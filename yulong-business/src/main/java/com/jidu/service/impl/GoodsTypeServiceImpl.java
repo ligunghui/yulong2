@@ -1,0 +1,54 @@
+package com.jidu.service.impl;
+
+import com.jidu.mapper.GoodsTypeMapper;
+import com.jidu.pojo.goods.GoodsType;
+import com.jidu.service.GoodsTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @program: yulong
+ * @description:
+ * @author: LiGuangHui
+ * @create: 2020-02-05 15:39
+ */
+@Service
+public class GoodsTypeServiceImpl implements GoodsTypeService {
+    @Autowired
+    private GoodsTypeMapper goodsTypeMapper;
+    @Override
+    public void save(String id, GoodsType goodsType) {
+       goodsType.setStoreId(id);
+       goodsTypeMapper.insert(goodsType);
+    }
+
+    @Override
+    public void update(GoodsType goodsType) {
+       goodsTypeMapper.updateByPrimaryKey(goodsType);
+    }
+
+    @Override
+    public GoodsType findById(int id) {
+        return goodsTypeMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void delete(int id) {
+
+         goodsTypeMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<GoodsType> search(Map param, String storeId) {
+        Example example=new Example(GoodsType.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("storeId",storeId);
+        return goodsTypeMapper.selectByExample(example);
+    }
+
+
+}

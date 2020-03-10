@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智慧玉龙-商会</title>
+	<meta name="Keywords" content="智慧玉龙,商会" />
+	<meta name="Description" content="智慧玉龙商会" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
+					</li>
+					<li class="">
+						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="coin-month.html"><em>本月收益明细</em></a>
+							</li>
+							<li>
+								<a href="coin-history.html"><em>历史收益明细</em></a>
+							</li>
+							<li>
+								<a class="" href="coin-recharge.html"><em>收益提现</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="platform-notice.html"><em>公告</em></a>
+							</li>
+							<li>
+								<a class="active-menu" href="platform-banner.html"><em>banner图</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
+					</li>
+					<li class="">
+						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+							</li>
+							<li>
+								<a class="" href="indexcontrol-store.html"><em>商户管理</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+					</li>
+					<li class="">
+						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="news-index.html"><em>商会动态</em></a>
+							</li>
+							<li>
+								<a href="news-goverment.html"><em>政府资讯</em></a>
+							</li>
+							<li>
+								<a href="news-culture.html"><em>文化旅游</em></a>
+							</li>
+							<li>
+								<a href="news-local.html"><em>本地新闻</em></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台公告</a> > <a href="platform-banner.html">banner图</a>
+							> <a href="#">添加banner</a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row page">
+					<div class="col-md-12 page-tit">
+						<p>基础设置</p>
+					</div>
+
+					<div class="col-md-12 page-block">
+						<form class="row layui-form" action="">
+
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">banner</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" value="" lay-verify="required" />
+										<div class="layui-upload col-md-8" id="layerDemo">
+											<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">本地上传图片</button>
+										</div>
+										<div class="layui-upload-list col-md-12">
+											<img class="layui-upload-img" id="demo1">
+											<p id="demoText"></p>
+										</div>
+									</div>
+								</label>
+								<label class="layui-inline col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">结束时间</span>
+									<div class="layui-input-inline col-md-4 col-xs-12">
+										<input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='endtime'>
+									</div>
+								</label>
+							</div>
+							<div class="block-con layui-form-item col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">发布者</span>
+									<div class="layui-input-block col-md-10_5 col-xs-12">
+										<select name="public" lay-filter="" lay-verify="" ref="publicss">
+											<option value="0" selected="">店铺发布</option>
+											<option value="1">管理发布</option>
+										</select>
+									</div>
+								</label>
+							</div>
+							<div class="block-con layui-form-item col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">发布位置</span>
+									<div class="layui-input-block col-md-10_5 col-xs-12">
+										<select name="position" lay-filter="" lay-verify="" ref="position">
+											<option value="1" selected="">首页</option>
+											<option value="2">智汇购</option>
+										</select>
+									</div>
+								</label>
+							</div>
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12"></span>
+									<div class="col-md-10_5 col-xs-12">
+										<input class="btn btn-sm btn-blue" type="button" value="提交" @click="subs" />
+									</div>
+								</label>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<!-- /. PAGE INNER  -->
+			</div>
+			<!-- /. PAGE WRAPPER  -->
+		</div>
+		<!-- /. WRAPPER  -->
+
+		<div id="footer-sec">
+			<p>Copyright © 2019 几度CMS版权所有</p>
+		</div>
+		<!-- /. FOOTER  -->
+		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+		<!-- JQUERY SCRIPTS -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- BOOTSTRAP SCRIPTS -->
+		<script src="assets/js/bootstrap.js"></script>
+		<script src="assets/layui/layui.all.js"></script>
+		<!-- METISMENU SCRIPTS -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<!-- CUSTOM SCRIPTS -->
+		<script src="assets/js/custom.js"></script>
+		<script src="assets/js/common.js"></script>
+		<script src="assets/js/link.js"></script>
+		<script src="assets/js/vue.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#page-wrapper',
+				data: {
+					endTime:'',
+					publics:'',
+					position:''
+				},
+				created() {
+					this.ids = window.location.href.split('=')[1]
+					if (Number(this.ids) >= 0) {
+
+					} else {
+						this.ids = ''
+					}
+
+				},
+				mounted() {
+					layui.use(['form', 'laydate'], function() {
+						var form = layui.form,
+							layer = layui.layer,
+							laydate = layui.laydate;
+						//日期时间选择器
+						laydate.render({
+							elem: '#endTime',
+							type: 'datetime'
+						});
+						
+						form.render();
+					})
+				},
+				methods: {
+					subs() {
+						let _this = this;
+						_this.endTime = _this.$refs.endtime.value;
+						console.log(_this.endTime)
+						_this.publics = _this.$refs.publicss.value;
+						_this.position = _this.$refs.position.value;
+						if (!imgurl || !_this.endTime || !_this.publics || !_this.position) {
+							layui.use('layer', function() {
+								var layer = layui.layer;
+								layer.msg('请输入需要的信息')
+							})
+							return
+						}
+						let v = {
+							"bannerdate": _this.endTime,//到期时间
+							"bannerimg": imgurl,//图片地址
+							"isAdminer": _this.publics,//0-----店铺发布，1----管理发布
+							"location": _this.position//位置1首页2智汇购
+						}
+						$.ajax({
+							url: '/chamber/banner',
+							type: 'POST',
+							contentType: 'application/json',
+							headers: {
+								'Authorization': sessionid,
+							},
+							dataType: 'json',
+							data: JSON.stringify(v),
+							success: (res) => {
+								layer.msg(res.message)
+								if(res.code == 10000) {
+									setTimeout(function(){
+										window.location.href = 'platform-banner.html'
+									},1200)
+								}
+							},
+							fail: (err) => {
+								layui.use('layer', function() {
+									var layer = layui.layer;
+									layer.msg(err.message)
+								})
+							}
+						})
+					}
+				}
+			})
+		</script>
+
+		<script type="text/javascript">
+			var imgurl;
+			/**/
+			layui.use('form', function() {
+				var form = layui.form;
+			});
+
+			layui.use('upload', function() {
+				var $ = layui.jquery,
+					upload = layui.upload;
+
+				//普通图片上传
+				var uploadInst = upload.render({
+					elem: '#uploadlogo',
+					url: '/upload/upload',
+					headers: {
+						'Authorization': sessionid
+					},
+					accept: 'images',
+					choose: function(obj) {
+
+						//将每次选择的文件追加到文件队列
+						var files = obj.pushFile();
+						//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+						obj.preview(function(index, file, result) {
+							console.log(file.name); //得到文件对象
+							$('.logopath').val(file.name)
+						});
+					},
+					before: function(obj) {
+						//预读本地文件示例，不支持ie8
+						obj.preview(function(index, file, result) {
+							$('#demo1').attr('src', result); //图片链接（base64）
+						});
+					},
+					done: function(res) {
+						imgurl = res.data
+					},
+					error: function() {
+						//演示失败状态，并实现重传
+						var demoText = $('#demoText');
+						demoText.html(
+							'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+						demoText.find('.demo-reload').on('click', function() {
+							uploadInst.upload();
+						});
+					}
+				});
+			});
+
+			//弹窗
+			layui.use('layer', function() {
+				var $ = layui.jquery,
+					layer = layui.layer;
+
+				// 弹窗内点击选择
+				$('.internetimg .imgs').click(function() {
+					if (!(/document/.test($(this).find('img').attr('src'))) && !(/return/.test($(this).find('img').attr('src')))) {
+						$(this).addClass('active').siblings().removeClass('active');
+					}
+					event.stopPropagation(); //阻止事件冒泡
+				})
+				$('.internetimg').click(function() { //相当于blur,点击以外的部分取消选择
+					$('.internetimg .imgs').each(function() {
+						$(this).removeClass('active')
+					})
+				})
+
+				// 站内选择
+				$('.inter-show .imgs').dblclick(function() {
+					var ids = $(this).attr('data-id');
+					$('.inter-show').hide().next().show();
+					$('.inter-level').attr('data-id', ids);
+					console.log($('.inter-level').attr('data-id'))
+				});
+				// 返回
+				$('.internetimg .imgs.return').click(function() {
+					$('.inter-show').show().next().hide();
+				})
+
+
+
+				//触发事件
+				var active = {
+					notice: function() {
+						//示范一个公告层
+						layer.open({
+							type: 1,
+							title: false //不显示标题栏
+								,
+							closeBtn: false,
+							area: 'device-width',
+							shade: 0.3,
+							resize: false,
+							id: 'LAY_layuipro' //设定一个id，防止重复弹出
+								,
+							btn: ['确认', '关闭'],
+							btnAlign: 'c' //按钮居中对齐
+								,
+							moveType: 1 //拖拽模式，0或者1
+								,
+							content: $('.internetimg'),
+							success: function(layero) {
+								var btn = layero.find('.layui-layer-btn');
+								// btn.find('.layui-layer-btn0').attr({
+								//   href: 'http://www.layui.com/'
+								//   ,target: '_blank'
+								// });
+							},
+							yes: function(index, layero) {
+								console.log('确认')
+								console.log($('.internetimg').find('.active').children().attr('src'))
+								var lengths = $('.internetimg').find('.active').length;
+								if (lengths) {
+									var src = $('.internetimg').find('.active').children().attr('src');
+									$('#layerDemo').siblings('input').val(src);
+									$('#demo1').attr('src', src);
+									$('.internetimg').css('display', 'none');
+									layer.close(index);
+								} else {
+									layer.msg('您未选中图片！')
+								}
+							},
+							btn2: function() {
+								console.log('关闭')
+								$('.internetimg').css('display', 'none');
+							}
+						});
+					}
+				};
+
+				$('#layerDemo .layui-btn').on('click', function() {
+					var othis = $(this),
+						method = othis.data('method');
+					active[method] ? active[method].call(this, othis) : '';
+				});
+			});
+		</script>
+</body>
+</html>

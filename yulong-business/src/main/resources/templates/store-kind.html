@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智汇玉龙-商户</title>
+	<meta name="Keywords" content="智汇玉龙,商户" />
+	<meta name="Description" content="智汇玉龙商户" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-object-group "></i><em>收益管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="coin-detail.html"><em>收益明细</em></a>
+							</li>
+							<li>
+								<a href="coin-show.html"><em>总收益展示</em></a>
+							</li>
+							<li>
+								<a href="coin-recharge.html"><em>提现情况</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="platform-notice.html"><em>公告显示</em></a>
+							</li>
+							<li>
+								<a href="platform-banner.html"><em>banner显示</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href=""><i class="fa fa-home"></i><em>商铺</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="store-goods.html"><em>商品管理</em></a>
+							</li>
+							<li>
+								<a class="active-menu" href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a href="store-index.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a href="store-control.html"><em>商户管理员</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="">
+					    <a href="order-before.html" class=""><i class="fa fa-tasks"></i><em>订单管理</em></a>
+					</li>
+				</ul>
+
+			</div>
+
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="#">商品分类管理</a></a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row page SEOpage">
+					<div class="col-md-12 page-tit">
+						<p>商品分类管理</p>
+					</div>
+
+					<div class="col-md-12 page-block textalign-center th-textalign-center">
+						<div class="panel panel-default">
+							<div class="panel-heading textalign-left">
+								<a class="btn btn-blue btn-sm" href="store-kind-edit.html?id=add">新增栏目</a>
+								<div class="btn-group pull-right">
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
+									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
+								</div>
+							</div>
+
+						</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<th>名称</th>
+											<th>一级分类</th>
+											<th>商铺ID</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-if="!issearch" v-for="(item,index) in bannerList">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{item.id}}</td>
+											<td>{{item.name}}</td>
+											<td>{{item.type == 0 ? '普通' : item.type ? '平台自营' : item.type == 2 ? '家乡特产' : item.type == 3 ? '礼包专区' : '新人专区'}}</td>
+											<td>{{item.storeId}}</td>
+											<td>
+												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
+											</td>
+										</tr>
+										<tr v-if="issearch">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{searchList.id}}</td>
+											<td>{{searchList.name}}</td>
+											<td>{{searchList.type == 0 ? '普通' : searchList.type ? '平台自营' : searchList.type == 2 ? '家乡特产' : searchList.type == 3 ? '礼包专区' : '新人专区'}}</td>
+											<td>{{searchList.storeId}}</td>
+											<td>
+												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
+												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="test1"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /. PAGE INNER  -->
+			<div class="popedit displaynone" id="popedit">
+				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-model="editTxt"></textarea>
+			</div>
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<!-- /. WRAPPER  -->
+
+	<div id="footer-sec">
+		<p>Copyright © 2019 几度CMS版权所有</p>
+	</div>
+
+</body>
+<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/layui/layui.all.js"></script>
+<script src="assets/js/jquery.metisMenu.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/link.js"></script>
+<script src="assets/js/vue.js"></script>
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#page-wrapper',
+		data: {
+			searchid: '',
+			bannerList: [],
+			issearch: false,
+			searchList: null,
+			editTxt:''
+		},
+		created() {
+			let _this = this;
+			$.ajax({
+				url: '/business/goodsType/1/10',
+				type: 'GET',
+				headers: {
+					'Authorization': sessionid,
+				},
+				success: (res) => {
+					_this.bannerList = res.rows
+					layui.use('laypage', function(){
+					  var laypage = layui.laypage;
+					  
+					  //执行一个laypage实例
+					  laypage.render({
+					    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+					    ,count: res.total //数据总数，从服务端得到
+						,jump: function(obj, first){
+						    $.ajax({
+						    	url: '/business/goodsType/'+obj.curr+'/10',
+						    	type: 'GET',
+						    	headers: {
+						    		'Authorization': sessionid,
+						    	},
+						    	success: (res) => {
+						    		_this.bannerList = res.rows
+						    	},
+						    	fail:(res) => {
+						    	}
+						    })
+						    //首次不执行
+						    // if(!first){
+						    //   //do something
+						    // }
+						  }
+					  });
+					});
+				},
+				fail:(res) => {
+				}
+			})
+		},
+		methods: {
+			mysearch() {
+				let _this = this;
+				if (!_this.searchid) {
+					_this.issearch = false
+				} else {
+					_this.issearch = true;
+					$.ajax({
+						url: '/business/goodsType/' + _this.searchid,
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.searchList = res.data
+						}
+					})
+				}
+			},
+			edit(ids,storeids) {
+				let _this = this;
+				$.ajax({
+					url: '/business/goodsType/' + ids,
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.editTxt = res.data.name;
+						let v = res.data;
+						layui.use('layer', function(){
+						  var layer = layui.layer;
+						  
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: $('#popedit') ,//这里content是一个普通的String
+							area: 'auto',
+							btn: ['确定', '取消'],
+							yes: function(index, layero){
+							    //按钮【按钮一】的回调
+								v.name = _this.editTxt;
+								layer.close(index)
+								$('#popedit').hide()
+								
+								$.ajax({
+									url: '/business/goodsType',
+									type: 'PUT',
+									contentType: 'application/json',
+									headers: {
+										'Authorization': sessionid,
+									},
+									dataType: 'json',
+									data: JSON.stringify(v),
+									success: (res) => {
+										layer.msg(res.message)
+										if(res.code == 10000) {
+											window.location.reload()
+										}
+									},
+									fail: (err) => {
+										layer.msg(err.message)
+									}
+								})
+							  }
+							  ,cancel: function(){ 
+							    //右上角关闭回调
+							    
+							    //return false 开启该代码可禁止点击该按钮关闭
+							  }
+						  });
+						}); 
+					}
+				})
+			},
+			del(ids) {
+				let _this = this;
+				$.ajax({
+					url: '/business/goodsType/' + ids,
+					type: 'delete',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						layer.msg(res.message)
+						setTimeout(function(){
+							window.location.reload()
+						},1200)
+					}
+				})
+			}
+		}
+	})
+</script>
+<script type="text/javascript">
+	layui.use('layer', function() {
+		var layer = layui.layer;
+
+		function getChecked() {
+			var eqs = '',
+				arr = [];
+			$('table th').each(function(i) {
+				if ($(this).text() == 'ID') {
+					eqs = i;
+				}
+			})
+			$('tr td:first-child input[type=checkbox]').each(function() {
+				var $this = $(this);
+				if ($(this)[0].checked) {
+					var check = $this.parent().parent().children().eq(eqs).text();
+					arr.push(check)
+				}
+			})
+
+			return arr
+		}
+
+		$('[data-event]').click(function() {
+			let dataEvent = $(this).attr('data-event');
+			let arr = getChecked();
+			if (arr.length) {
+				if (dataEvent == 'del') {
+					layer.confirm('确定删除吗？', function(index) {
+						console.log(arr)
+
+						layer.close(index);
+					})
+				}
+			} else {
+				layer.msg('您尚未选中任何选项！')
+			}
+
+		})
+		// $('[data-event]').click END
+	})
+</script>
+</html>

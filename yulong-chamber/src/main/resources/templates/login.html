@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>智汇玉龙-商会</title>
+		<meta name="Keywords" content="智汇玉龙,商会" />
+		<meta name="Description" content="智汇玉龙商会" />
+		
+		 <!-- BOOTSTRAP STYLES-->
+		 <link href="assets/css/bootstrap.css" rel="stylesheet" />
+		 <link href="assets/layui/css/layui.css" rel="stylesheet" />
+		 <!-- FONTAWESOME STYLES-->
+		 <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+		    <!--CUSTOM BASIC STYLES-->
+		 <link href="assets/css/basic.css" rel="stylesheet" />
+		 <!--CUSTOM MAIN STYLES-->
+		 <link href="assets/css/custom.css" rel="stylesheet" />
+		 <link href="assets/css/common.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="bg">
+					<div class="index-logo">
+						<img src="assets/img/indexLogo.png" >
+					</div>
+					<div class="logins">
+						<p class="marginBottom20">欢迎登录智慧玉龙</p>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<img src="assets/img/indexme.png" >
+							</span>
+							<input class="form-control" type="text" name="name" id="" value="" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<img src="assets/img/indexpsd.png" >
+							</span>
+							<input class="form-control" type="password" name="psd" id="" value="" />
+						</div>
+						<div class="loginbutton">
+							<input class="" type="submit" name="" id="" value="登录" />
+						</div>
+						<p>版本信息：V 2.0.0</p>
+					</div>
+				</div>
+				<!-- bg END -->
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="assets/layui/layui.all.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="assets/js/link.js"></script>
+	<script type="text/javascript">
+		layui.use('form',function(){
+			var form = layui.form;
+			
+			$('.loginbutton input').click(function(){
+				login();
+			})
+			
+			$(document).keyup(function(event){
+			  if(event.keyCode ==13){
+				login();
+			  }
+			});	
+			
+			
+			function login() {
+				if($('input[name=name]').val() == '') {
+					layer.alert('请输入用户名');
+					return
+				}else if($('input[name=psd]').val() == ''){
+					layer.alert('请输入密码');
+					return
+				}
+				var msg = 'name:'+$('input[name=name]').val()+'\n'+'psd:'+$('input[name=psd]').val()
+				
+				let v = {
+					"mobile": $('input[name=name]').val(),
+					"password": $('input[name=psd]').val()
+				}
+				
+				$.ajax({
+					url:loginurl + '/business/login/login',
+					type: 'POST',
+					contentType: 'application/json',
+					dataType: 'json',
+					data: JSON.stringify(v),
+					success: (res) => {
+						sessionid = res.data
+						localStorage.setItem("sessionid",sessionid);
+						localStorage.setItem("localTime",new Date());
+						layer.msg(res.message);
+						// return
+						if(res.code == 10000) {
+							setTimeout(function(){
+								window.location.href = 'index.html'
+							},1200)
+						}
+					}
+				})
+			}
+		})
+	</script>
+</html>

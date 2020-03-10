@@ -1,0 +1,70 @@
+#注册到eureka的服务地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+#服务配置
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+#spring配置
+spring:
+  #1.应用配置
+  application:
+    name: yulong-gate #指定服务名
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yulong?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 2
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+#配置路由规则
+zuul:
+  routes:
+    #路由id
+    business:
+      path: /business/** # 需要映射的路径地址 端口9001
+      serviceId: business
+      stripPrefix: false #不删除请求前缀
+      #处理敏感头信息
+      sentiviteHeaders:   #将指定路由的敏感头设置为空
+      customSensitiveHeaders: true #对指定路由开启自定义敏感头
+    chamber:
+      path: /chamber/** # 端口9002
+      serviceId: chamber
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+    media:
+      path: /media/** # 端口9004
+      serviceId: media
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+    app:
+      path: /app/** # 端口9005
+      serviceId: app
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+    backstage:
+      path: /backstage/** # 端口9003
+      serviceId: backstage
+      stripPrefix: false
+      sentiviteHeaders:
+      customSensitiveHeaders: true
+  servlet-path: /zuul

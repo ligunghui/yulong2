@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智汇玉龙-商户</title>
+	<meta name="Keywords" content="智汇玉龙,商户" />
+	<meta name="Description" content="智汇玉龙商户" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-object-group "></i><em>收益管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="coin-detail.html"><em>收益明细</em></a>
+							</li>
+							<li>
+								<a href="coin-show.html"><em>总收益展示</em></a>
+							</li>
+							<li>
+								<a href="coin-recharge.html"><em>提现情况</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="platform-notice-edit.html"><em>公告显示</em></a>
+							</li>
+							<li>
+								<a href="platform-banner.html"><em>banner显示</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-home"></i><em>商铺</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="store-goods.html"><em>商品管理</em></a>
+							</li>
+							<li>
+								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a href="store-index.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a href="store-control.html"><em>商户管理员</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href="order-before.html" class="active-menu"><i class="fa fa-tasks"></i><em>订单管理</em></a>
+					</li>
+				</ul>
+		
+			</div>
+		
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">订单管理</a> > <a href="store-kind.html">修改订单</a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row page">
+					<div class="col-md-12 page-tit">
+						<p>基础设置</p>
+					</div>
+
+					<div class="col-md-12 page-block">
+						<form class="row layui-form" action="">
+							
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">订单状态</span>
+									<div class="layui-input-block col-md-10_5 col-xs-12">
+										<select class="orderStatus" name="type" lay-filter="" lay-verify="" ref="orderStatus">
+											<option value="0" selected="" class="">待支付</option>
+											<option value="1" class="">待发货</option>
+											<option value="2" class="">待收货</option>
+											<option value="3" class="">待评价</option>
+											<option value="4" class="">申请退货</option>
+											<option value="4" class="">已退货</option>
+										</select>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">退货单号</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="returnShipcode" />
+									</div>
+								</label>
+								
+							</div>
+							<div class="block-con layui-form-item col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">发货时间</span>
+									<div class="layui-input-inline col-md-4 col-xs-12">
+										<input type="text" class="layui-input shiptime" id="startTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='shiptime'>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">快递号</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="shipcode" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">卖家留言</span>
+									<div class="col-md-10_5 col-xs-12">
+										<textarea class="form-control col-md-5" v-model="sellerMsg" >
+										</textarea>
+									</div>
+								</label>
+							</div>							
+
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12"></span>
+									<div class="col-md-10_5 col-xs-12">
+										<input class="btn btn-sm btn-blue" type="button" value="提交" @click="subs" />
+									</div>
+								</label>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<!-- /. PAGE INNER  -->
+			</div>
+			<!-- /. PAGE WRAPPER  -->
+		</div>
+		<!-- /. WRAPPER  -->
+
+		<div id="footer-sec">
+			<p>Copyright © 2019 几度CMS版权所有</p>
+		</div>
+		<!-- /. FOOTER  -->
+		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+		<!-- JQUERY SCRIPTS -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- BOOTSTRAP SCRIPTS -->
+		<script src="assets/js/bootstrap.js"></script>
+		<script src="assets/layui/layui.all.js"></script>
+		<!-- METISMENU SCRIPTS -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<!-- CUSTOM SCRIPTS -->
+		   <!-- CUSTOM SCRIPTS -->
+		<script src="assets/js/custom.js"></script>
+		<script src="assets/js/common.js"></script>
+		<script src="assets/js/link.js"></script>
+		<script src="assets/js/vue.js"></script>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#page-wrapper',
+				data: {
+					msgs:[],
+					orderStatus:'',
+					returnShipcode:'',
+					sellerMsg:'',
+					shipcode:'',
+					shiptime:''
+				},
+				created() {
+					let _this = this;
+					var ids = window.location.href.split('=')[1];
+					$.ajax({
+						url: '/business/order/' + ids,
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.msgs = res.data;
+							_this.returnShipcode = res.data.returnShipcode;
+							_this.sellerMsg = res.data.sellerMsg;
+							_this.shipcode = res.data.shipcode;
+							_this.shiptime = res.data.shiptime;
+							_this.$refs.shiptime.value = res.data.shiptime;
+						}
+					})
+				},
+				mounted() {
+					layui.use(['form','laydate'],function() {
+						var form = layui.form,
+							laydate = layui.laydate;
+						
+						form.render();
+						
+						//日期时间选择器
+						laydate.render({
+							elem: '#startTime',
+							type: 'datetime'
+						});
+					})
+				},
+				methods: {
+					subs() {
+						let _this = this;
+						_this.shiptime = _this.$refs.shiptime.value;
+						
+						if (!_this.returnShipcode || !_this.sellerMsg || !_this.shipcode || !_this.shiptime) {
+							layer.msg('请输入需要的信息')
+							return
+						}
+						let v = _this.msgs;
+						v.returnShipcode = _this.returnShipcode;
+						v.sellerMsg = _this.sellerMsg;
+						v.shipcode = _this.shipcode;
+						v.shiptime = _this.shiptime;
+						$.ajax({
+							url: '/business/order',
+							type: 'PUT',
+							contentType: 'application/json',
+							headers: {
+								'Authorization': sessionid,
+							},
+							dataType: 'json',
+							data: JSON.stringify(v),
+							success: (res) => {
+								layer.msg(res.message)
+								if(res.code == 10000) {
+									setTimeout(function() {
+										window.location.href = 'store-goods.html'
+									},1200)
+								}
+							},
+							fail: (err) => {
+								layer.msg(err.message)
+							}
+						})
+					}
+				}
+			})
+		</script>
+</body>
+</html>

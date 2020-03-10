@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智汇玉龙-商户</title>
+	<meta name="Keywords" content="智汇玉龙,商户" />
+	<meta name="Description" content="智汇玉龙商户" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-object-group "></i><em>收益管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="coin-detail.html"><em>收益明细</em></a>
+							</li>
+							<li>
+								<a href="coin-show.html"><em>总收益展示</em></a>
+							</li>
+							<li>
+								<a href="coin-recharge.html"><em>提现情况</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="platform-notice.html"><em>公告显示</em></a>
+							</li>
+							<li>
+								<a href="platform-banner.html"><em>banner显示</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href=""><i class="fa fa-home"></i><em>商铺</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a class="active-menu" href="store-goods.html"><em>商品管理</em></a>
+							</li>
+							<li>
+								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a href="store-index.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a href="store-control.html"><em>商户管理员</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="">
+					    <a href="order-before.html" class=""><i class="fa fa-tasks"></i><em>订单管理</em></a>
+					</li>
+				</ul>
+		
+			</div>
+		
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="store-kind.html">商品管理</a>
+							> <a href="#">添加商品</a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row page">
+					<div class="col-md-12 page-tit">
+						<p>基础设置</p>
+					</div>
+
+					<div class="col-md-12 page-block">
+						<form class="row layui-form" action="">
+							
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">商品名称</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="name" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">运费</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="number" class="form-control col-md-5" v-model="goodsWeight" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">是否推荐到首页</span>
+									<div class="col-md-10_5 col-xs-12">
+										<strong class="buttons buttons-default homePageTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch homePage" type="text" name="isopen" ref="homePage"/>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">商品图片</span>
+									<div class="col-md-10_5 col-xs-12">
+										<!-- <input class="form-control col-md-5 logopath" type="text" name="logopath" id="" value="" lay-verify="required" /> -->
+										<div class="layui-upload col-md-8" id="layerDemo">
+											<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">上传图片</button>
+										</div>
+										<div class="layui-upload-list col-md-12">
+											<p id="demoText"></p>
+										</div>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">新人专区</span>
+									<div class="col-md-10_5 col-xs-12">
+										<strong class="buttons buttons-default isNewTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch isNew" type="text" name="isopen" ref="isNew"/>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">市场价</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="markePrice" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">会员价</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="memberPrice" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">是否上架</span>
+									<div class="col-md-10_5 col-xs-12">
+										<strong class="buttons buttons-default onsaleTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch onsale" type="text" name="isopen" ref="onsale"/>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">商铺价格</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="number" class="form-control col-md-5" v-model="storePrice" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">总量</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="number" class="form-control col-md-5" v-model="totalNum" />
+									</div>
+								</label>
+								
+							</div>
+							<div class="block-con layui-form-item col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">开售时间</span>
+									<div class="layui-input-inline col-md-4 col-xs-12">
+										<input type="text" class="layui-input sellerTime" id="startTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='sellerTime'>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">商品类型</span>
+									<div class="layui-input-block col-md-10_5 col-xs-12">
+										<select class="typeId" name="type" lay-filter="" lay-verify="" ref="typeId">
+											<option value="0" selected="" class="typeOpt">普通</option>
+											<option value="1" class="typeOpt">平台自营</option>
+											<option value="2" class="typeOpt">家乡特产</option>
+											<option value="3" class="typeOpt">礼包专区</option>
+											<option value="4" class="typeOpt">新人专区</option>
+										</select>
+									</div>
+								</label>
+							</div>
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">详情</span>
+									<div class="col-md-10_5 col-xs-12">
+										<textarea id="editor_id" name="content" style="width: 700px; height: 300px;">&lt;strong&gt;HTML内容&lt;/strong&gt; </textarea>
+									</div>
+								</label>
+							</div>
+							
+
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12"></span>
+									<div class="col-md-10_5 col-xs-12">
+										<input class="btn btn-sm btn-blue" type="button" value="提交" @click="subs" />
+									</div>
+								</label>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<!-- /. PAGE INNER  -->
+			</div>
+			<!-- /. PAGE WRAPPER  -->
+		</div>
+		<!-- /. WRAPPER  -->
+
+		<div id="footer-sec">
+			<p>Copyright © 2019 几度CMS版权所有</p>
+		</div>
+		<!-- /. FOOTER  -->
+		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+		<!-- JQUERY SCRIPTS -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- BOOTSTRAP SCRIPTS -->
+		<script src="assets/js/bootstrap.js"></script>
+		<script src="assets/layui/layui.all.js"></script>
+		<!-- METISMENU SCRIPTS -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<!-- CUSTOM SCRIPTS -->
+		<script src="assets/kindeditor-4.1.11-zh-CN/kindeditor-all.js"></script>
+		<script src="assets/kindeditor-4.1.11-zh-CN/lang/zh-CN.js"></script>
+		   <!-- CUSTOM SCRIPTS -->
+		<script src="assets/js/custom.js"></script>
+		<script src="assets/js/common.js"></script>
+		<script src="assets/js/link.js"></script>
+		<script src="assets/js/vue.js"></script>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#page-wrapper',
+				data: {
+					details:'',
+					goodsWeight:'',
+					homePage:0,//1是0否
+					imgs:[],
+					isNew:0,//1是0否
+					markePrice:'',
+					memberPrice:'',
+					name:'',
+					onsale:1,//0上架1下架
+					sellerTime:'',
+					storePrice:'',
+					totalNum:'',
+					typeId:0
+				},
+				created() {
+					if(window.location.href.split('=')[1] != 'add') {
+						this.edit(window.location.href.split('=')[1]);
+					}
+				},
+				mounted() {
+					let _this = this;
+					layui.use(['form', 'laydate','upload'], function() {
+						var form = layui.form,
+							layer = layui.layer,
+							laydate = layui.laydate,
+							$ = layui.jquery,
+							upload = layui.upload;
+						
+						form.render();
+						//日期时间选择器
+						laydate.render({
+							elem: '#startTime',
+							type: 'datetime'
+						});
+						
+						var uploadInst = upload.render({
+							elem: '#uploadlogo',
+							url: '/upload/upload',
+							headers: {
+								'Authorization': sessionid
+							},
+							accept: 'images',
+							choose: function(obj) {
+											
+								//将每次选择的文件追加到文件队列
+								var files = obj.pushFile();
+								//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+								obj.preview(function(index, file, result) {
+									console.log(file.name); //得到文件对象
+									// $('.logopath').val(file.name)
+								});
+							},
+							before: function(obj) {
+								//预读本地文件示例，不支持ie8
+								obj.preview(function(index, file, result) {
+									// $('#demo1').attr('src', result); //图片链接（base64）
+									$('.layui-upload-list').append(`<img class="layui-upload-img" src="${result}" style="margin-right:10px;">`)
+								});
+							},
+							done: function(res) {
+								_this.imgs.push(res.data)
+							},
+							error: function() {
+								//演示失败状态，并实现重传
+								var demoText = $('#demoText');
+								demoText.html(
+									'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+								demoText.find('.demo-reload').on('click', function() {
+									uploadInst.upload();
+								});
+							}
+						});
+					})
+					
+					// 关闭过滤模式，保留所有标签
+					KindEditor.options.filterMode = false;
+					KindEditor.ready(function (K) {
+					    window.editor = K.create('#editor_id', {
+					        filePostName: "uploadFile",
+					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
+					        uploadJson: '/Kindeditor/uploadFile',
+					        resizeType: 1,
+					        allowPreviewEmoticons: true,
+					        allowImageUpload: true,
+					        afterBlur: function () {
+					            this.sync();
+					        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+					        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
+					            console.log(url)
+					            console.log(data)
+					        }
+					    });
+					});
+				},
+				methods: {
+					edit(ids) {
+						let _this = this;
+						$.ajax({
+							url: '/business/goods/' + ids,
+							type: 'GET',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								console.log(res.data)
+								// 设置HTML内容
+								editor.html(res.data.details);
+								_this.details = res.data.details;
+								_this.goodsWeight = res.data.goodsWeight;
+								// homePage
+								_this.homePage = res.data.homePage
+								if(res.data.homePage) {
+									$('.homePage').val('on')
+									$('.homePageTop').addClass('buttons-active').removeClass('buttons-dafault')
+								}else {
+									$('.homePage').val('off')
+									$('.homePageTop').addClass('buttons-dafault').removeClass('buttons-active')
+								}//homePage END
+								_this.imgs = res.data.img;
+								$('.logopath').val(res.data.img)
+								$('#demo1').attr('src', res.data.img);
+								// isNew
+								_this.isNew = res.data.isNew
+								if(res.data.isNew) {
+									$('.isNew').val('on')
+									$('.isNewTop').addClass('buttons-active').removeClass('buttons-dafault')
+								}else {
+									$('.isNew').val('off')
+									$('.isNewTop').addClass('buttons-dafault').removeClass('buttons-active')
+								}//isNew END
+								_this.markePrice = res.data.markePrice;
+								_this.memberPrice = res.data.memberPrice;
+								_this.name = res.data.name;
+								// isNew
+								_this.onsale = res.data.onsale
+								if(!res.data.onsale) {
+									$('.onsale').val('on')
+									$('.onsaleTop').addClass('buttons-active').removeClass('buttons-dafault')
+								}else {
+									$('.onsale').val('off')
+									$('.onsaleTop').addClass('buttons-dafault').removeClass('buttons-active')
+								}//isNew END
+								_this.sellerTime = res.data.sellerTime;
+								$('.sellerTime').val(res.data.sellerTime);
+								_this.storePrice = res.data.storePrice;
+								_this.totalNum = res.data.totalNum;
+								// _this.typeId = res.data.typeId;
+								// $('.typeOpt').eq(1).selected=true;
+								// $('.typeOpt').eq(1).addClass('layui-this').siblings().removeClass('layui-this');
+							}
+						})
+					},
+					subs() {
+						let _this = this;
+						_this.details = window.editor.html();
+						_this.homePage = _this.$refs.homePage.value == 'on' ? 1 : 0;
+						_this.isNew = _this.$refs.isNew.value == 'on' ? 1 : 0;
+						_this.onsale = _this.$refs.onsale.value == 'on' ? 0 : 1;
+						_this.sellerTime = _this.$refs.sellerTime.value;
+						_this.typeId = _this.$refs.typeId.value;
+						
+						if (!_this.details || !_this.goodsWeight || !_this.imgs || !_this.markePrice || !_this.memberPrice || !_this.name || !_this.sellerTime || !_this.storePrice || (_this.totalNum == '' && _this.totalNum != 0)) {
+							layer.msg('请输入需要的信息且价格不能为0')
+							return
+						}
+						let v = {
+							"details": _this.details,
+							"goodsWeight": _this.goodsWeight,
+							"homePage": _this.homePage,
+							"img": _this.imgs,
+							"isNew": _this.isNew,
+							"markePrice": _this.markePrice,
+							"memberPrice": _this.memberPrice,
+							"name": _this.name,
+							"onsale": _this.onsale,
+							"sellerTime": _this.sellerTime,
+							"storePrice": _this.storePrice,
+							"totalNum": _this.totalNum,
+							"typeId": _this.typeId
+						}
+						var ajaxType = 'POST'
+						if(window.location.href.split('=')[1] != 'add') {
+							ajaxType = 'PUT'
+						}
+						$.ajax({
+							url: '/business/goods',
+							type: ajaxType,
+							contentType: 'application/json',
+							headers: {
+								'Authorization': sessionid,
+							},
+							dataType: 'json',
+							data: JSON.stringify(v),
+							success: (res) => {
+								layer.msg(res.message)
+								if(res.code == 10000) {
+									// setTimeout(function() {
+									// 	window.location.href = 'store-goods.html'
+									// },1200)
+								}
+							},
+							fail: (err) => {
+								layer.msg(err.message)
+							}
+						})
+					}
+				}
+			})
+		</script>
+</body>
+</html>
