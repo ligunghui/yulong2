@@ -55,13 +55,10 @@ public class ActivityController {
         return new Result(ResultCode.SUCCESS);
     }
 
-    @RequestMapping(value = "/findByStoreId/{storeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/findByStoreId", method = RequestMethod.GET)
     @ApiOperation(value = "查询商会动态")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "storeId", value = "商铺id 平台传0", required = true, paramType = "query")
-    })
-    public Result<ShoppingActivity> search(@PathVariable String storeId) {
-        List<ShoppingActivity> shoppingActivity = activityService.search(storeId);
+    public Result<ShoppingActivity> search() {
+        List<ShoppingActivity> shoppingActivity = activityService.search();
         return new Result(ResultCode.SUCCESS, shoppingActivity);
     }
 

@@ -18,8 +18,8 @@ public class GoodsType {
     @ApiModelProperty(value = "商铺id 平台0")
     private String storeId;
 
-    @ApiModelProperty(value = " 一级分类(0普通1平台自营2家乡特产3礼包专区4新人专区)")
-    private Integer type;
+    @ApiModelProperty(value = "上级分类的id")
+    private Integer parentId;
 
 
 }

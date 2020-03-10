@@ -6,6 +6,7 @@ import com.jidu.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public void save(ShoppingBanner shoppingBanner) {
         shoppingBanner.setStoreId("0");
+        shoppingBanner.setAddtime(new Date());
+        shoppingBanner.setIsAdminer(1);
         shoppingBannerMapper.insert(shoppingBanner);
     }
 

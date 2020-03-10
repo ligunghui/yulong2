@@ -19,6 +19,6 @@ public interface ActivityService {
 
     void delete(int id);
 
-    List<ShoppingActivity> search(String storeId);
+    List<ShoppingActivity> search();
 
 }

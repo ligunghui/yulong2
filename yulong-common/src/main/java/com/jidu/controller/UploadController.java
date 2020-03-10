@@ -49,7 +49,7 @@ public class UploadController {
         try {
             file.transferTo(dest);
             LOGGER.info("上传成功");
-            return new Result(ResultCode.SUCCESS, yuming + s + fileName);
+            return new Result(ResultCode.SUCCESS, yuming + fileName);
         } catch (IOException e) {
             LOGGER.error(e.toString(), e);
         }

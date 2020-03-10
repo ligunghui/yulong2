@@ -2,7 +2,7 @@ package com.jidu.controller;
 
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
-import com.jidu.pojo.StatisticsGroup;
+import com.jidu.pojo.order.StatisticsGroup;
 import com.jidu.service.HomeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

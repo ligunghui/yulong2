@@ -25,46 +25,66 @@ import java.util.Map;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value="/backstage/goodsType")
+@RequestMapping(value = "/backstage/goodsType")
 @Api(value = "商品类型", description = "商品类型")
-public class GoodTypeController {
+public class GoodTypeController extends BusinessBaseController {
     @Autowired
     private GoodsTypeService goodsTypeService;
+
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品类型")
     public Result save(@RequestBody GoodsType goodsType) {
-        goodsTypeService.save("0",goodsType);
+        goodsTypeService.save("0", goodsType);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改商品类型")
     public Result update(@RequestBody GoodsType goodsType) {
         goodsTypeService.update(goodsType);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商品类型")
     public Result findById(@PathVariable int id) {
-        GoodsType goodsType= goodsTypeService.findById(id);
-        return new Result(ResultCode.SUCCESS,goodsType);
+        GoodsType goodsType = goodsTypeService.findById(id);
+        return new Result(ResultCode.SUCCESS, goodsType);
     }
-    @RequestMapping( value = "/{id}",method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/findOneLevel/{parentId}", method = RequestMethod.GET)
+    @ApiOperation(value = "按照父级id查询商品类型")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "parentId", value = "父级id 一级传1", required = true, paramType = "path")
+    })
+    public Result<GoodsType> findOneLevel(@PathVariable Integer parentId) {
+        List<GoodsType> goodsType = goodsTypeService.findOneLevel(storeId, parentId);
+        return new Result(ResultCode.SUCCESS, goodsType);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商品类型")
     public Result delete(@PathVariable int id) {
+        //如果有下级分类不能删除
+        List<GoodsType> goodsType = goodsTypeService.findOneLevel(storeId, id);
+        if (!goodsType.isEmpty()) {
+            return new Result(201, "存在下级分类不能删除", false);
+        }
         goodsTypeService.delete(id);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商品类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="pageNum",value="当前页码",required=true,paramType="path"),
-            @ApiImplicitParam(name="pageSize",value="每页条数",required=true,paramType="path"),
-            @ApiImplicitParam(name="param",value="条件查询",required=false,paramType="query")
+            @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "param", value = "条件查询", required = false, paramType = "query")
     })
-    public PageResult search (@PathVariable int pageNum, @PathVariable int pageSize, @RequestParam(required = false) Map param) {
+    public PageResult search(@PathVariable int pageNum, @PathVariable int pageSize, @RequestParam(required = false) Map param) {
         Page<GoodsType> page = PageHelper.startPage(pageNum, pageSize);
-        List<GoodsType> goodsTypes= goodsTypeService.search(param);
-        return new PageResult(page.getTotal(),page.getResult());
+        List<GoodsType> goodsTypes = goodsTypeService.search(param);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
 }

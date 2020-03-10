@@ -1,6 +1,6 @@
 package com.jidu.service;
 
-import com.jidu.pojo.StatisticsGroup;
+import com.jidu.pojo.order.StatisticsGroup;
 
 import java.text.ParseException;
 

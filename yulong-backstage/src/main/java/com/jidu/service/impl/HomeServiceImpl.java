@@ -2,10 +2,10 @@ package com.jidu.service.impl;
 
 import com.jidu.mapper.GoodsMapper;
 import com.jidu.mapper.OrderMapper;
-import com.jidu.pojo.StatisticsGroup;
 import com.jidu.pojo.goods.ShoppingGoods;
 import com.jidu.pojo.order.SevenOrder;
 import com.jidu.pojo.order.ShoppingOrder;
+import com.jidu.pojo.order.StatisticsGroup;
 import com.jidu.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class HomeServiceImpl implements HomeService {
     public StatisticsGroup index(String storeId) throws ParseException {
         StatisticsGroup statisticsGroup = new StatisticsGroup();
         // 1.最近七天下单趋势
-        List<SevenOrder> sevenOrders = getsevenOrders(storeId);
+        List<SevenOrder> sevenOrders = getSevenOrders(storeId);
         statisticsGroup.setSevenOrders(sevenOrders);
         // 3.本日订单数
         int value = sevenOrders.get(6).getValue();
@@ -58,7 +58,7 @@ public class HomeServiceImpl implements HomeService {
         return product(storeId, statisticsGroup);
     }
 
-    private List<SevenOrder> getsevenOrders(String storeId) throws ParseException {
+    private List<SevenOrder> getSevenOrders(String storeId) throws ParseException {
         String[] beforeSevenDay = getBeforeSevenDay();
         List<SevenOrder> list = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

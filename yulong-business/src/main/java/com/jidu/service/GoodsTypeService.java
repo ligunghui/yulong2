@@ -16,4 +16,5 @@ public interface GoodsTypeService {
 
     List<GoodsType> search(Map param, String storeId);
 
+    List<GoodsType> findOneLevel(String storeId,Integer parentId);
 }

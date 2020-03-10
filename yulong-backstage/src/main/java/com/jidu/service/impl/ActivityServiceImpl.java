@@ -43,10 +43,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<ShoppingActivity> search(String storeId) {
+    public List<ShoppingActivity> search() {
         Example example = new Example(ShoppingActivity.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("storeId", storeId);
         example.setOrderByClause("addtime DESC");
         return activityMapper.selectByExample(example);
     }

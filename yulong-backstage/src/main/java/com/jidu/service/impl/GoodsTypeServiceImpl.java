@@ -46,8 +46,17 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     public List<GoodsType> search(Map param) {
         Example example=new Example(GoodsType.class);
         Example.Criteria criteria = example.createCriteria();
-
+        criteria.andEqualTo("storeId",0);
+        criteria.andEqualTo("parentId",1);
         return goodsTypeMapper.selectByExample(example);
     }
 
+    @Override
+    public List<GoodsType> findOneLevel(String storeId,Integer parentId) {
+        Example example=new Example(GoodsType.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("storeId",storeId);
+        criteria.andEqualTo("parentId",parentId);
+        return goodsTypeMapper.selectByExample(example);
+    }
 }

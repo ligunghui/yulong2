@@ -2,23 +2,22 @@ package com.jidu.service.impl;
 
 import com.jidu.mapper.GoodsMapper;
 import com.jidu.mapper.OrderMapper;
-import com.jidu.pojo.SevenOrder;
-import com.jidu.pojo.StatisticsGroup;
 import com.jidu.pojo.goods.ShoppingGoods;
+import com.jidu.pojo.order.SevenOrder;
 import com.jidu.pojo.order.ShoppingOrder;
+import com.jidu.pojo.order.StatisticsGroup;
 import com.jidu.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * @Author: liguanghui
- * Date: 2020/3/4 0004 下午 2:25
+ * Date: 2020/3/10 0010 下午 3:28
  * @Version:
  * @Description:
  */
@@ -28,7 +27,6 @@ public class HomeServiceImpl implements HomeService {
     private OrderMapper orderMapper;
     @Autowired
     private GoodsMapper goodsMapper;
-
     @Override
     public StatisticsGroup index(String storeId) throws ParseException {
         StatisticsGroup statisticsGroup = new StatisticsGroup();
@@ -119,4 +117,5 @@ public class HomeServiceImpl implements HomeService {
         return statisticsGroup;
     }
 }
+
 

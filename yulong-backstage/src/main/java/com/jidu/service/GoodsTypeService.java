@@ -15,4 +15,6 @@ public interface GoodsTypeService {
     void delete(int id);
 
     List<GoodsType> search(Map param);
+
+    List<GoodsType> findOneLevel(String storeId, Integer parentId);
 }

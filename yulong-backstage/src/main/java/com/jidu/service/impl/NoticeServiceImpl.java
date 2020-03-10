@@ -23,6 +23,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public void save(ShoppingNotice shoppingNotice) {
         shoppingNotice.setAddtime(new Date());
+
         noticeMapper.insert(shoppingNotice);
     }
 
