@@ -47,12 +47,6 @@ public class AboutUsController {
         return new Result(ResultCode.SUCCESS, aboutUs);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ApiOperation(value = "删除关于我们")
-    public Result delete(@PathVariable Integer id) {
-        aboutUsService.delete(id);
-        return new Result(ResultCode.SUCCESS);
-    }
 
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ApiOperation(value = "查询关于我们")

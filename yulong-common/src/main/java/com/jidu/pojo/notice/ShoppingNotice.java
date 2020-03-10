@@ -24,6 +24,8 @@ public class ShoppingNotice {
     private Integer id;
     @ApiModelProperty(value = "内容")
     private String content;
+    @ApiModelProperty(value = "标题")
+    private String title;
     @ApiModelProperty(value = "消息的类型(1系统消息 2平台公告 3商会公告 4商户公告)")
     private Integer type;
     @ApiModelProperty(value = "是否显示(0是1否)")

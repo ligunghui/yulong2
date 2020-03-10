@@ -1,4 +1,4 @@
-package com.jidu.pojo;
+package com.jidu.pojo.order;
 
 import lombok.Data;
 
