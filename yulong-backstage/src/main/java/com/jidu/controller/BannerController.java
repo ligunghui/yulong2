@@ -11,12 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @program: yulong
- * @description:
- * @author: LiGuangHui
- * @create: 2020-02-06 11:14
- */
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/backstage/banner")

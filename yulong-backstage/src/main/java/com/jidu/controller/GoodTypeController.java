@@ -34,8 +34,8 @@ public class GoodTypeController extends BusinessBaseController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品类型")
     public Result save(@RequestBody GoodsType goodsType) {
-        goodsTypeService.save("0", goodsType);
-        return new Result(ResultCode.SUCCESS);
+        Integer integer = goodsTypeService.save("0", goodsType);
+        return new Result(ResultCode.SUCCESS, integer);
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)

@@ -4,13 +4,15 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:6868/eureka/
   instance:
-    preferIpAddress : true
+    preferIpAddress: true
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
 #服务配置
 server:
   port: 9003
 #spring配置
 spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
   #1.应用配置
   application:
     name: backstage #指定服务名
@@ -37,3 +39,7 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countsql
+media:
+  upload-location: F:/develop/video/
+FFmpeg:
+  path: D:\develop\ffmpeg\ffmpeg\bin\ffmpeg.exe

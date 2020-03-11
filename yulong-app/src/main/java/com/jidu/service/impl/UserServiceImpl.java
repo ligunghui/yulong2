@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         int a = (int) ((Math.random() * 9.0D + 1.0D) * 100000.0D);
         String random = a + "";
-        String url = "http://sms.linyu106.com/sms.aspx?action=send&userid=3156&account=15055153559&password=123456&mobile=" + mobile + "&content=【还管家】您本次的验证码为" + random + "&sendTime=&extno=";
+        String url = "http://sms.linyu106.com/sms.aspx?action=send&userid=3156&account=15055153559&password=123456&mobile=" + mobile + "&content=【智汇玉龙】您本次的验证码为" + random + "&sendTime=&extno=";
 
         restTemplate.postForEntity(url, map, String.class);
 
