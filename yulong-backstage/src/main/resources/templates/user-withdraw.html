@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智汇玉龙-管理后台</title>
+	<meta name="Keywords" content="智汇玉龙,管理后台" />
+	<meta name="Description" content="智汇玉龙管理后台" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<style>
+	.index-msg{
+		margin-right: 20px;
+	}
+</style>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
+					</li>
+					<li>
+						<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="banner.html"><em>banner图管理</em></a>
+							</li>
+							<li>
+								<a href="notice.html"><em>公告管理</em></a>
+							</li>
+							<li>
+								<a href="ads.html"><em>APP广告页管理</em></a>
+							</li>
+							<li>
+								<a href="card.html"><em>玉龙卡管理</em></a>
+							</li>
+							<li>
+								<a href="user-rate.html"><em>会员等级管理</em></a>
+							</li>
+							<li>
+								<a href="chat.html"><em>聊天室管理</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a><i class="fa fa-outdent"></i><em>提现管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="chamberWithdraw.html"><em>商会提现</em></a>
+							</li>
+							<li>
+								<a href="shoper-withdraw.html"><em>商户提现</em></a>
+							</li>
+							<li>
+								<a href="user-withdraw.html"><em>用户提现</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a><i class="fa fa-bank"></i><em>收益管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="rate.html"><em>分润设置</em></a>
+							</li>
+							<li>
+								<a href="income.html"><em>平台收益明细</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="category.html"><em>分类管理</em></a>
+							</li>
+							<li>
+								<a href="goods.html"><em>商品列表管理</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="sys-shop-data.html"><em>平台商城数据</em></a>
+							</li>
+							<li>
+								<a href="chamber-data.html"><em>商会数据</em></a>
+							</li>
+							<li>
+								<a href="shop-data.html"><em>商户数据</em></a>
+							</li>
+							<li>
+								<a href="order-statistic.html"><em>订单统计</em></a>
+							</li>
+							<li>
+								<a href="goods-statistic.html"><em>产品统计</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-users"></i><em>商会管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="chamber.html"><em>商会列表</em></a>
+							</li>
+							<li>
+								<a href="recommend.html"><em>商会推荐商户列表</em></a>
+							</li>
+							<li>
+								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
+							</li>
+							<li>
+								<a href="user-apply.html"><em>个人入会申请</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="">
+						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a class="" href="news-index.html"><em>商会动态</em></a>
+							</li>
+							<li>
+								<a href="news-goverment.html"><em>政府资讯</em></a>
+							</li>
+							<li>
+								<a href="news-culture.html"><em>文化旅游</em></a>
+							</li>
+							<li>
+								<a href="news-local.html"><em>本地新闻</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-user"></i><em>商户及用户管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="shoper.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a href="user.html"><em>用户管理</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="live.html"><em>直播管理</em></a>
+							</li>
+							<li>
+								<a href="video.html"><em>点播管理</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="database.html"><em>数据库管理</em></a>
+							</li>
+							<li>
+								<a href="log.html"><em>系统日志</em></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">提现管理</a> > <a href="#">用户提现</a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-3 index-msg">
+									<div class="col-md-4" style="background: #00bc3e;"><img src="assets/img/index-01.png"></div>
+									<div class="col-md-8">
+										<p style="color: #00bc3e;">已提现金额</p>
+										<p>¥1000</p>
+									</div>
+								</div>
+								<div class="col-md-3 index-msg">
+									<div class="col-md-4" style="background: #0098f0;"><img src="assets/img/index-02.png"></div>
+									<div class="col-md-8">
+										<p style="color: #0098f0;">今日申请提现</p>
+										<p>¥100</p>
+									</div>
+								</div>
+								<div class="col-md-3 index-msg">
+									<div class="col-md-4" style="background: #0098f0;"><img src="assets/img/index-02.png"></div>
+									<div class="col-md-8">
+										<p style="color: #0098f0;">已驳回提现</p>
+										<p>¥2000</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- endROW -->
+					</div>
+					<!-- end col-md-12 -->
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading textalign-left">
+						<div class="btn-group">
+							<button data-toggle="dropdown" class="btn btn-blue btn-sm dropdown-toggle">全部<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li data-event="del"><a href="#">全部</a></li>
+								<li data-event="add"><a href="#">待审核</a></li>
+								<li data-event="setmodule"><a href="#">已通过</a></li>
+								<li data-event="setSEO"><a href="#">已驳回</a></li>
+							</ul>
+						</div>
+						<a class="btn btn-blue btn-sm" href="javascript:;" tabledel>批量通过</a>
+						<a class="btn btn-danger btn-sm" href="javascript:;" tabledel>批量驳回</a>
+						<div class="btn-group pull-right">
+							<input type="text" class="searchid" id="" v-model="searchid" placeholder="按用户手机号查询"/>
+							<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th><input type="checkbox" name="" id="" value="" /></th>
+										<th>ID</th>
+										<th>会员名称</th>
+                                        <th>会员手机号</th>
+                                        <th>会员等级</th>
+										<th>提现金额（元）</th>
+										<th>提现账户</th>
+										<th>账户类型</th>
+										<th>申请时间</th>
+										<th>状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" name="" id="" value="" /></td>
+										<td>110000</td>
+										<td>阿三</td>
+                                        <td>15712341234</td>
+                                        <td>青铜会员</td>
+										<td>¥3000</td>
+										<td>1571234321</td>
+										<td>支付宝</td>
+										<td>2020-01-02</td>
+										<td>待审核</td>
+										<td>
+											<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>通过</a>
+                                            <a class="btn btn-danger btn-sm" href="javascript:;" rowdel>驳回</a>
+                                            <a class="btn btn-blue btn-sm btn-sum" href="javascript:;">用户汇总</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				
+				<!-- /. PAGE INNER  -->
+			</div>
+			<!-- /. PAGE WRAPPER  -->
+		</div>
+		<!-- /. WRAPPER  -->
+
+		<div id="footer-sec">
+			<p>Copyright © 2019 几度CMS版权所有</p>
+		</div>
+		<!-- /. FOOTER  -->
+		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+		<!-- JQUERY SCRIPTS -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- BOOTSTRAP SCRIPTS -->
+		<script src="assets/js/bootstrap.js"></script>
+		<script src="assets/layui/layui.all.js"></script>
+		<!-- METISMENU SCRIPTS -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<script src="assets/incubator-echarts-4.3.0/echarts.js"></script>
+		<!-- CUSTOM SCRIPTS -->
+		<script src="assets/js/custom.js"></script>
+		<script src="assets/js/common.js"></script>
+        <script src="assets/js/link.js"></script>
+        
+        <script>
+            $('.btn-sum').click(function(){
+                var modal = `<div class="modules popups">
+							<div class="form-group">
+								<label>已提现金额</label>
+								<input class="form-control" value="1200"/>
+							</div>
+							<div class="form-group">
+								<label>待审核金额</label>
+								<input class="form-control" value="1000"/>
+							</div>
+                            <div class="form-group">
+								<label>已驳回金额</label>
+								<input class="form-control" value="100"/>
+							</div>
+						</div>`;
+                layui.use('layer',function(){
+                    var layer = layui.layer;
+                    layer.open({
+                        content: modal
+                        ,area:'device-width'
+                        ,btn: ['确认']
+                        ,yes: function(index, layero){
+                            layer.close(index)
+                        }
+                        ,cancel: function(){ 
+                                    
+                        }
+                    })
+                })
+            })
+        </script>
+</body>
+</html>
