@@ -18,7 +18,7 @@ import java.util.Date;
  * @Description:
  */
 @Data
-@Table(name = "shopping_address")
+@Table(name = "user_comment")
 public class UserComment {
     @Id
     @KeySql(useGeneratedKeys = true)
@@ -39,7 +39,8 @@ public class UserComment {
     private Date commentTime;
     @ApiModelProperty(value = "评论内容")
     private String content;
-
+    @ApiModelProperty(value = "指向父评论的id,如果不是对评论的回复,那么该值为null")
+    private Integer parentId;
     @ApiModelProperty(value = "是不是自己的")
     @Transient
     private Integer oneself;

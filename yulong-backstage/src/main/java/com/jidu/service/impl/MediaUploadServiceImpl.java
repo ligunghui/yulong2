@@ -24,13 +24,17 @@ import java.util.*;
  */
 @Service
 public class MediaUploadServiceImpl implements MediaUploadService {
-    @Value("${media.upload-location}")
-    String upload_location;
     @Value("${FFmpeg.path}")
     String ffmpeg_path;
+    static String upload_location = "/yulong/upload/";
     @Autowired
     private MediaFileMapper mediaFileMapper;
-
+     static {
+         String os = System.getProperty("os.name");
+         if (os.toLowerCase().startsWith("win")) {
+             upload_location = "c:/upload/";
+         }
+     }
     //得到文件所属目录路径
     private String getFileFolderPath(String fileMd5) {
         return upload_location + fileMd5.substring(0, 1) + "/" + fileMd5.substring(1, 2) + "/" + fileMd5 + "/";
@@ -176,8 +180,8 @@ public class MediaUploadServiceImpl implements MediaUploadService {
             return new Result(100, "校验文件失败", false);
         }
         //3.将map4 文件转成m3u8
-        String mp4_video_path = getFilePath(fileMd5,fileExt);
-        map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);
+       /* String mp4_video_path = getFilePath(fileMd5,fileExt);
+        map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);*/
 
 
         return new Result(ResultCode.SUCCESS);
@@ -277,7 +281,6 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         mediaFile.setFileId(fileMd5);
         mediaFile.setFileOriginalName(fileName);
         mediaFile.setFileName(fileMd5 + "." + fileExt);
-
         mediaFile.setFilePath(mp4_video_path);
         mediaFile.setFileSize(fileSize);
         mediaFile.setUploadTime(new Date());

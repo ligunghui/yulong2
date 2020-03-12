@@ -23,7 +23,9 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public void save(ShoppingNotice shoppingNotice) {
         shoppingNotice.setAddtime(new Date());
-
+        shoppingNotice.setStoreId("0");
+        shoppingNotice.setCreateName("平台管理员");
+        shoppingNotice.setCreateId("0");
         noticeMapper.insert(shoppingNotice);
     }
 
