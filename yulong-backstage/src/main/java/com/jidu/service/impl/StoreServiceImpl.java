@@ -1,5 +1,7 @@
 package com.jidu.service.impl;
 
+import com.jidu.entity.Result;
+import com.jidu.entity.ResultCode;
 import com.jidu.mapper.BusinessAdminMapper;
 import com.jidu.mapper.ShoppingStoreMapper;
 import com.jidu.pojo.shop.BusinessAdmin;
@@ -45,10 +47,10 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void verify(String id, String violationReseaon, int storeStatus) {
+    public Result verify(String id, String violationReseaon, int storeStatus) {
         ShoppingStore shoppingStore = shoppingStoreMapper.selectByPrimaryKey(id);
         if (2 == storeStatus && 2 == shoppingStore.getStoreStatus()) {
-            return;
+            return new Result(201, "重复审核", false);
         }
         shoppingStore.setStoreStatus(storeStatus);
         if (3 == storeStatus) {
@@ -56,10 +58,14 @@ public class StoreServiceImpl implements StoreService {
                 shoppingStore.setViolationReseaon(violationReseaon);
             }
             shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
-            return;
+            return new Result(ResultCode.SUCCESS);
         }
         //第一次审核通过初始化商户管理员
         String username = shoppingStore.getStoreTelephone();
+        List<BusinessAdmin> businessAdminByUserName = findBusinessAdminByUserName(username);
+        if (!businessAdminByUserName.isEmpty()) {
+            return new Result(201, "用户名重复", false);
+        }
         String password = "zhyl@123";
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         BusinessAdmin businessAdmin = new BusinessAdmin();
@@ -70,5 +76,14 @@ public class StoreServiceImpl implements StoreService {
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
         shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
+        return new Result(ResultCode.SUCCESS);
+    }
+
+    @Override
+    public List<BusinessAdmin> findBusinessAdminByUserName(String username) {
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", username);
+        return businessAdminMapper.selectByExample(example);
     }
 }

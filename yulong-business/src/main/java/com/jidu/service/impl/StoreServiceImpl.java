@@ -55,6 +55,7 @@ public class StoreServiceImpl implements StoreService {
     public void addBusinessAdmin(BusinessAdmin businessAdmin) {
         String password = businessAdmin.getPassword();
         String username = businessAdmin.getUsername();
+
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         businessAdmin.setPassword(password);
         businessAdmin.setType(3);
@@ -78,6 +79,14 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void deleteBusinessAdminById(int id) {
         businessAdminMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<BusinessAdmin> findBusinessAdminByUserName(String username) {
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", username);
+        return businessAdminMapper.selectByExample(example);
     }
 
 

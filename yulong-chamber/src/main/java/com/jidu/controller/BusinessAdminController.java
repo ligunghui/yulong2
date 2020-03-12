@@ -40,6 +40,11 @@ public class BusinessAdminController extends BusinessBaseController {
     @RequestMapping(value = "/addBusinessAdmin", method = RequestMethod.POST)
     @ApiOperation(value = "添加商会管理员")
     public Result addBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
+        List<BusinessAdmin> list= businessAdminService.findBusinessAdminByUserName(businessAdmin.getUsername());
+        if (!list.isEmpty()){
+            return new Result(201,"用户名重复",false);
+
+        }
         businessAdmin.setStoreId(storeId);
         businessAdminService.addBusinessAdmin(businessAdmin);
         return new Result(ResultCode.SUCCESS);

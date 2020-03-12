@@ -1,5 +1,7 @@
 package com.jidu.service.impl;
 
+import com.jidu.entity.Result;
+import com.jidu.entity.ResultCode;
 import com.jidu.mapper.BusinessAdminMapper;
 import com.jidu.mapper.ChamberMapper;
 import com.jidu.pojo.shop.BusinessAdmin;
@@ -53,17 +55,17 @@ public class ChamberServiceImpl implements ChamberService {
     public List<ShoppingChamber> search(Map param, Integer status) {
         Example example = new Example(ShoppingChamber.class);
         Example.Criteria criteria = example.createCriteria();
-        if (0!=status){
-            criteria.andEqualTo("status",status);
+        if (0 != status) {
+            criteria.andEqualTo("status", status);
         }
         return chamberMapper.selectByExample(example);
     }
 
     @Override
-    public void verify(Integer id, String violationReseaon, Integer status) {
+    public Result verify(Integer id, String violationReseaon, Integer status) {
         ShoppingChamber shoppingChamber = chamberMapper.selectByPrimaryKey(id);
         if (2 == status && 2 == shoppingChamber.getStatus()) {
-            return;
+            return new Result(201, "重复审核", false);
         }
         shoppingChamber.setStatus(status);
         if (3 == status) {
@@ -71,21 +73,34 @@ public class ChamberServiceImpl implements ChamberService {
                 shoppingChamber.setViolationReseaon(violationReseaon);
             }
             chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
-            return;
+            return new Result(ResultCode.SUCCESS);
         }
         //第一次审核通过初始化商会管理员
-        String username = shoppingChamber.getName();
+        //
+        String username = shoppingChamber.getTelephone();
+        List<BusinessAdmin> businessAdminByUserName = findBusinessAdminByUserName(username);
+        if (!businessAdminByUserName.isEmpty()) {
+            return new Result(201, "用户名重复", false);
+        }
+        //判断
         String password = "zhyl@123";
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         BusinessAdmin businessAdmin = new BusinessAdmin();
-        businessAdmin.setStoreId(id+"");
+        businessAdmin.setStoreId(id + "");
         businessAdmin.setUsername(username);
         businessAdmin.setPassword(password);
         businessAdmin.setType(2);
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
         chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
+        return new Result(ResultCode.SUCCESS);
     }
 
+    public List<BusinessAdmin> findBusinessAdminByUserName(String username) {
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", username);
+        return businessAdminMapper.selectByExample(example);
+    }
 
 }

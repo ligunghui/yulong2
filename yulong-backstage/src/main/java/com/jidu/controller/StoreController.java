@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.pojo.shop.BusinessAdmin;
 import com.jidu.pojo.shop.ShoppingStore;
 import com.jidu.service.StoreService;
 import io.swagger.annotations.Api;
@@ -62,7 +63,7 @@ public class StoreController {
             @ApiImplicitParam(name = "violationReseaon", value = "拒绝理由", required = false, paramType = "query")
     })
     public Result verify(@PathVariable String id, @PathVariable int storeStatus, @RequestParam(required = false) String violationReseaon) {
-        storeService.verify(id, violationReseaon, storeStatus);
-        return new Result(ResultCode.SUCCESS);
+
+        return storeService.verify(id, violationReseaon, storeStatus);
     }
 }

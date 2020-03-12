@@ -1,5 +1,7 @@
 package com.jidu.service;
 
+import com.jidu.entity.Result;
+import com.jidu.pojo.shop.BusinessAdmin;
 import com.jidu.pojo.shop.ShoppingStore;
 
 import java.util.List;
@@ -10,5 +12,6 @@ public interface StoreService {
 
     ShoppingStore findShoppingStoreById(String id);
 
-    void verify(String id, String violationReseaon, int storeStatus);
+    Result verify(String id, String violationReseaon, int storeStatus);
+     List<BusinessAdmin> findBusinessAdminByUserName(String username);
 }

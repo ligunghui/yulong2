@@ -20,4 +20,6 @@ public interface BusinessAdminService {
     BusinessAdmin findBusinessAdminById(int id);
 
     void deleteBusinessAdminById(int id);
+
+    List<BusinessAdmin> findBusinessAdminByUserName(String username);
 }

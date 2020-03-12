@@ -65,6 +65,11 @@ public class StoreController extends BusinessBaseController {
     @ApiOperation(value = "添加商户管理员")
     public Result addBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
         businessAdmin.setStoreId(storeId);
+       List<BusinessAdmin> list= storeService.findBusinessAdminByUserName(businessAdmin.getUsername());
+       if (!list.isEmpty()){
+           return new Result(201,"用户名重复",false);
+
+       }
         storeService.addBusinessAdmin(businessAdmin);
         return new Result(ResultCode.SUCCESS);
     }

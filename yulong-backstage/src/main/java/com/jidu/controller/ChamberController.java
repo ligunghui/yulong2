@@ -77,7 +77,7 @@ public class ChamberController {
             @ApiImplicitParam(name = "violationReseaon", value = "拒绝理由", required = false, paramType = "query")
     })
     public Result verify(@PathVariable Integer id, @PathVariable Integer status, @RequestParam(required = false) String violationReseaon) {
-        chamberService.verify(id, violationReseaon, status);
-        return new Result(ResultCode.SUCCESS);
+       return chamberService.verify(id, violationReseaon, status);
+
     }
 }

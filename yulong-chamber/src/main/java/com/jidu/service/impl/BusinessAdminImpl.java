@@ -58,4 +58,12 @@ public class BusinessAdminImpl implements BusinessAdminService {
     public void deleteBusinessAdminById(int id) {
         businessAdminMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<BusinessAdmin> findBusinessAdminByUserName(String username) {
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", username);
+        return businessAdminMapper.selectByExample(example);
+    }
 }

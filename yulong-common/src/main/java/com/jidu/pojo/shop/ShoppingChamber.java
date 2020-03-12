@@ -22,6 +22,8 @@ public class ShoppingChamber {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
+    @ApiModelProperty(value = "手机号")
+    private String telephone;
     @ApiModelProperty(value = "商会名称")
     private String name;
     @ApiModelProperty(value = "商会地址")
@@ -31,7 +33,6 @@ public class ShoppingChamber {
     @ApiModelProperty(value = "商会头像")
     private String img;
     @ApiModelProperty(value = "商会介绍")
-
     private String introduction;
     @ApiModelProperty(value = "状态(1申请中2申请通过3申请不通过4关闭)")
     private Integer status;

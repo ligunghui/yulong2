@@ -22,4 +22,6 @@ public interface StoreService {
     BusinessAdmin findBusinessAdminById(int id);
 
     void deleteBusinessAdminById(int id);
+
+    List<BusinessAdmin> findBusinessAdminByUserName(String username);
 }

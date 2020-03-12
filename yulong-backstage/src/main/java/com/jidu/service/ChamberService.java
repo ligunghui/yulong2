@@ -1,5 +1,6 @@
 package com.jidu.service;
 
+import com.jidu.entity.Result;
 import com.jidu.pojo.shop.ShoppingChamber;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface ChamberService {
 
     List<ShoppingChamber> search(Map param, Integer status);
 
-    void verify(Integer id, String violationReseaon, Integer status);
+    Result verify(Integer id, String violationReseaon, Integer status);
 }
