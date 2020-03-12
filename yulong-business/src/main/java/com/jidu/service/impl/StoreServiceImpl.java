@@ -29,7 +29,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public void update(ShoppingStore shoppingStore) {
-        storeMapper.updateByPrimaryKey(shoppingStore);
+        storeMapper.updateByPrimaryKeySelective(shoppingStore);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class StoreServiceImpl implements StoreService {
         String username = businessAdmin.getUsername();
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         businessAdmin.setPassword(password);
-        businessAdminMapper.updateByPrimaryKey(businessAdmin);
+        businessAdminMapper.updateByPrimaryKeySelective(businessAdmin);
     }
 
     @Override

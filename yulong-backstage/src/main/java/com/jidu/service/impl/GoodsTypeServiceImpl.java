@@ -30,7 +30,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 
     @Override
     public void update(GoodsType goodsType) {
-        goodsTypeMapper.updateByPrimaryKey(goodsType);
+        goodsTypeMapper.updateByPrimaryKeySelective(goodsType);
     }
 
     @Override

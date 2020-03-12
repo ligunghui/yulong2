@@ -29,7 +29,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public void update(ShoppingNotice shoppingNotice) {
-        noticeMapper.updateByPrimaryKey(shoppingNotice);
+        noticeMapper.updateByPrimaryKeySelective(shoppingNotice);
     }
 
     @Override

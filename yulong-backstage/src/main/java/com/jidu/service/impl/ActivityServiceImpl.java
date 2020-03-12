@@ -29,7 +29,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public void update(ShoppingActivity shoppingActivity) {
-        activityMapper.updateByPrimaryKey(shoppingActivity);
+        activityMapper.updateByPrimaryKeySelective(shoppingActivity);
     }
 
     @Override

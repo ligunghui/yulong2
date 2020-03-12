@@ -290,7 +290,7 @@ public class UserController extends BaseController {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Md5Hash("admin", "yulong@123", 3).toString());
+        System.out.println(new Md5Hash("zhyl@123", "admin", 3).toString());
     }
 
 }

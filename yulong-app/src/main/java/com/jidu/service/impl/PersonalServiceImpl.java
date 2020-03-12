@@ -72,7 +72,7 @@ public class PersonalServiceImpl implements PersonalService {
         // ResponseEntity<Result> resultResponseEntity = restTemplate.postForEntity("http://chamber/chamber/user", chamberUser, Result.class);
         chamberClient.UserApplyChamber(chamberUser);
         userInfo.setChamberId(chamberUser.getChamberId());
-        userInfoMapper.updateByPrimaryKey(userInfo);
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return new Result(ResultCode.SUCCESS);
     }
 
@@ -102,7 +102,7 @@ public class PersonalServiceImpl implements PersonalService {
         }
         chamberClient.cancelChamberByUserId(userInfo.getChamberId());
         userInfo.setChamberId(0);
-        userInfoMapper.updateByPrimaryKey(userInfo);
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return new Result(ResultCode.SUCCESS);
     }
 

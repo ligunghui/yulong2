@@ -55,7 +55,7 @@ public class StoreServiceImpl implements StoreService {
             if (StringUtils.isNotEmpty(violationReseaon)) {
                 shoppingStore.setViolationReseaon(violationReseaon);
             }
-            shoppingStoreMapper.updateByPrimaryKey(shoppingStore);
+            shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
             return;
         }
         //第一次审核通过初始化商户管理员
@@ -69,6 +69,6 @@ public class StoreServiceImpl implements StoreService {
         businessAdmin.setType(3);
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
-        shoppingStoreMapper.updateByPrimaryKey(shoppingStore);
+        shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
     }
 }

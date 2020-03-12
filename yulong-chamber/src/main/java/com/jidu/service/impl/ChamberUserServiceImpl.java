@@ -52,7 +52,7 @@ public class ChamberUserServiceImpl implements ChamberUserService {
         chamberUser.setStatus(status);
         chamberUser.setHandlerTime(new Date());
         chamberUser.setHandlerPeople(userName);
-        chamberUserMapper.updateByPrimaryKey(chamberUser);
+        chamberUserMapper.updateByPrimaryKeySelective(chamberUser);
     }
 
     @Override

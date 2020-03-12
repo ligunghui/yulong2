@@ -30,7 +30,7 @@ public class UserCommentServiceImpl implements UserCommentService {
     public void thumbs(Integer id) {
         UserComment userComment = userCommentMapper.selectByPrimaryKey(id);
         userComment.setThumbsNum(userComment.getThumbsNum() + 1);
-        userCommentMapper.updateByPrimaryKey(userComment);
+        userCommentMapper.updateByPrimaryKeySelective(userComment);
     }
 
     @Override

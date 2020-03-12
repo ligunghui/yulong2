@@ -87,7 +87,7 @@ public class PayController  extends  BaseController{
             if (userInfo.getWalletMoney().compareTo(totalprice) > -1) {
                 BigDecimal subtract = userInfo.getWalletMoney().subtract(totalprice);
                 userInfo.setWalletMoney(subtract);
-                this.userInfoMapper.updateByPrimaryKey(userInfo);
+                this.userInfoMapper.updateByPrimaryKeySelective(userInfo);
                 return new Result(200, "余额充足", true);
             }
 
@@ -98,7 +98,7 @@ public class PayController  extends  BaseController{
         if (surplus == 3) {
             totalprice = totalprice.subtract(userInfo.getWalletMoney());
             userInfo.setWalletMoney(new BigDecimal(0.0));
-            this.userInfoMapper.updateByPrimaryKey(userInfo);
+            this.userInfoMapper.updateByPrimaryKeySelective(userInfo);
         }
         double money = totalprice.doubleValue();
         if (1 == type) {

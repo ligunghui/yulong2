@@ -35,7 +35,7 @@ public class ChamberServiceImpl implements ChamberService {
 
     @Override
     public void update(ShoppingChamber shoppingChamber) {
-        chamberMapper.updateByPrimaryKey(shoppingChamber);
+        chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ChamberServiceImpl implements ChamberService {
             if (StringUtils.isNotEmpty(violationReseaon)) {
                 shoppingChamber.setViolationReseaon(violationReseaon);
             }
-            chamberMapper.updateByPrimaryKey(shoppingChamber);
+            chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
             return;
         }
         //第一次审核通过初始化商会管理员
@@ -84,7 +84,7 @@ public class ChamberServiceImpl implements ChamberService {
         businessAdmin.setType(2);
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
-        chamberMapper.updateByPrimaryKey(shoppingChamber);
+        chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
     }
 
 

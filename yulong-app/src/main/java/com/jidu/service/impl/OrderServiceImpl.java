@@ -26,6 +26,6 @@ public class OrderServiceImpl implements OrderService {
     public void operationOrder(String orderId, Integer type) {
         ShoppingOrder shoppingOrder = shoppingOrderMapper.selectByPrimaryKey(orderId);
         shoppingOrder.setOrderStatus(type);
-        shoppingOrderMapper.updateByPrimaryKey(shoppingOrder);
+        shoppingOrderMapper.updateByPrimaryKeySelective(shoppingOrder);
     }
 }

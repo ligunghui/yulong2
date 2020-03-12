@@ -24,7 +24,6 @@ public class AppUpdate {
     private String title;
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
-
     @ApiModelProperty(value = "内容")
     private String content;
 

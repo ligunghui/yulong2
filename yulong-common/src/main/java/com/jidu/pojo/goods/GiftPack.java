@@ -18,7 +18,7 @@ import java.util.Date;
  * @create: 2020-02-23 10:18
  */
 @Data
-@Table(name = "gift _pack")
+@Table(name = "gift_pack")
 public class GiftPack {
     @Id
     @KeySql(useGeneratedKeys = true)

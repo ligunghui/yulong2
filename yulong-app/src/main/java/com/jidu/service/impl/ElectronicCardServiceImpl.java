@@ -23,7 +23,7 @@ public class ElectronicCardServiceImpl implements ElectronicCardService {
 
     @Override
     public void editElectronicCard(ElectronicCard electronicCard) {
-        electronicCardMapper.updateByPrimaryKey(electronicCard);
+        electronicCardMapper.updateByPrimaryKeySelective(electronicCard);
     }
 
     @Override

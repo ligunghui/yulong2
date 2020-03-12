@@ -43,7 +43,7 @@ public class ChamberServiceImpl implements ChamberService {
 
     @Override
     public void update(ShoppingChamber shoppingChamber) {
-        chamberMapper.updateByPrimaryKey(shoppingChamber);
+        chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class ChamberServiceImpl implements ChamberService {
                 return new Result(100, "商户已经被推荐", false);
             }
             selectOne.setRecommend(1);
-            chamberStoreMapper.updateByPrimaryKey(selectOne);
+            chamberStoreMapper.updateByPrimaryKeySelective(selectOne);
         }
         shoppingStore.setStoreRecommend(true);
-        shoppingStoreMapper.updateByPrimaryKey(shoppingStore);
+        shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
         return new Result(200, "推荐成功", true);
     }
 
@@ -114,9 +114,9 @@ public class ChamberServiceImpl implements ChamberService {
             return new Result(100, "商户已经被取消", false);
         }
         selectOne.setRecommend(0);
-        chamberStoreMapper.updateByPrimaryKey(selectOne);
+        chamberStoreMapper.updateByPrimaryKeySelective(selectOne);
         shoppingStore.setStoreRecommend(false);
-        shoppingStoreMapper.updateByPrimaryKey(shoppingStore);
+        shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
         return new Result(200, "取消推荐成功", true);
     }
 

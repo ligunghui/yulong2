@@ -22,20 +22,19 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/backstage/activity")
-@Api(value = "1商会动态2政府资3文化旅游4本地新闻", description = "1商会动态2政府资3文化旅游4本地新闻")
+@Api(value = "1商会动态2政府资3文化旅游4本地新闻", description = "1商会动态2政府资讯3文化旅游4本地新闻")
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
-
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @ApiOperation(value = "type 1商会动态2政府资3文化旅游4本地新闻")
+    @ApiOperation(value = "type 1商会动态2政府资讯3文化旅游4本地新闻")
     public Result save(@RequestBody ShoppingActivity shoppingActivity) {
         activityService.save(shoppingActivity);
         return new Result(ResultCode.SUCCESS);
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    @ApiOperation(value = "修改商会动态2政府资3文化旅游4本地新闻")
+    @ApiOperation(value = "修改商会动态2政府资讯3文化旅游4本地新闻")
     public Result update(@RequestBody ShoppingActivity shoppingActivity) {
         activityService.update(shoppingActivity);
         return new Result(ResultCode.SUCCESS);
@@ -47,14 +46,12 @@ public class ActivityController {
         ShoppingActivity shoppingActivity = activityService.findById(id);
         return new Result(ResultCode.SUCCESS, shoppingActivity);
     }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商会动态")
     public Result delete(@PathVariable int id) {
         activityService.delete(id);
         return new Result(ResultCode.SUCCESS);
     }
-
     @RequestMapping(value = "/findByStoreId", method = RequestMethod.GET)
     @ApiOperation(value = "查询商会动态")
     public Result<ShoppingActivity> search() {

@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
     @Override
     public void update(ShoppingOrder shoppingOrder) {
-        orderMapper.updateByPrimaryKey(shoppingOrder);
+        orderMapper.updateByPrimaryKeySelective(shoppingOrder);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public void update(SysGrade sysGrade) {
-        gradeMapper.updateByPrimaryKey(sysGrade);
+        gradeMapper.updateByPrimaryKeySelective(sysGrade);
     }
 
     @Override

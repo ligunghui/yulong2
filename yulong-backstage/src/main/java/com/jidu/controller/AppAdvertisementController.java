@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
-import com.jidu.pojo.sys.AboutUs;
 import com.jidu.pojo.sys.AppAdvertisement;
 import com.jidu.service.AppAdvertisementService;
 import io.swagger.annotations.Api;

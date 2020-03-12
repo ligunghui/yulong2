@@ -26,7 +26,7 @@ public class AboutUsServiceImpl implements AboutUsService {
 
     @Override
     public void update(AboutUs aboutUs) {
-        aboutUsMapper.updateByPrimaryKey(aboutUs);
+        aboutUsMapper.updateByPrimaryKeySelective(aboutUs);
     }
 
     @Override

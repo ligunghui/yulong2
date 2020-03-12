@@ -58,5 +58,4 @@ public class ChamberUserController extends BusinessBaseController {
         ChamberUser chamberUser= chamberUserService.findChamberUserById(id);
         return new Result(ResultCode.SUCCESS,chamberUser);
     }
-
 }

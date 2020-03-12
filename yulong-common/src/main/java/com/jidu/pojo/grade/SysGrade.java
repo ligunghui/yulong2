@@ -29,5 +29,5 @@ public class SysGrade {
     @ApiModelProperty(value = "图标")
     private  String img;
     @ApiModelProperty(value = "说明")
-    private  String explain;
+    private  String introduce;
 }

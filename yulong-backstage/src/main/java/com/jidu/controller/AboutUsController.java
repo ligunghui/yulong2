@@ -28,10 +28,8 @@ import java.util.List;
 @RequestMapping(value = "/backstage/aboutUs")
 @Api(value = "关于我们", description = "关于我们")
 public class AboutUsController {
-
     @Autowired
     private AboutUsService aboutUsService;
-
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改关于我们")
@@ -39,7 +37,6 @@ public class AboutUsController {
         aboutUsService.update(aboutUs);
         return new Result(ResultCode.SUCCESS);
     }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询关于我们")
     public Result<AboutUs> findById(@PathVariable Integer id) {

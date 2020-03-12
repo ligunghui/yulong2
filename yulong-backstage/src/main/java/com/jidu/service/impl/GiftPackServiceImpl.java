@@ -46,7 +46,7 @@ public class GiftPackServiceImpl implements GiftPackService {
     public void delete(long id) {
         GiftPack giftPack = giftPackMapper.selectByPrimaryKey(id);
         giftPack.setDeletestatus(true);
-        giftPackMapper.updateByPrimaryKey(giftPack);
+        giftPackMapper.updateByPrimaryKeySelective(giftPack);
     }
 
     @Override

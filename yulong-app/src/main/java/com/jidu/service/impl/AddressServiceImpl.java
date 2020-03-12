@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void editShoppingAddress(ShoppingAddress shoppingAddress) {
-        addressMapper.updateByPrimaryKey(shoppingAddress);
+        addressMapper.updateByPrimaryKeySelective(shoppingAddress);
     }
 
     @Override
@@ -52,14 +52,14 @@ public class AddressServiceImpl implements AddressService {
 
         ShoppingAddress shoppingAddress1 = addressMapper.selectByPrimaryKey(id);
         shoppingAddress1.setType(1);
-        addressMapper.updateByPrimaryKey(shoppingAddress1);
+        addressMapper.updateByPrimaryKeySelective(shoppingAddress1);
     }
 
     @Override
     public void cancelDefault(long id) {
         ShoppingAddress shoppingAddress1 = addressMapper.selectByPrimaryKey(id);
         shoppingAddress1.setType(0);
-        addressMapper.updateByPrimaryKey(shoppingAddress1);
+        addressMapper.updateByPrimaryKeySelective(shoppingAddress1);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public void update(ShoppingBanner shoppingBanner) {
-        bannerMapper.updateByPrimaryKey(shoppingBanner);
+        bannerMapper.updateByPrimaryKeySelective(shoppingBanner);
     }
 
     @Override
