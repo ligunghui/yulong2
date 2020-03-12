@@ -281,6 +281,7 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         mediaFile.setFileId(fileMd5);
         mediaFile.setFileOriginalName(fileName);
         mediaFile.setFileName(fileMd5 + "." + fileExt);
+
         mediaFile.setFilePath(mp4_video_path);
         mediaFile.setFileSize(fileSize);
         mediaFile.setUploadTime(new Date());
