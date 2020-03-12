@@ -29,8 +29,6 @@ public class ChamberServiceImpl implements ChamberService {
     @Autowired
     private ChamberMapper chamberMapper;
     @Autowired
-    private RestTemplate restTemplate;
-    @Autowired
     private ChamberStoreMapper chamberStoreMapper;
     @Autowired
     private ShoppingStoreMapper shoppingStoreMapper;

@@ -21,14 +21,20 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserInfoMapper userInfoMapper;
+
     @Override
     public List<UserInfo> search(Map param) {
-        Example example=new Example(UserInfo.class);
+        Example example = new Example(UserInfo.class);
         Example.Criteria criteria = example.createCriteria();
-       if (!param.isEmpty()){
+        if (!param.isEmpty()) {
 
 
-       }
+        }
         return userInfoMapper.selectByExample(example);
+    }
+
+    @Override
+    public void update(UserInfo userInfo) {
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
     }
 }

@@ -3,6 +3,8 @@ package com.jidu.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
+import com.jidu.entity.Result;
+import com.jidu.entity.ResultCode;
 import com.jidu.pojo.sys.AboutUs;
 import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.UserService;
@@ -41,5 +43,11 @@ public class UserController {
         Page<UserInfo> page = PageHelper.startPage(pageNum, pageSize);
         List<UserInfo> userInfos = userService.search(param);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ApiOperation(value = "修改会员")
+    public Result update(@RequestBody UserInfo userInfo) {
+        userService.update(userInfo);
+        return new Result(ResultCode.SUCCESS);
     }
 }

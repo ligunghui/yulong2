@@ -35,7 +35,6 @@ public class BannerController {
 
     @RequestMapping(value = "/findByStoreId", method = RequestMethod.GET)
     @ApiOperation(value = "查询轮播图")
-
     public Result<ShoppingBanner> search() {
         List<ShoppingBanner> shoppingBanner = bannerService.search();
         return new Result(ResultCode.SUCCESS, shoppingBanner);
