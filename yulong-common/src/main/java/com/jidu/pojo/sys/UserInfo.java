@@ -24,7 +24,7 @@ public class UserInfo {
     private String qq;
     @ApiModelProperty(value = "微信")
     private String wx;
-    @ApiModelProperty(value = "添加时间")
+    @ApiModelProperty(value = "地址")
     private String address;
 
     @ApiModelProperty(value = "生日")
@@ -93,7 +93,7 @@ public class UserInfo {
     private Date vipEnd;
     @ApiModelProperty(value = "是否购买玉龙卡(1是0否)")
     private int vipIs;
-    @ApiModelProperty(value = "是否购买玉龙卡")
+    @ApiModelProperty(value = "积分")
     private int integral;
 
 
