@@ -26,7 +26,6 @@ public class UserInfo {
     private String wx;
     @ApiModelProperty(value = "地址")
     private String address;
-
     @ApiModelProperty(value = "生日")
     private Date birthday;
     @ApiModelProperty(value = "email")
@@ -48,7 +47,6 @@ public class UserInfo {
     private String walletPassword;
     @ApiModelProperty(value = "钱数")
     private BigDecimal walletMoney;
-
     @ApiModelProperty(value = "性别")
     private Integer sex;
     @ApiModelProperty(value = "真实姓名")
@@ -95,6 +93,5 @@ public class UserInfo {
     private int vipIs;
     @ApiModelProperty(value = "积分")
     private int integral;
-
 
 }

@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
-import com.jidu.pojo.sys.AboutUs;
 import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.UserService;
 import io.swagger.annotations.Api;
@@ -49,5 +48,11 @@ public class UserController {
     public Result update(@RequestBody UserInfo userInfo) {
         userService.update(userInfo);
         return new Result(ResultCode.SUCCESS);
+    }
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "查询会员")
+    public Result findById(@PathVariable String id) {
+      UserInfo userInfo=  userService.findById(id);
+        return new Result(ResultCode.SUCCESS,userInfo);
     }
 }

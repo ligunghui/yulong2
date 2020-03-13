@@ -15,4 +15,6 @@ public interface UserService {
     List<UserInfo> search(Map param);
 
     void update(UserInfo userInfo);
+
+    UserInfo findById(String id);
 }
