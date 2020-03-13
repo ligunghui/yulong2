@@ -53,7 +53,7 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+						<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 					</li>
 					<li>
 						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -106,19 +106,19 @@
 							</li>
 						</ul>
 					</li>
-					<li>
+					<li class="active">
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="category.html"><em>分类管理</em></a>
 							</li>
 							<li>
-								<a href="goods.html"><em>商品列表管理</em></a>
+								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -145,9 +145,6 @@
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
-							</li>
-							<li>
-								<a href="recommend.html"><em>商会推荐商户列表</em></a>
 							</li>
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="database.html"><em>数据库管理</em></a>
-							</li>
-							<li>
-								<a href="log.html"><em>系统日志</em></a>
-							</li>
-						</ul>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
 			</div>
@@ -249,13 +238,12 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">商品图片</span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" value="" lay-verify="required" />
-										<div class="layui-upload col-md-8" id="layerDemo">
-											<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">本地上传图片</button>
-										</div>
-										<div class="layui-upload-list col-md-12">
-											<img class="layui-upload-img" id="demo1">
-											<p id="demoText"></p>
+										<div class="layui-upload">
+										  <button type="button" class="layui-btn" id="uploadlogo">多图片上传(最多三张)</button> 
+										  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+										    预览图：
+										    <div class="layui-upload-list" id="demo2"></div>
+										 </blockquote>
 										</div>
 									</div>
 								</label>
@@ -326,7 +314,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">商品类型</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										<select name="type" lay-filter="" lay-verify="" ref="type">
+										<select name="typeId" lay-filter="" lay-verify="" ref="typeId">
 											<option value="0" selected="">普通</option>
 											<option value="1">平台自营</option>
 											<option value="2">家乡特产</option>
@@ -390,19 +378,22 @@
 			var app = new Vue({
 				el: '#page-wrapper',
 				data: {
-					details:'',
 					goodsWeight:'',
 					homePage:0,//1是0否
-					imgs:[],
+					imgs:'',
 					isNew:0,//1是0否
 					markePrice:'',
 					memberPrice:'',
 					name:'',
 					onsale:1,//0上架1下架
-					sellerTime:'',
+					saleNum:'',
+					starttime:'',
 					storePrice:'',
+					surplusNum:'',
 					totalNum:'',
-					typeId:0
+					typeId:0,
+					details:'',
+					imgNum:0
 				},
 				created() {
 					if(window.location.href.split('=')[1] != 'add') {
@@ -425,43 +416,31 @@
 							type: 'datetime'
 						});
 						
-						var uploadInst = upload.render({
-							elem: '#uploadlogo',
-							url: myurl + '/upload/upload',
-							headers: {
-								'Authorization': sessionid
-							},
-							accept: 'images',
-							choose: function(obj) {
-											
-								//将每次选择的文件追加到文件队列
-								var files = obj.pushFile();
-								//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-								obj.preview(function(index, file, result) {
-									console.log(file.name); //得到文件对象
-									// $('.logopath').val(file.name)
-								});
-							},
-							before: function(obj) {
-								//预读本地文件示例，不支持ie8
-								obj.preview(function(index, file, result) {
-									// $('#demo1').attr('src', result); //图片链接（base64）
-									$('.layui-upload-list').append(`<img class="layui-upload-img" src="${result}" style="margin-right:10px;">`)
-								});
-							},
-							done: function(res) {
-								_this.imgs.push(res.data)
-							},
-							error: function() {
-								//演示失败状态，并实现重传
-								var demoText = $('#demoText');
-								demoText.html(
-									'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-								demoText.find('.demo-reload').on('click', function() {
-									uploadInst.upload();
-								});
-							}
-						});
+						//多图片上传
+						  upload.render({
+						    elem: '#uploadlogo',
+						    url:  '/upload/upload',
+						    headers: {
+						    	'Authorization': sessionid
+						    }
+						    ,multiple: true
+						    ,before: function(obj){
+								_this.imgNum ++;
+								if(_this.imgNum < 4) {
+									//预读本地文件示例，不支持ie8
+									obj.preview(function(index, file, result){
+									  $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+									});
+								}
+						    }
+						    ,done: function(res){
+						      //上传完毕
+							  if(_this.imgNum < 4) {
+							  	_this.imgs = _this.imgs + ' ' + res.data
+								console.log(_this.imgs)
+							  }
+						    }
+						  });
 					})
 					
 					// 关闭过滤模式，保留所有标签
@@ -470,7 +449,7 @@
 					    window.editor = K.create('#editor_id', {
 					        filePostName: "uploadFile",
 					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-					        uploadJson: myurl + '/Kindeditor/uploadFile',
+					        uploadJson:  '/Kindeditor/uploadFile',
 					        resizeType: 1,
 					        allowPreviewEmoticons: true,
 					        allowImageUpload: true,
@@ -488,7 +467,7 @@
 					edit(ids) {
 						let _this = this;
 						$.ajax({
-							url: myurl + '/business/goods/' + ids,
+							url:  '/backstage/goods/' + ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -532,8 +511,6 @@
 									$('.onsale').val('off')
 									$('.onsaleTop').addClass('buttons-dafault').removeClass('buttons-active')
 								}//isNew END
-								_this.sellerTime = res.data.sellerTime;
-								$('.sellerTime').val(res.data.sellerTime);
 								_this.storePrice = res.data.storePrice;
 								_this.totalNum = res.data.totalNum;
 								// _this.typeId = res.data.typeId;
@@ -545,13 +522,13 @@
 					subs() {
 						let _this = this;
 						_this.details = window.editor.html();
+						_this.starttime = _this.$refs.starttime.value;
 						_this.homePage = _this.$refs.homePage.value == 'on' ? 1 : 0;
 						_this.isNew = _this.$refs.isNew.value == 'on' ? 1 : 0;
 						_this.onsale = _this.$refs.onsale.value == 'on' ? 0 : 1;
-						_this.sellerTime = _this.$refs.sellerTime.value;
 						_this.typeId = _this.$refs.typeId.value;
 						
-						if (!_this.details || !_this.goodsWeight || !_this.imgs || !_this.markePrice || !_this.memberPrice || !_this.name || !_this.sellerTime || !_this.storePrice || (_this.totalNum == '' && _this.totalNum != 0)) {
+						if (!_this.details || !_this.goodsWeight || !_this.imgs || !_this.markePrice || !_this.memberPrice || !_this.name || !_this.storePrice || (_this.totalNum == '' && _this.totalNum != 0)) {
 							layer.msg('请输入需要的信息且价格不能为0')
 							return
 						}
@@ -565,7 +542,7 @@
 							"memberPrice": _this.memberPrice,
 							"name": _this.name,
 							"onsale": _this.onsale,
-							"sellerTime": _this.sellerTime,
+							"sellerTime": _this.starttime,
 							"storePrice": _this.storePrice,
 							"totalNum": _this.totalNum,
 							"typeId": _this.typeId
@@ -575,7 +552,7 @@
 							ajaxType = 'PUT'
 						}
 						$.ajax({
-							url: myurl + '/backstage/goods',
+							url:  '/backstage/goods',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {
@@ -586,9 +563,9 @@
 							success: (res) => {
 								layer.msg(res.message)
 								if(res.code == 10000) {
-									// setTimeout(function() {
-									// 	window.location.href = 'store-goods.html'
-									// },1200)
+									setTimeout(function() {
+										window.location.href = 'goods.html'
+									},1200)
 								}
 							},
 							fail: (err) => {

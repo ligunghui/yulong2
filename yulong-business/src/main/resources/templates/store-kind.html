@@ -64,18 +64,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -214,7 +214,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/business/goodsType/1/10',
+				url: myurl + '/business/goodsType/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -230,7 +230,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: '/business/goodsType/'+obj.curr+'/10',
+						    	url: myurl + '/business/goodsType/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -261,7 +261,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/business/goodsType/' + _this.searchid,
+						url: myurl + '/business/goodsType/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -275,7 +275,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/goodsType/' + ids,
+					url: myurl + '/business/goodsType/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -299,7 +299,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: '/business/goodsType',
+									url: myurl + '/business/goodsType',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -331,7 +331,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/goodsType/' + ids,
+					url: myurl + '/business/goodsType/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,

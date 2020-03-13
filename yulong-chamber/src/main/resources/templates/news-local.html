@@ -97,7 +97,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li class="active">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -263,7 +263,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/chamber/activity/findByStoreId',
+				url: myurl + '/chamber/activity/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -287,7 +287,7 @@
 				} else {
 					
 					$.ajax({
-						url: '/chamber/activity/' + _this.searchid,
+						url: myurl + '/chamber/activity/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -302,7 +302,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/activity/' + ids,
+					url: myurl + '/chamber/activity/' + ids,
 					type: 'DELETE',
 					headers: {
 						'Authorization': sessionid,

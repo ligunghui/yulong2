@@ -53,12 +53,12 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
         			</li>
-        			<li>
+        			<li class="active">
         				<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
@@ -68,7 +68,7 @@
         						<a href="notice.html"><em>公告管理</em></a>
         					</li>
         					<li>
-        						<a href="ads.html"><em>APP广告页管理</em></a>
+        						<a class="active-menu" href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
         						<a href="card.html"><em>玉龙卡管理</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -145,9 +145,6 @@
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
-        					</li>
-        					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
         					</li>
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -225,41 +214,34 @@
                 <!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>banner管理</p>
+						<p>APP广告管理</p>
 					</div>
 					
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 						    <div class="panel-heading textalign-left">
-						        <a class="btn btn-blue btn-sm" href="addAd.html">添加</a>
+								<!-- addAd.html -->
+						        <a class="btn btn-blue btn-sm" @click="add">添加</a>
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
-						            <table class="table table-hover">
+						            <table class="table table-hover" v-cloak>
 						                <thead>
 						                    <tr>
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
 												<th>ID</th>
-						                        <th>广告名称</th>
 						                        <th>资源</th>
-                                                <th>广告类型</th>
-                                                <th>链接</th>
-                                                <th>广告时长</th>
 						                        <th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-for="(item,index) in bannerList" :key="index">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-						                        <td tableedit>主图1</td>
-						                        <td ><a class="colorblue" href="javascript:;" popupimg="assets/img/logo.png">【预览】</a></td>
-												<td tableedit>图片</td>
-                                                <td tableedit>http://www.baidu.com</td>
-                                                <td tableedit>10s</td>
+						                        <td>{{item.id}}</td>
+						                        <td ><a class="colorblue" href="javascript:;" @click="lookat(item.img,'img')">【预览】</a></td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowdel>删除</a>
+													<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a> -->
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 												</td>
 						                    </tr>
 						                </tbody>
@@ -271,6 +253,19 @@
 				</div>
 				
             <!-- /. PAGE INNER  -->
+			<div class="modules popups displaynone" id="popus" style="padding: 15px;">
+				<div class="form-group">
+					<label class="col-md-4">资源</label>
+					<div class="layui-upload col-md-8" id="layerDemo">
+						<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">本地上传图片</button>
+						<div class="layui-upload-list col-md-12">
+							<img class="layui-upload-img" id="demo1">
+							<p id="demoText"></p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
@@ -291,5 +286,195 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+	<script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#page-wrapper',
+			data: {
+				searchid: '',
+				bannerList: [],
+				issearch: false,
+				searchList: null,
+				editTxt:'',
+				editTit:'',
+				imgs:''
+			},
+			created() {
+				let _this = this;
+				$.ajax({
+					url:  '/backstage/appAdvertisement/1/10',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = res.data
+						layui.use('laypage', function(){
+						  var laypage = layui.laypage;
+						  
+						  //执行一个laypage实例
+						  laypage.render({
+						    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						    ,count: res.total //数据总数，从服务端得到
+							,jump: function(obj, first){
+							    $.ajax({
+							    	url:  '/backstage/appAdvertisement/'+obj.curr+'/10',
+							    	type: 'GET',
+							    	headers: {
+							    		'Authorization': sessionid,
+							    	},
+							    	success: (res) => {
+							    		_this.bannerList = res.rows
+							    	},
+							    	fail:(res) => {
+							    	}
+							    })
+							    //首次不执行
+							    // if(!first){
+							    //   //do something
+							    // }
+							  }
+						  });
+						});
+					},
+					fail:(res) => {
+					}
+				})
+			},
+			mounted() {
+				let _this = this;
+				layui.use('upload', function() {
+					var $ = layui.jquery,
+						upload = layui.upload;
+				
+					//普通图片上传
+					var uploadInst = upload.render({
+						elem: '#uploadlogo',
+						url:  '/upload/upload',
+						headers: {
+							'Authorization': sessionid
+						},
+						accept: 'images',
+						choose: function(obj) {
+				
+							//将每次选择的文件追加到文件队列
+							var files = obj.pushFile();
+							//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+							obj.preview(function(index, file, result) {
+								console.log(file.name); //得到文件对象
+								// $('.logopath').val(file.name)
+							});
+						},
+						before: function(obj) {
+							//预读本地文件示例，不支持ie8
+							obj.preview(function(index, file, result) {
+								$('#demo1').attr('src', result); //图片链接（base64）
+							});
+						},
+						done: function(res) {
+							_this.imgs = res.data
+						},
+						error: function() {
+							//演示失败状态，并实现重传
+							var demoText = $('#demoText');
+							demoText.html(
+								'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+							demoText.find('.demo-reload').on('click', function() {
+								uploadInst.upload();
+							});
+						}
+					});
+				});
+			},
+			methods: {
+				add() {
+					let _this = this;
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+						type:1,
+						title:'信息',
+					    content: $('#popus') ,//这里content是一个普通的String
+						area: 'auto',
+						btn: ['确定', '取消'],
+						yes: function(index, layero){
+						    //按钮【按钮一】的回调
+							let v = {
+							  "img":  _this.imgs
+							};
+							layer.close(index)
+							$('#popus').hide()
+							
+							$.ajax({
+								url:  '/backstage/appAdvertisement',
+								type: 'POST',
+								contentType: 'application/json',
+								headers: {
+									'Authorization': sessionid,
+								},
+								dataType: 'json',
+								data: JSON.stringify(v),
+								success: (res) => {
+									layer.msg(res.message)
+									if(res.code == 10000) {
+										window.location.reload()
+									}
+								},
+								fail: (err) => {
+									layer.msg(err.message)
+								}
+							})
+						  }
+					  });
+					}); 
+				},
+				del(ids) {
+					let _this = this;
+					layer.confirm('确定删除吗？',{icon:3,title:'提示'},function() {
+						$.ajax({
+							url:  '/backstage/appAdvertisement/' + ids,
+							type: 'DELETE',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								layer.msg(res.message)
+								setTimeout(function(){
+									window.location.reload()
+								},1200)
+							}
+						})
+					})
+					
+				},
+				lookat(cons,tys) {
+					let _this = this;
+					layui.use('layer',function() {
+						var layer = layui.layer;
+						if(tys == 'img') {
+							layer.open({
+								type:1,
+								content:`<img src="${cons}" style="max-width:300px;"/>`,
+								area:'device-width'
+							})
+						}else {
+							layui.use('layer',function() {
+								var layer = layui.layer;
+								
+								layer.open({
+									type:1,
+									content:cons,
+									area:'device-width'
+								})
+							})
+						}
+						
+					})
+				}
+			}
+		})
+	</script>
 </body>
 </html>

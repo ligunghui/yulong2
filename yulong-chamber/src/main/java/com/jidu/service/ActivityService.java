@@ -1,6 +1,7 @@
 package com.jidu.service;
 
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.sys.UserInfo;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface ActivityService {
 
     List<ShoppingActivity> search(String storeId);
 
+    List<UserInfo> findActivityUser(String activityId);
 }

@@ -4,6 +4,8 @@ import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.mapper.BusinessAdminMapper;
 import com.jidu.mapper.ChamberMapper;
+import com.jidu.mapper.NoticeMapper;
+import com.jidu.pojo.notice.ShoppingNotice;
 import com.jidu.pojo.shop.BusinessAdmin;
 import com.jidu.pojo.shop.ShoppingChamber;
 import com.jidu.service.ChamberService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +31,8 @@ public class ChamberServiceImpl implements ChamberService {
     private ChamberMapper chamberMapper;
     @Autowired
     private BusinessAdminMapper businessAdminMapper;
+    @Autowired
+    private NoticeMapper noticeMapper;
 
 
     @Override
@@ -64,8 +69,15 @@ public class ChamberServiceImpl implements ChamberService {
     @Override
     public Result verify(Integer id, String violationReseaon, Integer status) {
         ShoppingChamber shoppingChamber = chamberMapper.selectByPrimaryKey(id);
-        if (2 == status && 2 == shoppingChamber.getStatus()) {
-            return new Result(201, "重复审核", false);
+        String username = shoppingChamber.getTelephone();
+        if (username==null){
+            return new Result(201, "没有填写手机号,审核失败", false);
+        }
+        if (shoppingChamber.getStatus()!=null){
+
+            if (2 == status && 2 == shoppingChamber.getStatus()) {
+                return new Result(201, "重复审核", false);
+            }
         }
         shoppingChamber.setStatus(status);
         if (3 == status) {
@@ -77,7 +89,7 @@ public class ChamberServiceImpl implements ChamberService {
         }
         //第一次审核通过初始化商会管理员
         //
-        String username = shoppingChamber.getTelephone();
+
         List<BusinessAdmin> businessAdminByUserName = findBusinessAdminByUserName(username);
         if (!businessAdminByUserName.isEmpty()) {
             return new Result(201, "用户名重复", false);
@@ -93,6 +105,14 @@ public class ChamberServiceImpl implements ChamberService {
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
         chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
+        //产生系统消息通知app端
+        ShoppingNotice notice=new ShoppingNotice();
+        notice.setCreateName("平台管理员");
+        notice.setCreateId("0");
+        notice.setType(1);
+        notice.setAddtime(new Date());
+        notice.setContent("您申请的商会已经通过了,网址:http://zhyl.zh0476.com:9002,用户名是"+username+",初始密码是"+password);
+        noticeMapper.insert(notice);
         return new Result(ResultCode.SUCCESS);
     }
 

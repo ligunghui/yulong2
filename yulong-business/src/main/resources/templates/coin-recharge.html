@@ -64,18 +64,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a class="active-menu" href="coin-recharge.html"><em>提现情况</em></a>
+								<a class="active-menu" href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -209,7 +209,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/business/banner/findByStoreId',
+				url: myurl + '/business/banner/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -227,7 +227,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/business/banner/' + _this.searchid,
+						url: myurl + '/business/banner/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -242,14 +242,14 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/banner/' + ids,
+					url: myurl + '/business/banner/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						$.ajax({
-							url: '/business/banner/findByStoreId',
+							url: myurl + '/business/banner/findByStoreId',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,

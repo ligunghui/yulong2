@@ -5,7 +5,7 @@ var sessionid = ''
 sessionid = localStorage.getItem("sessionid")
 // localStorage.setItem("temp",arr); //存入 参数： 1.调用的值 2.所要存入的数据 
 // 　　 console.log(localStorage.getItem("temp"));//输出
-// 24小时后清空localStorage
+// 七天后清空localStorage
 var localTime = localStorage.getItem("localTime")
 if(localTime + 24*60*60*1000 < new Date()) {
 	localStorage.clear()
@@ -41,7 +41,6 @@ if(/login.html/.test(window.location.href)) {
 					});
 				})
 			})
-			
 		})
 	}
 }

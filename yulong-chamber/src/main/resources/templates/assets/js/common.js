@@ -10,7 +10,7 @@ $(function(){
 			$('.nav-second-level').removeClass('in');
 			$('.navbar-side li').removeClass('active');
 			
-			$('.navbar-brand .logoimg').animate({'width':'90%'});
+			$('.navbar-brand .logoimg').animate({'width':'100%'});
 			$('.navbar-brand .logotxt').css('display','none');
 			$('.navbar-side li a').css('textAlign','center');
 			$('.navbar-side li a span').css('display','none');
@@ -130,7 +130,6 @@ $(function(){
 	
 	// table点击编辑
 	$('[tableedit]').click(function(){
-		
 		let $this = $(this);
 		if($(this).children().is('input')) {
 			$(this).children('input').blur(function(){//焦点失去

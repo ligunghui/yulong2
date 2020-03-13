@@ -3,6 +3,7 @@ package com.jidu.service.impl;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.mapper.MediaFileMapper;
+import com.jidu.pojo.activity.ShoppingActivity;
 import com.jidu.pojo.media.MediaFile;
 import com.jidu.service.MediaUploadService;
 import com.jidu.utils.HlsVideoUtil;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import java.io.*;
 import java.util.*;
@@ -29,12 +31,14 @@ public class MediaUploadServiceImpl implements MediaUploadService {
     static String upload_location = "/yulong/upload/";
     @Autowired
     private MediaFileMapper mediaFileMapper;
-     static {
-         String os = System.getProperty("os.name");
-         if (os.toLowerCase().startsWith("win")) {
-             upload_location = "c:/upload/";
-         }
-     }
+
+    static {
+        String os = System.getProperty("os.name");
+        if (os.toLowerCase().startsWith("win")) {
+            upload_location = "c:/upload/";
+        }
+    }
+
     //得到文件所属目录路径
     private String getFileFolderPath(String fileMd5) {
         return upload_location + fileMd5.substring(0, 1) + "/" + fileMd5.substring(1, 2) + "/" + fileMd5 + "/";
@@ -180,10 +184,33 @@ public class MediaUploadServiceImpl implements MediaUploadService {
             return new Result(100, "校验文件失败", false);
         }
         //3.将map4 文件转成m3u8
-       /* String mp4_video_path = getFilePath(fileMd5,fileExt);
-        map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);*/
+        String mp4_video_path = getFilePath(fileMd5, fileExt);
+        //map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);
+        saveFile(mp4_video_path, fileMd5, fileName, fileExt, mimetype, fileSize, null);
 
+        return new Result(ResultCode.SUCCESS);
+    }
 
+    @Override
+    public List<MediaFile> search() {
+        return mediaFileMapper.selectAll();
+    }
+
+    @Override
+    public Result add(String fileMd5, String videoName, String fileImg) {
+        MediaFile mediaFile = mediaFileMapper.selectByPrimaryKey(fileMd5);
+        if (mediaFile == null) {
+            return new Result(201, "文件不存在", false);
+        }
+        mediaFile.setVideoName(videoName);
+        mediaFile.setFileImg(fileImg);
+        mediaFileMapper.updateByPrimaryKeySelective(mediaFile);
+        return new Result(ResultCode.SUCCESS);
+    }
+
+    @Override
+    public Result delete(String fileId) {
+        mediaFileMapper.deleteByPrimaryKey(fileId);
         return new Result(ResultCode.SUCCESS);
     }
 
@@ -210,7 +237,7 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         //保存fileUrl（此url就是视频播放的相对路径）
         String m3u8FileUrl = m3u8folder_path + m3u8_name;
         //4、将文件的信息写入数据库
-        saveFile(mp4_video_path,fileMd5, fileName, fileExt, mimetype, fileSize,m3u8FileUrl);
+        saveFile(mp4_video_path, fileMd5, fileName, fileExt, mimetype, fileSize, m3u8FileUrl);
 
 
     }
@@ -276,19 +303,18 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         }
     }
 
-    public void saveFile(String mp4_video_path,String fileMd5, String fileName, String fileExt, String mimetype, long fileSize, String m3u8FileUrl) {
+    public void saveFile(String mp4_video_path, String fileMd5, String fileName, String fileExt, String mimetype, long fileSize, String m3u8FileUrl) {
         MediaFile mediaFile = new MediaFile();
         mediaFile.setFileId(fileMd5);
         mediaFile.setFileOriginalName(fileName);
         mediaFile.setFileName(fileMd5 + "." + fileExt);
-
         mediaFile.setFilePath(mp4_video_path);
         mediaFile.setFileSize(fileSize);
         mediaFile.setUploadTime(new Date());
         mediaFile.setMimeType(mimetype);
         mediaFile.setFileType(fileExt);
         //状态为上传成功
-        mediaFile.setFileStatus("301002");
+        mediaFile.setFileStatus("上传成功");
         mediaFile.setM3u8FileUrl(m3u8FileUrl);
         mediaFileMapper.insert(mediaFile);
     }

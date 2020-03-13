@@ -50,6 +50,6 @@ public class NoticeServiceImpl implements NoticeService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("storeId",storeId);
         criteria.andEqualTo("type",type);
-        return null;
+        return noticeMapper.selectByExample(example);
     }
 }

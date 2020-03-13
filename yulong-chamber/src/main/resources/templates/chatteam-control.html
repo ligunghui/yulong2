@@ -72,13 +72,13 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a class="" class="" href="platform-banner.html"><em>banner图</em></a>
+								<a class="" class="" href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -97,7 +97,7 @@
 						</ul>
 					</li>
 					<li>
-						<a class="active-menu" href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a class="active-menu" href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -143,7 +143,7 @@
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增栏目</a>
 								<div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询轮播图" />
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
 								</div>
 							</div>
@@ -234,7 +234,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/business/notice/findByStoreId/4',
+				url: myurl + '/business/notice/findByStoreId/4',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -252,7 +252,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/business/notice/' + _this.searchid,
+						url: myurl + '/business/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -267,14 +267,14 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/banner/' + ids,
+					url: myurl + '/business/banner/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						$.ajax({
-							url: '/business/banner/findByStoreId',
+							url: myurl + '/business/banner/findByStoreId',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,

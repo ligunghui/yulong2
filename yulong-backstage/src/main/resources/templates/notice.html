@@ -53,19 +53,19 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
         			</li>
-        			<li>
+        			<li class="active">
         				<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="banner.html"><em>banner图管理</em></a>
         					</li>
         					<li>
-        						<a href="notice.html"><em>公告管理</em></a>
+        						<a class="active-menu" href="notice.html"><em>公告管理</em></a>
         					</li>
         					<li>
         						<a href="ads.html"><em>APP广告页管理</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -145,9 +145,6 @@
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
-        					</li>
-        					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
         					</li>
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -325,7 +314,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/notice/findByStoreId/0/1',
+					url:  '/backstage/notice/findByStoreId/0/1',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -333,7 +322,7 @@
 					success: (res) => {
 						_this.bannerList = res.data
 						$.ajax({
-							url: myurl + '/backstage/notice/findByStoreId/0/2',
+							url:  '/backstage/notice/findByStoreId/0/2',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -357,7 +346,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: myurl + '/backstage/notice/' + _this.searchid,
+							url:  '/backstage/notice/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -375,7 +364,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/backstage/notice/' + ids,
+						url:  '/backstage/notice/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -400,7 +389,7 @@
 									$('#popedit').hide()
 									
 									$.ajax({
-										url: myurl + '/backstage/notice',
+										url:  '/backstage/notice',
 										type: 'PUT',
 										contentType: 'application/json',
 										headers: {
@@ -432,7 +421,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/backstage/notice/' + ids,
+						url:  '/backstage/notice/' + ids,
 						type: 'delete',
 						headers: {
 							'Authorization': sessionid,

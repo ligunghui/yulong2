@@ -3,7 +3,9 @@ package com.jidu.service.impl;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.mapper.BusinessAdminMapper;
+import com.jidu.mapper.NoticeMapper;
 import com.jidu.mapper.ShoppingStoreMapper;
+import com.jidu.pojo.notice.ShoppingNotice;
 import com.jidu.pojo.shop.BusinessAdmin;
 import com.jidu.pojo.shop.ShoppingStore;
 import com.jidu.service.StoreService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +32,8 @@ public class StoreServiceImpl implements StoreService {
     private ShoppingStoreMapper shoppingStoreMapper;
     @Autowired
     private BusinessAdminMapper businessAdminMapper;
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     @Override
     public List<ShoppingStore> search(Map param, int storeStatus) {
@@ -76,6 +81,13 @@ public class StoreServiceImpl implements StoreService {
         businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
         shoppingStoreMapper.updateByPrimaryKeySelective(shoppingStore);
+        ShoppingNotice notice=new ShoppingNotice();
+        notice.setCreateName("平台管理员");
+        notice.setCreateId("0");
+        notice.setType(1);
+        notice.setAddtime(new Date());
+        notice.setContent("您申请的商户已经通过了,网址:http://zhyl.zh0476.com:9001,用户名是"+username+",初始密码是"+password);
+        noticeMapper.insert(notice);
         return new Result(ResultCode.SUCCESS);
     }
 

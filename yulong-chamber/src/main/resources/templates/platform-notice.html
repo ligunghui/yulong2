@@ -141,9 +141,9 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增公告</a>
 								<div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询轮播图" />
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
 								</div>
 							</div>
@@ -161,9 +161,7 @@
 											<th>结束时间</th>
 											<th>内容</th>
 											<th>是否显示</th>
-											<th>显示位置</th>
-											<th>创建者ID</th>
-											<th>商户ID</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -175,9 +173,6 @@
 											<td>{{item.endTime}}</td>
 											<td v-html="item.content"></td>
 											<td>{{item.display ? '否' : '是'}}</td>
-											<td>{{item.position}}</td>
-											<td>{{item.createId}}</td>
-											<td>{{item.storeId}}</td>
 											<td>
 												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
@@ -192,9 +187,6 @@
 											<td>{{searchList.endTime}}</td>
 											<td v-html="searchList.content"></td>
 											<td>{{searchList.display ? '否' : '是'}}</td>
-											<td>{{searchList.position}}</td>
-											<td>{{searchList.createId}}</td>
-											<td>{{searchList.storeId}}</td>
 											<td>
 												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
@@ -244,7 +236,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/chamber/notice/findByStoreId/3',
+				url: myurl + '/chamber/notice/findByStoreId/3',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -264,7 +256,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/chamber/notice/' + _this.searchid,
+						url: myurl + '/chamber/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -278,7 +270,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/notice/' + ids,
+					url: myurl + '/chamber/notice/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -302,7 +294,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: '/chamber/notice',
+									url: myurl + '/chamber/notice',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -334,7 +326,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/notice/' + ids,
+					url: myurl + '/chamber/notice/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -348,48 +340,6 @@
 				})
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

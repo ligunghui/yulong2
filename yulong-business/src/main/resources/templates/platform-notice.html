@@ -64,18 +64,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li class="active">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a class="active-menu" href="platform-notice.html"><em>公告显示</em></a>
+								<a class="active-menu" href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -123,7 +123,7 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增公告</a>
 								<div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
@@ -138,49 +138,36 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
-											<th>内容</th>
-											<th>是否显示</th>
-											<th>显示位置</th>
-											<th>创建者ID</th>
-											<th>商户ID</th>
+											<th>标题</th>
+											<th>详情</th>
+											<th>修改时间</th>
+											<th>展示在首页</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
+											<td>{{item.title}}</td>
+											<td><a href="javascript:;" class="btn btn-blue" @click="lookat(item.content)">查看</a></td>
 											<td>{{item.startTime}}</td>
-											<td>{{item.endTime}}</td>
-											<td v-html="item.content"></td>
 											<td>{{item.display ? '否' : '是'}}</td>
-											<td>{{item.position}}</td>
-											<td>{{item.createId}}</td>
-											<td>{{item.storeId}}</td>
 											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(item.id,item.storeId)">编辑</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id,item.storeId)">删除</a>
 											</td>
 										</tr>
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
+											<td>{{searchList.title}}</td>
+											<td><a href="javascript:;" class="btn btn-blue" @click="lookat(searchList.content)">查看</a></td>
 											<td>{{searchList.startTime}}</td>
-											<td>{{searchList.endTime}}</td>
-											<td v-html="searchList.content"></td>
 											<td>{{searchList.display ? '否' : '是'}}</td>
-											<td>{{searchList.position}}</td>
-											<td>{{searchList.createId}}</td>
-											<td>{{searchList.storeId}}</td>
 											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(searchList.id,searchList.storeId)">编辑</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id,searchList.storeId)">删除</a>
 											</td>
 										</tr>
 									</tbody>
@@ -226,7 +213,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/business/notice/findByStoreId/4',
+				url: myurl + '/business/notice/findByStoreId/4',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -246,7 +233,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/business/notice/' + _this.searchid,
+						url: myurl + '/business/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -260,7 +247,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/notice/' + ids,
+					url: myurl + '/business/notice/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -284,7 +271,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: '/business/notice',
+									url: myurl + '/business/notice',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -316,7 +303,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/business/notice/' + ids,
+					url: myurl + '/business/notice/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -328,51 +315,30 @@
 						},1200)
 					}
 				})
+			},
+			lookat(cons,tys) {
+				let _this = this;
+				layui.use('layer',function() {
+					var layer = layui.layer;
+					if(tys == 'img') {
+						layer.open({
+							type:1,
+							content:`<img src="${cons}" />`
+						})
+					}else {
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								content:cons
+							})
+						})
+					}
+					
+				})
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	/**/
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

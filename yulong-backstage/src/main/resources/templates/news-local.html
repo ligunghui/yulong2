@@ -52,7 +52,7 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+						<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 					</li>
 					<li>
 						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -117,7 +117,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -146,9 +146,6 @@
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
 							<li>
-								<a href="recommend.html"><em>商会推荐商户列表</em></a>
-							</li>
-							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 							</li>
 							<li>
@@ -156,7 +153,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="">
+					<li class="active">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
@@ -169,7 +166,7 @@
 								<a href="news-culture.html"><em>文化旅游</em></a>
 							</li>
 							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
+								<a class="active-menu" href="news-local.html"><em>本地新闻</em></a>
 							</li>
 						</ul>
 					</li>
@@ -196,15 +193,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="database.html"><em>数据库管理</em></a>
-							</li>
-							<li>
-								<a href="log.html"><em>系统日志</em></a>
-							</li>
-						</ul>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
 			</div>
@@ -352,7 +341,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/backstage/activity/findByStoreId/0',
+				url:  '/backstage/activity/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -360,7 +349,7 @@
 				success: (res) => {
 					if(res.data) {
 						res.data.forEach(function(i) {
-							if(i.type == 1) {
+							if(i.type == 4) {
 								_this.bannerList.push(i)
 							}
 						})
@@ -376,7 +365,7 @@
 				} else {
 					
 					$.ajax({
-						url: myurl + '/backstage/activity/' + _this.searchid,
+						url:  '/backstage/activity/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -391,7 +380,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/activity/' + ids,
+					url:  '/backstage/activity/' + ids,
 					type: 'DELETE',
 					headers: {
 						'Authorization': sessionid,

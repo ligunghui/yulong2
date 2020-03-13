@@ -52,7 +52,7 @@
 				<div class="sidebar-collapse">
 					<ul class="nav" id="main-menu">
 						<li>
-							<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+							<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 						</li>
 						<li>
 							<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -117,7 +117,7 @@
 							</ul>
 						</li>
 						<li>
-							<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+							<a class="active-menu" href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 						</li>
 						<li>
 							<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -144,9 +144,6 @@
 							<ul class="nav nav-second-level">
 								<li>
 									<a href="chamber.html"><em>商会列表</em></a>
-								</li>
-								<li>
-									<a href="recommend.html"><em>商会推荐商户列表</em></a>
 								</li>
 								<li>
 									<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -196,15 +193,7 @@
 							</ul>
 						</li>
 						<li>
-							<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a href="database.html"><em>数据库管理</em></a>
-								</li>
-								<li>
-									<a href="log.html"><em>系统日志</em></a>
-								</li>
-							</ul>
+							<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 						</li>
 					</ul>
 				</div>
@@ -248,24 +237,24 @@
 													<th>地址ID</th>
 													<th>商品ID</th>
 													<th>订单ID</th>
-													<th>添加时间</th>
-													<th>是否自动确认</th>
+													<!-- <th>添加时间</th> -->
+													<!-- <th>是否自动确认</th> -->
 													<th>完成时间</th>
 													<th>数量</th>
 													<th>订单状态</th>
-													<th>订单类型</th>
+													<!-- <th>订单类型</th> -->
 													<th>买家留言</th>
 													<th>支付时间</th>
-													<th>退货原因</th>
-													<th>退货单号</th>
-													<th>退货时间</th>
-													<th>卖家留言</th>
+													<!-- <th>退货原因</th> -->
+													<!-- <th>退货单号</th> -->
+													<!-- <th>退货时间</th> -->
+													<!-- <th>卖家留言</th> -->
 													<th>快递费</th>
 													<th>快递号</th>
 													<th>发货时间</th>
-													<th>商户ID</th>
+													<!-- <th>商户ID</th> -->
 													<th>总价格</th>
-													<th>单号</th>
+													<!-- <th>单号</th> -->
 													<th>用户ID</th>
 													<th>操作</th>
 												</tr>
@@ -277,24 +266,24 @@
 													<td>{{item.addrId}}</td>
 													<td>{{item.goodsId}}</td>
 													<td>{{item.orderId}}</td>
-													<td>{{item.addtime.split('T')[0]}}</td>
-													<td>{{item.autoConfirmEmail ? '是' : '否'}}</td>
+													<!-- <td>{{item.addtime.split('T')[0]}}</td> -->
+													<!-- <td>{{item.autoConfirmEmail ? '是' : '否'}}</td> -->
 													<td>{{item.finishtime}}</td>
 													<td>{{item.num}}</td>
 													<td>{{item.orderStatus | fOrder}}</td>
-													<td>{{item.orderType ? '平台' : '商户'}}</td>
+													<!-- <td>{{item.orderType ? '平台' : '商户'}}</td> -->
 													<td><a class="btn btn-blue" @click="lookat(item.payMsg)">查看</a></td>
 													<td>{{item.paytime}}</td>
-													<td><a class="btn btn-blue" @click="lookat(item.returnContent)">查看</a></td>
-													<td>{{item.returnShipcode}}</td>
-													<td>{{item.returnTime}}</td>
-													<td><a class="btn btn-blue" @click="lookat(item.sellerMsg)">查看</a></td>
+													<!-- <td><a class="btn btn-blue" @click="lookat(item.returnContent)">查看</a></td> -->
+													<!-- <td>{{item.returnShipcode}}</td> -->
+													<!-- <td>{{item.returnTime}}</td> -->
+													<!-- <td><a class="btn btn-blue" @click="lookat(item.sellerMsg)">查看</a></td> -->
 													<td>{{item.shipPrice}}</td>
 													<td>{{item.shipcode}}</td>
 													<td>{{item.shiptime}}</td>
-													<td>{{item.storeId}}</td>
+													<!-- <td>{{item.storeId}}</td> -->
 													<td>{{item.totalprice}}</td>
-													<td>{{item.transport}}</td>
+													<!-- <td>{{item.transport}}</td> -->
 													<td>{{item.userId}}</td>
 													<td>
 														<a class="btn btn-blue btn-sm" @click="looks(item.orderId,item.orderStatus)">查看物流</a>
@@ -385,7 +374,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/backstage/order/findByStoreId/0/1/10',
+						url:  '/backstage/order/findByStoreId/0/1/10',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -403,7 +392,7 @@
 										,
 									jump: function(obj, first) {
 										$.ajax({
-											url: myurl + '/backstage/order/findByStoreId/0/' + obj.curr + '/10',
+											url:  '/backstage/order/findByStoreId/0/' + obj.curr + '/10',
 											type: 'GET',
 											headers: {
 												'Authorization': sessionid,
@@ -449,7 +438,7 @@
 						} else {
 							_this.issearch = true;
 							$.ajax({
-								url: myurl + '/backstage/order/' + _this.searchid,
+								url:  '/backstage/order/' + _this.searchid,
 								type: 'GET',
 								headers: {
 									'Authorization': sessionid,
@@ -470,7 +459,7 @@
 						}, function(index, layero){
 						  //按钮【按钮一】的回调
 						  $.ajax({
-						  	url: myurl + '/backstage/order/' + ids,
+						  	url:  '/backstage/order/' + ids,
 						  	type: 'DELETE',
 						  	headers: {
 						  		'Authorization': sessionid,
@@ -524,7 +513,7 @@
 							})
 						}else {
 							$.ajax({
-								url: myurl + '/backstage/order/findLogisticsByOrderId/' + ids,
+								url:  '/backstage/order/findLogisticsByOrderId/' + ids,
 								type: 'GET',
 								headers: {
 									'Authorization': sessionid,

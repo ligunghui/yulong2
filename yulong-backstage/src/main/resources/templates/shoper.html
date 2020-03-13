@@ -53,7 +53,7 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -147,9 +147,6 @@
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
         					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
-        					</li>
-        					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
         					<li>
@@ -174,11 +171,11 @@
         					</li>
         				</ul>
         			</li>
-        			<li>
+        			<li class="active">
         				<a href=""><i class="fa fa-user"></i><em>商户及用户管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="shoper.html"><em>商户管理</em></a>
+        						<a class="active-menu" href="shoper.html"><em>商户管理</em></a>
         					</li>
         					<li>
         						<a href="user.html"><em>用户管理</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -231,46 +220,95 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 						    <div class="panel-heading textalign-left">
-						        <a class="btn btn-blue btn-sm" href="addchat.html">启用</a>
-                                <a class="btn btn-blue btn-sm" href="javascript:;" tabledel>禁用</a>
+						        <!-- <a class="btn btn-blue btn-sm" href="addchat.html">启用</a> -->
+                                <a class="btn" href="javascript:;">详情</a>
                                 <div class="btn-group pull-right">
-									<input type="text" class="searchid" id="" v-model="searchid" placeholder="按商户名称查询"/>
+									<input type="text" class="searchid" id="" v-model="searchid" placeholder="按商户ID查询"/>
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
 								</div>
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
-						            <table class="table table-hover">
+						            <table class="table table-hover" v-cloak>
 						                <thead>
 						                    <tr>
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
 												<th>ID</th>
-                                                <th>商户名称</th>
-                                                <th>商户类型</th>
-                                                <th>类型（仅本地服务有）</th>
-						                        <th>推荐到首页</th>
-						                        <th>入驻时间</th>
-						                        <th>排序</th>
-						                        <th>操作</th>
+												<th>所属商会ID</th>
+												<th>logo</th>
+												<th>商户商家ID</th>
+												<th>商户地址</th>
+												<th>商户信用值</th>
+												<th>商户简介</th>
+												<th>商户信息</th>
+												<th>关键字</th>
+												<th>商户名称</th>
+												<th>商户店家</th>
+												<th>是否推荐</th>
+												<th>推荐时间</th>
+												<th>商户状态</th>
+												<th>是否审核</th>
+												<th>审核时间</th>
+												<th>原因</th>
+												<th>电话</th>
+												<th>QQ</th>
+												<th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-if="!issearch" v-for="(item,index) in bannerList">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-                                                <td tableedit>AA商户</td>
-                                                <td tableedit>普通商户/本地服务</td>
-                                                <td>餐饮</td>
-                                                <td tableedit>是</td>
-                                                <td>2020-01-02 12:00:00</td>
-												<td tableedit>01</td>
-												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowdel>禁用</a>
-												</td>
+						                        <td>{{item.id}}</td>
+						                        <td>{{item.chamberId}}</td>
+						                        <td><a class="btn btn-blue" @click="lookat(item.logo,'img')">预览</a></td>
+						                        <td>{{item.owerId}}</td>
+						                        <td>{{item.storeAddress}}</td>
+						                        <td>{{item.storeCredit}}</td>
+						                        <td>{{item.storeInfo}}</td>
+						                        <td><a class="btn btn-blue" @click="lookat(item.storeDescription)">预览</a></td>
+						                        <td>{{item.storeKeywords}}</td>
+						                        <td>{{item.storeName}}</td>
+						                        <td>{{item.storeOwer}}</td>
+						                        <td>{{item.storeRecommend ? '是' : '否'}}</td>
+						                        <td>{{item.storeRecommendTime ? item.storeRecommendTime : '未设置'}}</td>
+						                        <td>{{item.storeStatus | fstatus}}</td>
+						                        <td>{{item.validity ? '是' : '否'}}</td>
+						                        <td>{{item.validityTime ? item.validityTime : '未设置'}}</td>
+						                        <td><a class="btn btn-blue" @click="lookat(item.violationReseaon)">查看</a></td>
+						                        <td>{{item.storeTelephone}}</td>
+						                        <td>{{item.storeQq}}</td>
+						                        <td>
+						                        	<a class="btn btn-blue btn-sm" @click="del(item.id,item.storeStatus)">{{item.storeStatus | fconfirm}}</a>
+						                        </td>
 						                    </tr>
+											<tr v-if="issearch">
+												<td><input type="checkbox" name="" id="" value="" /></td>
+											    <td>{{searchList.id}}</td>
+											    <td>{{searchList.chamberId}}</td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.logo,'img')">预览</a></td>
+											    <td>{{searchList.owerId}}</td>
+											    <td>{{searchList.storeAddress}}</td>
+											    <td>{{searchList.storeCredit}}</td>
+											    <td>{{searchList.storeInfo}}</td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.storeDescription)">预览</a></td>
+											    <td>{{searchList.storeKeywords}}</td>
+											    <td>{{searchList.storeName}}</td>
+											    <td>{{searchList.storeOwer}}</td>
+											    <td>{{searchList.storeRecommend ? '是' : '否'}}</td>
+											    <td>{{searchList.storeRecommendTime ? searchList.storeRecommendTime : '未设置'}}</td>
+											    <td>{{searchList.storeStatus | fstatus}}</td>
+											    <td>{{searchList.validity ? '是' : '否'}}</td>
+											    <td>{{searchList.validityTime ? searchList.validityTime : '未设置'}}</td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.violationReseaon)">查看</a></td>
+											    <td>{{searchList.storeTelephone}}</td>
+											    <td>{{searchList.storeQq}}</td>
+											    <td>
+											    	<a class="btn btn-blue btn-sm" @click="del(searchList.id)">推荐</a>
+											    </td>
+											</tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
@@ -298,5 +336,166 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+	<script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#page-wrapper',
+			data: {
+				searchid: '',
+				bannerList: [],
+				issearch: false,
+				searchList: null,
+				editTxt:''
+			},
+			created() {
+				let _this = this;
+				$.ajax({
+					url:  '/backstage/store/1/10/0',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = res.rows
+						layui.use('laypage', function(){
+						  var laypage = layui.laypage;
+						  
+						  //执行一个laypage实例
+						  laypage.render({
+						    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						    ,count: res.total //数据总数，从服务端得到
+							,jump: function(obj, first){
+							    $.ajax({
+							    	url:  '/backstage/store/'+obj.curr+'/10/0',
+							    	type: 'GET',
+							    	headers: {
+							    		'Authorization': sessionid,
+							    	},
+							    	success: (res) => {
+							    		_this.bannerList = res.rows
+							    	},
+							    	fail:(res) => {
+							    	}
+							    })
+							    //首次不执行
+							    // if(!first){
+							    //   //do something
+							    // }
+							  }
+						  });
+						});
+					},
+					fail:(res) => {
+					}
+				})
+			},
+			filters: {
+				fstatus(tys) {
+					if(tys == 1) {
+						return '申请中'
+					}else if(tys == 2) {
+						return '申请通过'
+					}else if(tys == 3) {
+						return '申请不通过'
+					}else {
+						return '关闭'
+					}
+				},
+				fconfirm(tys) {
+					if(tys == 1) {
+						return '启用'
+					}else if(tys == 2) {
+						return '禁用'
+					}else if(tys == 3) {
+						return '启用'
+					}else {
+						return '启用'
+					}
+				}
+			},
+			methods: {
+				mysearch(tys) {
+					let _this = this;
+					if(tys == 'all') {
+						
+						$.ajax({
+							url:  '/backstage/store' + _ths.searchid,
+							type: 'GET',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								_this.searchList = res.data
+								_this.issearch = true;
+								layer.msg(res.message)
+							}
+						})
+					}else {
+						if (!_this.searchid) {
+							_this.issearch = false
+						} else {
+							_this.issearch = true;
+						}
+					}
+				},
+				del(ids,tys) {
+					let _this = this;
+					// 2通过3拒绝
+					var sts;
+					if(tys == 1) {
+						// return '启用'
+						sts = 2;
+					}else if(tys == 2) {
+						// return '禁用'
+						sts = 3;
+					}else if(tys == 3) {
+						sts = 2;
+					}else {
+						sts = 2;
+					}
+					$.ajax({
+						url:  '/backstage/store/' + ids + '/' + sts,
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							setTimeout(function(){
+								window.location.reload()
+							},1200)
+						}
+					})
+				},
+				lookat(cons,type) {
+					if(!cons) {
+						layer.msg('您想查看的内容为空')
+						return
+					}
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  if(type == 'img') {
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: '<img src="' + cons + '" />',//这里content是一个普通的String
+							area: 'auto',
+						  });
+					  }else {
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: cons ,//这里content是一个普通的String
+							area: 'auto',
+						  });
+					  }
+					  
+					}); 
+				}
+			}
+		})
+	</script>
 </body>
 </html>

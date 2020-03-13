@@ -64,18 +64,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -169,12 +169,6 @@
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">QQ</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="number" class="form-control col-md-5" v-model="storeQq" />
-									</div>
-								</label>
-								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">介绍</span>
 									<div class="col-md-10_5 col-xs-12">
 										<textarea id="editor_id" name="content" style="width: 700px; height: 300px;">&lt;strong&gt;HTML内容&lt;/strong&gt; </textarea>
@@ -228,14 +222,13 @@
 				storeInfo: '',
 				storeDescription: '',
 				storeKeywords: '',
-				storeQq: '',
 				storeTelephone: '',
 				imgs: ''
 			},
 			created() {
 				let _this = this;
 				$.ajax({
-					url: '/business/store',
+					url: myurl + '/business/store',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -249,7 +242,6 @@
 							// 设置HTML内容
 							window.editor.html(_this.bannerList.storeDescription);
 							_this.storeKeywords = _this.bannerList.storeKeywords;
-							_this.storeQq = _this.bannerList.storeQq;
 							_this.storeTelephone = _this.bannerList.storeTelephone;
 							_this.imgs = _this.bannerList.logo;
 							$('.logopath').val(_this.bannerList.logo)
@@ -267,7 +259,7 @@
 
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url: '/upload/upload',
+						url: myurl + '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -309,7 +301,7 @@
 					window.editor = K.create('#editor_id', {
 						filePostName: "uploadFile",
 						//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-						uploadJson: '/Kindeditor/uploadFile',
+						uploadJson: myurl + '/Kindeditor/uploadFile',
 						resizeType: 1,
 						allowPreviewEmoticons: true,
 						allowImageUpload: true,
@@ -346,10 +338,9 @@
 					v.storeInfo = _this.storeInfo;
 					v.storeDescription = window.editor.html();
 					v.storeKeywords = _this.storeKeywords;
-					v.storeQq = _this.storeQq;
 					v.storeTelephone = _this.storeTelephone;
 					$.ajax({
-						url: '/business/store',
+						url: myurl + '/business/store',
 						type: 'PUT',
 						contentType: 'application/json',
 						headers: {

@@ -72,13 +72,13 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a class="" href="platform-banner.html"><em>banner图</em></a>
+								<a class="" href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -97,7 +97,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -141,7 +141,7 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="indexcontrol-master-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="indexcontrol-master-edit.html?id=add">添加管理员</a>
 								<div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询商品" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
@@ -168,7 +168,7 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
 											<td>{{item.username}}</td>
-											<td>{{item.password}}</td>
+											<td>******</td>
 											<td>{{item.type | fTypeTd}}</td>
 											<td>{{item.useable ? '是' : '否'}}</td>
 											<td>
@@ -180,7 +180,7 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.username}}</td>
-											<td>{{searchList.password}}</td>
+											<td>******</td>
 											<td>{{searchList.type | fTypeTd}}</td>
 											<td>{{searchList.useable ? '是' : '否'}}</td>
 											<td>
@@ -246,7 +246,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/admin/findBusinessAdmin/1/10',
+					url: myurl + '/chamber/admin/findBusinessAdmin/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -262,7 +262,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url: '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
+							    	url: myurl + '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -302,7 +302,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: '/chamber/admin/findBusinessAdminById/' + _this.searchid,
+							url: myurl + '/chamber/admin/findBusinessAdminById/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -316,7 +316,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url: '/chamber/admin/findBusinessAdminById/' + ids,
+						url: myurl + '/chamber/admin/findBusinessAdminById/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -338,7 +338,7 @@
 										v.username = _this.username;
 										v.password = _this.password;
 										$.ajax({
-											url: '/chamber/admin/updateBusinessAdmin',
+											url: myurl + '/chamber/admin/updateBusinessAdmin',
 											type: 'PUT',
 											contentType: 'application/json',
 											headers: {
@@ -373,7 +373,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url: '/chamber/admin/deleteBusinessAdminById/' + ids,
+						url: myurl + '/chamber/admin/deleteBusinessAdminById/' + ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,

@@ -1,3 +1,4 @@
+var loginurl = 'http://39.96.95.40:9001'
 var myurl = 'http://39.96.95.40:9001'
 var appurl = 'http://39.96.95.40:9005'
 var sessionid = ''

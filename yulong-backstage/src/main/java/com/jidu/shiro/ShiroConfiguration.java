@@ -23,7 +23,7 @@ public class ShiroConfiguration {
     //1.创建realm
     @Bean
     public MyRealm getRealm() {
-        return new MyRealm();
+        return new BusinessRealm();
     }
 
     //2.创建安全管理器
@@ -51,11 +51,14 @@ public class ShiroConfiguration {
         filterFactory.setLoginUrl("/autherror?code=1");//跳转url地址
         filterFactory.setUnauthorizedUrl("/autherror?code=2");//未授权的url
         Map<String,String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/app/user/login","anon");
+        filterMap.put("/business/login/login","anon");
         // filterMap.put("/business/user/login","perms[user-home]");
         //filterMap.put("/business/user/login","roles[user-home]");
         filterMap.put("/autherror","anon");
-        // filterMap.put("/**","authc");
+        filterMap.put("/","anon");
+        filterMap.put("/login.html","anon");
+        filterMap.put("/assets/**","anon");
+        //filterMap.put("/**","authc");
         filterFactory.setFilterChainDefinitionMap(filterMap);
 
         return filterFactory;
@@ -107,8 +110,6 @@ public class ShiroConfiguration {
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
-
-
 
 
     //开启对shior注解的支持

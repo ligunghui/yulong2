@@ -1,10 +1,12 @@
 package com.jidu.service.impl;
 
 import com.jidu.mapper.ShoppingBannerMapper;
+import com.jidu.pojo.activity.ShoppingActivity;
 import com.jidu.pojo.shop.ShoppingBanner;
 import com.jidu.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -35,6 +37,10 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public List<ShoppingBanner> search() {
-        return shoppingBannerMapper.selectAll();
+        Example example = new Example(ShoppingBanner.class);
+        Example.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("addtime DESC");
+        criteria.andEqualTo("storeId","0");
+        return shoppingBannerMapper.selectByExample(example);
     }
 }

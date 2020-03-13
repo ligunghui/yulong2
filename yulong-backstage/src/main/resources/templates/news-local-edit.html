@@ -53,7 +53,7 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+						<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 					</li>
 					<li>
 						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -118,7 +118,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -147,9 +147,6 @@
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
 							<li>
-								<a href="recommend.html"><em>商会推荐商户列表</em></a>
-							</li>
-							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 							</li>
 							<li>
@@ -157,7 +154,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="">
+					<li class="active">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
@@ -170,7 +167,7 @@
 								<a href="news-culture.html"><em>文化旅游</em></a>
 							</li>
 							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
+								<a class="active-menu" href="news-local.html"><em>本地新闻</em></a>
 							</li>
 						</ul>
 					</li>
@@ -197,15 +194,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="database.html"><em>数据库管理</em></a>
-							</li>
-							<li>
-								<a href="log.html"><em>系统日志</em></a>
-							</li>
-						</ul>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
 			</div>
@@ -355,7 +344,7 @@
 					_this.ids = window.location.href.split('=')[1];
 					if(_this.ids != 'add') {
 						$.ajax({
-							url: myurl + '/backstage/activity/' + _this.ids,
+							url:  '/backstage/activity/' + _this.ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -400,7 +389,7 @@
 		
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url: myurl + '/upload/upload',
+							url:  '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -436,7 +425,7 @@
 						});
 						var uploadInst2 = upload.render({
 							elem: '#uploadlogo2',
-							url: myurl + '/upload/upload',
+							url:  '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -478,7 +467,7 @@
 						window.editor = K.create('#editor_id', {
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson: myurl + '/Kindeditor/uploadFile',
+							uploadJson:  '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -529,7 +518,7 @@
 						v.type = 4;
 						
 						$.ajax({
-							url: myurl + '/backstage/activity',
+							url:  '/backstage/activity',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {

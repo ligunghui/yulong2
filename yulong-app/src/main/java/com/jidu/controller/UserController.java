@@ -47,8 +47,8 @@ public class UserController extends BaseController {
     @ApiOperation(value = "用户登录")
     public Result login(@ApiJsonObject(name = "loginMap", value = {
             @ApiJsonProperty(key = "mobile", example = "18614242538", description = "mobile"),
-            @ApiJsonProperty(key = "password", example = "123456", description = "password")
-    }) @RequestBody Map<String, String> loginMap) {
+            @ApiJsonProperty(key = "password", example = "123456", description = "password")})
+                            @RequestBody Map<String, String> loginMap) {
         String mobile = loginMap.get("mobile");
         String password = loginMap.get("password");
         try {
@@ -290,7 +290,7 @@ public class UserController extends BaseController {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Md5Hash("zhyl@123", "admin", 3).toString());
+        System.out.println(new Md5Hash("1", "1", 3).toString());
     }
 
 }

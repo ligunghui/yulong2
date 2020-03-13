@@ -1,6 +1,8 @@
 package com.jidu.service;
 
+import com.jidu.pojo.activity.ActivityUser;
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.sys.UserInfo;
 
 import java.util.List;
 
@@ -20,5 +22,6 @@ public interface ActivityService {
     void delete(int id);
 
     List<ShoppingActivity> search();
+
 
 }

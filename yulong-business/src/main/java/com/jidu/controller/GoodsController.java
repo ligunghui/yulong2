@@ -38,11 +38,11 @@ public class GoodsController extends BusinessBaseController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品")
     public Result save(@RequestBody ShoppingGoods shoppingGoods) {
-        shoppingGoods.setStoreId(storeId);
         ShoppingStore shoppingStore = storeService.findById(storeId);
         if (shoppingGoods == null) {
             return new Result(201, "商户不存在", false);
         }
+        shoppingGoods.setStoreId(storeId);
         shoppingGoods.setStoreName(shoppingStore.getStoreName());
         goodsService.save(shoppingGoods);
         return new Result(ResultCode.SUCCESS);

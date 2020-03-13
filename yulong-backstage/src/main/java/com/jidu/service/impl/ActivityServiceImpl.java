@@ -1,12 +1,17 @@
 package com.jidu.service.impl;
 
 import com.jidu.mapper.ActivityMapper;
+import com.jidu.mapper.ActivityUserMapper;
+import com.jidu.mapper.UserInfoMapper;
+import com.jidu.pojo.activity.ActivityUser;
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +24,11 @@ import java.util.List;
 public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private ActivityUserMapper activityUserMapper;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
 
     @Override
     public void save(ShoppingActivity shoppingActivity) {
@@ -47,8 +57,12 @@ public class ActivityServiceImpl implements ActivityService {
         Example example = new Example(ShoppingActivity.class);
         Example.Criteria criteria = example.createCriteria();
         example.setOrderByClause("addtime DESC");
+        criteria.andEqualTo("storeId", "0");
         return activityMapper.selectByExample(example);
     }
+
+
+
 
 
 }

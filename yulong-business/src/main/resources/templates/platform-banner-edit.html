@@ -65,18 +65,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li class="active">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a class="active-menu" href="platform-banner.html"><em>banner显示</em></a>
+								<a class="active-menu" href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -139,12 +139,6 @@
 											<img class="layui-upload-img" id="demo1">
 											<p id="demoText"></p>
 										</div>
-									</div>
-								</label>
-								<label class="layui-inline col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">结束时间</span>
-									<div class="layui-input-inline col-md-4 col-xs-12">
-										<input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='endtime'>
 									</div>
 								</label>
 							</div>
@@ -210,7 +204,6 @@
 			var app = new Vue({
 				el: '#page-wrapper',
 				data: {
-					endTime:'',
 					publics:'',
 					position:''
 				},
@@ -240,11 +233,9 @@
 				methods: {
 					subs() {
 						let _this = this;
-						_this.endTime = _this.$refs.endtime.value;
-						console.log(_this.endTime)
 						_this.publics = _this.$refs.publicss.value;
 						_this.position = _this.$refs.position.value;
-						if (!imgurl || !_this.endTime || !_this.publics || !_this.position) {
+						if (!imgurl ||  !_this.publics || !_this.position) {
 							layui.use('layer', function() {
 								var layer = layui.layer;
 								layer.msg('请输入需要的信息')
@@ -252,13 +243,13 @@
 							return
 						}
 						let v = {
-							"bannerdate": _this.endTime,//到期时间
+							"bannerdate": "",//到期时间
 							"bannerimg": imgurl,//图片地址
 							"isAdminer": _this.publics,//0-----店铺发布，1----管理发布
 							"location": _this.position//位置1首页2智汇购
 						}
 						$.ajax({
-							url: '/business/banner',
+							url: myurl + '/business/banner',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {
@@ -300,7 +291,7 @@
 				//普通图片上传
 				var uploadInst = upload.render({
 					elem: '#uploadlogo',
-					url: '/upload/upload',
+					url: myurl + '/upload/upload',
 					headers: {
 						'Authorization': sessionid
 					},

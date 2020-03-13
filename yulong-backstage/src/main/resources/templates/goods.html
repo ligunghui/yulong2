@@ -52,7 +52,7 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+						<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 					</li>
 					<li>
 						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -105,19 +105,19 @@
 							</li>
 						</ul>
 					</li>
-					<li>
+					<li class="active">
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="category.html"><em>分类管理</em></a>
 							</li>
 							<li>
-								<a href="goods.html"><em>商品列表管理</em></a>
+								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -144,9 +144,6 @@
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
-							</li>
-							<li>
-								<a href="recommend.html"><em>商会推荐商户列表</em></a>
 							</li>
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -196,15 +193,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="database.html"><em>数据库管理</em></a>
-							</li>
-							<li>
-								<a href="log.html"><em>系统日志</em></a>
-							</li>
-						</ul>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
 			</div>
@@ -258,7 +247,6 @@
 											<th>剩余数量</th>
 											<th>总量</th>
                                             <th>类型ID</th>
-                                            <th>所在分区</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -267,10 +255,9 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
 											<td>{{item.addtime}}</td>
-											<td>{{item.details}}</td>
 											<td>{{item.goodsWeight}}</td>
 											<td>{{item.homePage ? '是' : '否'}}</td>
-											<td><img :src="item.img" ></td>
+											<td><a class="colorblue" @click="lookat(item.img,'img3')">【预览】</a></td>
 											<td>{{item.isNew ? '是' : '否'}}</td>
 											<td>{{item.markePrice}}</td>
 											<td>{{item.memberPrice}}</td>
@@ -278,11 +265,8 @@
 											<td>{{item.onsale ? '下架' : '上架'}}</td>
 											<td>{{item.saleNum}}</td>
 											<td>{{item.sellerTime}}</td>
-											<td>{{item.storePrice}}</td>
-											<td>{{item.surplusNum}}</td>
 											<td>{{item.totalNum}}</td>
-                                            <td>{{item.typeId}}</td>
-                                            <td>平台自营/家乡特产</td>
+                                            <td>{{item.typeId | ftype}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
@@ -292,7 +276,6 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.addtime}}</td>
-											<td>{{searchList.details}}</td>
 											<td>{{searchList.goodsWeight}}</td>
 											<td>{{searchList.homePage ? '是' : '否'}}</td>
 											<td><img :src="searchList.img" ></td>
@@ -305,10 +288,7 @@
 											<td>{{searchList.sellerTime}}</td>
 											<td>{{searchList.storeId}}</td>
 											<td>{{searchList.storeName}}</td>
-											<td>{{searchList.storePrice}}</td>
-											<td>{{searchList.surplusNum}}</td>
 											<td>{{searchList.totalNum}}</td>
-											<td>{{searchList.typeId}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
@@ -326,6 +306,10 @@
 			<!-- /. PAGE INNER  -->
 			<div class="popedit displaynone" id="popedit">
 				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-model="editTxt"></textarea>
+			</div>
+			
+			<div class="displaynone" style="max-width:500px;max-height:600px;overflow:auto;" id="popimg">
+				<img v-for="item in imgList" :src="item" style="max-width:200px;margin: 10px;"/>
 			</div>
 		</div>
 		<!-- /. PAGE WRAPPER  -->
@@ -353,12 +337,13 @@
 			bannerList: [],
 			issearch: false,
 			searchList: null,
-			editTxt:''
+			editTxt:'',
+			imgList:[]
 		},
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/backstage/goods/1/10',
+				url:  '/backstage/goods/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -374,7 +359,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: myurl + '/backstage/goods/'+obj.curr+'/10',
+						    	url:  '/backstage/goods/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -397,6 +382,21 @@
 				}
 			})
 		},
+		filters:{
+			ftype(tys){
+				if(tys == 0) {
+					return '普通'
+				}else if(tys == 1){
+					return '平台自营'
+				}else if(tys == 2) {
+					return '家乡特产'
+				}else if(tys == 3){
+					return '礼包专区'
+				}else {
+					return '新人专区'
+				}
+			}
+		},
 		methods: {
 			mysearch() {
 				let _this = this;
@@ -405,7 +405,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/backstage/goods/' + _this.searchid,
+						url:  '/backstage/goods/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -417,65 +417,12 @@
 				}
 			},
 			edit(ids,storeids) {
-				let _this = this;
-				$.ajax({
-					url: myurl + '/backstage/goods/' + ids,
-					type: 'GET',
-					headers: {
-						'Authorization': sessionid,
-					},
-					success: (res) => {
-						_this.editTxt = res.data.name;
-						let v = res.data;
-						layui.use('layer', function(){
-						  var layer = layui.layer;
-						  
-						  layer.open({
-						    type: 1, 
-							title:'内容',
-						    content: $('#popedit') ,//这里content是一个普通的String
-							area: 'auto',
-							btn: ['确定', '取消'],
-							yes: function(index, layero){
-							    //按钮【按钮一】的回调
-								v.name = _this.editTxt;
-								layer.close(index)
-								$('#popedit').hide()
-								
-								$.ajax({
-									url: myurl + '/backstage/goods',
-									type: 'PUT',
-									contentType: 'application/json',
-									headers: {
-										'Authorization': sessionid,
-									},
-									dataType: 'json',
-									data: JSON.stringify(v),
-									success: (res) => {
-										layer.msg(res.message)
-										if(res.code == 10000) {
-											window.location.reload()
-										}
-									},
-									fail: (err) => {
-										layer.msg(err.message)
-									}
-								})
-							  }
-							  ,cancel: function(){ 
-							    //右上角关闭回调
-							    
-							    //return false 开启该代码可禁止点击该按钮关闭
-							  }
-						  });
-						}); 
-					}
-				})
+				window.location.href = "goods-edit.html?id=" + ids;
 			},
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/goods/' + ids,
+					url:  '/backstage/goods/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -487,50 +434,38 @@
 						},1200)
 					}
 				})
+			},
+			lookat(cons,tys) {
+				let _this = this;
+				if(!cons) {
+					layer.msg('查看的内容为空')
+					return
+				}
+				if(tys == 'img3') {
+					if(cons.split(' ').length) {
+						cons.split(' ').forEach(function(i){
+							if(i) {
+								_this.imgList.push(i)
+							}
+						})
+						
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'图片',
+								content:$('#popimg'),
+								area:'device-width',
+								cancel:function() {
+									_this.imgList = []
+								}
+							})
+						})
+					}
+				}
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

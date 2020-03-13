@@ -4,6 +4,7 @@ import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.pojo.activity.ShoppingActivity;
 import com.jidu.pojo.shop.ShoppingChamber;
+import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.ActivityService;
 import com.jidu.service.ChamberService;
 import io.swagger.annotations.Api;
@@ -30,7 +31,6 @@ public class ActivityController extends BusinessBaseController {
     private ActivityService activityService;
     @Autowired
     private ChamberService chamberService;
-
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "type 1商会动态2政府资3文化旅游4本地新闻")
     public Result save(@RequestBody ShoppingActivity shoppingActivity) {
@@ -72,6 +72,12 @@ public class ActivityController extends BusinessBaseController {
         return new Result(ResultCode.SUCCESS, shoppingActivity);
     }
 
+    @RequestMapping(value = "/findActivityUser/{activityId}", method = RequestMethod.GET)
+    @ApiOperation(value = "活动报名的人员")
+    public Result<UserInfo> findActivityUser(@PathVariable String activityId) {
+        List<UserInfo> shoppingActivity = activityService.findActivityUser(activityId);
+        return new Result(ResultCode.SUCCESS, shoppingActivity);
+    }
 }
 
 

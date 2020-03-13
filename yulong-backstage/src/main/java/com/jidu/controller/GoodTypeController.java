@@ -58,7 +58,7 @@ public class GoodTypeController extends BusinessBaseController {
             @ApiImplicitParam(name = "parentId", value = "父级id 一级传1", required = true, paramType = "path")
     })
     public Result<GoodsType> findOneLevel(@PathVariable Integer parentId) {
-        List<GoodsType> goodsType = goodsTypeService.findOneLevel(storeId, parentId);
+        List<GoodsType> goodsType = goodsTypeService.findOneLevel("0", parentId);
         return new Result(ResultCode.SUCCESS, goodsType);
     }
 
@@ -66,7 +66,7 @@ public class GoodTypeController extends BusinessBaseController {
     @ApiOperation(value = "删除商品类型")
     public Result delete(@PathVariable int id) {
         //如果有下级分类不能删除
-        List<GoodsType> goodsType = goodsTypeService.findOneLevel(storeId, id);
+        List<GoodsType> goodsType = goodsTypeService.findOneLevel("0", id);
         if (!goodsType.isEmpty()) {
             return new Result(201, "存在下级分类不能删除", false);
         }

@@ -56,7 +56,7 @@ public class GoodsServiceImpl implements GoodsService {
     public List<ShoppingGoods> search(Map param) {
         Example example = new Example(ShoppingGoods.class);
         Example.Criteria criteria = example.createCriteria();
-
+        criteria.andEqualTo("storeId", "0");
         return goodsMapper.selectByExample(example);
     }
 }

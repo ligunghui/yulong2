@@ -25,7 +25,9 @@ public class MediaFile {
     private String fileType;
     private String fileStatus;
     private String mimeType;
-    private  String m3u8FileUrl;
+    private String m3u8FileUrl;
+    private String videoName;
+    private String fileImg;
 
 
 }

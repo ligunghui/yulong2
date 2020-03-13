@@ -53,7 +53,7 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -106,11 +106,11 @@
         					</li>
         				</ul>
         			</li>
-        			<li>
+        			<li class="active">
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a class="active-menu" href="category.html"><em>分类管理</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -145,9 +145,6 @@
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
-        					</li>
-        					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
         					</li>
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -313,7 +302,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/goodsType/1/10',
+					url:  '/backstage/goodsType/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -329,7 +318,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url: myurl + '/backstage/goodsType/'+obj.curr+'/10',
+							    	url:  '/backstage/goodsType/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -358,7 +347,7 @@
 					var upload = layui.upload;
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url: myurl + '/upload/upload',
+						url:  '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -387,7 +376,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: myurl + '/backstage/goodsType/' + _this.searchid,
+							url:  '/backstage/goodsType/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -404,7 +393,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/backstage/goodsType/' + ids,
+						url:  '/backstage/goodsType/' + ids,
 						type: 'delete',
 						headers: {
 							'Authorization': sessionid,

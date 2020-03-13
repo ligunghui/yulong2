@@ -1,12 +1,17 @@
 package com.jidu.service.impl;
 
 import com.jidu.mapper.ActivityMapper;
+import com.jidu.mapper.ActivityUserMapper;
+import com.jidu.mapper.UserInfoMapper;
+import com.jidu.pojo.activity.ActivityUser;
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +24,10 @@ import java.util.List;
 public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private ActivityUserMapper activityUserMapper;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public void save(ShoppingActivity shoppingActivity) {
@@ -49,5 +58,18 @@ public class ActivityServiceImpl implements ActivityService {
         return activityMapper.selectByExample(example);
     }
 
+    @Override
+    public List<UserInfo> findActivityUser(String activityId) {
+        List<UserInfo> list = new ArrayList<>();
+        Example example = new Example(ActivityUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("activityId", activityId);
+        List<ActivityUser> activityUsers = activityUserMapper.selectByExample(example);
+        for (ActivityUser activityUser : activityUsers) {
+            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(activityUser.getUserId());
+            list.add(userInfo);
+        }
+        return list;
+    }
 
 }

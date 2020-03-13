@@ -73,13 +73,13 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a class="" href="platform-banner.html"><em>banner图</em></a>
+								<a class="" href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -98,7 +98,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -255,7 +255,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url: '/business/home',
+						url: myurl + '/business/home',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,

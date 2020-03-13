@@ -97,7 +97,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -160,7 +160,7 @@
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会头像</span>
+									<span class="col-md-1_5 col-xs-12">商会主图</span>
 									<div class="col-md-10_5 col-xs-12">
 										<img :src="bannerList.img" >
 									</div>
@@ -239,7 +239,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/index',
+					url: myurl + '/chamber/index',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,

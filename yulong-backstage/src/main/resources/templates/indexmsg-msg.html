@@ -52,10 +52,10 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+						<a href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
 					</li>
 					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
+						<a class="active-menu" href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
 					</li>
 					<li>
 						<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
@@ -117,7 +117,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -144,9 +144,6 @@
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
-							</li>
-							<li>
-								<a href="recommend.html"><em>商会推荐商户列表</em></a>
 							</li>
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -196,15 +193,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="database.html"><em>数据库管理</em></a>
-							</li>
-							<li>
-								<a href="log.html"><em>系统日志</em></a>
-							</li>
-						</ul>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
 			</div>
@@ -305,39 +294,39 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/aboutUs/1/10',
+					url:  '/backstage/aboutUs/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						_this.bannerList = res.rows[0];
+						
+						// 关闭过滤模式，保留所有标签
+						KindEditor.options.filterMode = false;
+						KindEditor.ready(function (K) {
+						    window.editor = K.create('#editor_id', {
+						        filePostName: "uploadFile",
+						        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
+						        uploadJson:  '/Kindeditor/uploadFile',
+						        resizeType: 1,
+						        allowPreviewEmoticons: true,
+						        allowImageUpload: true,
+						        afterBlur: function () {
+						            this.sync();
+						        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+						        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
+						            console.log(url)
+						            console.log(data)
+						        }
+						    });
+							
+						});
+						
 					}
 				})
 			},
 			mounted() {
-				let _this = this;
-				
-				// 关闭过滤模式，保留所有标签
-				KindEditor.options.filterMode = false;
-				KindEditor.ready(function (K) {
-				    window.editor = K.create('#editor_id', {
-				        filePostName: "uploadFile",
-				        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-				        uploadJson: myurl + '/Kindeditor/uploadFile',
-				        resizeType: 1,
-				        allowPreviewEmoticons: true,
-				        allowImageUpload: true,
-				        afterBlur: function () {
-				            this.sync();
-				        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
-				        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
-				            console.log(url)
-				            console.log(data)
-				        }
-				    });
-					
-				});
 				
 			},
 			methods: {

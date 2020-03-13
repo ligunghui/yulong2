@@ -65,18 +65,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -152,12 +152,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">管理员类型</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										<select class="" name="type" lay-filter="" lay-verify="" ref="typeId">
-											<option value="0" selected="" class="">平台总管理员</option>
-											<option value="1" class="">平台管理</option>
-											<option value="2" class="">商会管理</option>
-											<option value="3" class="">商户管理</option>
-										</select>
+										商户管理
 									</div>
 								</label>
 							</div>
@@ -209,7 +204,7 @@
 				data: {
 					username:'',
 					password:'',
-					typeId:'',//0平台总管理员1平台管理2商会管理3商户管理 
+					typeId:3,//0平台总管理员1平台管理2商会管理3商户管理 
 					useable:''//是否可用，1是0否
 				},
 				mounted() {
@@ -221,7 +216,6 @@
 				methods: {
 					subs() {
 						let _this = this;
-						_this.typeId = _this.$refs.typeId.value;
 						_this.useable = _this.$refs.useable.value == 'on' ? 1 : 0;
 						let v = {
 						  "password": _this.password,
@@ -230,7 +224,7 @@
 						  "username": _this.username
 						}
 						$.ajax({
-							url: '/business/store/addBusinessAdmin',
+							url: myurl + '/business/store/addBusinessAdmin',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {

@@ -248,7 +248,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url: '/chamber/index',
+						url: myurl + '/chamber/index',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -277,7 +277,7 @@
 		
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url: '/upload/upload',
+							url: myurl + '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -313,7 +313,7 @@
 						});
 						var uploadInst2 = upload.render({
 							elem: '#uploadlogo2',
-							url: '/upload/upload',
+							url: myurl + '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -355,7 +355,7 @@
 						window.editor = K.create('#editor_id', {
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson: '/Kindeditor/uploadFile',
+							uploadJson: myurl + '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -375,13 +375,13 @@
 						let v = _this.bannerList;
 						v.name = _this.name;
 						v.log = _this.log;
-						v.imgs = _this.imgs;
+						v.img = _this.imgs;
 						v.introduction = window.editor.html();
 						v.display = _this.$refs.display ? 1 : 0;
 						v.address = _this.address;
 						
 						$.ajax({
-							url: '/chamber/index',
+							url: myurl + '/chamber/index',
 							type: 'PUT',
 							contentType: 'application/json',
 							headers: {

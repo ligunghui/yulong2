@@ -97,7 +97,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li class="">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -274,7 +274,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/chamber/recommend/1/10',
+				url: myurl + '/chamber/recommend/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -290,7 +290,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: '/chamber/recommend/'+obj.curr+'/10',
+						    	url: myurl + '/chamber/recommend/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -332,7 +332,7 @@
 				if(tys == 'all') {
 					_this.issearch = true;
 					$.ajax({
-						url: '/chamber/recommend/noRecommend',
+						url: myurl + '/chamber/recommend/noRecommend',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -348,7 +348,7 @@
 					} else {
 						_this.issearch = true;
 						// $.ajax({
-						// 	url: '/chamber/recommend/recommend/' + _this.searchid,
+						// 	url: myurl + '/chamber/recommend/recommend/' + _this.searchid,
 						// 	type: 'GET',
 						// 	headers: {
 						// 		'Authorization': sessionid,
@@ -364,7 +364,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/recommend/recommend/' + ids,
+					url: myurl + '/chamber/recommend/recommend/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -380,7 +380,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/recommend/cancelRecommend/' + ids,
+					url: myurl + '/chamber/recommend/cancelRecommend/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -416,48 +416,6 @@
 				}); 
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

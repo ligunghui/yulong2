@@ -98,7 +98,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -167,12 +167,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">管理员类型</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										<select class="" name="type" lay-filter="" lay-verify="" ref="typeId">
-											<option value="0" selected="" class="">平台总管理员</option>
-											<option value="1" class="">平台管理</option>
-											<option value="2" class="">商会管理</option>
-											<option value="3" class="">商户管理</option>
-										</select>
+										商会管理员
 									</div>
 								</label>
 							</div>
@@ -224,7 +219,7 @@
 				data: {
 					username:'',
 					password:'',
-					typeId:'',//0平台总管理员1平台管理2商会管理3商户管理 
+					typeId:2,//0平台总管理员1平台管理2商会管理3商户管理 
 					useable:''//是否可用，1是0否
 				},
 				mounted() {
@@ -236,7 +231,6 @@
 				methods: {
 					subs() {
 						let _this = this;
-						_this.typeId = _this.$refs.typeId.value;
 						_this.useable = _this.$refs.useable.value == 'on' ? 1 : 0;
 						let v = {
 						  "password": _this.password,
@@ -245,7 +239,7 @@
 						  "username": _this.username
 						}
 						$.ajax({
-							url: '/chamber/admin/addBusinessAdmin',
+							url: myurl + '/chamber/admin/addBusinessAdmin',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {

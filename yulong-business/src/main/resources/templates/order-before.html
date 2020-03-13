@@ -64,18 +64,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice-edit.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -132,27 +132,18 @@
 									<tr>
 										<th><input type="checkbox" name="" id="" value="" /></th>
 										<th>ID</th>
-										<th>地址ID</th>
-										<th>商品ID</th>
-										<th>订单ID</th>
-										<th>添加时间</th>
-										<th>是否自动确认</th>
-										<th>完成时间</th>
+										<!-- <th>地址ID</th> -->
+										<!-- <th>商品ID</th> -->
+										<th>下单时间</th>
+										<!-- <th>完成时间</th> -->
 										<th>数量</th>
 										<th>订单状态</th>
-										<th>订单类型</th>
-										<th>买家留言</th>
-										<th>支付时间</th>
-										<th>退货原因</th>
-										<th>退货单号</th>
-										<th>退货时间</th>
-										<th>卖家留言</th>
+										<!-- <th>买家留言</th> -->
+										<!-- <th>支付时间</th> -->
 										<th>快递费</th>
 										<th>快递号</th>
 										<th>发货时间</th>
-										<th>商户ID</th>
 										<th>总价格</th>
-										<th>单号</th>
 										<th>用户ID</th>
 										<th>操作</th>
 									</tr>
@@ -161,30 +152,22 @@
 									<tr v-if="!issearch" v-for="(item,index) in bannerList">
 										<td><input type="checkbox" name="" id="" value="" /></td>
 										<td>{{item.id}}</td>
-										<td>{{item.addrId}}</td>
-										<td>{{item.goodsId}}</td>
-										<td>{{item.orderId}}</td>
-										<td>{{item.addtime.split('T')[0]}}</td>
-										<td>{{item.autoConfirmEmail ? '是' : '否'}}</td>
-										<td>{{item.finishtime}}</td>
+										<!-- <td>{{item.addrId}}</td> -->
+										<!-- <td>{{item.goodsId}}</td> -->
+										<td>{{item.addtime}}</td>
+										<!-- <td>{{item.finishtime}}</td> -->
 										<td>{{item.num}}</td>
 										<td>{{item.orderStatus | fOrder}}</td>
-										<td>{{item.orderType ? '平台' : '商户'}}</td>
-										<td><a class="btn btn-blue" @click="lookat(item.payMsg)">查看</a></td>
-										<td>{{item.paytime}}</td>
-										<td><a class="btn btn-blue" @click="lookat(item.returnContent)">查看</a></td>
-										<td>{{item.returnShipcode}}</td>
-										<td>{{item.returnTime}}</td>
-										<td><a class="btn btn-blue" @click="lookat(item.sellerMsg)">查看</a></td>
+										<!-- <td><a class="btn btn-blue" @click="lookat(item.payMsg)">查看</a></td> -->
+										<!-- <td>{{item.paytime}}</td> -->
 										<td>{{item.shipPrice}}</td>
 										<td>{{item.shipcode}}</td>
 										<td>{{item.shiptime}}</td>
-										<td>{{item.storeId}}</td>
 										<td>{{item.totalprice}}</td>
-										<td>{{item.transport}}</td>
 										<td>{{item.userId}}</td>
 										<td>
 											<a class="btn btn-blue btn-sm" @click="looks(item.orderId,item.orderStatus)">查看物流</a>
+											<a class="btn btn-blue btn-sm" @click="looklook(item.addrId,item.goodsId,item.finishtime,item.payMsg,item.paytime)">订单详情</a>
 											<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 											<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
 										</td>
@@ -192,30 +175,24 @@
 									<tr v-if="issearch">
 										<td><input type="checkbox" name="" id="" value="" /></td>
 										<td>{{searchList.id}}</td>
-										<td>{{searchList.addrId}}</td>
-										<td>{{searchList.goodsId}}</td>
+										<!-- <td>{{searchList.addrId}}</td> -->
+										<!-- <td>{{searchList.goodsId}}</td> -->
 										<td>{{searchList.orderId}}</td>
-										<td>{{searchList.addtime.split('T')[0]}}</td>
-										<td>{{searchList.autoConfirmEmail ? '是' : '否'}}</td>
-										<td>{{searchList.finishtime}}</td>
+										<td>{{searchList.addtime}}</td>
+										<!-- <td>{{searchList.finishtime}}</td> -->
 										<td>{{searchList.num}}</td>
 										<td>{{searchList.orderStatus | fOrder}}</td>
-										<td>{{searchList.orderType ? '平台' : '商户'}}</td>
-										<td><a class="btn btn-blue" @click="lookat(searchList.payMsg)">查看</a></td>
-										<td>{{searchList.paytime}}</td>
-										<td><a class="btn btn-blue" @click="lookat(searchList.returnContent)">查看</a></td>
-										<td>{{searchList.returnShipcode}}</td>
-										<td>{{searchList.returnTime}}</td>
-										<td><a class="btn btn-blue" @click="lookat(searchList.sellerMsg)">查看</a></td>
+										<!-- <td><a class="btn btn-blue" @click="lookat(searchList.payMsg)">查看</a></td> -->
+										<!-- <td>{{searchList.paytime}}</td> -->
 										<td>{{searchList.shipPrice}}</td>
 										<td>{{searchList.shipcode}}</td>
 										<td>{{searchList.shiptime}}</td>
-										<td>{{searchList.storeId}}</td>
 										<td>{{searchList.totalprice}}</td>
 										<td>{{searchList.transport}}</td>
 										<td>{{searchList.userId}}</td>
 										<td>
 											<a class="btn btn-blue btn-sm" @click="looks(searchList.orderId,searchList.orderStatus)">查看物流</a>
+											<a class="btn btn-blue btn-sm" @click="looklook(searchList.addrId,searchList.goodsId,searchList.finishtime,searchList.payMsg,searchList.paytime)">订单详情</a>
 											<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 											<a class="btn btn-blue btn-sm" @click="del(searchList.id)">删除</a>
 										</td>
@@ -228,6 +205,7 @@
 				</div>
 
 				<!-- /. PAGE INNER  -->
+				<!-- 物流信息弹窗 -->
 				<div class="pop displaynone" id="pop" style="box-sizing: border-box;padding: 15px;max-width: 100%;width: 500px;min-height: 200px;max-height: 600px;">
 					<ul class="layui-timeline">
 					  <li class="layui-timeline-item" v-for="(item,index) in msgs" v-if="">
@@ -238,6 +216,39 @@
 					    </div>
 					  </li>
 					</ul>  
+				</div>
+				<!-- 更多信息弹窗 -->
+				<div class="block-con col-xs-12 displaynone" id="moreMsg">
+					<label class="col-md-12 col-xs-12">
+						<span class="col-md-1_5 col-xs-12">地址ID</span>
+						<div class="col-md-10_5 col-xs-12">
+							{{moreMsg.addrId}}
+						</div>
+					</label>
+					<label class="col-md-12 col-xs-12">
+						<span class="col-md-1_5 col-xs-12">商品ID</span>
+						<div class="col-md-10_5 col-xs-12">
+							{{moreMsg.goodsId}}
+						</div>
+					</label>
+					<label class="col-md-12 col-xs-12">
+						<span class="col-md-1_5 col-xs-12">完成时间</span>
+						<div class="col-md-10_5 col-xs-12">
+							{{moreMsg.finishtime}}
+						</div>
+					</label>
+					<label class="col-md-12 col-xs-12">
+						<span class="col-md-1_5 col-xs-12">买家留言</span>
+						<div class="col-md-10_5 col-xs-12" v-html="moreMsg.payMsg">
+							
+						</div>
+					</label>
+					<label class="col-md-12 col-xs-12">
+						<span class="col-md-1_5 col-xs-12">支付时间</span>
+						<div class="col-md-10_5 col-xs-12">
+							{{moreMsg.paytime}}
+						</div>
+					</label>
 				</div>
 			</div>
 			<!-- /. PAGE WRAPPER  -->
@@ -266,12 +277,13 @@
 			issearch: false,
 			searchList: null,
 			editTxt: '',
-			msgs:null
+			msgs:null,
+			moreMsg:{}
 		},
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/business/order/findByStoreId/1/10',
+				url: myurl + '/business/order/findByStoreId/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -289,7 +301,7 @@
 								,
 							jump: function(obj, first) {
 								$.ajax({
-									url: '/business/order/findByStoreId/' + obj.curr + '/10',
+									url: myurl + '/business/order/findByStoreId/' + obj.curr + '/10',
 									type: 'GET',
 									headers: {
 										'Authorization': sessionid,
@@ -335,7 +347,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/business/order/' + _this.searchid + '/',
+						url: myurl + '/business/order/' + _this.searchid + '/',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -356,7 +368,7 @@
 				}, function(index, layero){
 				  //按钮【按钮一】的回调
 				  $.ajax({
-				  	url: '/business/order/' + ids + '/',
+				  	url: myurl + '/business/order/' + ids + '/',
 				  	type: 'DELETE',
 				  	headers: {
 				  		'Authorization': sessionid,
@@ -375,19 +387,22 @@
 				return
 				
 			},
-			lookat(con) {
-				if(!con) {
-					layer.msg('内容为空')
-					return
+			looklook(addrId,goodsId,finishtime,payMsg,paytime) {
+				this.moreMsg = {
+					"addrId":addrId,
+					"goodsId":goodsId,
+					"finishtime":finishtime,
+					"payMsg":payMsg,
+					"paytime":paytime,
 				}
-				let _this = this;
-				layui.use('form',function() {
+				layui.use('layer',function() {
 					var layer = layui.layer;
 					
 					layer.open({
 						type:1,
-						content:con,
-						area:['300px','200px']
+						title:'更多信息',
+						content:$('#moreMsg'),
+						area:'device-width'
 					})
 				})
 			},
@@ -410,7 +425,7 @@
 					})
 				}else {
 					$.ajax({
-						url: '/business/order/findLogisticsByOrderId/' + ids,
+						url: myurl + '/business/order/findLogisticsByOrderId/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -431,48 +446,6 @@
 				
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

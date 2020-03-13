@@ -115,8 +115,10 @@ body {
     }
 
 .active-menu {
-	color: #90d2f0!important;
+	color: #be0715!important;
+	/* color: #90d2f0!important; */
     background-color: #223040!important;
+	font-weight: bold!important;
 }
 .active-menu-top {
     background-color: #000!important;
@@ -165,17 +167,10 @@ body {
             border-bottom: 1px solid #2F2E31;
         }
 
-    .sidebar-collapse > .nav > li > a {
+    .sidebar-collapse > .nav > li > a,
+    .sidebar-collapse > .nav > li > div {
         padding: 15px 15px;
     }
-
-    .sidebar-collapse .nav > li > a:hover,
-    .sidebar-collapse .nav > li > a:focus {
-        background: #223040;
-        outline: 0;
-		color: #90d2f0;
-    }
-
 
 
 .nav-second-level > li:last-child > a:after,

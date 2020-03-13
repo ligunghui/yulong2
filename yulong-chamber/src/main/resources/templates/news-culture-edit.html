@@ -98,7 +98,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li class="active">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -266,7 +266,7 @@
 					_this.ids = window.location.href.split('=')[1];
 					if(_this.ids != 'add') {
 						$.ajax({
-							url: '/chamber/activity/' + _this.ids,
+							url: myurl + '/chamber/activity/' + _this.ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -311,7 +311,7 @@
 		
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url: '/upload/upload',
+							url: myurl + '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -347,7 +347,7 @@
 						});
 						var uploadInst2 = upload.render({
 							elem: '#uploadlogo2',
-							url: '/upload/upload',
+							url: myurl + '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -389,7 +389,7 @@
 						window.editor = K.create('#editor_id', {
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson: '/Kindeditor/uploadFile',
+							uploadJson: myurl + '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -440,7 +440,7 @@
 						v.type = 3;
 						
 						$.ajax({
-							url: '/chamber/activity',
+							url: myurl + '/chamber/activity',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {

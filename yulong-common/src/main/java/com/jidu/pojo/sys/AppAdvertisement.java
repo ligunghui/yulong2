@@ -21,4 +21,8 @@ public class AppAdvertisement {
     private Integer id;
     @ApiModelProperty(value = "图片")
     private String img;
+    @ApiModelProperty(value = "1图片2视频")
+    private int type;
+    @ApiModelProperty(value = "1是2否")
+    private int isShow;
 }

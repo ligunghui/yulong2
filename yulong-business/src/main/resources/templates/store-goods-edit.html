@@ -65,18 +65,18 @@
 								<a href="coin-show.html"><em>总收益展示</em></a>
 							</li>
 							<li>
-								<a href="coin-recharge.html"><em>提现情况</em></a>
+								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="platform-notice.html"><em>公告显示</em></a>
+								<a href="platform-notice.html"><em>公告展示</em></a>
 							</li>
 							<li>
-								<a href="platform-banner.html"><em>banner显示</em></a>
+								<a href="platform-banner.html"><em>banner展示</em></a>
 							</li>
 						</ul>
 					</li>
@@ -310,7 +310,7 @@
 						
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url: '/upload/upload',
+							url: myurl + '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -353,7 +353,7 @@
 					    window.editor = K.create('#editor_id', {
 					        filePostName: "uploadFile",
 					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-					        uploadJson: '/Kindeditor/uploadFile',
+					        uploadJson: myurl + '/Kindeditor/uploadFile',
 					        resizeType: 1,
 					        allowPreviewEmoticons: true,
 					        allowImageUpload: true,
@@ -371,7 +371,7 @@
 					edit(ids) {
 						let _this = this;
 						$.ajax({
-							url: '/business/goods/' + ids,
+							url: myurl + '/business/goods/' + ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -458,7 +458,7 @@
 							ajaxType = 'PUT'
 						}
 						$.ajax({
-							url: '/business/goods',
+							url: myurl + '/business/goods',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {

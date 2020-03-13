@@ -2,7 +2,9 @@ package com.jidu.controller;
 
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.pojo.activity.ActivityUser;
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.sys.UserInfo;
 import com.jidu.service.ActivityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -58,6 +60,7 @@ public class ActivityController {
         List<ShoppingActivity> shoppingActivity = activityService.search();
         return new Result(ResultCode.SUCCESS, shoppingActivity);
     }
+
 
 }
 

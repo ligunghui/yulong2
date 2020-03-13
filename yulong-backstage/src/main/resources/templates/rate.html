@@ -53,7 +53,7 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -95,11 +95,11 @@
         					</li>
         				</ul>
         			</li>
-        			<li>
+        			<li class="active">
         				<a><i class="fa fa-bank"></i><em>收益管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="rate.html"><em>分润设置</em></a>
+        						<a class="active-menu" href="rate.html"><em>分润设置</em></a>
         					</li>
         					<li>
         						<a href="income.html"><em>平台收益明细</em></a>
@@ -145,9 +145,6 @@
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
-        					</li>
-        					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
         					</li>
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -233,28 +222,58 @@
 							
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会推荐商户收益分润</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5" type="text" name="name" id="" placeholder="%" lay-verify="required"/>
-										<b class="col-md-8"></b>
+									<span class="col-md-2 col-xs-12 textalign-right">提现手续费</span>
+									<div class="col-md-10 col-xs-12">
+										<input class="form-control col-md-5" type="text" name="serviceCharge" id="" placeholder="" lay-verify="required"/>
+										<b class="col-md-8">%</b>
 									</div>
 								</label>
                             </div>
                             
                             <div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">会员推广分润</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5" type="text" name="name" id="" placeholder="%" lay-verify="required"/>
-										<b class="col-md-8"></b>
+									<span class="col-md-2 col-xs-12 textalign-right">交易商会奖励</span>
+									<div class="col-md-10 col-xs-12">
+										<input class="form-control col-md-5" type="text" name="transactionChamber" id="" placeholder="" lay-verify="required"/>
+										<b class="col-md-8">%</b>
 									</div>
 								</label>
 							</div>
 							
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12"></span>
-									<div class="col-md-10_5 col-xs-12">
+									<span class="col-md-2 col-xs-12 textalign-right">交易平台奖励</span>
+									<div class="col-md-10 col-xs-12">
+										<input class="form-control col-md-5" type="text" name="transactionPlatform" id="" placeholder="" lay-verify="required"/>
+										<b class="col-md-8">%</b>
+									</div>
+								</label>
+							</div>
+							
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12 textalign-right">玉龙卡商会奖励</span>
+									<div class="col-md-10 col-xs-12">
+										<input class="form-control col-md-5" type="text" name="vipChamber" id="" placeholder="" lay-verify="required"/>
+										<b class="col-md-8">%</b>
+									</div>
+								</label>
+							</div>
+							
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12 textalign-right">购买玉龙卡推荐人奖励</span>
+									<div class="col-md-10 col-xs-12">
+										<input class="form-control col-md-5" type="text" name="vipRecommend" id="" placeholder="" lay-verify="required"/>
+										<b class="col-md-8">%</b>
+									</div>
+								</label>
+							</div>
+							
+							<div class="block-con col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12 textalign-right"></span>
+									<div class="col-md-10 col-xs-12">
 										<input class="btn btn-sm btn-blue" type="submit" value="提交" lay-submit="" lay-filter="example"/>
 									</div>
 								</label>
@@ -269,53 +288,6 @@
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
-	
-	<!-- 弹窗 -->
-	<div class="internetimg">
-		<div class="inter-show">
-			<a class="imgs" data-id="1">
-				<img src="assets/img/document.png">
-			</a>
-			<a class="imgs" data-id="2">
-				<img src="assets/img/document.png">
-			</a>
-			<a class="imgs" data-id="3">
-				<img src="assets/img/document.png">
-			</a>
-			<a class="imgs" data-id="4">
-				<img src="assets/img/document.png">
-			</a>
-			<a class="imgs" data-id="5">
-				<img src="assets/img/document.png">
-			</a>
-			<a class="imgs" data-id="6">
-				<img src="assets/img/document.png">
-			</a>
-		</div>
-		<!-- inter-show END -->
-		<div class="inter-level">
-			<a class="imgs return">
-				<img src="assets/img/return.png">
-			</a>
-			<a class="imgs">
-				<img src="assets/img/test/test1.jpg">
-			</a>
-			<a class="imgs">
-				<img src="assets/img/test/test2.jpg">
-			</a>
-			<a class="imgs">
-				<img src="assets/img/test/test3.jpg">
-			</a>
-			<a class="imgs">
-				<img src="assets/img/test/test4.jpg">
-			</a>
-			<a class="imgs">
-				<img src="assets/img/test/test5.jpg">
-			</a>
-		</div>
-		<!-- inter-level END -->
-	</div>
-	<!-- 弹窗结束 -->
 
     <div id="footer-sec">
        <p>Copyright © 2019 几度CMS版权所有</p>
@@ -332,8 +304,32 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
-	
+	<script src="assets/js/link.js"></script>
 	<script type="text/javascript">
+		created();
+		function created() {
+			$.ajax({
+				url:  '/backstage/incomeSetting/1/10',
+				type: 'GET',
+				headers: {
+					'Authorization': sessionid,
+				},
+				success: (res) => {
+					if(res.rows.length) {
+						var list = res.rows[0]
+						$('input[name=serviceCharge]').val(list.serviceCharge);
+						$('input[name=transactionChamber]').val(list.transactionChamber);
+						$('input[name=transactionPlatform]').val(list.transactionPlatform);
+						$('input[name=vipChamber]').val(list.vipChamber);
+						$('input[name=vipRecommend]').val(list.vipRecommend);
+					}else {
+						console.log(0)
+					}
+				},
+				fail: (res) => {}
+			})
+		}
+		
 		layui.use(['form', 'layedit', 'laydate'], function(){
 		  var form = layui.form
 		  ,layer = layui.layer
@@ -363,239 +359,33 @@
 					}
 			   }
 			})
-		     
-		     
 		     //监听提交
 		     form.on('submit(example)', function(data){
-		       layer.alert(JSON.stringify(data.field), {
-		         title: '最终的提交信息'
-		       })
+		       // layer.alert(JSON.stringify(data.field), {
+		       //   title: '最终的提交信息'
+		       // })
+			   $.ajax({
+			   	url:  '/backstage/incomeSetting',
+			   	type: 'PUT',
+				contentType: 'application/json',
+			   	headers: {
+			   		'Authorization': sessionid,
+			   	},
+				dataType: 'json',
+				data:JSON.stringify(data.field),
+			   	success: (res) => {
+			   		layer.msg(res.message)
+					setTimeout(function() {
+						window.location.reload()
+					},1200)
+			   	},
+			   	fail: (res) => {}
+			   })
 		       return false;
 		     });
 		 
 		});
 		/**/
 	</script>
-	<script type="text/javascript">
-		let myimg = '',myimg1 = '';
-		
-		layui.use('upload', function(){
-		  var $ = layui.jquery
-		  ,upload = layui.upload;
-		  
-		  //普通图片上传
-		  var uploadInst = upload.render({
-		    elem: '#uploadlogo'
-		    ,url: '/upload/'
-			,choose: function(obj){
-			    //将每次选择的文件追加到文件队列
-			    var files = obj.pushFile();
-			    //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-			    obj.preview(function(index, file, result){
-			      // console.log(index); //得到文件索引
-			      console.log(file.name); //得到文件对象
-			      // console.log(result); //得到文件base64编码，比如图片
-			      //obj.resetFile(index, file, '123.jpg'); //重命名文件名，layui 2.3.0 开始新增
-			      //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
-			      //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
-				  $('.logopath').val(file.name)
-			    });
-			  }
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-				  myimg = result;
-		       // $('#demo1').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var demoText = $('#demoText');
-		      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-		      demoText.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-		  });
-		 
-		 //副图片上传
-		  var uploadInst = upload.render({
-		    elem: '#uploadlogo1'
-		    ,url: '/upload/'
-		  		,choose: function(obj){
-		  		    //将每次选择的文件追加到文件队列
-		  		    var files = obj.pushFile();
-		  		    //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-		  		    obj.preview(function(index, file, result){
-		  		      // console.log(index); //得到文件索引
-		  		      //console.log(file.name); //得到文件对象
-		  		      // console.log(result); //得到文件base64编码，比如图片
-		  		      //obj.resetFile(index, file, '123.jpg'); //重命名文件名，layui 2.3.0 开始新增
-		  		      //obj.upload(index, file); //对上传失败的单个文件重新上传，一般在某个事件中使用
-		  		      //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
-		  			  $('.logopath1').val(file.name)
-		  		    });
-		  		  }
-		    ,before: function(obj){
-		      //预读本地文件示例，不支持ie8
-		      obj.preview(function(index, file, result){
-		  			  myimg1 = result;
-		        //$('#demo1').attr('src', result); //图片链接（base64）
-		      });
-		    }
-		    ,done: function(res){
-		      //如果上传失败
-		      if(res.code > 0){
-		        return layer.msg('上传失败');
-		      }
-		      //上传成功
-		    }
-		    ,error: function(){
-		      //演示失败状态，并实现重传
-		      var demoText = $('#demoText');
-		      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-		      demoText.find('.demo-reload').on('click', function(){
-		        uploadInst.upload();
-		      });
-		    }
-		  });
-		});
-		
-		//弹窗
-		layui.use('layer', function(){
-		 var $ = layui.jquery, layer = layui.layer;
-		 
-		 // 弹窗内点击选择
-		 $('.internetimg .imgs').click(function(){
-			  if(!(/document/.test($(this).find('img').attr('src'))) && !(/return/.test($(this).find('img').attr('src')))){
-				  $(this).addClass('active').siblings().removeClass('active');
-			  }
-			  event.stopPropagation();//阻止事件冒泡
-		})
-		$('.internetimg').click(function(){//相当于blur,点击以外的部分取消选择
-			  $('.internetimg .imgs').each(function(){
-				  $(this).removeClass('active')
-			  })
-		 })
-		 
-		 // 站内选择
-		 $('.inter-show .imgs').dblclick(function(){
-			var ids = $(this).attr('data-id');
-		 	$('.inter-show').hide().next().show();
-			$('.inter-level').attr('data-id',ids);
-			console.log($('.inter-level').attr('data-id'))
-		 });
-		 // 返回
-		 $('.internetimg .imgs.return').click(function(){
-			  $('.inter-show').show().next().hide();
-		 })
-		  
-		  //触发事件
-		    var active = {
-		      notice: function(){
-		        //示范一个公告层
-		        layer.open({
-		          type: 1
-		          ,title: false //不显示标题栏
-		          ,closeBtn: false
-		          ,area: 'device-width'
-		          ,shade: 0.3
-		          ,resize: false
-		          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-		          ,btn: ['确认', '关闭']
-		          ,btnAlign: 'c'//按钮居中对齐
-		          ,moveType: 1 //拖拽模式，0或者1
-		          ,content: $('.internetimg')
-		          ,success: function(layero){
-		            var btn = layero.find('.layui-layer-btn');
-		            // btn.find('.layui-layer-btn0').attr({
-		            //   href: 'http://www.layui.com/'
-		            //   ,target: '_blank'
-		            // });
-		          }
-		          ,yes: function(index, layero){
-		        	console.log('确认')
-		        	console.log($('.internetimg').find('.active').children().attr('src'))
-		        	var lengths = $('.internetimg').find('.active').length;
-		        	if(lengths){
-		        		var src = $('.internetimg').find('.active').children().attr('src');
-		        		$('#layerDemo').siblings('input').val(src);
-		        		// $('#demo1').attr('src',src);
-		        		 $('.internetimg').css('display','none');
-		        		layer.close(index);
-		        	}else {
-		        		layer.msg('您未选中图片！')
-		        	}
-		          }
-		          ,btn2: function(){
-		        	  console.log('关闭')
-		        	  $('.internetimg').css('display','none');
-		          }
-		        });
-		      }
-		    };
-			var active1 = {
-			  notice: function(){
-			    //示范一个公告层
-			    layer.open({
-			      type: 1
-			      ,title: false //不显示标题栏
-			      ,closeBtn: false
-			      ,area: 'device-width'
-			      ,shade: 0.3
-			      ,resize: false
-			      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-			      ,btn: ['确认', '关闭']
-			      ,btnAlign: 'c'//按钮居中对齐
-			      ,moveType: 1 //拖拽模式，0或者1
-			      ,content: $('.internetimg')
-			      ,success: function(layero){
-			        var btn = layero.find('.layui-layer-btn');
-			        // btn.find('.layui-layer-btn0').attr({
-			        //   href: 'http://www.layui.com/'
-			        //   ,target: '_blank'
-			        // });
-			      }
-			      ,yes: function(index, layero){
-			    	console.log('确认')
-			    	console.log($('.internetimg').find('.active').children().attr('src'))
-			    	var lengths = $('.internetimg').find('.active').length;
-			    	if(lengths){
-			    		var src = $('.internetimg').find('.active').children().attr('src');
-			    		$('#layerDemo1').siblings('input').val(src);
-			    		// $('#demo1').attr('src',src);
-			    		 $('.internetimg').css('display','none');
-			    		layer.close(index);
-			    	}else {
-			    		layer.msg('您未选中图片！')
-			    	}
-			      }
-			      ,btn2: function(){
-			    	  console.log('关闭')
-			    	  $('.internetimg').css('display','none');
-			      }
-			    });
-			  }
-			};
-		    
-		    $('#layerDemo .layui-btn').on('click', function(){
-		      var othis = $(this), method = othis.data('method');
-		      active[method] ? active[method].call(this, othis) : '';
-		    });
-			$('#layerDemo1 .layui-btn').on('click', function(){
-			  var othis = $(this), method = othis.data('method');
-			  active1[method] ? active1[method].call(this, othis) : '';
-			});
-		});
-		
-		
-		 </script>
 </body>
 </html>

@@ -96,7 +96,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li class="">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -168,8 +168,8 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime.split('T')[0]}}</td>
-											<td>{{item.bannerdate.split('T')[0]}}</td>
+											<td>{{item.addtime}}</td>
+											<td>{{item.bannerdate}}</td>
 											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
 											<td>{{item.deletestatus ? '是' : '否'}}</td>
 											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
@@ -183,8 +183,8 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime.split('T')[0]}}</td>
-											<td>{{item.bannerdate.split('T')[0]}}</td>
+											<td>{{searchList.addtime}}</td>
+											<td>{{item.bannerdate}}</td>
 											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
 											<td>{{item.deletestatus ? '是' : '否'}}</td>
 											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
@@ -244,7 +244,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/chamber/banner/findByStoreId',
+				url: myurl + '/chamber/banner/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -262,7 +262,7 @@
 				var upload = layui.upload;
 				var uploadInst = upload.render({
 					elem: '#uploadlogo',
-					url: '/upload/upload',
+					url: myurl + '/upload/upload',
 					headers: {
 						'Authorization': sessionid
 					},
@@ -291,7 +291,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: '/chamber/banner/' + _this.searchid,
+						url: myurl + '/chamber/banner/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -305,13 +305,13 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/banner/' + ids,
+					url: myurl + '/chamber/banner/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
-						_this.editTxt = res.data.content;
+						_this.editTxt = res.data.bannerimg;
 						let v = res.data;
 						layui.use(['layer','upload'], function(){
 						  var layer = layui.layer;
@@ -329,7 +329,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: '/chamber/banner',
+									url: myurl + '/chamber/banner',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -363,7 +363,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/chamber/banner/' + ids,
+					url: myurl + '/chamber/banner/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -384,7 +384,7 @@
 				  layer.open({
 				    type: 1, 
 					title:'内容',
-				    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+				    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 					area: 'auto'
 				  });
 				}); 

@@ -53,12 +53,12 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
         			</li>
-        			<li>
+        			<li class="active">
         				<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
@@ -74,7 +74,7 @@
         						<a href="card.html"><em>玉龙卡管理</em></a>
         					</li>
         					<li>
-        						<a href="user-rate.html"><em>会员等级管理</em></a>
+        						<a class="active-menu" href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
         						<a href="chat.html"><em>聊天室管理</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -145,9 +145,6 @@
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
-        					</li>
-        					<li>
-        						<a href="recommend.html"><em>商会推荐商户列表</em></a>
         					</li>
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
@@ -197,15 +194,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href=""><i class="fa fa-cubes"></i><em>系统与数据</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="database.html"><em>数据库管理</em></a>
-        					</li>
-        					<li>
-        						<a href="log.html"><em>系统日志</em></a>
-        					</li>
-        				</ul>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -251,10 +240,10 @@
 						                        <td>{{item.id}}</td>
 						                        <td>{{item.name}}</td>
 						                        <td>{{item.integral}}</td>
-						                        <td><a class="tn btn-blue" @click="lookat(item.img,'img')">查看</a></td>
+						                        <td><a class="btn btn-blue" @click="lookat(item.img,'img')">查看</a></td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit">编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del">删除</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(item.id)">编辑</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 												</td>
 						                    </tr>
 											<tr v-if="issearch">
@@ -262,10 +251,10 @@
 											    <td>{{searchList.id}}</td>
 											    <td>{{searchList.name}}</td>
 											    <td>{{searchList.integral}}</td>
-											    <td><a class="tn btn-blue" @click="lookat(searchList.img,'img')">查看</a></td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.img,'img')">查看</a></td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit">编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del">删除</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(searchList.id)">编辑</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
 												</td>
 											</tr>
 						                </tbody>
@@ -277,7 +266,7 @@
 				</div>
 				
             <!-- /. PAGE INNER  -->
-			<div class="modules popups displaynone" id="popus">
+			<div class="modules popups displaynone" id="popus" style="padding: 15px;">
 				<div class="form-group">
 					<label>等级名称</label>
 					<input class="form-control" value="" v-model="editTit"/>
@@ -288,7 +277,6 @@
 				</div>
 				<div class="form-group">
 					<label>图标</label>
-					<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" value="" lay-verify="required" />
 					<div class="layui-upload col-md-8" id="layerDemo">
 						<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">本地上传图片</button>
 					</div>
@@ -335,7 +323,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/backstage/grade',
+					url:  '/backstage/grade',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -356,7 +344,7 @@
 					//普通图片上传
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url: myurl + '/upload/upload',
+						url:  '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -368,7 +356,7 @@
 							//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
 							obj.preview(function(index, file, result) {
 								console.log(file.name); //得到文件对象
-								$('.logopath').val(file.name)
+								// $('.logopath').val(file.name)
 							});
 						},
 						before: function(obj) {
@@ -400,7 +388,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: myurl + '/backstage/grade/' + _this.searchid,
+							url:  '/backstage/grade/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -431,14 +419,14 @@
 							let v = {
 							  "explain": "",
 							  "img":  _this.imgs,
-							  "integral":  _this.imgs,
+							  "integral":  _this.editTxt,
 							  "name":  _this.editTit
 							};
 							layer.close(index)
 							$('#popus').hide()
 							
 							$.ajax({
-								url: myurl + '/backstage/grade',
+								url:  '/backstage/grade',
 								type: 'POST',
 								contentType: 'application/json',
 								headers: {
@@ -463,7 +451,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/backstage/grade/' + ids,
+						url:  '/backstage/grade/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -493,7 +481,7 @@
 									$('#popus').hide()
 									
 									$.ajax({
-										url: myurl + '/backstage/grade',
+										url:  '/backstage/grade',
 										type: 'PUT',
 										contentType: 'application/json',
 										headers: {
@@ -521,7 +509,7 @@
 					let _this = this;
 					layer.confirm('确定删除吗？',{icon:3,title:'提示'},function() {
 						$.ajax({
-							url: myurl + '/backstage/grade/' + ids,
+							url:  '/backstage/grade/' + ids,
 							type: 'delete',
 							headers: {
 								'Authorization': sessionid,
@@ -543,7 +531,7 @@
 						if(tys == 'img') {
 							layer.open({
 								type:1,
-								content:`<img src="${cons}" />`
+								content:`<img src="${cons}" style="max-width:300px;"/>`
 							})
 						}else {
 							layui.use('layer',function() {

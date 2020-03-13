@@ -98,7 +98,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
+						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
 					<li class="">
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
@@ -145,6 +145,12 @@
 				
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">公告标题</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="title" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">公告内容</span>
 									<div class="col-md-10_5 col-xs-12">
 										<textarea class="form-control col-md-5" v-model="notices" lay-verify="required" /></textarea>
@@ -168,14 +174,6 @@
 									<div class="layui-input-inline col-md-4 col-xs-12">
 										<input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='endtime'>
 									</div>
-								</label>
-								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">显示位置</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="number" class="form-control col-md-5" v-model="position" lay-verify="required" />
-										<b>1 首页 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 商户首页</b>
-									</div>
-									
 								</label>
 				
 							</div>
@@ -222,6 +220,7 @@
 				data: {
 					ids:'',
 					isshow:1,
+					title:'',
 					notices: '',
 					position:1,
 					endTime:'',
@@ -258,24 +257,21 @@
 						// 原时间格式:'yyyy-MM-dd'T'HH:mm:ss.SSSZ'
 						_this.startTime = _this.$refs.starttime.value
 						_this.endTime = _this.$refs.endtime.value
-						if(_this.position != 1 && _this.position != 2) {
-							layer.msg('对不起，您所输入的显示位置不在可选范围内，请重新输入')
-							return
-						}
 						if (!_this.notices || !_this.startTime || !_this.endTime) {
 							layer.msg('请输入需要的信息')
 							return
 						}
 						let v = {
+							"title": _this.title,
 							"content": _this.notices,
 							"display": _this.isshow,
 							"endTime": _this.endTime,
-							"position": _this.position,
+							"position": '',
 							"startTime": _this.startTime,
 							"type": 3
 						}
 						$.ajax({
-							url: '/chamber/notice/3',
+							url: myurl + '/chamber/notice/3',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {
