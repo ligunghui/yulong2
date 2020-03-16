@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/chamber/index")
-public class IndexController extends  BusinessBaseController{
+@RequestMapping(value = "/chamber/index")
+public class IndexController extends BusinessBaseController {
     @Autowired
     private IndexService indexService;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public Result findAll() {
-        IndexGroup indexGroup=indexService.findAll(storeId);
+    public Result<IndexGroup> findAll() {
+
+        IndexGroup indexGroup = indexService.findAll(storeId);
+        indexGroup.setUserName(userName);
         return new Result(ResultCode.SUCCESS, indexGroup);
     }
 }

@@ -43,4 +43,9 @@ public class BannerServiceImpl implements BannerService {
         criteria.andEqualTo("storeId","0");
         return shoppingBannerMapper.selectByExample(example);
     }
+
+    @Override
+    public ShoppingBanner findById(long id) {
+        return shoppingBannerMapper.selectByPrimaryKey(id);
+    }
 }

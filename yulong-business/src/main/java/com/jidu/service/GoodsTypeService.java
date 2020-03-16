@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface GoodsTypeService {
-    void save(String id, GoodsType goodsType);
+    Integer save(String id, GoodsType goodsType);
 
     void update(GoodsType goodsType);
 

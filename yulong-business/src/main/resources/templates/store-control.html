@@ -125,7 +125,7 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="store-control-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="store-control-edit.html?id=add">添加管理员</a>
 								<div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
@@ -153,7 +153,7 @@
 											<td>{{item.id}}</td>
 											<td>{{item.username}}</td>
 											<td>******</td>
-											<td>{{item.type | fTypeTd}}</td>
+											<td>商户管理员</td>
 											<td>{{item.useable ? '是' : '否'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
@@ -165,7 +165,7 @@
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.username}}</td>
 											<td>******</td>
-											<td>{{searchList.type | fTypeTd}}</td>
+											<td>商户管理员</td>
 											<td>{{searchList.useable ? '是' : '否'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
@@ -204,7 +204,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 
@@ -231,7 +231,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/store/findBusinessAdmin/1/10',
+					url:  '/business/store/findBusinessAdmin/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -247,7 +247,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url: myurl + '/business/store/findBusinessAdmin/'+obj.curr+'/10',
+							    	url:  '/business/store/findBusinessAdmin/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -287,7 +287,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: myurl + '/business/store/findBusinessAdminById/' + _this.searchid,
+							url:  '/business/store/findBusinessAdminById/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -301,7 +301,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/business/store/findBusinessAdminById/' + ids,
+						url:  '/business/store/findBusinessAdminById/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -323,7 +323,7 @@
 										v.username = _this.username;
 										v.password = _this.password;
 										$.ajax({
-											url: myurl + '/business/store/updateBusinessAdmin',
+											url:  '/business/store/updateBusinessAdmin',
 											type: 'PUT',
 											contentType: 'application/json',
 											headers: {
@@ -337,7 +337,6 @@
 													setTimeout(function() {
 														window.location.reload()
 													},1200)
-													
 												}
 												
 											}
@@ -358,8 +357,8 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/business/store/addBusinessAdmin' + ids,
-						type: 'delete',
+						url:  '/business/store/deleteBusinessAdminById/' + ids,
+						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,
 						},

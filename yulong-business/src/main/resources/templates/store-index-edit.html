@@ -197,7 +197,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 
@@ -228,7 +228,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/store',
+					url:  '/business/store',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -259,7 +259,7 @@
 
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url: myurl + '/upload/upload',
+						url:  '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -301,7 +301,7 @@
 					window.editor = K.create('#editor_id', {
 						filePostName: "uploadFile",
 						//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-						uploadJson: myurl + '/Kindeditor/uploadFile',
+						uploadJson:  '/Kindeditor/uploadFile',
 						resizeType: 1,
 						allowPreviewEmoticons: true,
 						allowImageUpload: true,
@@ -340,7 +340,7 @@
 					v.storeKeywords = _this.storeKeywords;
 					v.storeTelephone = _this.storeTelephone;
 					$.ajax({
-						url: myurl + '/business/store',
+						url:  '/business/store',
 						type: 'PUT',
 						contentType: 'application/json',
 						headers: {

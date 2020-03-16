@@ -27,7 +27,7 @@
 						<img src="assets/img/indexLogo.png" >
 					</div>
 					<div class="logins">
-						<p class="marginBottom20">欢迎登录智慧玉龙</p>
+						<p class="marginBottom20">欢迎登录智汇玉龙</p>
 						<div class="input-group">
 							<span class="input-group-addon">
 								<img src="assets/img/indexme.png" >
@@ -92,7 +92,7 @@
 					success: (res) => {
 						sessionid = res.data
 						localStorage.setItem("sessionid",sessionid);
-						localStorage.setItem("localTime",new Date());
+						localStorage.setItem("localTime",Date.parse(new Date()));
 						layer.msg(res.message);
 						// return
 						if(res.code == 10000) {

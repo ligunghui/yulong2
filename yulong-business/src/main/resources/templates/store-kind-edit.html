@@ -121,58 +121,60 @@
 				<!-- /. ROW  -->
 				<div class="row page">
 					<div class="col-md-12 page-tit">
-						<p>基础设置</p>
+						<p>添加分类</p>
 					</div>
 
 					<div class="col-md-12 page-block">
 						<form class="row layui-form" action="">
-
-							<div class="block-con col-xs-12">
-								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">名称</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="text" class="form-control col-md-5" v-model="name" />
-									</div>
-									
-								</label>
-
-							</div>
 							<div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">一级分类</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										<select name="type" lay-filter="" lay-verify="" ref="type">
-											<option value="0" selected="">普通</option>
-											<option value="1">平台自营</option>
-											<option value="2">家乡特产</option>
-											<option value="3">礼包专区</option>
-											<option value="4">新人专区</option>
-										</select>
+										<input type="text" class="form-control col-md-5" v-model="type1" />
+										<input class="btn btn-sm btn-blue" type="button" value="添加二级分类" @click="addtype(1)" />
 									</div>
 								</label>
 							</div>
-
+							
+							<div class="block-con layui-form-item col-xs-12">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">二级分类</span>
+									<div class="layui-input-block col-md-10_5 col-xs-12 type2s">
+										<!-- <input type="text" class="form-control col-md-5 type2s_name type2_name_0" v-model="type2" /> -->
+										<!-- <input class="btn btn-sm btn-blue" type="button" value="继续添加" @click="addtype(2)" /> -->
+									</div>
+								</label>
+							</div>
+					
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12"></span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="btn btn-sm btn-blue" type="button" value="提交" @click="subs" />
+										<input class="btn btn-sm btn-blue" type="button" value="修改" @click="subs" />
 									</div>
 								</label>
 							</div>
-
+					
 						</form>
 					</div>
 				</div>
 
 				<!-- /. PAGE INNER  -->
+				<div class="block-con col-xs-12 displaynone" id="pops">
+					<label class="col-md-12 col-xs-12 marginTop20">
+						<span class="col-md-3 col-xs-12">名称</span>
+						<div class="col-md-9 col-xs-12">
+							<input class="form-control" type="text" v-model="addSecond" style="width: 100%;"/>
+						</div>
+					</label>
+				</div>
 			</div>
 			<!-- /. PAGE WRAPPER  -->
 		</div>
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -188,64 +190,190 @@
 		<script src="assets/js/common.js"></script>
 		<script src="assets/js/link.js"></script>
 		<script src="assets/js/vue.js"></script>
-		<script type="text/javascript">
-
-		</script>
+		
 		<script type="text/javascript">
 			var app = new Vue({
 				el: '#page-wrapper',
 				data: {
-					name:'',
-					type:0
+					type1:'',
+					type2:'',
+					type1Id:'',
+					istype2:false,
+					ids:'',
+					firstTys:'',//一级分类返回id
+					types2:[],//所有二级分类
+					storeid:'',
+					addSecond:''//添加的二级分类名称
 				},
 				created() {
-					
-				},
-				mounted() {
-					layui.use(['form', 'laydate'], function() {
-						var form = layui.form,
-							layer = layui.layer,
-							laydate = layui.laydate;
-						
-						form.render();
-					})
+					let _this = this;
+					this.ids = window.location.href.split('=')[1]
+					if(_this.ids != 'add') {
+						_this.edit(_this.ids)
+					}
 				},
 				methods: {
-					subs() {
+					edit(ids) {
 						let _this = this;
-						_this.type = _this.$refs.type.value;
-						if (!_this.name || !_this.type) {
-							layer.msg('请输入需要的信息')
-							return
-						}
-						let v = {
-							"name": _this.name,
-							"type": _this.type
-						}
 						$.ajax({
-							url: myurl + '/business/goodsType',
-							type: 'POST',
-							contentType: 'application/json',
+							url:  '/business/goodsType/' + ids,
+							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
 							},
-							dataType: 'json',
-							data: JSON.stringify(v),
 							success: (res) => {
-								layer.msg(res.message)
-								// if(res.code == 10000) {
-								// 	setTimeout(function() {
-								// 		window.location.href = 'store-kind.html'
-								// 	},1200)
-								// }
-							},
-							fail: (err) => {
-								layer.msg(err.message)
+								_this.type1 = res.data.name
+								_this.storeid = res.data.storeId;
+								$.ajax({
+									url:  '/business/goodsType/findOneLevel/' + ids,
+									type: 'GET',
+									headers: {
+										'Authorization': sessionid,
+									},
+									success: (res) => {
+										if(res.data) {
+											res.data.forEach(function(i,index) {
+												$('.type2s').append(`<div class="col-md-12 col-xs-12" style="margin:0 0 20px -15px;"><input type="text" class="type2s_name type2_name_${index}" value="${i.name}"/><input class="btn btn-sm btn-blue" type="button" value="删除分类" onclick="del(${i.id},${i.parentId})" /></div>`);
+											})
+										}
+										_this.types2 = res.data;
+									}
+								})
 							}
 						})
+					},
+					addtype(tys) {
+						let _this = this;
+						let v = {
+						  "name": "string",
+						  "parentId": _this.ids,
+						  "storeId": _this.storeid
+						};
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							layer.open({
+								type:1,
+								title:'添加二级分类',
+								content:$('#pops'),
+								btn:['确定','取消'],
+								yes:function(index) {
+									v.name = _this.addSecond
+									$.ajax({
+										url:  '/business/goodsType',
+										type: 'POST',
+										contentType: 'application/json',
+										headers: {
+											'Authorization': sessionid,
+										},
+										dataType: 'json',
+										data: JSON.stringify(v),
+										success: (res) => {
+											layer.msg(res.message)
+											setTimeout(function(){
+												window.location.reload()
+											},1200)
+										},
+										fail: (err) => {
+											layer.msg(err.message)
+										}
+									})
+									layer.close(index)
+									$('#pops').hide()
+									
+								},
+								cancel:function() {
+									$('#pops').hide()
+								}
+							})
+						})
+					},
+					toload(tys,names,myid) {
+						let _this = this;
+						let v = {
+							  "id":"string",
+							  "name": "string",
+							  "parentId": 0,
+							  "storeId": _this.storeid
+							};
+						if(tys == 1) {
+							v.id = _this.ids;
+							v.parentId = 1;
+							v.name = _this.type1
+							$.ajax({
+								url:  '/business/goodsType',
+								type: 'PUT',
+								contentType: 'application/json',
+								headers: {
+									'Authorization': sessionid,
+								},
+								dataType: 'json',
+								data: JSON.stringify(v),
+								success: (res) => {
+									// _this.firstTys = res.data
+									layer.msg(res.message)
+								},
+								fail: (err) => {
+									layer.msg(err.message)
+								}
+							})
+						}else {
+							v.id = myid;
+							v.parentId = _this.ids;
+							v.name = names;
+							$.ajax({
+								url:  '/business/goodsType',
+								type: 'PUT',
+								contentType: 'application/json',
+								headers: {
+									'Authorization': sessionid,
+								},
+								dataType: 'json',
+								data: JSON.stringify(v),
+								success: (res) => {
+									layer.msg(res.message)
+								},
+								fail: (err) => {
+									layer.msg(err.message)
+								}
+							})
+						}
+						
+					},
+					subs() {
+						let _this = this;
+						_this.toload(1)
+						_this.types2.forEach(function(i,index) {
+							var is = $('.type2s_name').eq(index).val();
+							// return
+							_this.toload(2,is,i.id)
+						})
+						setTimeout(function() {
+							// window.location.href = "store-kind.html"
+						},1200)
 					}
 				}
 			})
+		</script>
+		<script type="text/javascript">
+			function del(ids) {
+				$.ajax({
+					url: '/business/goodsType/' + ids,
+					type: 'DELETE',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						// _this.firstTys = res.data
+						layer.msg(res.message)
+						setTimeout(function(){
+							window.location.reload()
+						},1200)
+					},
+					fail: (err) => {
+						layer.msg(err.message)
+					}
+				})
+			}
 		</script>
 </body>
 </html>

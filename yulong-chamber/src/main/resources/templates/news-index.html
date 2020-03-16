@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -72,7 +72,7 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="platform-notice.html"><em>公告</em></a>
@@ -106,14 +106,9 @@
 								<a class="active-menu" href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -141,11 +136,11 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="news-index-edit.html?id=add">新增栏目</a>
-								<div class="btn-group pull-right">
+								<a class="btn btn-blue btn-sm" href="news-index-edit.html?id=add">新增新闻</a>
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 
 						</div>
@@ -155,46 +150,34 @@
 									<thead>
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
-											<th>ID</th>
-											<th>添加时间</th>
-											<th>添加人</th>
-											<th>内容</th>
-											<th>名称</th>
-											<th>副标题</th>
-											<th>是否可见</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
-											<th>封面图</th>
-											<th>是否推荐到首页</th>
 											<th>排序</th>
-											<th>商户ID</th>
-											<th>商户名称</th>
-											<th>评论次数</th>
-											<th>观看次数</th>
-											<th>点赞次数</th>
+											<!-- <th>添加时间</th> -->
+											<!-- <th>添加人</th> -->
+											<th>是否推荐到首页</th>
+											<th>封面图</th>
+											<th>新增新闻</th>
+											<th>名称</th>
+											<th>是否可见</th>
+											<!-- <th>评论次数</th> -->
+											<!-- <th>观看次数</th> -->
+											<!-- <th>点赞次数</th> -->
 											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
-											<td>{{item.addpeople}}</td>
+											<td>{{item.sordOrder}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
+											<!-- <td>{{item.addpeople}}</td> -->
+											<td>{{item.homePage ? '是' : '否'}}</td>
+											<td><a class="btn btn-blue" @click="lookat(item.headPic,'img')">预览</a></td>
 											<td><a class="btn btn-blue" @click="lookat(item.context,'HTML')">查看</a></td>
 											<td>{{item.name}}</td>
-											<td>{{item.subheadig}}</td>
 											<td>{{item.display ? '是' : '否'}}</td>
-											<td>{{item.startime}}</td>
-											<td>{{item.endtime}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.headPic,'img')">预览</a></td>
-											<td>{{item.homePage ? '是' : '否'}}</td>
-											<td>{{item.sordOrder}}</td>
-											<td>{{item.storeId}}</td>
-											<td>{{item.storeName}}</td>
-											<td>{{item.commentNum}}</td>
-											<td>{{item.seenum}}</td>
-											<td>{{item.thumbsNum}}</td>
+											<!-- <td>{{item.commentNum}}</td> -->
+											<!-- <td>{{item.seenum}}</td> -->
+											<!-- <td>{{item.thumbsNum}}</td> -->
 											<td>
 												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+item.id">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
@@ -202,23 +185,17 @@
 										</tr>
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
-											<td>{{searchList.addpeople}}</td>
+											<td>{{searchList.sordOrder}}</td>
+											<!-- <td>{{searchList.addtime}}</td> -->
+											<!-- <td>{{searchList.addpeople}}</td> -->
+											<td>{{searchList.homePage ? '是' : '否'}}</td>
+											<td><a class="btn btn-blue" @click="lookat(searchList.headPic,'img')">预览</a></td>
 											<td><a class="btn btn-blue" @click="lookat(searchList.context,'HTML')">查看</a></td>
 											<td>{{searchList.name}}</td>
-											<td>{{searchList.subheadig}}</td>
 											<td>{{searchList.display ? '是' : '否'}}</td>
-											<td>{{searchList.startime}}</td>
-											<td>{{searchList.endtime}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.headPic,'img')">预览</a></td>
-											<td>{{searchList.homePage ? '是' : '否'}}</td>
-											<td>{{searchList.sordOrder}}</td>
-											<td>{{searchList.storeId}}</td>
-											<td>{{searchList.storeName}}</td>
-											<td>{{searchList.commentNum}}</td>
-											<td>{{searchList.seenum}}</td>
-											<td>{{searchList.thumbsNum}}</td>
+											<!-- <td>{{searchList.commentNum}}</td> -->
+											<!-- <td>{{searchList.seenum}}</td> -->
+											<!-- <td>{{searchList.thumbsNum}}</td> -->
 											<td>
 												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
 												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+searchList.id">编辑</a>
@@ -242,7 +219,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -267,7 +244,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/chamber/activity/findByStoreId',
+				url:  '/chamber/activity/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -291,7 +268,7 @@
 				} else {
 					
 					$.ajax({
-						url: myurl + '/chamber/activity/' + _this.searchid,
+						url:  '/chamber/activity/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -306,7 +283,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/activity/' + ids,
+					url:  '/chamber/activity/' + ids,
 					type: 'DELETE',
 					headers: {
 						'Authorization': sessionid,
@@ -332,7 +309,7 @@
 					  layer.open({
 					    type: 1, 
 						title:'内容',
-					    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+					    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 						area: 'auto'
 					  });
 					}); 

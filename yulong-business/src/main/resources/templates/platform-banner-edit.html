@@ -184,7 +184,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -243,13 +243,13 @@
 							return
 						}
 						let v = {
-							"bannerdate": "",//到期时间
+							"bannerdate": _this.endTime,//到期时间
 							"bannerimg": imgurl,//图片地址
 							"isAdminer": _this.publics,//0-----店铺发布，1----管理发布
 							"location": _this.position//位置1首页2智汇购
 						}
 						$.ajax({
-							url: myurl + '/business/banner',
+							url:  '/business/banner',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {
@@ -291,7 +291,7 @@
 				//普通图片上传
 				var uploadInst = upload.render({
 					elem: '#uploadlogo',
-					url: myurl + '/upload/upload',
+					url:  '/upload/upload',
 					headers: {
 						'Authorization': sessionid
 					},

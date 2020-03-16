@@ -53,7 +53,7 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
@@ -118,7 +118,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
+        				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
         			</li>
         			<li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -182,6 +182,9 @@
         					</li>
         				</ul>
         			</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -194,7 +197,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em><span class="fa arrow"></span></a>
         			</li>
         		</ul>
         	</div>
@@ -220,8 +223,14 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 						    <div class="panel-heading textalign-left">
-						        <a class="btn btn-blue btn-sm" href="addchat.html">添加</a>
-								<a class="btn btn-blue btn-sm" href="javascript:;" tabledel>删除</a>
+								<select name="types" class="btn btn-blue" v-model="types">
+									<option value="0" selected="">全部</option>
+									<option value="1">申请中</option>
+									<option value="2">申请通过</option>
+									<option value="3">申请不通过</option>
+								</select>
+						        <!-- <a class="btn btn-blue btn-sm" href="addchat.html">添加</a>
+								<a class="btn btn-blue btn-sm" href="javascript:;" tabledel>删除</a> -->
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
@@ -230,28 +239,29 @@
 						                    <tr>
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
 												<th>ID</th>
-						                        <th>聊天室名称</th>
-						                        <th>聊天室图标</th>
-						                        <th>类型</th>
-						                        <th>排序</th>
-						                        <th>操作</th>
+												<th>名称</th>
+												<th>聊天室类型</th>
+												<th>申请情况</th>
+												<th>群主</th>
+												<th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-for="(item,index) in bannerList">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-						                        <td tableedit>啊啊啊聊提示</td>
-						                        <td ><a class="colorblue" href="javascript:;" popupimg="assets/img/logo.png">【预览】</a></td>
-												<td tableedit>商会聊天室</td>
-												<td tableedit>01</td>
+						                        <td>{{item.id}}</td>
+						                        <td>{{item.name}}</td>
+						                        <td>{{item.status | fstatus}}</td>
+						                        <td>{{item.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
+						                        <td>{{item.uid ? item.uid : '暂无群主'}}</td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowdel>删除</a>
+													<a class="btn btn-blue btn-sm" @click="pass(item.id,item.status)">{{item.status | fispass}}</a>
+													<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
 												</td>
 						                    </tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
@@ -265,7 +275,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -279,5 +289,147 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+	<script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#page-wrapper',
+			data: {
+				searchid: '',
+				bannerList: [],
+				issearch: false,
+				searchList: null,
+				types:0
+			},
+			created() {
+				let _this = this;
+				// 房间状态(全部0 1申请中2申请通过3申请不通过)
+				this.open(0)
+			},
+			filters:{
+				fstatus(sts) {
+					if(sts == 1) {
+						return '申请中'
+					}else if(sts == 2) {
+						return '申请通过'
+					}else if(sts == 3) {
+						return '申请不通过'
+					}else {
+						return '暂无此状态'
+					}
+				},
+				fispass(sts) {
+					if(sts == 2) {
+						return '拒绝'
+					}else {
+						return '通过'
+					}
+				}
+			},
+			watch:{
+				types() {
+					this.open(this.types)
+				}
+			},
+			methods: {
+				open(ids) {
+					let _this = this;
+					$.ajax({
+						url:  '/backstage/room/'+ids+'/1/10',
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.bannerList = res.rows
+							layui.use('laypage', function(){
+							  var laypage = layui.laypage;
+							  
+							  //执行一个laypage实例
+							  laypage.render({
+							    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+							    ,count: res.total //数据总数，从服务端得到
+								,jump: function(obj, first){
+								    $.ajax({
+								    	url:  '/backstage/room/'+ids+'/'+obj.curr+'/10',
+								    	type: 'GET',
+								    	headers: {
+								    		'Authorization': sessionid,
+								    	},
+								    	success: (res) => {
+								    		_this.bannerList = res.rows
+								    	},
+								    	fail:(res) => {
+								    	}
+								    })
+								  }
+							  });
+							});
+						}
+					})
+				},
+				mysearch() {
+					let _this = this;
+					if (!_this.searchid) {
+						_this.issearch = false
+					} else {
+						_this.issearch = true;
+						$.ajax({
+							url:  '/chamber/notice/' + _this.searchid,
+							type: 'GET',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								_this.searchList = res.data
+								console.log(_this.searchList)
+							}
+						})
+					}
+				},
+				pass(ids,sts) {
+					let _this = this;
+					// GET /backstage/room/{id}/{storeStatus}
+					// 2通过3拒绝
+					var mysts;
+					if(sts == 2) {
+						// return '拒绝'
+						mysts = 3
+					}else {
+						// return '通过'
+						mysts = 2
+					}
+					$.ajax({
+						url:  '/backstage/room/' + ids + '/' + mysts,
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							// setTimeout(function() {
+							// 	window.location.reload()
+							// },1200)
+						}
+					})
+				},
+				del(ids) {
+					$.ajax({
+						url:  '/backstage/room/' + ids,
+						type: 'DELETE',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							// setTimeout(function() {
+							// 	window.location.reload()
+							// },1200)
+						}
+					})
+				}
+			}
+		})
+	</script>
 </body>
 </html>

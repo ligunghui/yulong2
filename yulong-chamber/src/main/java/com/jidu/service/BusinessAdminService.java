@@ -11,9 +11,9 @@ import java.util.List;
  * @Description:
  */
 public interface BusinessAdminService {
-    void updateBusinessAdmin(BusinessAdmin businessAdmin);
+    void updateBusinessAdmin(BusinessAdmin chamberAdmin);
 
-    void addBusinessAdmin(BusinessAdmin businessAdmin);
+    void addBusinessAdmin(BusinessAdmin chamberAdmin);
 
     List<BusinessAdmin> findBusinessAdmin(String storeId);
 

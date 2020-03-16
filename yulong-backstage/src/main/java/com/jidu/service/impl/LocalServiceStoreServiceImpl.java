@@ -37,4 +37,9 @@ public class LocalServiceStoreServiceImpl implements LocalServiceStoreService {
     public void update(LocalServiceStore localServiceStore) {
         localServiceStoreMapper.updateByPrimaryKeySelective(localServiceStore);
     }
+
+    @Override
+    public void delete(Integer id) {
+        localServiceStoreMapper.deleteByPrimaryKey(id);
+    }
 }

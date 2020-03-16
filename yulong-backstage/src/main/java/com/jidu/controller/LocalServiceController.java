@@ -51,6 +51,12 @@ public class LocalServiceController {
         LocalService localService = localServiceService.findById(id);
         return new Result(ResultCode.SUCCESS, localService);
     }
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "删除")
+    public Result DELETE(@PathVariable Integer id) {
+       localServiceService.delete(id);
+        return new Result(ResultCode.SUCCESS);
+    }
     @RequestMapping(value = "/findByServiceId/{serviceId}", method = RequestMethod.GET)
     @ApiOperation(value = "查询本地服务的店家")
     public Result<LocalServiceStore> findByServiceId(@PathVariable Integer serviceId) {

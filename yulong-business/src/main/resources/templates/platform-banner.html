@@ -204,7 +204,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -229,7 +229,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/banner/findByStoreId',
+				url:  '/business/banner/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -247,7 +247,7 @@
 				var upload = layui.upload;
 				var uploadInst = upload.render({
 					elem: '#uploadlogo',
-					url: myurl + '/upload/upload',
+					url:  '/upload/upload',
 					headers: {
 						'Authorization': sessionid
 					},
@@ -276,7 +276,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/banner/' + _this.searchid,
+						url:  '/business/banner/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -290,13 +290,13 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/banner/' + ids,
+					url:  '/business/banner/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
-						_this.editTxt = res.data.content;
+						_this.editTxt = res.data.bannerimg;
 						let v = res.data;
 						layui.use(['layer','upload'], function(){
 						  var layer = layui.layer;
@@ -314,7 +314,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: myurl + '/business/banner',
+									url:  '/business/banner',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -348,7 +348,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/banner/' + ids,
+					url:  '/business/banner/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -369,7 +369,7 @@
 				  layer.open({
 				    type: 1, 
 					title:'内容',
-				    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+				    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 					area: 'auto'
 				  });
 				}); 

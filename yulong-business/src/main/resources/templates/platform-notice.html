@@ -141,7 +141,8 @@
 											<th>标题</th>
 											<th>详情</th>
 											<th>修改时间</th>
-											<th>展示在首页</th>
+											<th>是否显示</th>
+											<th>显示位置</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -151,8 +152,9 @@
 											<td>{{item.id}}</td>
 											<td>{{item.title}}</td>
 											<td><a href="javascript:;" class="btn btn-blue" @click="lookat(item.content)">查看</a></td>
-											<td>{{item.startTime}}</td>
+											<td>{{item.addtime}}</td>
 											<td>{{item.display ? '否' : '是'}}</td>
+											<td>{{item.position == 1 ? '首页' : '商户首页'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(item.id,item.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id,item.storeId)">删除</a>
@@ -163,7 +165,7 @@
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.title}}</td>
 											<td><a href="javascript:;" class="btn btn-blue" @click="lookat(searchList.content)">查看</a></td>
-											<td>{{searchList.startTime}}</td>
+											<td>{{searchList.addtime}}</td>
 											<td>{{searchList.display ? '否' : '是'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(searchList.id,searchList.storeId)">编辑</a>
@@ -188,7 +190,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -213,7 +215,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/notice/findByStoreId/4',
+				url:  '/business/notice/findByStoreId/4',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -233,7 +235,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/notice/' + _this.searchid,
+						url:  '/business/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -247,7 +249,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/notice/' + ids,
+					url:  '/business/notice/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -271,7 +273,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: myurl + '/business/notice',
+									url:  '/business/notice',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -303,7 +305,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/notice/' + ids,
+					url:  '/business/notice/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,

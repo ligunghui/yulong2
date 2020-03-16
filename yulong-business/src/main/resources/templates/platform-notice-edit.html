@@ -149,11 +149,12 @@
 								</label>
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">显示位置</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="number" class="form-control col-md-5" v-model="position" lay-verify="required" />
-										<b>1 首页 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 商户首页</b>
+									<div class="layui-input-block col-md-10_5 col-xs-12">
+										<select class="position" name="position" lay-filter="" lay-verify="" ref="position">
+											<option value="1" selected="" class="">首页</option>
+											<option value="2" class="">商户首页</option>
+										</select>
 									</div>
-									
 								</label>
 
 							</div>
@@ -178,7 +179,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -195,9 +196,6 @@
 		<script src="assets/js/link.js"></script>
 		<script src="assets/js/vue.js"></script>
 		<script type="text/javascript">
-
-		</script>
-		<script type="text/javascript">
 			var app = new Vue({
 				el: '#page-wrapper',
 				data: {
@@ -207,8 +205,11 @@
 					notices: '',
 					position:1
 				},
-				created() {
-					
+				mounted() {
+					layui.use('form',function() {
+						var form = layui.form;
+						form.render()
+					})
 				},
 				methods: {
 					subs() {
@@ -219,11 +220,8 @@
 						}else {
 							_this.isshow = 0
 						}
-						if(_this.position != 1 && _this.position != 2) {
-							layer.msg('对不起，您所输入的显示位置不在可选范围内，请重新输入')
-							return
-						}
-						if (!_this.title || !_this.notices) {
+						_this.position = _this.$refs.position.value;
+						if (!_this.title || !_this.notices || !_this.position) {
 							layer.msg('请输入需要的信息')
 							return
 						}
@@ -237,7 +235,7 @@
 							"type": 4
 						}
 						$.ajax({
-							url: myurl + '/business/notice',
+							url:  '/business/notice',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {

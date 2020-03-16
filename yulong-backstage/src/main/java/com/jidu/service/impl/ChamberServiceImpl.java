@@ -110,8 +110,9 @@ public class ChamberServiceImpl implements ChamberService {
         notice.setCreateName("平台管理员");
         notice.setCreateId("0");
         notice.setType(1);
+        notice.setTitle("商会申请通过");
         notice.setAddtime(new Date());
-        notice.setContent("您申请的商会已经通过了,网址:http://zhyl.zh0476.com:9002,用户名是"+username+",初始密码是"+password);
+        notice.setContent("您申请的商会已经通过了,网址:http://zhyl.zh0476.com:9002,用户名是"+username+",初始密码是:"+"zhyl@123");
         noticeMapper.insert(notice);
         return new Result(ResultCode.SUCCESS);
     }

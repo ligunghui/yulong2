@@ -7,7 +7,7 @@ sessionid = localStorage.getItem("sessionid")
 // 　　 console.log(localStorage.getItem("temp"));//输出
 // 七天后清空localStorage
 var localTime = localStorage.getItem("localTime")
-if(localTime + 24*60*60*1000 < new Date()) {
+if(Number(localTime) + 24*60*60*1000 < new Date()) {
 	localStorage.clear()
 }
 if(/login.html/.test(window.location.href)) {

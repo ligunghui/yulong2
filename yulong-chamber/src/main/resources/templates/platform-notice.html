@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -72,7 +72,7 @@
 						</ul>
 					</li>
 					<li class="active">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a class="active-menu" href="platform-notice.html"><em>公告</em></a>
@@ -106,14 +106,9 @@
 								<a href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -129,7 +124,7 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台公告</a> > <a href="#">公告显示</a></a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会公告</a> > <a href="#">公告显示</a></a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -142,10 +137,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增公告</a>
-								<div class="btn-group pull-right">
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 		
 						</div>
@@ -156,9 +151,9 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
+											<!-- <th>添加时间</th> -->
+											<!-- <th>开始时间</th> -->
+											<!-- <th>结束时间</th> -->
 											<th>内容</th>
 											<th>是否显示</th>
 											<th>操作</th>
@@ -168,9 +163,9 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
-											<td>{{item.startTime}}</td>
-											<td>{{item.endTime}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
+											<!-- <td>{{item.startTime}}</td> -->
+											<!-- <td>{{item.endTime}}</td> -->
 											<td v-html="item.content"></td>
 											<td>{{item.display ? '否' : '是'}}</td>
 											<td>
@@ -182,9 +177,9 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
-											<td>{{searchList.startTime}}</td>
-											<td>{{searchList.endTime}}</td>
+											<!-- <td>{{searchList.addtime}}</td> -->
+											<!-- <td>{{searchList.startTime}}</td> -->
+											<!-- <td>{{searchList.endTime}}</td> -->
 											<td v-html="searchList.content"></td>
 											<td>{{searchList.display ? '否' : '是'}}</td>
 											<td>
@@ -211,7 +206,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -236,7 +231,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/chamber/notice/findByStoreId/3',
+				url:  '/chamber/notice/findByStoreId/3',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -256,7 +251,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/chamber/notice/' + _this.searchid,
+						url:  '/chamber/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -270,7 +265,7 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/notice/' + ids,
+					url:  '/chamber/notice/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -294,7 +289,7 @@
 								$('#popedit').hide()
 								
 								$.ajax({
-									url: myurl + '/chamber/notice',
+									url:  '/chamber/notice',
 									type: 'PUT',
 									contentType: 'application/json',
 									headers: {
@@ -326,7 +321,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/notice/' + ids,
+					url:  '/chamber/notice/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,

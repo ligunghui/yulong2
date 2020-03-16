@@ -71,9 +71,6 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
@@ -115,6 +112,12 @@
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+        					</li>
         				</ul>
         			</li>
         			<li>
@@ -144,13 +147,10 @@
         				<a href=""><i class="fa fa-users"></i><em>商会管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="chamber.html"><em>商会列表</em></a>
+        						<a class="" href="chamber.html"><em>商会列表</em></a>
         					</li>
         					<li>
         						<a class="active-menu" href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
         					</li>
         				</ul>
         			</li>
@@ -182,6 +182,9 @@
         					</li>
         				</ul>
         			</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -208,7 +211,7 @@
                     <div class="col-md-12 nav-topdown">
                       <!-- <h1 class="page-head-line">DASHBOARD</h1> -->
                        <!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会管理</a> > <a href="#">商会入驻申请</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会入驻申请</a></p>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -220,38 +223,74 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 						    <div class="panel-heading textalign-left">
-						        <a class="btn btn-blue btn-sm" href="addbanner.html">通过申请</a>
-								<a class="btn btn-danger btn-sm" href="javascript:;" tabledel>拒绝申请</a>
+                                <a class="btn" href="chamber-edit.html?id=add">申请中商会</a>
+                                <!-- <div class="btn-group pull-right">
+									<input type="text" class="searchid" id="" v-model="searchid" placeholder="按商会ID查询"/>
+									<button class="btn btn-blue btn-sm pull-right" @click="mysearch('all')">确定</button>
+								</div> -->
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
-						            <table class="table table-hover">
+						            <table class="table table-hover" v-cloak>
 						                <thead>
 						                    <tr>
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
 												<th>ID</th>
                                                 <th>商会名称</th>
-                                                <th>所在地区</th>
-						                        <th>商会管理员姓名</th>
-						                        <th>商会管理员电话</th>
+                                                <th>商会地址</th>
+												<th>联系方式</th>
+                                                <th>商会logo</th>
+                                                <th>商会封面图</th>
+                                                <th>商会介绍</th>
+                                                <th>商会状态</th>
+                                                <th>审核时间</th>
+                                                <th>是否显示在首页</th>
 						                        <th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-if="!issearch" v-for="(item,index) in bannerList">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-                                                <td tableedit>赤峰商会</td>
-                                                <td tableedit>赤峰</td>
-						                        <td tableedit>阿三</td>
-												<td tableedit>15712341234</td>
+						                        <td>{{item.id}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.address}}</td>
+												<td>{{item.telephone}}</td>
+                                                <td><a class="btn btn-blue" @click="lookat(item.log,'img')">查看</a></td>
+						                        <td><a class="btn btn-blue" @click="lookat(item.img,'img')">查看</a></td>
+                                                <td><a class="btn btn-blue" @click="lookat(item.introduction)">查看</a></td>
+                                                <td>{{item.status | fstatus}}</td>
+                                                <td>{{item.violationReseaon}}</td>
+                                                <td>{{item.display ? '是' : '否'}}</td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>通过</a>
-													<a class="btn btn-danger btn-sm" href="javascript:;" rowdel>驳回</a>
+													<a class="btn btn-info btn-sm" href="javascript:;" @click="edit(item.id)">编辑</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="open(item.id,item.status)">{{item.status | fconfirm}}</a>
+													<!-- <a class="btn btn-primary btn-sm" href="chamber-user.html">查看商会会员</a> -->
+													<a class="btn btn-danger btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 												</td>
 						                    </tr>
+											<tr v-if="issearch">
+												<td><input type="checkbox" name="" id="" value="" /></td>
+											    <td>{{searchList.id}}</td>
+											    <td>{{searchList.name}}</td>
+												<td>{{searchList.address}}</td>
+												<td>{{searchList.telephone}}</td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.log,'img')">查看</a></td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.img,'img')">查看</a></td>
+											    <td><a class="btn btn-blue" @click="lookat(searchList.introduction)">查看</a></td>
+											    <td>{{searchList.status | fstatus}}</td>
+											    <td>{{searchList.violationReseaon}}</td>
+											    <td>{{searchList.display ? '是' : '否'}}</td>
+												<td>
+													<a class="btn btn-info btn-sm" href="javascript:;" @click="edit(searchList.id)">编辑</a>
+														<a class="btn btn-blue btn-sm" href="javascript:;" @click="open(searchList.id,searchList.status)">{{searchList.status | fconfirm}}</a>
+														<!-- <a class="btn btn-primary btn-sm" href="chamber-user.html">查看商会会员</a> -->
+														<a class="btn btn-danger btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+													</td>
+												</td>
+											</tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
@@ -265,7 +304,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -279,5 +318,181 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+	<script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#page-wrapper',
+			data: {
+				searchid: '',
+				bannerList: [],
+				issearch: false,
+				searchList: null,
+				editTxt:''
+			},
+			created() {
+				let _this = this;
+				$.ajax({
+					url:  '/backstage/chamber/1/10/1',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = res.rows
+						layui.use('laypage', function(){
+						  var laypage = layui.laypage;
+						  
+						  //执行一个laypage实例
+						  laypage.render({
+						    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						    ,count: res.total //数据总数，从服务端得到
+							,jump: function(obj, first){
+							    $.ajax({
+							    	url:  '/backstage/chamber/'+obj.curr+'/10/1',
+							    	type: 'GET',
+							    	headers: {
+							    		'Authorization': sessionid,
+							    	},
+							    	success: (res) => {
+							    		_this.bannerList = res.rows
+							    	},
+							    	fail:(res) => {
+							    	}
+							    })
+							    //首次不执行
+							    // if(!first){
+							    //   //do something
+							    // }
+							  }
+						  });
+						});
+					},
+					fail:(res) => {
+					}
+				})
+			},
+			filters: {
+				fstatus(tys) {
+					if(tys == 1) {
+						return '申请中'
+					}else if(tys == 2) {
+						return '申请通过'
+					}else if(tys == 3) {
+						return '申请不通过'
+					}else {
+						return '关闭'
+					}
+				},
+				fconfirm(tys) {
+					if(tys == 1) {
+						return '启用'
+					}else if(tys == 2) {
+						return '禁用'
+					}else if(tys == 3) {
+						return '启用'
+					}else {
+						return '启用'
+					}
+				}
+			},
+			methods: {
+				mysearch(tys) {
+					let _this = this;
+					if(tys == 'all') {
+						$.ajax({
+							url:  '/backstage/chamber/' + _this.searchid,
+							type: 'GET',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								_this.searchList = res.data
+								_this.issearch = true;
+								layer.msg(res.message)
+							}
+						})
+					}else {
+						if (!_this.searchid) {
+							_this.issearch = false
+						} else {
+							_this.issearch = true;
+						}
+					}
+					
+				},
+				edit(ids) {
+					window.location.href = "chamber-edit.html?id=" + ids;
+				},
+				del(ids) {
+					let _this = this;
+					$.ajax({
+						url:  '/backstage/chamber/' + ids,
+						type: 'DELETE',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							setTimeout(function(){
+								window.location.reload()
+							},1200)
+						}
+					})
+				},
+				open(ids,tys) {
+					let _this = this;
+					// status	2通过3拒绝
+					var sts;
+					if(tys == 1) {
+						// return '启用'
+						sts = 2;
+					}else if(tys == 2) {
+						// return '禁用'
+						sts = 3;
+					}else if(tys == 3) {
+						sts = 2;
+					}else {
+						sts = 2;
+					}
+					$.ajax({
+						url:  '/backstage/chamber/' + ids + '/' + sts,
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							setTimeout(function(){
+								window.location.reload()
+							},1200)
+						}
+					})
+				},
+				lookat(cons,type) {
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  if(type == 'img') {
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
+							area: 'auto'
+						  });
+					  }else {
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: cons ,//这里content是一个普通的String
+							area: 'auto'
+						  });
+					  }
+					  
+					}); 
+				}
+			}
+		})
+	</script>
 </body>
 </html>

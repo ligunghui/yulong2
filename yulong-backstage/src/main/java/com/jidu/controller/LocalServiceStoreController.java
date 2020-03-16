@@ -37,21 +37,27 @@ public class LocalServiceStoreController {
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @ApiOperation(value = "添加本地服务")
+    @ApiOperation(value = "添加本地服务商家")
     public Result add(@RequestBody LocalServiceStore localServiceStore) {
         localServiceStoreService.add(localServiceStore);
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ApiOperation(value = "查询本地服务")
+    @ApiOperation(value = "查询本地服务商家")
     public Result<LocalServiceStore> findById(@PathVariable Integer id) {
         LocalServiceStore localServiceStore = localServiceStoreService.findById(id);
         return new Result(ResultCode.SUCCESS, localServiceStore);
     }
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "查询本地服务商家")
+    public Result delete(@PathVariable Integer id) {
+        localServiceStoreService.delete(id);
+        return new Result(ResultCode.SUCCESS);
+    }
 
 
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
-    @ApiOperation(value = "查询本地服务")
+    @ApiOperation(value = "查询本地服务商家")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
             @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path")

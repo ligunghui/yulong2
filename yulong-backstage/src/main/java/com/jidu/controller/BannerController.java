@@ -39,5 +39,11 @@ public class BannerController {
         List<ShoppingBanner> shoppingBanner = bannerService.search();
         return new Result(ResultCode.SUCCESS, shoppingBanner);
     }
+    @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "查询轮播图")
+    public Result<ShoppingBanner> findById(@PathVariable long id) {
+        ShoppingBanner shoppingBanner = bannerService.findById(id);
+        return new Result(ResultCode.SUCCESS, shoppingBanner);
+    }
 
 }

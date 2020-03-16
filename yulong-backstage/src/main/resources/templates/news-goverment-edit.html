@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-管理后台</title>
+	<meta name="Keywords" content="智汇玉龙,管理后台" />
+	<meta name="Description" content="智汇玉龙管理后台" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -71,9 +71,6 @@
 								<a href="ads.html"><em>APP广告页管理</em></a>
 							</li>
 							<li>
-								<a href="card.html"><em>玉龙卡管理</em></a>
-							</li>
-							<li>
 								<a href="user-rate.html"><em>会员等级管理</em></a>
 							</li>
 							<li>
@@ -115,6 +112,12 @@
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
 							</li>
+							<li>
+								<a href="gift.html"><em>礼包专区</em></a>
+							</li>
+							<li>
+								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+							</li>
 						</ul>
 					</li>
 					<li>
@@ -149,9 +152,6 @@
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 							</li>
-							<li>
-								<a href="user-apply.html"><em>个人入会申请</em></a>
-							</li>
 						</ul>
 					</li>
 					<li class="active">
@@ -182,6 +182,9 @@
 							</li>
 						</ul>
 					</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
 					<li>
 						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -208,7 +211,7 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexmsg-msg.html">资讯管理</a> > <a href="#">政府资讯</a> > <a href="#">政府资讯</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexmsg-msg.html">资讯管理</a> > <a href="news-goverment.html">政府资讯</a> > <a href="#">政府资讯</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -305,7 +308,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -507,11 +510,11 @@
 						}
 						// 设置HTML内容
 						v.context = window.editor.html();
-						v.display = _this.$refs.display == 'on' ? 1 : 0;
+						v.display = _this.$refs.display.value == 'on' ? 1 : 0;
 						v.endtime = _this.$refs.endtime.value;
 						v.starttime = _this.$refs.starttime.value;
 						v.headPic = _this.headPic;
-						v.homePage = _this.$refs.homePage == 'on' ? 1 : 0;
+						v.homePage = _this.$refs.homePage.value == 'on' ? 1 : 0;
 						v.name = _this.name;
 						v.sordOrder = _this.sordOrder;
 						v.subheading = _this.subheading;
@@ -530,7 +533,7 @@
 								layer.msg(res.message)
 								if (res.code == 10000) {
 									setTimeout(function() {
-										window.location.href = 'news-goverment-edit.html'	
+										window.location.href = 'news-goverment.html'	
 									}, 1200)
 								}
 							}

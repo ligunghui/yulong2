@@ -51,4 +51,9 @@ public class LocalServiceServiceImpl implements LocalServiceService {
         criteria.andEqualTo("serviceId", serviceId);
         return localServiceStoreMapper.selectByExample(example);
     }
+
+    @Override
+    public void delete(Integer id) {
+        localServiceMapper.deleteByPrimaryKey(id);
+    }
 }

@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -73,7 +73,7 @@
 						</ul>
 					</li>
 					<li class="active">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="platform-notice.html"><em>公告</em></a>
@@ -107,14 +107,9 @@
 								<a href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -130,7 +125,7 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台公告</a> > <a href="platform-banner.html">banner图</a>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会公告</a> > <a href="platform-banner.html">banner图</a>
 							> <a href="#">添加banner</a></p>
 					</div>
 				</div>
@@ -157,14 +152,14 @@
 										</div>
 									</div>
 								</label>
-								<label class="layui-inline col-md-12 col-xs-12">
+								<!-- <label class="layui-inline col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">结束时间</span>
 									<div class="layui-input-inline col-md-4 col-xs-12">
 										<input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='endtime'>
 									</div>
-								</label>
+								</label> -->
 							</div>
-							<div class="block-con layui-form-item col-xs-12">
+							<!-- <div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">发布者</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
@@ -174,7 +169,7 @@
 										</select>
 									</div>
 								</label>
-							</div>
+							</div> -->
 							<div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">发布位置</span>
@@ -206,7 +201,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -227,7 +222,7 @@
 				el: '#page-wrapper',
 				data: {
 					endTime:'',
-					publics:'',
+					publics:'1',
 					position:''
 				},
 				created() {
@@ -245,10 +240,10 @@
 							layer = layui.layer,
 							laydate = layui.laydate;
 						//日期时间选择器
-						laydate.render({
-							elem: '#endTime',
-							type: 'datetime'
-						});
+						// laydate.render({
+						// 	elem: '#endTime',
+						// 	type: 'datetime'
+						// });
 						
 						form.render();
 					})
@@ -256,11 +251,11 @@
 				methods: {
 					subs() {
 						let _this = this;
-						_this.endTime = _this.$refs.endtime.value;
-						console.log(_this.endTime)
+						// _this.endTime = _this.$refs.endtime.value;
+						// console.log(_this.endTime)
 						_this.publics = _this.$refs.publicss.value;
 						_this.position = _this.$refs.position.value;
-						if (!imgurl || !_this.endTime || !_this.publics || !_this.position) {
+						if (!imgurl || !_this.publics || !_this.position) {
 							layui.use('layer', function() {
 								var layer = layui.layer;
 								layer.msg('请输入需要的信息')
@@ -268,13 +263,13 @@
 							return
 						}
 						let v = {
-							"bannerdate": _this.endTime,//到期时间
+							"bannerdate": "",//到期时间
 							"bannerimg": imgurl,//图片地址
 							"isAdminer": _this.publics,//0-----店铺发布，1----管理发布
 							"location": _this.position//位置1首页2智汇购
 						}
 						$.ajax({
-							url: myurl + '/chamber/banner',
+							url:  '/chamber/banner',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {
@@ -316,7 +311,7 @@
 				//普通图片上传
 				var uploadInst = upload.render({
 					elem: '#uploadlogo',
-					url: myurl + '/upload/upload',
+					url:  '/upload/upload',
 					headers: {
 						'Authorization': sessionid
 					},

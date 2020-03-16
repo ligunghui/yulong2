@@ -125,13 +125,13 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="store-goods-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="store-goods-edit.html?id=add">新增</a>
 								<div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询商品" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
 								</div>
 							</div>
-
+					
 						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
@@ -140,8 +140,7 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>详情</th>
+											<!-- <th>添加时间</th> -->
 											<th>运费</th>
 											<th>是否推荐到首页</th>
 											<th>商品图片</th>
@@ -150,14 +149,9 @@
 											<th>会员价</th>
 											<th>商品名称</th>
 											<th>是否上架</th>
-											<th>销售数量</th>
-											<th>开售时间</th>
-											<th>商户ID</th>
-											<th>商户名称</th>
-											<th>商铺价格</th>
+											<!-- <th>商铺价格</th> -->
 											<th>剩余数量</th>
 											<th>总量</th>
-											<th>类型ID</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -165,24 +159,18 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime ? item.addtime.split('T')[0] : '未设置'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.details)">预览</a></td>
+											<!-- <td>{{item.addtime}}</td> -->
 											<td>{{item.goodsWeight}}</td>
 											<td>{{item.homePage ? '是' : '否'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.img,'img')">预览</a></td>
+											<td><a class="colorblue" @click="lookat(item.img,'img3')">【预览】</a></td>
 											<td>{{item.isNew ? '是' : '否'}}</td>
 											<td>{{item.markePrice}}</td>
 											<td>{{item.memberPrice}}</td>
 											<td>{{item.name}}</td>
 											<td>{{item.onsale ? '下架' : '上架'}}</td>
-											<td>{{item.saleNum}}</td>
-											<td>{{item.sellerTime ? item.sellerTime.split('T')[0] : '未设置'}}</td>
-											<td>{{item.storeId}}</td>
-											<td>{{item.storeName}}</td>
-											<td>{{item.storePrice}}</td>
+											<!-- <td>{{item.saleNum}}</td> -->
 											<td>{{item.surplusNum}}</td>
 											<td>{{item.totalNum}}</td>
-											<td>{{item.typeId}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
@@ -191,24 +179,17 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime ? searchList.addtime.split('T')[0] : '未设置'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.details)">预览</a></td>
 											<td>{{searchList.goodsWeight}}</td>
 											<td>{{searchList.homePage ? '是' : '否'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.details,'img')">预览</a></td>
+											<td><a class="colorblue" @click="lookat(searchList.img,'img3')">【预览】</a></td>
 											<td>{{searchList.isNew ? '是' : '否'}}</td>
-											<td>{{searchList.markPrice}}</td>
+											<td>{{searchList.markePrice}}</td>
 											<td>{{searchList.memberPrice}}</td>
 											<td>{{searchList.name}}</td>
 											<td>{{searchList.onsale ? '下架' : '上架'}}</td>
-											<td>{{searchList.saleNum}}</td>
-											<td>{{searchList.sellerTime ? searchList.sellerTime.split('T')[0] : '未设置'}}</td>
-											<td>{{searchList.storeId}}</td>
-											<td>{{searchList.storeName}}</td>
-											<td>{{searchList.storePrice}}</td>
+											<!-- <td>{{searchList.saleNum}}</td> -->
 											<td>{{searchList.surplusNum}}</td>
 											<td>{{searchList.totalNum}}</td>
-											<td>{{searchList.typeId}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
@@ -224,13 +205,20 @@
 			</div>
 
 			<!-- /. PAGE INNER  -->
+			<div class="popedit displaynone" id="popedit">
+				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-model="editTxt"></textarea>
+			</div>
+			
+			<div class="displaynone" style="max-width:500px;max-height:600px;overflow:auto;" id="popimg">
+				<img v-for="item in imgList" :src="item" style="max-width:200px;margin: 10px;"/>
+			</div>
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -250,12 +238,13 @@
 			bannerList: [],
 			issearch: false,
 			searchList: null,
-			editTxt:''
+			editTxt:'',
+			imgList:[]
 		},
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/goods/1/10',
+				url:  '/business/goods/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -271,7 +260,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: myurl + '/business/goods/'+obj.curr+'/10',
+						    	url:  '/business/goods/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -294,6 +283,21 @@
 				}
 			})
 		},
+		filters:{
+			ftype(tys){
+				if(tys == 0) {
+					return '普通'
+				}else if(tys == 1){
+					return '平台自营'
+				}else if(tys == 2) {
+					return '家乡特产'
+				}else if(tys == 3){
+					return '礼包专区'
+				}else {
+					return '新人专区'
+				}
+			}
+		},
 		methods: {
 			mysearch() {
 				let _this = this;
@@ -302,7 +306,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/goods/' + _this.searchid,
+						url:  '/business/goods/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -314,12 +318,12 @@
 				}
 			},
 			edit(ids,storeids) {
-				window.location.href="store-goods-edit.html?id="+ids
+				window.location.href = "store-goods-edit.html?id=" + ids;
 			},
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/goods/' + ids,
+					url:  '/business/goods/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
@@ -332,71 +336,37 @@
 					}
 				})
 			},
-			lookat(cons,type) {
-				layui.use('layer', function(){
-				  var layer = layui.layer;
-				  
-				  if(type == 'img') {
-					  layer.open({
-					    type: 1, 
-						title:'内容',
-					    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
-						area: 'auto'
-					  });
-				  }else {
-					  layer.open({
-					    type: 1, 
-						title:'内容',
-					    content: cons ,//这里content是一个普通的String
-						area: 'auto'
-					  });
-				  }
-				  
-				}); 
+			lookat(cons,tys) {
+				let _this = this;
+				if(!cons) {
+					layer.msg('查看的内容为空')
+					return
+				}
+				if(tys == 'img3') {
+					if(cons.split(' ').length) {
+						cons.split(' ').forEach(function(i){
+							if(i) {
+								_this.imgList.push(i)
+							}
+						})
+						
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'图片',
+								content:$('#popimg'),
+								area:'device-width',
+								cancel:function() {
+									_this.imgList = []
+								}
+							})
+						})
+					}
+				}
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

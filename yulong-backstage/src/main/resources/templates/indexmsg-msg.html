@@ -70,9 +70,6 @@
 								<a href="ads.html"><em>APP广告页管理</em></a>
 							</li>
 							<li>
-								<a href="card.html"><em>玉龙卡管理</em></a>
-							</li>
-							<li>
 								<a href="user-rate.html"><em>会员等级管理</em></a>
 							</li>
 							<li>
@@ -114,6 +111,12 @@
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
 							</li>
+							<li>
+								<a href="gift.html"><em>礼包专区</em></a>
+							</li>
+							<li>
+								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+							</li>
 						</ul>
 					</li>
 					<li>
@@ -148,9 +151,6 @@
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 							</li>
-							<li>
-								<a href="user-apply.html"><em>个人入会申请</em></a>
-							</li>
 						</ul>
 					</li>
 					<li class="">
@@ -180,6 +180,9 @@
 								<a href="user.html"><em>用户管理</em></a>
 							</li>
 						</ul>
+					</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
@@ -237,12 +240,12 @@
 										<b class="">{{bannerList.createBy}}</b>
 									</div>
 								</label>
-								<label class="col-md-12 col-xs-12">
+								<!-- <label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">创建时间</span>
 									<div class="col-md-10_5 col-xs-12">
 										<b class="">{{bannerList.createDate}}</b>
 									</div>
-								</label>
+								</label> -->
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">内容</span>
 									<div class="col-md-10_5 col-xs-12">
@@ -272,7 +275,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 <script src="assets/js/jquery-1.10.2.js"></script>
@@ -301,37 +304,40 @@
 					},
 					success: (res) => {
 						_this.bannerList = res.rows[0];
-						
-						// 关闭过滤模式，保留所有标签
-						KindEditor.options.filterMode = false;
-						KindEditor.ready(function (K) {
-						    window.editor = K.create('#editor_id', {
-						        filePostName: "uploadFile",
-						        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-						        uploadJson:  '/Kindeditor/uploadFile',
-						        resizeType: 1,
-						        allowPreviewEmoticons: true,
-						        allowImageUpload: true,
-						        afterBlur: function () {
-						            this.sync();
-						        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
-						        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
-						            console.log(url)
-						            console.log(data)
-						        }
-						    });
-							
-						});
-						
+						_this.$nextTick(() => {
+							_this.kindLoad()
+						})
 					}
 				})
 			},
 			mounted() {
-				
+				this.kindLoad()
 			},
 			methods: {
 				subs() {
 					window.location.href="indexmsg-msg-edit.html"
+				},
+				kindLoad() {
+					// 关闭过滤模式，保留所有标签
+					KindEditor.options.filterMode = false;
+					KindEditor.ready(function (K) {
+					    window.editor = K.create('#editor_id', {
+					        filePostName: "uploadFile",
+					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
+					        uploadJson:  '/Kindeditor/uploadFile',
+					        resizeType: 1,
+					        allowPreviewEmoticons: true,
+					        allowImageUpload: true,
+					        afterBlur: function () {
+					            this.sync();
+					        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+					        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
+					            console.log(url)
+					            console.log(data)
+					        }
+					    });
+						
+					});
 				}
 			}
 		})

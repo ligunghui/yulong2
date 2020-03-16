@@ -71,9 +71,6 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
@@ -115,6 +112,12 @@
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+        					</li>
         				</ul>
         			</li>
         			<li>
@@ -149,9 +152,6 @@
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
-        					</li>
         				</ul>
         			</li>
         			<li class="">
@@ -182,6 +182,9 @@
         					</li>
         				</ul>
         			</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -223,10 +226,10 @@
                                 <a class="btn btn-blue btn-sm" href="chamber-edit.html?id=add">添加商会</a>
                                 <!-- <a class="btn btn-danger btn-sm" href="javascript:;">批量启用</a>
                                 <a class="btn btn-danger btn-sm" href="javascript:;">批量禁用</a> -->
-                                <div class="btn-group pull-right">
+                                <!-- <div class="btn-group pull-right">
 									<input type="text" class="searchid" id="" v-model="searchid" placeholder="按商会ID查询"/>
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch('all')">确定</button>
-								</div>
+								</div> -->
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
@@ -237,6 +240,7 @@
 												<th>ID</th>
                                                 <th>商会名称</th>
                                                 <th>商会地址</th>
+												<th>联系方式</th>
                                                 <th>商会logo</th>
                                                 <th>商会封面图</th>
                                                 <th>商会介绍</th>
@@ -252,6 +256,7 @@
 						                        <td>{{item.id}}</td>
                                                 <td>{{item.name}}</td>
                                                 <td>{{item.address}}</td>
+												<td>{{item.telephone}}</td>
                                                 <td><a class="btn btn-blue" @click="lookat(item.log,'img')">查看</a></td>
 						                        <td><a class="btn btn-blue" @click="lookat(item.img,'img')">查看</a></td>
                                                 <td><a class="btn btn-blue" @click="lookat(item.introduction)">查看</a></td>
@@ -270,6 +275,7 @@
 											    <td>{{searchList.id}}</td>
 											    <td>{{searchList.name}}</td>
 												<td>{{searchList.address}}</td>
+												<td>{{searchList.telephone}}</td>
 											    <td><a class="btn btn-blue" @click="lookat(searchList.log,'img')">查看</a></td>
 											    <td><a class="btn btn-blue" @click="lookat(searchList.img,'img')">查看</a></td>
 											    <td><a class="btn btn-blue" @click="lookat(searchList.introduction)">查看</a></td>
@@ -300,7 +306,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -388,7 +394,7 @@
 					}else if(tys == 3) {
 						return '启用'
 					}else {
-						return '不可操作'
+						return '启用'
 					}
 				}
 			},
@@ -430,6 +436,9 @@
 						},
 						success: (res) => {
 							layer.msg(res.message)
+							setTimeout(function(){
+								window.location.reload()
+							},1200)
 						}
 					})
 				},
@@ -446,7 +455,7 @@
 					}else if(tys == 3) {
 						sts = 2;
 					}else {
-						return
+						sts = 2;
 					}
 					$.ajax({
 						url:  '/backstage/chamber/' + ids + '/' + sts,
@@ -470,7 +479,7 @@
 						  layer.open({
 						    type: 1, 
 							title:'内容',
-						    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+						    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 							area: 'auto'
 						  });
 					  }else {

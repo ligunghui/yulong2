@@ -114,6 +114,12 @@
 								<li>
 									<a href="goods.html"><em>商品列表管理</em></a>
 								</li>
+								<li>
+									<a href="gift.html"><em>礼包专区</em></a>
+								</li>
+								<li>
+									<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+								</li>
 							</ul>
 						</li>
 						<li>
@@ -148,9 +154,6 @@
 								<li>
 									<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 								</li>
-								<li>
-									<a href="user-apply.html"><em>个人入会申请</em></a>
-								</li>
 							</ul>
 						</li>
 						<li class="">
@@ -163,7 +166,7 @@
 									<a href="news-goverment.html"><em>政府资讯</em></a>
 								</li>
 								<li>
-									<a href="news-culture.html"><em>文化旅游</em></a>
+									<a class="" href="news-culture.html"><em>文化旅游</em></a>
 								</li>
 								<li>
 									<a href="news-local.html"><em>本地新闻</em></a>
@@ -180,6 +183,9 @@
 									<a href="user.html"><em>用户管理</em></a>
 								</li>
 							</ul>
+						</li>
+						<li class="">
+							<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
 						</li>
 						<li>
 							<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
@@ -220,10 +226,10 @@
 							<div class="panel panel-default">
 								<div class="panel-heading textalign-left">
 									<a class="btn">订单</a>
-										<div class="btn-group pull-right">
+										<!-- <div class="btn-group pull-right">
 											<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询"/>
 											<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-										</div>
+										</div> -->
 									</div>
 									
 								</div>
@@ -234,27 +240,18 @@
 												<tr>
 													<th><input type="checkbox" name="" id="" value="" /></th>
 													<th>ID</th>
-													<th>地址ID</th>
-													<th>商品ID</th>
-													<th>订单ID</th>
-													<!-- <th>添加时间</th> -->
-													<!-- <th>是否自动确认</th> -->
-													<th>完成时间</th>
+													<!-- <th>地址ID</th> -->
+													<!-- <th>商品ID</th> -->
+													<!-- <th>订单ID</th> -->
+													<!-- <th>完成时间</th> -->
 													<th>数量</th>
 													<th>订单状态</th>
-													<!-- <th>订单类型</th> -->
-													<th>买家留言</th>
-													<th>支付时间</th>
-													<!-- <th>退货原因</th> -->
-													<!-- <th>退货单号</th> -->
-													<!-- <th>退货时间</th> -->
-													<!-- <th>卖家留言</th> -->
+													<!-- <th>买家留言</th> -->
+													<!-- <th>支付时间</th> -->
 													<th>快递费</th>
 													<th>快递号</th>
 													<th>发货时间</th>
-													<!-- <th>商户ID</th> -->
 													<th>总价格</th>
-													<!-- <th>单号</th> -->
 													<th>用户ID</th>
 													<th>操作</th>
 												</tr>
@@ -263,30 +260,22 @@
 												<tr v-if="!issearch" v-for="(item,index) in bannerList">
 													<td><input type="checkbox" name="" id="" value="" /></td>
 													<td>{{item.id}}</td>
-													<td>{{item.addrId}}</td>
-													<td>{{item.goodsId}}</td>
-													<td>{{item.orderId}}</td>
-													<!-- <td>{{item.addtime.split('T')[0]}}</td> -->
-													<!-- <td>{{item.autoConfirmEmail ? '是' : '否'}}</td> -->
-													<td>{{item.finishtime}}</td>
+													<!-- <td>{{item.addrId}}</td> -->
+													<!-- <td>{{item.goodsId}}</td> -->
+													<!-- <td>{{item.orderId}}</td> -->
+													<!-- <td>{{item.finishtime}}</td> -->
 													<td>{{item.num}}</td>
 													<td>{{item.orderStatus | fOrder}}</td>
-													<!-- <td>{{item.orderType ? '平台' : '商户'}}</td> -->
-													<td><a class="btn btn-blue" @click="lookat(item.payMsg)">查看</a></td>
-													<td>{{item.paytime}}</td>
-													<!-- <td><a class="btn btn-blue" @click="lookat(item.returnContent)">查看</a></td> -->
-													<!-- <td>{{item.returnShipcode}}</td> -->
-													<!-- <td>{{item.returnTime}}</td> -->
-													<!-- <td><a class="btn btn-blue" @click="lookat(item.sellerMsg)">查看</a></td> -->
+													<!-- <td><a class="btn btn-blue" @click="lookat(item.payMsg)">查看</a></td> -->
+													<!-- <td>{{item.paytime}}</td> -->
 													<td>{{item.shipPrice}}</td>
 													<td>{{item.shipcode}}</td>
 													<td>{{item.shiptime}}</td>
-													<!-- <td>{{item.storeId}}</td> -->
 													<td>{{item.totalprice}}</td>
-													<!-- <td>{{item.transport}}</td> -->
 													<td>{{item.userId}}</td>
 													<td>
 														<a class="btn btn-blue btn-sm" @click="looks(item.orderId,item.orderStatus)">查看物流</a>
+														<a class="btn btn-blue btn-sm" @click="looklook(item.addrId,item.goodsId,item.finishtime,item.payMsg,item.paytime)">订单详情</a>
 														<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 														<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
 													</td>
@@ -294,30 +283,21 @@
 												<tr v-if="issearch">
 													<td><input type="checkbox" name="" id="" value="" /></td>
 													<td>{{searchList.id}}</td>
-													<td>{{searchList.addrId}}</td>
-													<td>{{searchList.goodsId}}</td>
-													<td>{{searchList.orderId}}</td>
-													<td>{{searchList.addtime.split('T')[0]}}</td>
-													<td>{{searchList.autoConfirmEmail ? '是' : '否'}}</td>
-													<td>{{searchList.finishtime}}</td>
+													<!-- <td>{{searchList.addrId}}</td> -->
+													<!-- <td>{{searchList.goodsId}}</td> -->
+													<!-- <td>{{searchList.orderId}}</td> -->
+													<!-- <td>{{searchList.finishtime}}</td> -->
 													<td>{{searchList.num}}</td>
 													<td>{{searchList.orderStatus | fOrder}}</td>
-													<td>{{searchList.orderType ? '平台' : '商户'}}</td>
-													<td><a class="btn btn-blue" @click="lookat(searchList.payMsg)">查看</a></td>
-													<td>{{searchList.paytime}}</td>
-													<td><a class="btn btn-blue" @click="lookat(searchList.returnContent)">查看</a></td>
-													<td>{{searchList.returnShipcode}}</td>
-													<td>{{searchList.returnTime}}</td>
-													<td><a class="btn btn-blue" @click="lookat(searchList.sellerMsg)">查看</a></td>
+													<!-- <td><a class="btn btn-blue" @click="lookat(searchList.payMsg)">查看</a></td> -->
+													<!-- <td>{{searchList.paytime}}</td> -->
 													<td>{{searchList.shipPrice}}</td>
 													<td>{{searchList.shipcode}}</td>
 													<td>{{searchList.shiptime}}</td>
-													<td>{{searchList.storeId}}</td>
-													<td>{{searchList.totalprice}}</td>
-													<td>{{searchList.transport}}</td>
 													<td>{{searchList.userId}}</td>
 													<td>
 														<a class="btn btn-blue btn-sm" @click="looks(searchList.orderId,searchList.orderStatus)">查看物流</a>
+														<a class="btn btn-blue btn-sm" @click="looklook(searchList.addrId,searchList.goodsId,searchList.finishtime,searchList.payMsg,searchList.paytime)">订单详情</a>
 														<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 														<a class="btn btn-blue btn-sm" @click="del(searchList.id)">删除</a>
 													</td>
@@ -342,13 +322,15 @@
 						  </li>
 						</ul>  
 					</div>
+					<!-- 更多信息弹窗 -->
+					
 				</div>
 				<!-- /. PAGE WRAPPER  -->
 			</div>
 			<!-- /. WRAPPER  -->
 
 			<div id="footer-sec">
-				<p>Copyright © 2019 几度CMS版权所有</p>
+				<p>Copyright © 2020 几度互联版权所有</p>
 			</div>
 		
 </body>
@@ -478,19 +460,47 @@
 						return
 						
 					},
-					lookat(con) {
-						if(!con) {
-							layer.msg('内容为空')
-							return
-						}
-						let _this = this;
-						layui.use('form',function() {
+					looklook(addrId,goodsId,finishtime,payMsg,paytime) {
+						var divs = `<div class="block-con col-xs-12" id="moreMsg">
+										<label class="col-md-12 col-xs-12">
+											<span class="col-md-2 col-xs-12">地址ID</span>
+											<div class="col-md-10 col-xs-12">
+												${addrId}
+											</div>
+										</label>
+										<label class="col-md-12 col-xs-12">
+											<span class="col-md-2 col-xs-12">商品ID</span>
+											<div class="col-md-10 col-xs-12">
+												${goodsId}
+											</div>
+										</label>
+										<label class="col-md-12 col-xs-12">
+											<span class="col-md-2 col-xs-12">完成时间</span>
+											<div class="col-md-10 col-xs-12">
+												${finishtime}
+											</div>
+										</label>
+										<label class="col-md-12 col-xs-12">
+											<span class="col-md-2 col-xs-12">买家留言</span>
+											<div class="col-md-10 col-xs-12" v-html="${payMsg}">
+												
+											</div>
+										</label>
+										<label class="col-md-12 col-xs-12">
+											<span class="col-md-2 col-xs-12">支付时间</span>
+											<div class="col-md-10 col-xs-12">
+												${paytime}
+											</div>
+										</label>
+									</div>`;
+						layui.use('layer',function() {
 							var layer = layui.layer;
 							
 							layer.open({
 								type:1,
-								content:con,
-								area:['300px','200px']
+								title:'更多信息',
+								content:divs,
+								area:'device-width'
 							})
 						})
 					},

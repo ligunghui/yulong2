@@ -52,13 +52,11 @@ public class ShiroConfiguration {
         filterFactory.setUnauthorizedUrl("/autherror?code=2");//未授权的url
         Map<String,String> filterMap = new LinkedHashMap<>();
         filterMap.put("/business/login/login","anon");
-        // filterMap.put("/business/user/login","perms[user-home]");
-        //filterMap.put("/business/user/login","roles[user-home]");
         filterMap.put("/autherror","anon");
         filterMap.put("/","anon");
         filterMap.put("/login.html","anon");
         filterMap.put("/assets/**","anon");
-        //filterMap.put("/**","authc");
+       //filterMap.put("/**","authc");
         filterFactory.setFilterChainDefinitionMap(filterMap);
 
         return filterFactory;

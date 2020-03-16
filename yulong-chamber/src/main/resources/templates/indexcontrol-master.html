@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -158,7 +158,7 @@
 											<th>ID</th>
 											<th>用户名</th>
 											<th>密码</th>
-											<th>管理员类别</th>
+											<!-- <th>管理员类别</th> -->
 											<th>是否可用</th>
 											<th>操作</th>
 										</tr>
@@ -169,7 +169,7 @@
 											<td>{{item.id}}</td>
 											<td>{{item.username}}</td>
 											<td>******</td>
-											<td>{{item.type | fTypeTd}}</td>
+											<!-- <td>{{item.type | fTypeTd}}</td> -->
 											<td>{{item.useable ? '是' : '否'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
@@ -180,8 +180,8 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.username}}</td>
-											<td>******</td>
-											<td>{{searchList.type | fTypeTd}}</td>
+											<td>{{searchList.password}}</td>
+											<!-- <td>{{searchList.type | fTypeTd}}</td> -->
 											<td>{{searchList.useable ? '是' : '否'}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
@@ -220,7 +220,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -246,7 +246,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/admin/findBusinessAdmin/1/10',
+					url:  '/chamber/admin/findBusinessAdmin/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -262,7 +262,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url: myurl + '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
+							    	url:  '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -302,7 +302,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url: myurl + '/chamber/admin/findBusinessAdminById/' + _this.searchid,
+							url:  '/chamber/admin/findBusinessAdminById/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -316,7 +316,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/chamber/admin/findBusinessAdminById/' + ids,
+						url:  '/chamber/admin/findBusinessAdminById/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -338,7 +338,7 @@
 										v.username = _this.username;
 										v.password = _this.password;
 										$.ajax({
-											url: myurl + '/chamber/admin/updateBusinessAdmin',
+											url:  '/chamber/admin/updateBusinessAdmin',
 											type: 'PUT',
 											contentType: 'application/json',
 											headers: {
@@ -373,7 +373,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/chamber/admin/deleteBusinessAdminById/' + ids,
+						url:  '/chamber/admin/deleteBusinessAdminById/' + ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,

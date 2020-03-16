@@ -11,4 +11,6 @@ public interface BannerService {
     void delete(long id);
 
     List<ShoppingBanner> search();
+
+    ShoppingBanner findById(long id);
 }

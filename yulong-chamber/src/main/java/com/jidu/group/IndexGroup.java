@@ -21,4 +21,6 @@ public class IndexGroup {
     private BigDecimal withdrawal;
     @ApiModelProperty(value = "推荐商户数")
     private Integer recommend;
+    @ApiModelProperty(value = "用户名")
+    private String userName;
 }

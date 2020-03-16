@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 /**
  * @Author: liguanghui
- * Date: 2020/3/13 0013 下午 7:54
+ * Date: 2020/3/15 0015 下午 11:27
  * @Version:
  * @Description:
  */
@@ -21,10 +21,12 @@ public class LocalServiceStore {
     private Integer id;
     @ApiModelProperty(value = "名称")
     private  String name;
-    @ApiModelProperty(value = "log")
+    @ApiModelProperty(value = "img")
     private  String img;
-    @ApiModelProperty(value = "本地服务id")
-    private  int serviceId;
-    @ApiModelProperty(value = "介绍")
+    @ApiModelProperty(value = "服务id")
+    private  String serviceId;
+    @ApiModelProperty(value = "introduce")
     private  String introduce;
+    @ApiModelProperty(value = "地址")
+    private  String address;
 }

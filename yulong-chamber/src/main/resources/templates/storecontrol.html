@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -72,7 +72,7 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="platform-notice.html"><em>公告</em></a>
@@ -106,13 +106,10 @@
 								<a href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
 							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
+								<a class="" href="active-person.html"><em>报名人员列表</em></a>
 							</li>
 						</ul>
 					</li>
@@ -156,25 +153,21 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>所属商会ID</th>
+											<!-- <th>添加时间</th> -->
+											<!-- <th>所属商会ID</th> -->
 											<th>logo</th>
-											<th>商户商家ID</th>
-											<th>商户地址</th>
-											<th>商户信用值</th>
-											<th>商户简介</th>
-											<th>商户信息</th>
-											<th>关键字</th>
+											<!-- <th>商户简介</th> -->
+											<!-- <th>商户信息</th> -->
+											<th>行业</th>
 											<th>商户名称</th>
 											<th>商户店家</th>
 											<th>是否推荐</th>
-											<th>推荐时间</th>
+											<!-- <th>推荐时间</th> -->
 											<th>商户状态</th>
 											<th>是否审核</th>
 											<th>审核时间</th>
-											<th>原因</th>
-											<th>电话</th>
-											<th>QQ</th>
+											<!-- <th>原因</th> -->
+											<!-- <th>电话</th> -->
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -182,14 +175,11 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime ? item.addtime : '未设置'}}</td>
-											<td>{{item.chamberId}}</td>
+											<!-- <td>{{item.addtime ? item.addtime : '未设置'}}</td> -->
+											<!-- <td>{{item.chamberId}}</td> -->
 											<td><a class="btn btn-blue" @click="lookat(item.logo,'img')">预览</a></td>
-											<td>{{item.owerId}}</td>
-											<td>{{item.storeAddress}}</td>
-											<td>{{item.storeCredit}}</td>
-											<td>{{item.storeInfo}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.storeDescription)">预览</a></td>
+											<!-- <td>{{item.storeInfo}}</td> -->
+											<!-- <td><a class="btn btn-blue" @click="lookat(item.storeDescription)">预览</a></td> -->
 											<td>{{item.storeKeywords}}</td>
 											<td>{{item.storeName}}</td>
 											<td>{{item.storeOwer}}</td>
@@ -197,11 +187,11 @@
 											<td>{{item.storeRecommendTime ? item.storeRecommendTime : '未设置'}}</td>
 											<td>{{item.storeStatus | fstatus}}</td>
 											<td>{{item.validity ? '是' : '否'}}</td>
-											<td>{{item.validityTime ? item.validityTime : '未设置'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.violationReseaon)">查看</a></td>
-											<td>{{item.storeTelephone}}</td>
-											<td>{{item.storeQq}}</td>
+											<!-- <td>{{item.validityTime ? item.validityTime : '未设置'}}</td> -->
+											<!-- <td><a class="btn btn-blue" @click="lookat(item.violationReseaon)">查看</a></td> -->
+											<!-- <td>{{item.storeTelephone}}</td> -->
 											<td>
+												<a class="btn btn-blue btn-sm" @click="looklook(item.chamberId,item.storeInfo,item.violationReseaon,item.storeTelephone)">更多信息</a>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id)">推荐</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">取消推荐</a>
 											</td>
@@ -209,14 +199,9 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime ? searchList.addtime.split('T')[0] : '未设置'}}</td>
-											<td>{{searchList.chamberId}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.logo,'img')">预览</a></td>
-											<td>{{searchList.owerId}}</td>
-											<td>{{searchList.storeAddress}}</td>
-											<td>{{searchList.storeCredit}}</td>
-											<td>{{searchList.storeInfo}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.storeDescription)">预览</a></td>
+											<td><a class="btn btn-blue" @click="lookat(item.logo,'img')">预览</a></td>
+											<!-- <td>{{item.storeInfo}}</td> -->
+											<!-- <td><a class="btn btn-blue" @click="lookat(item.storeDescription)">预览</a></td> -->
 											<td>{{searchList.storeKeywords}}</td>
 											<td>{{searchList.storeName}}</td>
 											<td>{{searchList.storeOwer}}</td>
@@ -224,11 +209,8 @@
 											<td>{{searchList.storeRecommendTime ? searchList.storeRecommendTime : '未设置'}}</td>
 											<td>{{searchList.storeStatus | fstatus}}</td>
 											<td>{{searchList.validity ? '是' : '否'}}</td>
-											<td>{{searchList.validityTime ? searchList.validityTime : '未设置'}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.violationReseaon)">查看</a></td>
-											<td>{{searchList.storeTelephone}}</td>
-											<td>{{searchList.storeQq}}</td>
 											<td>
+												<a class="btn btn-blue btn-sm" @click="looklook(searchList.chamberId,searchList.storeInfo,searchList.violationReseaon,searchList.storeTelephone)">更多信息</a>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id)">推荐</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">取消推荐</a>
 											</td>
@@ -249,7 +231,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -274,7 +256,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/chamber/recommend/1/10',
+				url:  '/chamber/recommend/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -290,7 +272,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: myurl + '/chamber/recommend/'+obj.curr+'/10',
+						    	url:  '/chamber/recommend/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -332,7 +314,7 @@
 				if(tys == 'all') {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/chamber/recommend/noRecommend',
+						url:  '/chamber/recommend/noRecommend',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -348,7 +330,7 @@
 					} else {
 						_this.issearch = true;
 						// $.ajax({
-						// 	url: myurl + '/chamber/recommend/recommend/' + _this.searchid,
+						// 	url:  '/chamber/recommend/recommend/' + _this.searchid,
 						// 	type: 'GET',
 						// 	headers: {
 						// 		'Authorization': sessionid,
@@ -364,8 +346,8 @@
 			edit(ids,storeids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/recommend/recommend/' + ids,
-					type: 'delete',
+					url:  '/chamber/recommend/recommend/' + ids,
+					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
@@ -380,7 +362,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/chamber/recommend/cancelRecommend/' + ids,
+					url:  '/chamber/recommend/cancelRecommend/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -401,7 +383,7 @@
 					  layer.open({
 					    type: 1, 
 						title:'内容',
-					    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+					    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 						area: 'auto'
 					  });
 				  }else {
@@ -412,8 +394,51 @@
 						area: 'auto'
 					  });
 				  }
-				  
 				}); 
+			},
+			looklook(addtime,addpeople,addrId,goodsId,finishtime) {
+				var divs = `<div class="block-con col-xs-12" id="moreMsg">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">所属商会ID</span>
+									<div class="col-md-10 col-xs-12">
+										${addtime}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">商户简介</span>
+									<div class="col-md-10 col-xs-12">
+										${addpeople}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">商户信息</span>
+									<div class="col-md-10 col-xs-12">
+										${addrId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">原因</span>
+									<div class="col-md-10 col-xs-12">
+										${goodsId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">电话</span>
+									<div class="col-md-10 col-xs-12">
+										${finishtime}
+									</div>
+								</label>
+							</div>`;
+				layui.use('layer',function() {
+					var layer = layui.layer;
+					
+					layer.open({
+						type:1,
+						title:'更多信息',
+						content:divs,
+						area:'device-width'
+					})
+				})
 			}
 		}
 	})

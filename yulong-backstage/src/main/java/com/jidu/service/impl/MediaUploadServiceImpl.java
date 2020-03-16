@@ -308,6 +308,8 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         mediaFile.setFileId(fileMd5);
         mediaFile.setFileOriginalName(fileName);
         mediaFile.setFileName(fileMd5 + "." + fileExt);
+        mp4_video_path=mp4_video_path.replaceAll("/yulong/","");
+        mp4_video_path="http://39.96.95.40:8080/"+mp4_video_path;
         mediaFile.setFilePath(mp4_video_path);
         mediaFile.setFileSize(fileSize);
         mediaFile.setUploadTime(new Date());

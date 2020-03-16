@@ -217,46 +217,13 @@
 					  </li>
 					</ul>  
 				</div>
-				<!-- 更多信息弹窗 -->
-				<div class="block-con col-xs-12 displaynone" id="moreMsg">
-					<label class="col-md-12 col-xs-12">
-						<span class="col-md-1_5 col-xs-12">地址ID</span>
-						<div class="col-md-10_5 col-xs-12">
-							{{moreMsg.addrId}}
-						</div>
-					</label>
-					<label class="col-md-12 col-xs-12">
-						<span class="col-md-1_5 col-xs-12">商品ID</span>
-						<div class="col-md-10_5 col-xs-12">
-							{{moreMsg.goodsId}}
-						</div>
-					</label>
-					<label class="col-md-12 col-xs-12">
-						<span class="col-md-1_5 col-xs-12">完成时间</span>
-						<div class="col-md-10_5 col-xs-12">
-							{{moreMsg.finishtime}}
-						</div>
-					</label>
-					<label class="col-md-12 col-xs-12">
-						<span class="col-md-1_5 col-xs-12">买家留言</span>
-						<div class="col-md-10_5 col-xs-12" v-html="moreMsg.payMsg">
-							
-						</div>
-					</label>
-					<label class="col-md-12 col-xs-12">
-						<span class="col-md-1_5 col-xs-12">支付时间</span>
-						<div class="col-md-10_5 col-xs-12">
-							{{moreMsg.paytime}}
-						</div>
-					</label>
-				</div>
 			</div>
 			<!-- /. PAGE WRAPPER  -->
 		</div>
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 
 </body>
@@ -283,7 +250,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/order/findByStoreId/1/10',
+				url:  '/business/order/findByStoreId/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -301,7 +268,7 @@
 								,
 							jump: function(obj, first) {
 								$.ajax({
-									url: myurl + '/business/order/findByStoreId/' + obj.curr + '/10',
+									url:  '/business/order/findByStoreId/' + obj.curr + '/10',
 									type: 'GET',
 									headers: {
 										'Authorization': sessionid,
@@ -347,7 +314,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/order/' + _this.searchid + '/',
+						url:  '/business/order/' + _this.searchid + '/',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -368,7 +335,7 @@
 				}, function(index, layero){
 				  //按钮【按钮一】的回调
 				  $.ajax({
-				  	url: myurl + '/business/order/' + ids + '/',
+				  	url:  '/business/order/' + ids + '/',
 				  	type: 'DELETE',
 				  	headers: {
 				  		'Authorization': sessionid,
@@ -386,25 +353,6 @@
 				});
 				return
 				
-			},
-			looklook(addrId,goodsId,finishtime,payMsg,paytime) {
-				this.moreMsg = {
-					"addrId":addrId,
-					"goodsId":goodsId,
-					"finishtime":finishtime,
-					"payMsg":payMsg,
-					"paytime":paytime,
-				}
-				layui.use('layer',function() {
-					var layer = layui.layer;
-					
-					layer.open({
-						type:1,
-						title:'更多信息',
-						content:$('#moreMsg'),
-						area:'device-width'
-					})
-				})
 			},
 			looks(ids,stats) {
 				// 查看物流
@@ -425,13 +373,18 @@
 					})
 				}else {
 					$.ajax({
-						url: myurl + '/business/order/findLogisticsByOrderId/' + ids,
+						url:  '/business/order/findLogisticsByOrderId/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
 						},
 						success: (res) => {
+							if(!res.data) {
+								layer.msg('暂无物流信息')
+								return
+							}
 							_this.msgs = res.data.Traces;
+							
 							layer.open({
 								type:1,
 								title:'物流信息',
@@ -444,6 +397,51 @@
 					})
 				}
 				
+			},
+			looklook(addrId,goodsId,finishtime,payMsg,paytime) {
+				var divs = `<div class="block-con col-xs-12" id="moreMsg">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">地址ID</span>
+									<div class="col-md-10 col-xs-12">
+										${addrId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">商品ID</span>
+									<div class="col-md-10 col-xs-12">
+										${goodsId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">完成时间</span>
+									<div class="col-md-10 col-xs-12">
+										${finishtime}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">买家留言</span>
+									<div class="col-md-10 col-xs-12" v-html="${payMsg}">
+										
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">支付时间</span>
+									<div class="col-md-10 col-xs-12">
+										${paytime}
+									</div>
+								</label>
+							</div>`;
+				layui.use('layer',function() {
+					var layer = layui.layer;
+					
+					layer.open({
+						type:1,
+						title:'更多信息',
+						content:divs,
+						area:'device-width'
+					})
+				})
+			
 			}
 		}
 	})

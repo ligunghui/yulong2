@@ -50,7 +50,7 @@ public class StoreController extends BusinessBaseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商户")
-    @RequiresPermissions(value = "delete-store")
+    //@RequiresPermissions(value = "delete-store")
     public Result delete(@PathVariable String id) {
         storeService.delete(id);
         return new Result(ResultCode.SUCCESS);
@@ -90,7 +90,7 @@ public class StoreController extends BusinessBaseController {
         BusinessAdmin businessAdmins= storeService.findBusinessAdminById(id);
         return new Result(ResultCode.SUCCESS,businessAdmins);
     }
-    @RequestMapping(value = "/deleteBusinessAdminById/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteBusinessAdminById/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除单个商户管理员")
     public Result deleteBusinessAdminById(@PathVariable int id) {
        storeService.deleteBusinessAdminById(id);

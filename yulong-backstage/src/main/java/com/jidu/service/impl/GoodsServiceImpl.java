@@ -30,7 +30,7 @@ public class GoodsServiceImpl implements GoodsService {
         shoppingGoods.setSurplusNum(shoppingGoods.getTotalNum());
         shoppingGoods.setSaleNum(0);
         shoppingGoods.setDeletestatus(false);
-        shoppingGoods.setOnsale(1);
+        //shoppingGoods.setOnsale(1);
         goodsMapper.insert(shoppingGoods);
     }
 

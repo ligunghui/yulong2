@@ -140,7 +140,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">LOGO</span>
 									<div class="col-md-10_5 col-xs-12">
-										<img :src="bannerList.logo" />
+										<img :src="bannerList.logo" style="max-width: 200px;"/>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
@@ -197,7 +197,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 
@@ -229,7 +229,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/store',
+					url:  '/business/store',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -249,7 +249,7 @@
 						title: '提示'
 					}, function(index, layero) {
 						$.ajax({
-							url: myurl + '/business/store/' + ids,
+							url:  '/business/store/' + ids,
 							type: 'DELETE',
 							headers: {
 								'Authorization': sessionid,

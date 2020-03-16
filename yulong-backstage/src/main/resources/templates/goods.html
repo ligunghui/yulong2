@@ -70,9 +70,6 @@
 								<a href="ads.html"><em>APP广告页管理</em></a>
 							</li>
 							<li>
-								<a href="card.html"><em>玉龙卡管理</em></a>
-							</li>
-							<li>
 								<a href="user-rate.html"><em>会员等级管理</em></a>
 							</li>
 							<li>
@@ -114,6 +111,12 @@
 							<li>
 								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
 							</li>
+							<li>
+								<a href="gift.html"><em>礼包专区</em></a>
+							</li>
+							<li>
+								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+							</li>
 						</ul>
 					</li>
 					<li>
@@ -148,9 +151,6 @@
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
 							</li>
-							<li>
-								<a href="user-apply.html"><em>个人入会申请</em></a>
-							</li>
 						</ul>
 					</li>
 					<li class="">
@@ -181,6 +181,9 @@
 							</li>
 						</ul>
 					</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
 					<li>
 						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -207,23 +210,23 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="#">商品管理</a></a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="#">商品列表管理</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>商品管理</p>
+						<p>商品列表管理</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="goods-edit.html?id=add">新增</a>
-								<div class="btn-group pull-right">
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询商品" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 
 						</div>
@@ -234,7 +237,7 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
+											<!-- <th>添加时间</th> -->
 											<th>运费</th>
 											<th>是否推荐到首页</th>
 											<th>商品图片</th>
@@ -243,10 +246,10 @@
 											<th>会员价</th>
 											<th>商品名称</th>
 											<th>是否上架</th>
-											<th>商铺价格</th>
+											<!-- <th>商铺价格</th> -->
 											<th>剩余数量</th>
 											<th>总量</th>
-                                            <th>类型ID</th>
+                                            <th>类型</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -254,7 +257,7 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
 											<td>{{item.goodsWeight}}</td>
 											<td>{{item.homePage ? '是' : '否'}}</td>
 											<td><a class="colorblue" @click="lookat(item.img,'img3')">【预览】</a></td>
@@ -263,8 +266,8 @@
 											<td>{{item.memberPrice}}</td>
 											<td>{{item.name}}</td>
 											<td>{{item.onsale ? '下架' : '上架'}}</td>
-											<td>{{item.saleNum}}</td>
-											<td>{{item.sellerTime}}</td>
+											<!-- <td>{{item.saleNum}}</td> -->
+											<td>{{item.surplusNum}}</td>
 											<td>{{item.totalNum}}</td>
                                             <td>{{item.typeId | ftype}}</td>
 											<td>
@@ -275,20 +278,19 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
+											<!-- <td>{{searchList.addtime}}</td> -->
 											<td>{{searchList.goodsWeight}}</td>
 											<td>{{searchList.homePage ? '是' : '否'}}</td>
-											<td><img :src="searchList.img" ></td>
+											<td><a class="colorblue" @click="lookat(searchList.img,'img3')">【预览】</a></td>
 											<td>{{searchList.isNew ? '是' : '否'}}</td>
-											<td>{{searchList.markPrice}}</td>
+											<td>{{searchList.markePrice}}</td>
 											<td>{{searchList.memberPrice}}</td>
 											<td>{{searchList.name}}</td>
 											<td>{{searchList.onsale ? '下架' : '上架'}}</td>
-											<td>{{searchList.saleNum}}</td>
-											<td>{{searchList.sellerTime}}</td>
-											<td>{{searchList.storeId}}</td>
-											<td>{{searchList.storeName}}</td>
+											<!-- <td>{{searchList.saleNum}}</td> -->
+											<td>{{searchList.surplusNum}}</td>
 											<td>{{searchList.totalNum}}</td>
+											<td>{{searchList.typeId | ftype}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
@@ -317,7 +319,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -403,7 +405,7 @@
 				if (!_this.searchid) {
 					_this.issearch = false
 				} else {
-					_this.issearch = true;
+					
 					$.ajax({
 						url:  '/backstage/goods/' + _this.searchid,
 						type: 'GET',
@@ -412,6 +414,7 @@
 						},
 						success: (res) => {
 							_this.searchList = res.data
+							_this.issearch = true;
 						}
 					})
 				}

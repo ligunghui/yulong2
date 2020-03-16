@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -107,14 +107,9 @@
 								<a href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -135,7 +130,7 @@
 				</div>
 				<!-- /. ROW  -->
 				<div class="row">
-					<div class="col-md-7 lgcontent">
+					<div class="col-md-12 lgcontent">
 						<h2 class="marginBottom20">今日，</h2>
 						<p>{{mytimes}}，欢迎您回到智汇玉龙管理中心。</p>
 						<p class="marginBottom27">温馨提示：您当前正处于<a href="javascript:;" style="color: #b84500;"> 商会端 </a>后台。</p>
@@ -143,37 +138,37 @@
 							<a class="btn btn-warning btn-paddinglr marginLeft20" href="javascript:;" role="button">购买</a> -->
 					</div>
 		
-					<div class="col-md-5">
+					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="col-md-12 index-msg">
 									<div class="col-md-4" style="background: #00bc3e;"><img src="assets/img/index-01.png"></div>
 									<div class="col-md-8">
-										<p style="color: #00bc3e;">本月收益</p>
-										<p>{{bannerList.goodsTotal}}</p>
+										<p style="color: #00bc3e;">历史收益</p>
+										<p>{{bannerList.historyProfit}}</p>
 									</div>
 								</div>
 								<div class="col-md-12 index-msg">
 									<div class="col-md-4" style="background: #0098f0;"><img src="assets/img/index-02.png"></div>
 									<div class="col-md-8">
-										<p style="color: #0098f0;">历史总收益</p>
-										<p>{{bannerList.newGoods}}</p>
+										<p style="color: #0098f0;">本月收益</p>
+										<p>{{bannerList.monthProfit}}</p>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="col-md-12 index-msg">
 									<div class="col-md-4" style="background: #f06600;"><img src="assets/img/index-01.png"></div>
 									<div class="col-md-8">
-										<p style="color: #f06600;">收益提现总数</p>
-										<p>{{bannerList.goodsTotal}}</p>
+										<p style="color: #f06600;">推荐商户数</p>
+										<p>{{bannerList.recommend}}</p>
 									</div>
 								</div>
 								<div class="col-md-12 index-msg">
 									<div class="col-md-4" style="background: #92cf00;"><img src="assets/img/index-02.png"></div>
 									<div class="col-md-8">
-										<p style="color: #92cf00;">推荐商户数</p>
-										<p>{{bannerList.newGoods}}</p>
+										<p style="color: #92cf00;">可提现金额</p>
+										<p>{{bannerList.withdrawal}}</p>
 									</div>
 								</div>
 							</div>
@@ -194,17 +189,17 @@
 							</div>
 						</div>
 					</div> -->
-					<div class="col-md-6 col-xs-12 pull-right tit-right">
+					<!-- <div class="col-md-6 col-xs-12 pull-right tit-right">
 						<p class="col-xs-12"><img src="assets/img/images/index-05_03.png" alt="">订单数量（件）</p>
-						<!-- <p class="col-xs-12"><img src="assets/img/images/index-06_03.png">实时预测（人）</p> -->
-					</div>
+						<p class="col-xs-12"><img src="assets/img/images/index-06_03.png">实时预测（人）</p>
+					</div> -->
 				</div>
 				<!-- /. ROW  -->
-				<div class="row index-table">
+				<!-- <div class="row index-table">
 					<div id="zxBox" class="img-con" style="width: 100%;height: 500px;">
 					</div>
 		
-				</div>
+				</div> -->
 				<!-- /. PAGE INNER  -->
 			</div>
 			<!-- /. PAGE WRAPPER  -->
@@ -212,7 +207,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -255,19 +250,16 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url: myurl + '/business/home',
+						url:  '/chamber/index/index',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
 						},
 						success: (res) => {
 							_this.bannerList = res.data
-							res.data.sevenOrders.forEach(function(i) {
-								_this.echartList.name.push(i.name)
-								_this.echartList.value.push(i.value)
-							})
+							
 							localStorage.setItem('userName',res.data.userName)
-							_this.myechart(_this.echartList.name,_this.echartList.value)
+							// _this.myechart(_this.echartList.name,_this.echartList.value)
 						}
 					})
 					

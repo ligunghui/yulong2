@@ -21,4 +21,6 @@ public interface LocalServiceService {
     List<LocalService> search();
 
     List<LocalServiceStore> findByServiceId(Integer serviceId);
+
+    void delete(Integer id);
 }

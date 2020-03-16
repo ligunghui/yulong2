@@ -125,7 +125,7 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="store-kind-edit.html?id=add">新增栏目</a>
+								<a class="btn btn-blue btn-sm" href="store-kind-add.html?id=add">新增</a>
 								<div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
@@ -141,7 +141,7 @@
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
 											<th>名称</th>
-											<th>一级分类</th>
+											<!-- <th>一级分类</th> -->
 											<th>商铺ID</th>
 											<th>操作</th>
 										</tr>
@@ -151,7 +151,7 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
 											<td>{{item.name}}</td>
-											<td>{{item.type == 0 ? '普通' : item.type ? '平台自营' : item.type == 2 ? '家乡特产' : item.type == 3 ? '礼包专区' : '新人专区'}}</td>
+											<!-- <td>{{item.type == 0 ? '普通' : item.type ? '平台自营' : item.type == 2 ? '家乡特产' : item.type == 3 ? '礼包专区' : '新人专区'}}</td> -->
 											<td>{{item.storeId}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
@@ -162,7 +162,7 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
 											<td>{{searchList.name}}</td>
-											<td>{{searchList.type == 0 ? '普通' : searchList.type ? '平台自营' : searchList.type == 2 ? '家乡特产' : searchList.type == 3 ? '礼包专区' : '新人专区'}}</td>
+											<!-- <td>{{searchList.type == 0 ? '普通' : searchList.type ? '平台自营' : searchList.type == 2 ? '家乡特产' : searchList.type == 3 ? '礼包专区' : '新人专区'}}</td> -->
 											<td>{{searchList.storeId}}</td>
 											<td>
 												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
@@ -189,7 +189,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -214,7 +214,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/goodsType/1/10',
+				url:  '/business/goodsType/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -230,7 +230,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: myurl + '/business/goodsType/'+obj.curr+'/10',
+						    	url:  '/business/goodsType/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -261,7 +261,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/goodsType/' + _this.searchid,
+						url:  '/business/goodsType/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -273,65 +273,12 @@
 				}
 			},
 			edit(ids,storeids) {
-				let _this = this;
-				$.ajax({
-					url: myurl + '/business/goodsType/' + ids,
-					type: 'GET',
-					headers: {
-						'Authorization': sessionid,
-					},
-					success: (res) => {
-						_this.editTxt = res.data.name;
-						let v = res.data;
-						layui.use('layer', function(){
-						  var layer = layui.layer;
-						  
-						  layer.open({
-						    type: 1, 
-							title:'内容',
-						    content: $('#popedit') ,//这里content是一个普通的String
-							area: 'auto',
-							btn: ['确定', '取消'],
-							yes: function(index, layero){
-							    //按钮【按钮一】的回调
-								v.name = _this.editTxt;
-								layer.close(index)
-								$('#popedit').hide()
-								
-								$.ajax({
-									url: myurl + '/business/goodsType',
-									type: 'PUT',
-									contentType: 'application/json',
-									headers: {
-										'Authorization': sessionid,
-									},
-									dataType: 'json',
-									data: JSON.stringify(v),
-									success: (res) => {
-										layer.msg(res.message)
-										if(res.code == 10000) {
-											window.location.reload()
-										}
-									},
-									fail: (err) => {
-										layer.msg(err.message)
-									}
-								})
-							  }
-							  ,cancel: function(){ 
-							    //右上角关闭回调
-							    
-							    //return false 开启该代码可禁止点击该按钮关闭
-							  }
-						  });
-						}); 
-					}
-				})
+				window.location.href = "store-kind-edit.html?id="+ids;
 			},
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/goodsType/' + ids,
+					url:  '/business/goodsType/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,

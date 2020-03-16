@@ -19,26 +19,26 @@ import java.util.List;
 @Service
 public class BusinessAdminImpl implements BusinessAdminService {
     @Autowired
-    private BusinessAdminMapper businessAdminMapper;
+    private BusinessAdminMapper chamberAdminMapper;
 
     @Override
-    public void updateBusinessAdmin(BusinessAdmin businessAdmin) {
-        String password = businessAdmin.getPassword();
-        String username = businessAdmin.getUsername();
+    public void updateBusinessAdmin(BusinessAdmin chamberAdmin) {
+        String password = chamberAdmin.getPassword();
+        String username = chamberAdmin.getUsername();
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
-        businessAdmin.setPassword(password);
-        businessAdminMapper.updateByPrimaryKeySelective(businessAdmin);
+        chamberAdmin.setPassword(password);
+        chamberAdminMapper.updateByPrimaryKeySelective(chamberAdmin);
     }
 
     @Override
-    public void addBusinessAdmin(BusinessAdmin businessAdmin) {
-        String password = businessAdmin.getPassword();
-        String username = businessAdmin.getUsername();
+    public void addBusinessAdmin(BusinessAdmin chamberAdmin) {
+        String password = chamberAdmin.getPassword();
+        String username = chamberAdmin.getUsername();
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
-        businessAdmin.setPassword(password);
-        //businessAdmin.setType(3);
-        //businessAdmin.setUseable(1);
-        businessAdminMapper.insert(businessAdmin);
+        chamberAdmin.setPassword(password);
+        //chamberAdmin.setType(3);
+        //chamberAdmin.setUseable(1);
+        chamberAdminMapper.insert(chamberAdmin);
     }
 
     @Override
@@ -46,17 +46,17 @@ public class BusinessAdminImpl implements BusinessAdminService {
         Example example = new Example(BusinessAdmin.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("storeId", storeId);
-        return businessAdminMapper.selectByExample(example);
+        return chamberAdminMapper.selectByExample(example);
     }
 
     @Override
     public BusinessAdmin findBusinessAdminById(int id) {
-        return businessAdminMapper.selectByPrimaryKey(id);
+        return chamberAdminMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public void deleteBusinessAdminById(int id) {
-        businessAdminMapper.deleteByPrimaryKey(id);
+        chamberAdminMapper.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -64,6 +64,6 @@ public class BusinessAdminImpl implements BusinessAdminService {
         Example example = new Example(BusinessAdmin.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("username", username);
-        return businessAdminMapper.selectByExample(example);
+        return chamberAdminMapper.selectByExample(example);
     }
 }

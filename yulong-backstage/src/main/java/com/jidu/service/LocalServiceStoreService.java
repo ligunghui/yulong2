@@ -18,4 +18,6 @@ public interface LocalServiceStoreService {
     void add(LocalServiceStore localServiceStore);
 
     void update(LocalServiceStore localServiceStore);
+
+    void delete(Integer id);
 }

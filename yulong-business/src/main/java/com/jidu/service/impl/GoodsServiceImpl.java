@@ -25,7 +25,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void save(ShoppingGoods shoppingGoods) {
         shoppingGoods.setAddtime(new Date());
-       // System.out.println(shoppingGoods.getTotalNum());
+       //System.out.println(shoppingGoods.getTotalNum());
         shoppingGoods.setSurplusNum(shoppingGoods.getTotalNum());
         shoppingGoods.setSaleNum(0);
         shoppingGoods.setDeletestatus(false);

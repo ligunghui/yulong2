@@ -21,9 +21,11 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     @Autowired
     private GoodsTypeMapper goodsTypeMapper;
     @Override
-    public void save(String id, GoodsType goodsType) {
+    public Integer save(String id, GoodsType goodsType) {
        goodsType.setStoreId(id);
        goodsTypeMapper.insert(goodsType);
+        Integer id1 = goodsType.getId();
+        return id1;
     }
 
     @Override

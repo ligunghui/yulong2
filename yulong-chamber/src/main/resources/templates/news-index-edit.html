@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -73,7 +73,7 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>平台公告</em><span class="fa arrow"></span></a>
+						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="platform-notice.html"><em>公告</em></a>
@@ -107,14 +107,9 @@
 								<a class="active-menu" href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -167,18 +162,6 @@
 										<input class="displaynone switch" type="text" name="isopen" ref="display"/>
 									</div>
 								</label>
-								<label class="layui-inline col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">开始时间</span>
-									<div class="layui-input-inline col-md-4 col-xs-12">
-										<input type="text" class="layui-input" id="startTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='starttime'>
-									</div>
-								</label>
-								<label class="layui-inline col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">结束时间</span>
-									<div class="layui-input-inline col-md-4 col-xs-12">
-										<input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='endtime'>
-									</div>
-								</label>
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">封面图</span>
 									<div class="col-md-10_5 col-xs-12">
@@ -227,7 +210,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -253,12 +236,10 @@
 					ids:'',
 					context:null,//内容
 					display:'',//是否可见 1是0否
-					endtime:'',
 					headPic:'',//封面图
 					homePage:'',//是否推荐到首页 1是0否
 					name:'',
 					sordOrder:'',//排序
-					starttime:'',
 					subheading:''//副标题
 				},
 				created() {
@@ -266,7 +247,7 @@
 					_this.ids = window.location.href.split('=')[1];
 					if(_this.ids != 'add') {
 						$.ajax({
-							url: myurl + '/chamber/activity/' + _this.ids,
+							url:  '/chamber/activity/' + _this.ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -276,8 +257,6 @@
 								_this.$nextTick(() => {
 									// 设置HTML内容
 									window.editor.html(_this.bannerList.context);
-									_this.endtime = _this.bannerList.endtime;
-									_this.$refs.endTime = _this.bannerList.endtime;
 									_this.headPic = _this.bannerList.headPic;
 									
 									$('.logopath').val(_this.bannerList.headPic)
@@ -311,7 +290,7 @@
 		
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url: myurl + '/upload/upload',
+							url:  '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -347,7 +326,7 @@
 						});
 						var uploadInst2 = upload.render({
 							elem: '#uploadlogo2',
-							url: myurl + '/upload/upload',
+							url:  '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -389,7 +368,7 @@
 						window.editor = K.create('#editor_id', {
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson: myurl + '/Kindeditor/uploadFile',
+							uploadJson:  '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -414,12 +393,10 @@
 							v = {
 							  "context": "string",
 							  "display": 0,
-							  "endtime": "2020-03-09T05:41:01.473Z",
 							  "headPic": "string",
 							  "homePage": 0,
 							  "name": "string",
 							  "sordOrder": 0,
-							  "starttime": "2020-03-09T05:41:01.473Z",
 							  "subheading": "string",
 							  "type": "string"
 							}
@@ -430,8 +407,6 @@
 						// 设置HTML内容
 						v.context = window.editor.html();
 						v.display = _this.$refs.display == 'on' ? 1 : 0;
-						v.endtime = _this.$refs.endtime.value;
-						v.starttime = _this.$refs.starttime.value;
 						v.headPic = _this.headPic;
 						v.homePage = _this.$refs.homePage == 'on' ? 1 : 0;
 						v.name = _this.name;
@@ -440,7 +415,7 @@
 						v.type = 1;
 						
 						$.ajax({
-							url: myurl + '/chamber/activity',
+							url:  '/chamber/activity',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {

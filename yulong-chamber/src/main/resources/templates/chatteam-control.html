@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-商会</title>
+	<meta name="Keywords" content="智汇玉龙,商会" />
+	<meta name="Description" content="智汇玉龙商会" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -83,7 +83,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-crcle-o "></i><em>推荐商户管理</em></span></a>
+						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
@@ -106,14 +106,9 @@
 								<a href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="active-public.html"><em>活动信息发布</em></a>
 							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
+							
 						</ul>
 					</li>
 				</ul>
@@ -129,23 +124,23 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台公告</a> > <a href="#">公告显示</a></a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会聊天室管理</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>公告显示</p>
+						<p>商会聊天室管理</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增栏目</a>
-								<div class="btn-group pull-right">
+								<a class="btn btn-blue btn-sm" href="chatteam-control-edit.html?id=add">新增聊天室</a>
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 
 						</div>
@@ -156,42 +151,35 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
-											<th>内容</th>
-											<th>是否显示</th>
-											<th>显示位置</th>
-											<th>创建者ID</th>
-											<th>商户ID</th>
+											<th>名称</th>
+											<th>聊天室类型</th>
+											<th>申请情况</th>
+											<th>群主</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime.split('T')[0]}}</td>
-											<td>{{item.startTime.split('T')[0]}}</td>
-											<td>{{item.endTime.split('T')[0]}}</td>
-											<td v-html="item.content"></td>
-											<td>{{item.display ? '否' : '是'}}</td>
-											<td>{{item.position}}</td>
-											<td>{{item.createId}}</td>
-											<td>{{item.storeId}}</td>
+											<td>{{item.name}}</td>
+											<td>{{item.status | fstatus}}</td>
+											<td>{{item.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
+											<td>{{item.uid ? item.uid : '暂无群主'}}</td>
 											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" :href="'platform-notice-edit.html?id='+item.id">编辑</a>
+												<!-- <a class="btn btn-blue btn-sm" :href="'chatteam-control-edit.html?id='+item.id">编辑</a> -->
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 											</td>
 										</tr>
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime.split('T')[0]}}</td>
-											<td><img :src="searchList.bannerimg"></td>
+											<td>{{searchList.name}}</td>
+											<td>{{searchList.status | fstatus}}</td>
+											<td>{{searchList.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
+											<td>{{searchList.uid ? searchList.uid : '暂无群主'}}</td>
 											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" :href="'platform-notice-edit.html?id='+searchList.id">编辑</a>
+												<!-- <a class="btn btn-blue btn-sm" :href="'chatteam-control-edit.html?id='+searchList.id">编辑</a> -->
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
 											</td>
 										</tr>
@@ -210,7 +198,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -234,7 +222,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/notice/findByStoreId/4',
+				url:  '/chamber/room',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -244,6 +232,19 @@
 				}
 			})
 		},
+		filters:{
+			fstatus(sts) {
+				if(sts == 1) {
+					return '申请中'
+				}else if(sts == 2) {
+					return '申请通过'
+				}else if(sts == 3) {
+					return '申请不通过'
+				}else {
+					return '暂无此状态'
+				}
+			}
+		},
 		methods: {
 			mysearch() {
 				let _this = this;
@@ -252,7 +253,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/notice/' + _this.searchid,
+						url:  '/chamber/notice/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -267,14 +268,14 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/banner/' + ids,
-					type: 'GET',
+					url:  '/chamber/room/' + ids,
+					type: 'DELETE',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						$.ajax({
-							url: myurl + '/business/banner/findByStoreId',
+							url:  '/chamber/room',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -287,48 +288,6 @@
 				})
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

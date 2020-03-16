@@ -71,9 +71,6 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
@@ -115,6 +112,12 @@
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+        					</li>
         				</ul>
         			</li>
         			<li>
@@ -149,9 +152,6 @@
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
-        					</li>
         				</ul>
         			</li>
         			<li class="">
@@ -164,7 +164,7 @@
         						<a href="news-goverment.html"><em>政府资讯</em></a>
         					</li>
         					<li>
-        						<a href="news-culture.html"><em>文化旅游</em></a>
+        						<a class="" href="news-culture.html"><em>文化旅游</em></a>
         					</li>
         					<li>
         						<a href="news-local.html"><em>本地新闻</em></a>
@@ -182,6 +182,9 @@
         					</li>
         				</ul>
         			</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -207,7 +210,7 @@
                     <div class="col-md-12 nav-topdown">
                       <!-- <h1 class="page-head-line">DASHBOARD</h1> -->
                        <!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台信息设置</a> > <a href="#">公告管理</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台基础设置</a> > <a href="#">公告管理</a></p>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -220,10 +223,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="platform-notice-edit.html?id=add">新增</a>
-								<div class="btn-group pull-right">
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 								
 						</div>
@@ -236,8 +239,7 @@
 											<th>ID</th>
 						                    <th>标题</th>
 						                    <th>详情</th>
-						                    <th>修改时间</th>
-						                    <th>展示在首页</th>
+						                    <th>展示位置</th>
 						                    <th>操作</th>
 						                </tr>
 						            </thead>
@@ -247,8 +249,7 @@
 						                    <td>{{item.id}}</td>
 						                    <td>{{item.title}}</td>
 						                    <td><a href="javascript:;" class="btn btn-blue" @click="lookat(item.content)">查看</a></td>
-						                    <td>{{item.startTime}}</td>
-						                    <td>{{item.display ? '否' : '是'}}</td>
+						                    <td>{{item.position | fposition}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(item.id,item.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id,item.storeId)">删除</a>
@@ -259,8 +260,7 @@
 										    <td>{{searchList.id}}</td>
 										    <td>{{searchList.title}}</td>
 										    <td><a href="javascript:;" class="btn btn-blue" @click="lookat(searchList.content)">查看</a></td>
-										    <td>{{searchList.startTime}}</td>
-										    <td>{{searchList.display ? '否' : '是'}}</td>
+										    <td>{{item.position | fposition}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id,searchList.storeId)">删除</a>
@@ -275,8 +275,14 @@
 				
             <!-- /. PAGE INNER  -->
 			<div class="popedit displaynone" id="popedit">
-				<input type="text" v-model="editTit" style="margin: 15px 0;padding: 0 10px;">
-				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-model="editTxt"></textarea>
+				<div class="col-md-12 col-xs-12">
+					<p class="col-md-12 col-xs-12">标题</p>
+					<input type="text" v-model="editTit" style="margin: 15px 0;padding: 0 10px;">
+				</div>
+				<div class="col-md-12 col-xs-12">
+					<p class="col-md-12 col-xs-12">内容</p>
+					<textarea id="editor_id" name="content" v-html="editTxt" style="width: 100%;">&lt;strong&gt;HTML内容&lt;/strong&gt; </textarea>
+				</div>
 			</div>
         </div>
         <!-- /. PAGE WRAPPER  -->
@@ -284,7 +290,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -295,6 +301,8 @@
     <script src="assets/layui/layui.all.js"></script>
     <!-- METISMENU SCRIPTS -->
     <script src="assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/kindeditor-4.1.11-zh-CN/kindeditor-all.js"></script>
+	<script src="assets/kindeditor-4.1.11-zh-CN/lang/zh-CN.js"></script>
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
@@ -328,7 +336,12 @@
 								'Authorization': sessionid,
 							},
 							success: (res) => {
-								_this.bannerList.push(res.data)
+								if(res.data.length){
+									res.data.forEach(function(i) {
+										_this.bannerList.push(i)
+									})
+								}
+								
 							},
 							fail:(res) => {
 							}
@@ -338,13 +351,24 @@
 					}
 				})
 			},
+			filters:{
+				fposition(tys) {
+					if(tys == 2) {
+						return '智汇购'
+					}else if(tys == 3) {
+						return '个人中心'
+					}else {
+						return '首页'
+					}
+				}
+			},
 			methods: {
 				mysearch() {
 					let _this = this;
 					if (!_this.searchid) {
 						_this.issearch = false
 					} else {
-						_this.issearch = true;
+						
 						$.ajax({
 							url:  '/backstage/notice/' + _this.searchid,
 							type: 'GET',
@@ -352,6 +376,7 @@
 								'Authorization': sessionid,
 							},
 							success: (res) => {
+								_this.issearch = true;
 								if(res.data) {
 									if(res.data.type == 1 || res.data.type == 2) {
 										_this.searchList = res.data
@@ -384,7 +409,8 @@
 								btn: ['确定', '取消'],
 								yes: function(index, layero){
 								    //按钮【按钮一】的回调
-									v.content = _this.editTxt;
+									v.content = $('#editor_id').val();
+									v.title = _this.editTit;
 									layer.close(index)
 									$('#popedit').hide()
 									
@@ -410,13 +436,14 @@
 								  }
 								  ,cancel: function(){ 
 								    //右上角关闭回调
-								    
+								    $('#popedit').hide()
 								    //return false 开启该代码可禁止点击该按钮关闭
 								  }
 							  });
 							}); 
 						}
 					})
+					
 				},
 				del(ids) {
 					let _this = this;
@@ -441,7 +468,7 @@
 						if(tys == 'img') {
 							layer.open({
 								type:1,
-								content:`<img src="${cons}" />`
+								content:`<img src="${cons}" style="max-width:300px;"/>`
 							})
 						}else {
 							layui.use('layer',function() {
@@ -455,6 +482,28 @@
 						}
 						
 					})
+				},
+				kindLoad() {
+					// 关闭过滤模式，保留所有标签
+					KindEditor.options.filterMode = false;
+					KindEditor.ready(function (K) {
+					    window.editor = K.create('#editor_id', {
+					        filePostName: "uploadFile",
+					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
+					        uploadJson:  '/Kindeditor/uploadFile',
+					        resizeType: 1,
+					        allowPreviewEmoticons: true,
+					        allowImageUpload: true,
+					        afterBlur: function () {
+					            this.sync();
+					        }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+					        afterUpload: function (url, data, name) { //上传文件后执行的回调函数，必须为3个参数
+					            console.log(url)
+					            console.log(data)
+					        }
+					    });
+						
+					});
 				}
 			}
 		})

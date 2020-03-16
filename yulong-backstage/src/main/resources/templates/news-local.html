@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>智慧玉龙-商会</title>
-	<meta name="Keywords" content="智慧玉龙,商会" />
-	<meta name="Description" content="智慧玉龙商会" />
+	<title>智汇玉龙-管理后台</title>
+	<meta name="Keywords" content="智汇玉龙,管理后台" />
+	<meta name="Description" content="智汇玉龙管理后台" />
 
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -70,9 +70,6 @@
 								<a href="ads.html"><em>APP广告页管理</em></a>
 							</li>
 							<li>
-								<a href="card.html"><em>玉龙卡管理</em></a>
-							</li>
-							<li>
 								<a href="user-rate.html"><em>会员等级管理</em></a>
 							</li>
 							<li>
@@ -114,10 +111,16 @@
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
 							</li>
+							<li>
+								<a href="gift.html"><em>礼包专区</em></a>
+							</li>
+							<li>
+								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -147,9 +150,6 @@
 							</li>
 							<li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-							</li>
-							<li>
-								<a href="user-apply.html"><em>个人入会申请</em></a>
 							</li>
 						</ul>
 					</li>
@@ -181,6 +181,9 @@
 							</li>
 						</ul>
 					</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
 					<li>
 						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -193,7 +196,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
+						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em><span class="fa arrow"></span></a>
 					</li>
 				</ul>
 			</div>
@@ -218,10 +221,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="news-local-edit.html?id=add">新增</a>
-								<div class="btn-group pull-right">
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 					
 						</div>
@@ -232,19 +235,19 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
-											<th>添加人</th>
-											<th>内容</th>
+											<!-- <th>添加时间</th> -->
+											<!-- <th>添加人</th> -->
 											<th>名称</th>
-											<th>副标题</th>
+											<th>内容</th>
+											<!-- <th>副标题</th> -->
 											<th>是否可见</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
+											<!-- <th>开始时间</th> -->
+											<!-- <th>结束时间</th> -->
 											<th>封面图</th>
 											<th>是否推荐到首页</th>
-											<th>排序</th>
-											<th>商户ID</th>
-											<th>商户名称</th>
+											<!-- <th>排序</th> -->
+											<!-- <th>商会ID</th> -->
+											<th>商会名称</th>
 											<th>评论次数</th>
 											<th>观看次数</th>
 											<th>点赞次数</th>
@@ -255,49 +258,50 @@
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
-											<td>{{item.addpeople}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.context,'HTML')">查看</a></td>
 											<td>{{item.name}}</td>
-											<td>{{item.subheadig}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
+											<!-- <td>{{item.addpeople}}</td> -->
+											<td><a class="btn btn-blue" @click="lookat(item.context,'HTML')">查看</a></td>
+											<!-- <td>{{item.subheadig}}</td> -->
 											<td>{{item.display ? '是' : '否'}}</td>
-											<td>{{item.startime}}</td>
-											<td>{{item.endtime}}</td>
+											<!-- <td>{{item.startime}}</td> -->
+											<!-- <td>{{item.endtime}}</td> -->
 											<td><a class="btn btn-blue" @click="lookat(item.headPic,'img')">预览</a></td>
 											<td>{{item.homePage ? '是' : '否'}}</td>
-											<td>{{item.sordOrder}}</td>
-											<td>{{item.storeId}}</td>
+											<!-- <td>{{item.sordOrder}}</td> -->
+											<!-- <td>{{item.storeId}}</td> -->
 											<td>{{item.storeName}}</td>
 											<td>{{item.commentNum}}</td>
 											<td>{{item.seenum}}</td>
 											<td>{{item.thumbsNum}}</td>
 											<td>
-												<a class="btn btn-blue btn-sm" :href="'news-local-edit.html?id='+item.id">编辑</a>
+												<a class="btn btn-blue btn-sm" @click="looklook(item.addtime,item.addpeople,item.subheadig,item.startime,item.endtime,item.sordOrder,item.storeId)">更多信息</a>
+												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+item.id">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 											</td>
 										</tr>
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
-											<td>{{searchList.addpeople}}</td>
-											<td><a class="btn btn-blue" @click="lookat(searchList.context,'HTML')">查看</a></td>
 											<td>{{searchList.name}}</td>
+											<!-- <td>{{searchList.addtime}}</td>
+											<td>{{searchList.addpeople}}</td> -->
+											<td><a class="btn btn-blue" @click="lookat(searchList.context,'HTML')">查看</a></td>
 											<td>{{searchList.subheadig}}</td>
 											<td>{{searchList.display ? '是' : '否'}}</td>
 											<td>{{searchList.startime}}</td>
 											<td>{{searchList.endtime}}</td>
 											<td><a class="btn btn-blue" @click="lookat(searchList.headPic,'img')">预览</a></td>
 											<td>{{searchList.homePage ? '是' : '否'}}</td>
-											<td>{{searchList.sordOrder}}</td>
-											<td>{{searchList.storeId}}</td>
+											<!-- <td>{{searchList.sordOrder}}</td> -->
+											<!-- <td>{{searchList.storeId}}</td> -->
 											<td>{{searchList.storeName}}</td>
 											<td>{{searchList.commentNum}}</td>
 											<td>{{searchList.seenum}}</td>
 											<td>{{searchList.thumbsNum}}</td>
 											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" :href="'news-local-edit.html?id='+searchList.id">编辑</a>
+												<a class="btn btn-blue btn-sm" @click="looklook(searchList.addtime,searchList.addpeople,searchList.subheadig,searchList.startime,searchList.endtime,searchList.sordOrder,searchList.storeId)">更多信息</a>
+												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+searchList.id">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
 											</td>
 										</tr>
@@ -310,13 +314,16 @@
 			</div>
 
 			<!-- /. PAGE INNER  -->
+			<div id="pop" class="displaynone" v-html="editTxt" style="max-width: 100%;">
+				
+			</div>
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -349,7 +356,7 @@
 				success: (res) => {
 					if(res.data) {
 						res.data.forEach(function(i) {
-							if(i.type == 4) {
+							if(i.type == 1) {
 								_this.bannerList.push(i)
 							}
 						})
@@ -406,7 +413,7 @@
 					  layer.open({
 					    type: 1, 
 						title:'内容',
-					    content: '<img src="' + cons + '" />' ,//这里content是一个普通的String
+					    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
 						area: 'auto'
 					  });
 					}); 
@@ -419,8 +426,15 @@
 					    type: 1, 
 						title:'内容',
 					    content: $('#pop') ,//这里content是一个普通的String
-						area: 'auto'
+						area: 'auto',
+						yes:function() {
+							$('#pop').hide()
+						},
+						cancel:function() {
+							$('#pop').hide()
+						}
 					  });
+					  
 					}); 
 				}else {
 					layui.use('layer', function(){
@@ -435,6 +449,62 @@
 					}); 
 				}
 				
+			},
+			looklook(addtime,addpeople,addrId,goodsId,finishtime,payMsg,paytime) {
+				var divs = `<div class="block-con col-xs-12" id="moreMsg">
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">添加时间</span>
+									<div class="col-md-10 col-xs-12">
+										${addtime}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">添加人</span>
+									<div class="col-md-10 col-xs-12">
+										${addpeople}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">副标题</span>
+									<div class="col-md-10 col-xs-12">
+										${addrId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">开始时间</span>
+									<div class="col-md-10 col-xs-12">
+										${goodsId}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">结束时间</span>
+									<div class="col-md-10 col-xs-12">
+										${finishtime}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">排序</span>
+									<div class="col-md-10 col-xs-12">
+										${payMsg}
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-2 col-xs-12">商会ID</span>
+									<div class="col-md-10 col-xs-12">
+										${paytime}
+									</div>
+								</label>
+							</div>`;
+				layui.use('layer',function() {
+					var layer = layui.layer;
+					
+					layer.open({
+						type:1,
+						title:'更多信息',
+						content:divs,
+						area:'device-width'
+					})
+				})
 			}
 		}
 	})

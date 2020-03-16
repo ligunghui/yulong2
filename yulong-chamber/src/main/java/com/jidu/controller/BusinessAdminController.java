@@ -28,25 +28,25 @@ import java.util.List;
 @Api(value = "商会管理员操作", description = "商会管理员操作")
 public class BusinessAdminController extends BusinessBaseController {
     @Autowired
-    private BusinessAdminService businessAdminService;
+    private BusinessAdminService chamberAdminService;
 
     @RequestMapping(value = "/updateBusinessAdmin", method = RequestMethod.PUT)
     @ApiOperation(value = "修改商会管理员用户名 密码")
-    public Result updateBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
-        businessAdminService.updateBusinessAdmin(businessAdmin);
+    public Result updateBusinessAdmin(@RequestBody BusinessAdmin chamberAdmin) {
+        chamberAdminService.updateBusinessAdmin(chamberAdmin);
         return new Result(ResultCode.SUCCESS);
     }
 
     @RequestMapping(value = "/addBusinessAdmin", method = RequestMethod.POST)
     @ApiOperation(value = "添加商会管理员")
-    public Result addBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
-        List<BusinessAdmin> list= businessAdminService.findBusinessAdminByUserName(businessAdmin.getUsername());
+    public Result addBusinessAdmin(@RequestBody BusinessAdmin chamberAdmin) {
+        List<BusinessAdmin> list= chamberAdminService.findBusinessAdminByUserName(chamberAdmin.getUsername());
         if (!list.isEmpty()){
             return new Result(201,"用户名重复",false);
 
         }
-        businessAdmin.setStoreId(storeId);
-        businessAdminService.addBusinessAdmin(businessAdmin);
+        chamberAdmin.setStoreId(storeId);
+        chamberAdminService.addBusinessAdmin(chamberAdmin);
         return new Result(ResultCode.SUCCESS);
     }
 
@@ -58,21 +58,21 @@ public class BusinessAdminController extends BusinessBaseController {
     })
     public PageResult<BusinessAdmin> findBusinessAdmin(@PathVariable int pageNum, @PathVariable int pageSize) {
         Page<BusinessAdmin> page = PageHelper.startPage(pageNum, pageSize);
-        List<BusinessAdmin> businessAdmins = businessAdminService.findBusinessAdmin(storeId);
+        List<BusinessAdmin> chamberAdmins = chamberAdminService.findBusinessAdmin(storeId);
         return new PageResult(page.getTotal(), page.getResult());
     }
 
     @RequestMapping(value = "/findBusinessAdminById/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询单个商会管理员")
     public Result<BusinessAdmin> findBusinessAdminById(@PathVariable int id) {
-        BusinessAdmin businessAdmins = businessAdminService.findBusinessAdminById(id);
-        return new Result(ResultCode.SUCCESS, businessAdmins);
+        BusinessAdmin chamberAdmins = chamberAdminService.findBusinessAdminById(id);
+        return new Result(ResultCode.SUCCESS, chamberAdmins);
     }
 
     @RequestMapping(value = "/deleteBusinessAdminById/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除单个商会管理员")
     public Result deleteBusinessAdminById(@PathVariable int id) {
-        businessAdminService.deleteBusinessAdminById(id);
+        chamberAdminService.deleteBusinessAdminById(id);
         return new Result(ResultCode.SUCCESS);
     }
 }

@@ -124,7 +124,7 @@
 
 					<div class="col-md-12 page-block th-textalign-center marginBottom20">
 						<p>
-							<span class="">现有收益：￥550.00</span>
+							<span class="">现有收益：￥0.00</span>
 							<a class="btn btn-blue btn-sm marginLeft20">提现</a>
 						</p>
 
@@ -136,43 +136,7 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<div class="table-responsive">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th><input type="checkbox" name="" id="" value="" /></th>
-											<th>ID</th>
-											<th>创建时间</th>
-											<th>内容</th>
-											<th>操作</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-if="!issearch" v-for="(item,index) in bannerList">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{item.id}}</td>
-											<td>{{item.addtime.split('T')[0]}}</td>
-											<td><img :src="item.bannerimg"></td>
-											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" :href="'platform-banner-edit.html?id='+item.id">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
-											</td>
-										</tr>
-										<tr v-if="issearch">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime.split('T')[0]}}</td>
-											<td><img :src="searchList.bannerimg"></td>
-											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" :href="'platform-banner-edit.html?id='+searchList.id">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							<h1>暂无数据</h1>
 						</div>
 					</div>
 				</div>
@@ -185,7 +149,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2019 几度CMS版权所有</p>
+		<p>Copyright © 2020 几度互联版权所有</p>
 	</div>
 
 </body>
@@ -209,7 +173,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: myurl + '/business/banner/findByStoreId',
+				url:  '/business/banner/findByStoreId',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -227,7 +191,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url: myurl + '/business/banner/' + _this.searchid,
+						url:  '/business/banner/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -242,14 +206,14 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: myurl + '/business/banner/' + ids,
+					url:  '/business/banner/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						$.ajax({
-							url: myurl + '/business/banner/findByStoreId',
+							url:  '/business/banner/findByStoreId',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,

@@ -114,7 +114,7 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="store-kind.html">商户管理员</a>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="store-control.html">商户管理员</a>
 							> <a href="#">添加商户管理员</a></p>
 					</div>
 				</div>
@@ -152,7 +152,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">管理员类型</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										商户管理
+										商户管理员
 									</div>
 								</label>
 							</div>
@@ -178,7 +178,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2019 几度CMS版权所有</p>
+			<p>Copyright © 2020 几度互联版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -219,12 +219,12 @@
 						_this.useable = _this.$refs.useable.value == 'on' ? 1 : 0;
 						let v = {
 						  "password": _this.password,
-						  "type": _this.typeId,// 0平台总管理员1平台管理2商会管理3商户管理 ,
+						  "type": 3,// 0平台总管理员1平台管理2商会管理3商户管理 ,
 						  "useable": _this.useable,// (是否可用1是0否) ,
 						  "username": _this.username
 						}
 						$.ajax({
-							url: myurl + '/business/store/addBusinessAdmin',
+							url:  '/business/store/addBusinessAdmin',
 							type: 'POST',
 							contentType: 'application/json',
 							headers: {
@@ -235,9 +235,9 @@
 							success: (res) => {
 								layer.msg(res.message)
 								if(res.code == 10000) {
-									setTimeout(function() {
-										window.location.href = 'store-control.html'
-									},1200)
+									// setTimeout(function() {
+									// 	window.location.href = 'store-control.html'
+									// },1200)
 								}
 							},
 							fail: (err) => {

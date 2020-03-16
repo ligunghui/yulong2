@@ -72,9 +72,6 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
@@ -116,6 +113,12 @@
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+        					</li>
         				</ul>
         			</li>
         			<li>
@@ -150,9 +153,6 @@
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
-        					</li>
         				</ul>
         			</li>
         			<li class="">
@@ -183,14 +183,17 @@
         					</li>
         				</ul>
         			</li>
-        			<li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
+        			<li class="active">
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
         						<a href="live.html"><em>直播管理</em></a>
         					</li>
         					<li>
-        						<a href="video.html"><em>点播管理</em></a>
+        						<a class="active-menu" href="video.html"><em>点播管理</em></a>
         					</li>
         				</ul>
         			</li>
@@ -225,51 +228,41 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">视频名称</span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5" type="text" name="name" id="" placeholder="视频名称" lay-verify="required"/>
+										<input class="form-control col-md-5" type="text" name="name" placeholder="视频名称" v-model="name"/>
 										<b class="col-md-8"></b>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">点播封面</span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" placeholder="编辑图片" lay-verify="required"/>
 										<div class="layui-upload col-md-8" id="layerDemo">
-										  <button type="button" class="layui-btn btn-blue chooseimg" id="chooseimg" data-method="notice">选择站内图片</button>
-										  <button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png" >本地上传图片</button>
+											<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">本地上传图片</button>
+										</div>
+										<div class="layui-upload-list col-md-12">
+											<img class="layui-upload-img" id="demo1">
+											<p id="demoText"></p>
 										</div>
 									</div>
                                 </label>
-                                <!-- <label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">上传视频</span>
+                                <label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">点播视频</span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" placeholder="编辑视频" lay-verify="required"/>
-										<div class="layui-upload col-md-8" id="layerDemo">
-										  <button type="button" class="layui-btn btn-blue chooseimg" id="chooseimg" data-method="notice">选择站内视频</button>
-										  <button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png" >本地上传视频</button>
+										<div id="uploader" class="wu-example">
+										  <div class="btns" style="float:left;padding-right: 20px">
+										    <div id="picker">选择文件</div>
+										  </div>
+										  <div id="ctlBtn" class="webuploader-pick" @click="upload()">开始上传</div>
+										
+										</div>
+										<!--用来存放文件信息-->
+										<div id="thelist" class="uploader-list" >
+										  <div v-if="uploadFile.id" :id='uploadFile.id'><span>{{uploadFile.name}}</span>&nbsp;<span class='percentage'>{{percentage}}%</span></div>
+										
 										</div>
 									</div>
-                                </label> -->
-                                <label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">排序</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5" type="text" name="domainName" id="" value="1" lay-verify="required"/>
-										<b class="col-md-8"></b>
-									</div>
-								</label>
+                                </label>
 							</div>
 							
-							<div id="uploader" class="wu-example">
-							  <div class="btns" style="float:left;padding-right: 20px">
-							    <div id="picker">选择文件</div>
-							  </div>
-							  <div id="ctlBtn" class="webuploader-pick" @click="upload()">开始上传</div>
-							
-							</div>
-							<!--用来存放文件信息-->
-							<div id="thelist" class="uploader-list" >
-							  <div v-if="uploadFile.id" :id='uploadFile.id'><span>{{uploadFile.name}}</span>&nbsp;<span class='percentage'>{{percentage}}%</span></div>
-							
-							</div>
 							
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
@@ -291,7 +284,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -316,7 +309,9 @@
 				uploadFile:{},
 				percentage:0,
 				fileMd5:'',
-				uploadStatus:false//视频上传是否成功
+				uploadStatus:false,//视频上传是否成功
+				name:'',
+				imgs:''
 			},
 			mounted() {
 				this.uploadVideo();
@@ -508,47 +503,7 @@
 					  });
 					},
 					layuis() {
-						layui.use(['form', 'layedit', 'laydate'], function(){
-						  var form = layui.form
-						  ,layer = layui.layer
-						  ,layedit = layui.layedit
-						  ,laydate = layui.laydate;
-						  
-						
-						   //自定义验证规则
-						     form.verify({
-						       links: function(value,item){
-								   let checked = false;
-									var names = $(item).attr('name')
-									,contents = $(item).parents('form').find('input[name=' + names + ']')
-									 , verifyType=$(item).attr('type')
-									,focusElem = contents.next().find('i.layui-icon');//焦点元素
-									contents.each(function(i){
-										checked = checked || $(this)[0].checked;
-									})
-									if(checked == false){
-										 //定位焦点
-										focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
-										//对非输入框设置焦点
-										focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
-											focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
-										 }).focus();
-										return '必填项不能为空'
-									}
-							   }
-							})
-						     
-						     
-						     //监听提交
-						     form.on('submit(example)', function(data){
-						       layer.alert(JSON.stringify(data.field), {
-						         title: '最终的提交信息'
-						       })
-						       return false;
-						     });
-						 
-						});
-						
+						let _this = this;
 						layui.use('upload', function(){
 						  var $ = layui.jquery
 						  ,upload = layui.upload;
@@ -578,10 +533,7 @@
 						      });
 						    }
 						    ,done: function(res){
-						      //如果上传失败
-						      if(res.code > 0){
-						        return layer.msg('上传失败');
-						      }
+						      _this.imgs = res.data
 						      //上传成功
 						    }
 						    ,error: function(){

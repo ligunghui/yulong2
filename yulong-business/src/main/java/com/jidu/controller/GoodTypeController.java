@@ -35,8 +35,8 @@ public class GoodTypeController extends BusinessBaseController {
     @ApiOperation(value = "添加商品类型")
 
     public Result save(@RequestBody GoodsType goodsType) {
-        goodsTypeService.save(storeId, goodsType);
-        return new Result(ResultCode.SUCCESS);
+        Integer save = goodsTypeService.save(storeId, goodsType);
+        return new Result(ResultCode.SUCCESS, save);
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
@@ -66,10 +66,10 @@ public class GoodTypeController extends BusinessBaseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商品类型")
     public Result delete(@PathVariable int id) {
-     //如果有下级id不能删除
+        //如果有下级id不能删除
         List<GoodsType> goodsType = goodsTypeService.findOneLevel(storeId, id);
-        if (!goodsType.isEmpty()){
-            return  new Result(201,"存在下级分类不能删除",false);
+        if (!goodsType.isEmpty()) {
+            return new Result(201, "存在下级分类不能删除", false);
 
         }
         goodsTypeService.delete(id);

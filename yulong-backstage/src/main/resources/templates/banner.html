@@ -71,9 +71,6 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
@@ -115,6 +112,12 @@
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+        					</li>
         				</ul>
         			</li>
         			<li>
@@ -149,9 +152,6 @@
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
-        					</li>
         				</ul>
         			</li>
         			<li class="">
@@ -182,6 +182,9 @@
         					</li>
         				</ul>
         			</li>
+					<li class="">
+						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -221,10 +224,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="platform-banner-edit.html?id=add">新增</a>
-								<div class="btn-group pull-right">
+								<!-- <div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
+								</div> -->
 							</div>
 					
 						</div>
@@ -235,22 +238,22 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<th>添加时间</th>
+											<!-- <th>添加时间</th> -->
 											<th>内容</th>
 											<th>发布者</th>
 											<th>发布位置</th>
-											<th>商户ID</th>
+											<!-- <th>商户ID</th> -->
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.addtime}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
 											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
 											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
-											<td>{{item.location ? '首页' : '智汇购'}}</td>
-											<td>{{item.storeId}}</td>
+											<td>{{item.location == 1 ? '首页' : '智汇购'}}</td>
+											<!-- <td>{{item.storeId}}</td> -->
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 											</td>
@@ -258,12 +261,12 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.addtime}}</td>
+											<!-- <td>{{searchList.addtime}}</td> -->
 											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
 											<td>{{item.deletestatus ? '是' : '否'}}</td>
 											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
-											<td>{{item.location ? '首页' : '智汇购'}}</td>
-											<td>{{item.storeId}}</td>
+											<td>{{item.location == 1  ? '首页' : '智汇购'}}</td>
+											<!-- <td>{{item.storeId}}</td> -->
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
 											</td>
@@ -282,7 +285,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2019 几度CMS版权所有</p>
+       <p>Copyright © 2020 几度互联版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -357,7 +360,7 @@
 					if (!_this.searchid) {
 						_this.issearch = false
 					} else {
-						_this.issearch = true;
+						
 						$.ajax({
 							url:  '/backstage/banner/' + _this.searchid,
 							type: 'GET',
@@ -366,6 +369,7 @@
 							},
 							success: (res) => {
 								_this.searchList = res.data
+								_this.issearch = true;
 							}
 						})
 					}
