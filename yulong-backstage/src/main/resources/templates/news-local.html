@@ -120,7 +120,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em><span class="fa arrow"></span></a>
+						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
@@ -160,13 +160,16 @@
 								<a class="" href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="news-goverment.html"><em>时事要闻</em></a>
 							</li>
 							<li>
 								<a href="news-culture.html"><em>文化旅游</em></a>
 							</li>
 							<li>
-								<a class="active-menu" href="news-local.html"><em>本地新闻</em></a>
+								<a class="active-menu" href="news-local.html"><em>招商引资</em></a>
+							</li>
+							<li>
+								<a href="oppo.html"><em>汇商机</em></a>
 							</li>
 						</ul>
 					</li>
@@ -208,13 +211,13 @@
 
 				<div class="row">
 					<div class="col-md-12 nav-topdown">
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">资讯管理</a> > <a href="#">本地新闻</a></a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">资讯管理</a> > <a href="#">招商引资</a></a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>本地新闻</p>
+						<p>招商引资</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
@@ -276,7 +279,7 @@
 											<td>{{item.thumbsNum}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="looklook(item.addtime,item.addpeople,item.subheadig,item.startime,item.endtime,item.sordOrder,item.storeId)">更多信息</a>
-												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+item.id">编辑</a>
+												<a class="btn btn-blue btn-sm" :href="'news-local-edit.html?id='+item.id">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
 											</td>
 										</tr>
@@ -301,7 +304,7 @@
 											<td>{{searchList.thumbsNum}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" @click="looklook(searchList.addtime,searchList.addpeople,searchList.subheadig,searchList.startime,searchList.endtime,searchList.sordOrder,searchList.storeId)">更多信息</a>
-												<a class="btn btn-blue btn-sm" :href="'news-index-edit.html?id='+searchList.id">编辑</a>
+												<a class="btn btn-blue btn-sm" :href="'news-local-edit.html?id='+searchList.id">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
 											</td>
 										</tr>
@@ -323,7 +326,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2020 几度互联版权所有</p>
+		<p>Copyright © 2020 智汇玉龙版权所有</p>
 	</div>
 
 </body>
@@ -356,7 +359,7 @@
 				success: (res) => {
 					if(res.data) {
 						res.data.forEach(function(i) {
-							if(i.type == 1) {
+							if(i.type == 4) {
 								_this.bannerList.push(i)
 							}
 						})

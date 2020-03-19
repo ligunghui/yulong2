@@ -161,13 +161,16 @@
 								<a class="" href="news-index.html"><em>商会动态</em></a>
 							</li>
 							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
+								<a href="news-goverment.html"><em>时事要闻</em></a>
 							</li>
 							<li>
 								<a href="news-culture.html"><em>文化旅游</em></a>
 							</li>
 							<li>
-								<a class="active-menu" href="news-local.html"><em>本地新闻</em></a>
+								<a class="active-menu" href="news-local.html"><em>招商引资</em></a>
+							</li>
+							<li>
+								<a href="oppo.html"><em>汇商机</em></a>
 							</li>
 						</ul>
 					</li>
@@ -211,7 +214,7 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexmsg-msg.html">资讯管理</a> > <a href="news-local.html">本地新闻</a> > <a href="#">添加本地新闻</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexmsg-msg.html">资讯管理</a> > <a href="news-local.html">招商引资</a> > <a href="#">添加招商引资</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -244,8 +247,8 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">是否可见</span>
 									<div class="col-md-10_5 col-xs-12">
-										<strong class="buttons buttons-default"><i class="buttons-point"></i></strong>
-										<input class="displaynone switch" type="text" name="isopen" ref="display"/>
+										<strong class="buttons buttons-default displayTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch display" type="text" name="isopen" ref="display"/>
 									</div>
 								</label>
 								<label class="layui-inline col-md-12 col-xs-12">
@@ -276,8 +279,8 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">是否推到首页</span>
 									<div class="col-md-10_5 col-xs-12">
-										<strong class="buttons buttons-default"><i class="buttons-point"></i></strong>
-										<input class="displaynone switch" type="text" name="isopen" ref="homePage"/>
+										<strong class="buttons buttons-default homePageTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch homePage" type="text" name="isopen" ref="homePage"/>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
@@ -308,7 +311,7 @@
 		<!-- /. WRAPPER  -->
 
 		<div id="footer-sec">
-			<p>Copyright © 2020 几度互联版权所有</p>
+			<p>Copyright © 2020 智汇玉龙版权所有</p>
 		</div>
 		<!-- /. FOOTER  -->
 		<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -366,6 +369,22 @@
 									_this.name = _this.bannerList.name;
 									_this.sordOrder = _this.bannerList.sordOrder;
 									_this.subheading = _this.bannerList.subheading;
+									_this.homePage =  _this.bannerList.homePage;
+									if(res.data.homePage) {
+										$('.homePage').val('on')
+										$('.homePageTop').addClass('buttons-active').removeClass('buttons-dafault')
+									}else {
+										$('.homePage').val('off')
+										$('.homePageTop').addClass('buttons-dafault').removeClass('buttons-active')
+									}
+									_this.display = _this.bannerList.display;
+									if(res.data.display) {
+										$('.display').val('on')
+										$('.displayTop').addClass('buttons-active').removeClass('buttons-dafault')
+									}else {
+										$('.display').val('off')
+										$('.displayTop').addClass('buttons-dafault').removeClass('buttons-active')
+									}
 								})
 							}
 						})
@@ -533,7 +552,7 @@
 								layer.msg(res.message)
 								if (res.code == 10000) {
 									setTimeout(function() {
-										window.location.href = 'news-index.html'	
+										window.location.href = 'news-local.html'	
 									}, 1200)
 								}
 							}

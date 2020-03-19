@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class ActivityServiceImpl implements ActivityService {
     public void save(ShoppingActivity shoppingActivity) {
         shoppingActivity.setStoreId("0");
         shoppingActivity.setStoreName("平台");
+        shoppingActivity.setAddtime(new Date());
         activityMapper.insert(shoppingActivity);
     }
 

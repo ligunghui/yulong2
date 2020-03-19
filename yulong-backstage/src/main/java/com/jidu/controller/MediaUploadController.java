@@ -66,14 +66,14 @@ public class MediaUploadController {
         List<MediaFile> mediaFiles = mediaUploadService.search();
         return new PageResult(page.getTotal(), page.getResult());
     }
-    @RequestMapping(value = "/{fileMd5}/{videoName}/{fileImg}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{fileMd5}/{videoName}", method = RequestMethod.POST)
     @ApiOperation(value = "添加")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "fileMd5", value = "fileMd5", required = true, paramType = "path"),
             @ApiImplicitParam(name = "videoName", value = "视频名称", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "fileImg", value = "封面", required = true, paramType = "path")
+            @ApiImplicitParam(name = "fileImg", value = "封面", required = true, paramType = "query")
     })
-    public Result add(@PathVariable String fileMd5, @PathVariable String videoName, @PathVariable String fileImg) {
+    public Result add(@PathVariable String fileMd5, @PathVariable String videoName, @RequestParam String fileImg) {
 
         return mediaUploadService.add(fileMd5,videoName,fileImg);
     }
@@ -85,5 +85,14 @@ public class MediaUploadController {
     public Result delete(@PathVariable String fileId) {
 
         return mediaUploadService.delete(fileId);
+    }
+    @RequestMapping(value = "/{fileId}", method = RequestMethod.GET)
+    @ApiOperation(value = "查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "fileId", value = "fileId", required = true, paramType = "path"),
+    })
+    public Result find(@PathVariable String fileId) {
+        MediaFile mediaFile= mediaUploadService.find(fileId);
+        return new Result(ResultCode.SUCCESS,mediaFile);
     }
 }

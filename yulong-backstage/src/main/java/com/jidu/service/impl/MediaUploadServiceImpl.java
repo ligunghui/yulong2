@@ -210,8 +210,23 @@ public class MediaUploadServiceImpl implements MediaUploadService {
 
     @Override
     public Result delete(String fileId) {
+        MediaFile mediaFile = mediaFileMapper.selectByPrimaryKey(fileId);
+        if (mediaFile==null){
+            return new Result(201,"文件不存在",false);
+
+        }
+        String fileUrl = mediaFile.getM3u8FileUrl();
+        File file = new File(fileUrl);// 读取
+        if(file.isFile()){
+            file.delete();
+        }
         mediaFileMapper.deleteByPrimaryKey(fileId);
         return new Result(ResultCode.SUCCESS);
+    }
+
+    @Override
+    public MediaFile find(String fileId) {
+        return mediaFileMapper.selectByPrimaryKey(fileId);
     }
 
 
@@ -315,6 +330,7 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         mediaFile.setUploadTime(new Date());
         mediaFile.setMimeType(mimetype);
         mediaFile.setFileType(fileExt);
+        mediaFile.setM3u8FileUrl("/yulong/"+mp4_video_path);
         //状态为上传成功
         mediaFile.setFileStatus("上传成功");
         mediaFile.setM3u8FileUrl(m3u8FileUrl);

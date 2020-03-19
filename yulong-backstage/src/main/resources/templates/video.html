@@ -162,14 +162,17 @@
         						<a class="" href="news-index.html"><em>商会动态</em></a>
         					</li>
         					<li>
-        						<a href="news-goverment.html"><em>政府资讯</em></a>
+        						<a href="news-goverment.html"><em>时事要闻</em></a>
         					</li>
         					<li>
         						<a class="" href="news-culture.html"><em>文化旅游</em></a>
         					</li>
         					<li>
-        						<a href="news-local.html"><em>本地新闻</em></a>
+        						<a href="news-local.html"><em>招商引资</em></a>
         					</li>
+							<li>
+								<a href="oppo.html"><em>汇商机</em></a>
+							</li>
         				</ul>
         			</li>
         			<li>
@@ -232,27 +235,26 @@
 						                <thead>
 						                    <tr>
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
-												<th>ID</th>
 						                        <th>视频名称</th>
                                                 <th>视频封面</th>
-                                                <th>视频排序</th>
+                                                <th>上传时间</th>
 						                        <th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-for="(item,index) in bannerList" :key="index">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-						                        <td tableedit>李嘉琪直播间</td>
-						                        <td ><a class="colorblue" href="javascript:;" popupimg="assets/img/logo.png">【预览】</a></td>
-                                                <td>1</td>
+						                        <td>{{item.videoName}}</td>
+						                        <td ><a class="colorblue" href="javascript:;" @click="lookat(item.fileImg,'img')">【预览】</a></td>
+                                                <td>{{item.uploadTime.slice(0,10)}}</td>
                                                 <td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowdel>删除</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;">编辑</a>
+													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.fileId)">删除</a>
 												</td>
 						                    </tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
@@ -266,7 +268,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2020 几度互联版权所有</p>
+       <p>Copyright © 2020 智汇玉龙版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -280,5 +282,95 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+    <script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#page-wrapper',
+			data:{
+				bannerList:[]
+			},
+			created() {
+				this.load()
+			},
+			methods:{
+				load() {
+					let _this = this;
+					$.ajax({
+						url:  '/media/upload/1/10',
+						type: 'GET',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.bannerList = res.rows
+							layui.use('laypage', function(){
+							  var laypage = layui.laypage;
+							  
+							  //执行一个laypage实例
+							  laypage.render({
+							    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+							    ,count: res.total //数据总数，从服务端得到
+								,jump: function(obj, first){
+								    $.ajax({
+								    	url:  '/media/upload/'+obj.curr+'/10',
+								    	type: 'GET',
+								    	headers: {
+								    		'Authorization': sessionid,
+								    	},
+								    	success: (res) => {
+								    		_this.bannerList = res.rows
+								    	},
+								    	fail:(res) => {
+								    	}
+								    })
+								    //首次不执行
+								    // if(!first){
+								    //   //do something
+								    // }
+								  }
+							  });
+							});
+						},
+						fail:(res) => {
+						}
+					})
+				},
+				lookat(cons,types) {
+					if(types == 'img') {
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'封面图',
+								content:`<img src="${cons}" style="max-width:300px;"/>"`,
+								area:'auto'
+							})
+						})
+					}
+				},
+				del(ids) {
+					let _this = this;
+					// DELETE /media/upload/{fileId}
+					$.ajax({
+						url:  '/media/upload/'+ids,
+						type: 'DELETE',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							if(res.code == 10000) {
+								_this.load()
+							}
+						},
+						fail:(res) => {
+						}
+					})
+				}
+			}
+		})
+	</script>
 </body>
 </html>

@@ -53,12 +53,12 @@
         	<div class="sidebar-collapse">
         		<ul class="nav" id="main-menu">
         			<li>
-        				<a class="active-menu" href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
+        				<a href="index.html"><i class="fa fa-desktop"></i><em>管理控制台</em></a>
         			</li>
         			<li>
         				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>关于我们</em></a>
         			</li>
-        			<li class="active">
+        			<li>
         				<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
@@ -71,13 +71,10 @@
         						<a href="ads.html"><em>APP广告页管理</em></a>
         					</li>
         					<li>
-        						<a href="card.html"><em>玉龙卡管理</em></a>
-        					</li>
-        					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
         					<li>
-        						<a class="active-menu" href="chat.html"><em>聊天室管理</em></a>
+        						<a href="chat.html"><em>聊天室管理</em></a>
         					</li>
         				</ul>
         			</li>
@@ -106,14 +103,20 @@
         					</li>
         				</ul>
         			</li>
-        			<li>
+        			<li class="">
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a class="" href="category.html"><em>分类管理</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
+        					</li>
+        					<li>
+        						<a href="gift.html"><em>礼包专区</em></a>
+        					</li>
+        					<li>
+        						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
         					</li>
         				</ul>
         			</li>
@@ -149,12 +152,9 @@
         					<li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
         					</li>
-        					<li>
-        						<a href="user-apply.html"><em>个人入会申请</em></a>
-        					</li>
         				</ul>
         			</li>
-        			<li class="">
+        			<li class="active">
         				<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
@@ -170,7 +170,7 @@
         						<a href="news-local.html"><em>招商引资</em></a>
         					</li>
 							<li>
-								<a href="oppo.html"><em>汇商机</em></a>
+								<a class="active-menu" href="oppo.html"><em>汇商机</em></a>
 							</li>
         				</ul>
         			</li>
@@ -200,7 +200,7 @@
         				</ul>
         			</li>
         			<li>
-        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em><span class="fa arrow"></span></a>
+        				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
         		</ul>
         	</div>
@@ -214,64 +214,83 @@
                     <div class="col-md-12 nav-topdown">
                       <!-- <h1 class="page-head-line">DASHBOARD</h1> -->
                        <!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台信息设置</a> > <a href="#">聊天室管理</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">资讯管理</a> > <a href="#">汇商机</a></p>
                     </div>
                 </div>
                 <!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>聊天室管理</p>
+						<p>汇商机</p>
 					</div>
 					
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
-						<div class="panel panel-default">
-						    <div class="panel-heading textalign-left">
-								<select name="types" class="btn btn-blue" v-model="types">
-									<option value="0" selected="">全部</option>
-									<option value="1">申请中</option>
-									<option value="2">申请通过</option>
-									<option value="3">申请不通过</option>
-								</select>
-						        <!-- <a class="btn btn-blue btn-sm" href="addchat.html">添加</a>
-								<a class="btn btn-blue btn-sm" href="javascript:;" tabledel>删除</a> -->
-						    </div>
-						    <div class="panel-body">
-						        <div class="table-responsive">
-						            <table class="table table-hover">
-						                <thead>
-						                    <tr>
-						                        <th><input type="checkbox" name="" id="" value="" /></th>
-												<th>ID</th>
-												<th>名称</th>
-												<th>聊天室类型</th>
-												<th>申请情况</th>
-												<th>群主</th>
-												<th>操作</th>
-						                    </tr>
-						                </thead>
-						                <tbody>
-						                    <tr v-for="(item,index) in bannerList">
-												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td>{{item.id}}</td>
-						                        <td>{{item.name}}</td>
-						                        <td>{{item.status | fstatus}}</td>
-						                        <td>{{item.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
-						                        <td>{{item.uid ? item.uid : '暂无群主'}}</td>
-												<td>
-													<a class="btn btn-blue btn-sm" @click="pass(item.id,item.status)">{{item.status | fispass}}</a>
-													<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
-												</td>
-						                    </tr>
-						                </tbody>
-						            </table>
-									<div id="test1"></div>
-						        </div>
-						    </div>
+						<!-- <div class="panel panel-default">
+							<div class="panel-heading textalign-left">
+								<a class="btn btn-blue btn-sm" href="category-add.html?id=add">新增</a>
+								<div class="btn-group pull-right">
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
+									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
+								</div>
+							</div>
+					
+						</div> -->
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<!-- <th>发布人</th> -->
+											<th>名称</th>
+											<th>内容</th>
+											<th>图片</th>
+											<th>类型</th>
+											<th>是否展示在首页</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-if="!issearch" v-for="(item,index) in bannerList">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{item.id}}</td>
+											<!-- <td>{{item.user_name}}</td> -->
+											<td>{{item.name}}</td>
+											<td><a class="colorblue" @click="lookat(item.context)">[查看]</a></td>
+											<td><a class="colorblue" @click="lookat(item.head_pic,'img')">[预览]</a></td>
+											<td>{{item.type == 1 ? '供应' : '求购'}}</td>
+											<td>{{item.home_page == 1 ? '是' : '否'}}</td>
+											<td>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="open(item.id,item.home_page)">{{item.home_page ? '取消展示' : '确认展示'}}</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
+											</td>
+										</tr>
+										<tr v-if="issearch">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{searchList.id}}</td>
+											<!-- <td>{{searchList.user_name}}</td> -->
+											<td>{{searchList.name}}</td>
+											<td><a class="colorblue" @click="lookat(searchList.context)">[查看]</a></td>
+											<td><a class="colorblue" @click="lookat(searchList.head_pic,'img')">[预览]</a></td>
+											<td>{{searchList.type == 1 ? '供应' : '求购'}}</td>
+											<td>{{searchList.home_page == 1 ? '是' : '否'}}</td>
+											<td>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="open(searchList.id,item.home_page)">{{searchList.home_page ? '取消展示' : '确认展示'}}</a>
+												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="test1"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 				
             <!-- /. PAGE INNER  -->
+			<div class="block-con col-xs-12 displaynone" id="popimg" style="max-height: 600px;overflow: auto;">
+				
+			</div>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
@@ -302,75 +321,25 @@
 				bannerList: [],
 				issearch: false,
 				searchList: null,
-				types:0
+				editTxt:''
 			},
 			created() {
 				let _this = this;
-				// 房间状态(全部0 1申请中2申请通过3申请不通过)
-				this.open(0)
-			},
-			filters:{
-				fstatus(sts) {
-					if(sts == 1) {
-						return '申请中'
-					}else if(sts == 2) {
-						return '申请通过'
-					}else if(sts == 3) {
-						return '申请不通过'
-					}else {
-						return '暂无此状态'
+				$.ajax({
+					url:' http://yulong.ijidoo.cn/index/Info/oppoList?type=0',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = JSON.parse(res).data
+					},
+					fail:(res) => {
 					}
-				},
-				fispass(sts) {
-					if(sts == 2) {
-						return '拒绝'
-					}else {
-						return '通过'
-					}
-				}
-			},
-			watch:{
-				types() {
-					this.open(this.types)
-				}
+				})
+				
 			},
 			methods: {
-				open(ids) {
-					let _this = this;
-					$.ajax({
-						url:  '/backstage/room/'+ids+'/1/10',
-						type: 'GET',
-						headers: {
-							'Authorization': sessionid,
-						},
-						success: (res) => {
-							_this.bannerList = res.rows
-							layui.use('laypage', function(){
-							  var laypage = layui.laypage;
-							  
-							  //执行一个laypage实例
-							  laypage.render({
-							    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-							    ,count: res.total //数据总数，从服务端得到
-								,jump: function(obj, first){
-								    $.ajax({
-								    	url:  '/backstage/room/'+ids+'/'+obj.curr+'/10',
-								    	type: 'GET',
-								    	headers: {
-								    		'Authorization': sessionid,
-								    	},
-								    	success: (res) => {
-								    		_this.bannerList = res.rows
-								    	},
-								    	fail:(res) => {
-								    	}
-								    })
-								  }
-							  });
-							});
-						}
-					})
-				},
 				mysearch() {
 					let _this = this;
 					if (!_this.searchid) {
@@ -378,58 +347,100 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url:  '/chamber/notice/' + _this.searchid,
+							url: '/backstage/goodsType/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
 							},
 							success: (res) => {
 								_this.searchList = res.data
-								console.log(_this.searchList)
 							}
 						})
 					}
 				},
-				pass(ids,sts) {
+				open(ids,sts) {
 					let _this = this;
-					// GET /backstage/room/{id}/{storeStatus}
-					// 2通过3拒绝
-					var mysts;
-					if(sts == 2) {
-						// return '拒绝'
-						mysts = 3
-					}else {
-						// return '通过'
-						mysts = 2
-					}
 					$.ajax({
-						url:  '/backstage/room/' + ids + '/' + mysts,
+						url: 'http://yulong.ijidoo.cn/index/Info/setOppoToIndex?id=' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
 						},
 						success: (res) => {
-							layer.msg(res.message)
-							// setTimeout(function() {
-							// 	window.location.reload()
-							// },1200)
+							layer.msg(JSON.parse(res).msg)
+							if(JSON.parse(res).code == 1) {
+								setTimeout(function(){
+									$.ajax({
+										url:' http://yulong.ijidoo.cn/index/Info/oppoList?type=0',
+										type: 'GET',
+										headers: {
+											'Authorization': sessionid,
+										},
+										success: (res) => {
+											_this.bannerList = JSON.parse(res).data
+										},
+										fail:(res) => {
+										}
+									})
+								},1200)
+							}
 						}
 					})
 				},
 				del(ids) {
+					let _this = this;
+					let v = {
+						"id":ids
+					}
 					$.ajax({
-						url:  '/backstage/room/' + ids,
-						type: 'DELETE',
+						url: ' http://yulong.ijidoo.cn/index/Info/deleteOppo',
+						type: 'POST',
+						contentType: 'application/json',
 						headers: {
 							'Authorization': sessionid,
 						},
+						dataType:'json',
+						data:JSON.stringify(v),
 						success: (res) => {
-							layer.msg(res.message)
-							// setTimeout(function() {
-							// 	window.location.reload()
-							// },1200)
+							layer.msg(JSON.parse(res).msg)
+							setTimeout(function(){
+								window.location.reload()
+							},1200)
+							
 						}
 					})
+				},
+				lookat(cons,type) {
+					if(type == 'img') {
+						cons.split(',').forEach(function(i) {
+							$('#popimg').append(`<img src="${i}" style="max-width:300px;margin:10px;"/>`)
+						})
+						layui.use('layer', function(){
+						  var layer = layui.layer;
+						  
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: $('#popimg'),//这里content是一个普通的String
+							area: 'auto',
+							cancel:function() {
+								$('#popimg').hide()
+							}
+						  });
+						}); 
+					}else {
+						layui.use('layer', function(){
+						  var layer = layui.layer;
+						  
+						  layer.open({
+						    type: 1, 
+							title:'内容',
+						    content: `<div style="max-width:300px;box-sizing:border-box;padding:10px;lineh-height:1.2;">${cons}</div>`,//这里content是一个普通的String
+							area: 'auto'
+						  });
+						}); 
+					}
+					
 				}
 			}
 		})

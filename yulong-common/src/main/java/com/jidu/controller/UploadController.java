@@ -37,7 +37,7 @@ public class UploadController {
         String fileName = s + file.getOriginalFilename();
         Pattern pat = Pattern.compile(REGEX_CHINESE);
         Matcher mat = pat.matcher(fileName);
-        fileName = mat.replaceAll("");
+        fileName = mat.replaceAll("-");
         String os = System.getProperty("os.name");
         String filePath = "/yulong/upload/";
         if (os.toLowerCase().startsWith("win")) {
@@ -60,7 +60,7 @@ public class UploadController {
         Pattern pat = Pattern.compile(REGEX_CHINESE);
         String fileName = "已一抬头";
         Matcher mat = pat.matcher(fileName);
-        fileName = mat.replaceAll("");
+        fileName = mat.replaceAll("-");
         System.out.println(fileName);
     }
 }

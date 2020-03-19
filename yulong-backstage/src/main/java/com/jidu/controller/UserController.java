@@ -36,23 +36,49 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
             @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path"),
-            @ApiImplicitParam(name="param",value="条件查询",required=false,paramType="query")
+            @ApiImplicitParam(name = "param", value = "条件查询", required = false, paramType = "query")
     })
     public PageResult search(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @RequestParam(required = false) Map param) {
         Page<UserInfo> page = PageHelper.startPage(pageNum, pageSize);
         List<UserInfo> userInfos = userService.search(param);
         return new PageResult(page.getTotal(), page.getResult());
     }
+
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改会员")
     public Result update(@RequestBody UserInfo userInfo) {
         userService.update(userInfo);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询会员")
     public Result findById(@PathVariable String id) {
-      UserInfo userInfo=  userService.findById(id);
-        return new Result(ResultCode.SUCCESS,userInfo);
+        UserInfo userInfo = userService.findById(id);
+        return new Result(ResultCode.SUCCESS, userInfo);
+    }
+
+    @RequestMapping(value = "/{pageNum}/{pageSize}/{authentication}", method = RequestMethod.GET)
+    @ApiOperation(value = "查询实名认证相关会员")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "authentication", value = "是否实名认证0否1申请中2申请通过3申请不通过", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "param", value = "条件查询", required = false, paramType = "query")
+    })
+    public PageResult searchAuthentication(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @RequestParam(required = false) Map param, @PathVariable Integer authentication) {
+        Page<UserInfo> page = PageHelper.startPage(pageNum, pageSize);
+        List<UserInfo> userInfos = userService.searchAuthentication(param, authentication);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @RequestMapping(value = "/delAuthentication/{userId}/{authentication}", method = RequestMethod.GET)
+    @ApiOperation(value = "处理实名认证相关会员")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "userId", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "authentication", value = "2申请通过3申请不通过", required = true, paramType = "path")
+    })
+    public Result delAuthentication(@PathVariable String userId, @PathVariable Integer authentication) {
+        return   userService.delAuthentication(userId, authentication);
     }
 }

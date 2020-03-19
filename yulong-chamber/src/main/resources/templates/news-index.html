@@ -219,7 +219,7 @@
 	<!-- /. WRAPPER  -->
 
 	<div id="footer-sec">
-		<p>Copyright © 2020 几度互联版权所有</p>
+		<p>Copyright © 2020 智汇玉龙版权所有</p>
 	</div>
 
 </body>
@@ -322,7 +322,13 @@
 					    type: 1, 
 						title:'内容',
 					    content: $('#pop') ,//这里content是一个普通的String
-						area: 'auto'
+						area: 'auto',
+						yes:function() {
+							$('#pop').hide()
+						},
+						cancel:function() {
+							$('#pop').hide()
+						}
 					  });
 					}); 
 				}else {

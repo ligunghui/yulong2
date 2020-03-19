@@ -20,4 +20,6 @@ public interface MediaUploadService {
     Result add(String fileMd5, String videoName, String fileImg);
 
     Result delete(String fileId);
+
+    MediaFile find(String fileId);
 }

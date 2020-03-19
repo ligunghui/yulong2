@@ -48,7 +48,7 @@ public class GoodsServiceImpl implements GoodsService {
     public void delete(long id) {
         ShoppingGoods shoppingGoods = new ShoppingGoods();
         shoppingGoods.setId(id);
-        shoppingGoods.setDeletestatus(false);
+        shoppingGoods.setDeletestatus(true);
         goodsMapper.updateByPrimaryKeySelective(shoppingGoods);
     }
 
@@ -57,6 +57,7 @@ public class GoodsServiceImpl implements GoodsService {
         Example example = new Example(ShoppingGoods.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("storeId", "0");
+        criteria.andEqualTo("deletestatus", false);
         return goodsMapper.selectByExample(example);
     }
 }

@@ -155,14 +155,17 @@
         						<a class="" href="news-index.html"><em>商会动态</em></a>
         					</li>
         					<li>
-        						<a href="news-goverment.html"><em>政府资讯</em></a>
+        						<a href="news-goverment.html"><em>时事要闻</em></a>
         					</li>
         					<li>
         						<a href="news-culture.html"><em>文化旅游</em></a>
         					</li>
         					<li>
-        						<a href="news-local.html"><em>本地新闻</em></a>
+        						<a href="news-local.html"><em>招商引资</em></a>
         					</li>
+							<li>
+								<a href="oppo.html"><em>汇商机</em></a>
+							</li>
         				</ul>
         			</li>
         			<li>
@@ -217,17 +220,17 @@
 						<form class="row layui-form" action="">
 							<div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">一级分类</span>
+									<span class="col-md-1_5 col-xs-12">栏目</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
 										<input type="text" class="form-control col-md-5" v-model="type1" />
-										<input class="btn btn-sm btn-blue" type="button" value="添加二级分类" @click="addtype(1)" />
+										<input class="btn btn-sm btn-blue" type="button" value="添加通用商品分类" @click="addtype(1)" />
 									</div>
 								</label>
 							</div>
 							
 							<div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">二级分类</span>
+									<span class="col-md-1_5 col-xs-12">通用商品分类</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12 type2s">
 										<!-- <input type="text" class="form-control col-md-5 type2s_name type2_name_0" v-model="type2" /> -->
 										<!-- <input class="btn btn-sm btn-blue" type="button" value="继续添加" @click="addtype(2)" /> -->
@@ -263,7 +266,7 @@
     <!-- /. WRAPPER  -->
 
     <div id="footer-sec">
-       <p>Copyright © 2020 几度互联版权所有</p>
+       <p>Copyright © 2020 智汇玉龙版权所有</p>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -343,7 +346,7 @@
 						var layer = layui.layer;
 						layer.open({
 							type:1,
-							title:'添加二级分类',
+							title:'添加通用商品分类',
 							content:$('#pops'),
 							btn:['确定','取消'],
 							yes:function(index) {

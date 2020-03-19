@@ -33,7 +33,6 @@ public class ShoppingGoods {
     private String details;
     @ApiModelProperty(value = "商品名称")
     private String name;
-
     @ApiModelProperty(value = "是否推荐到首页1是0否")
     private Integer homePage;
     @ApiModelProperty(value = "新人专区(1是0否)")
@@ -66,5 +65,7 @@ public class ShoppingGoods {
     private Integer typeId;
     @ApiModelProperty(value = "图片")
     private String img;
+    @ApiModelProperty(value = "显示方式(1横排2竖排)")
+    private Integer displayType;
 
 }

@@ -1,5 +1,6 @@
 package com.jidu.service;
 
+import com.jidu.entity.Result;
 import com.jidu.pojo.sys.UserInfo;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface UserService {
     void update(UserInfo userInfo);
 
     UserInfo findById(String id);
+
+    List<UserInfo> searchAuthentication(Map param, Integer authentication);
+
+    Result delAuthentication(String userId, Integer authentication);
 }

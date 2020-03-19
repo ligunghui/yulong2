@@ -109,10 +109,10 @@
 								<a href="category.html"><em>分类管理</em></a>
 							</li>
 							<li>
-								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
+								<a href="goods.html"><em>商品列表管理</em></a>
 							</li>
 							<li>
-								<a href="gift.html"><em>礼包专区</em></a>
+								<a class="active-menu" href="gift.html"><em>礼包专区</em></a>
 							</li>
 							<li>
 								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
@@ -213,21 +213,21 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="#">商品列表管理</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="#">礼包专区</a></a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>商品列表管理</p>
+						<p>礼包专区</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="goods-edit.html?id=add">新增</a>
+								<a class="btn btn-blue btn-sm" href="gift-edit.html?id=add">新增</a>
 								<!-- <div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询商品" />
+									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
 								</div> -->
 							</div>
@@ -252,7 +252,7 @@
 											<!-- <th>商铺价格</th> -->
 											<th>剩余数量</th>
 											<th>总量</th>
-                                            <th>类型</th>
+											<!-- <th>类型ID</th> -->
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -261,18 +261,20 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
 											<!-- <td>{{item.addtime}}</td> -->
-											<td>{{item.goodsWeight}}</td>
+											<td>{{item.postage}}</td>
 											<td>{{item.homePage ? '是' : '否'}}</td>
-											<td><a class="colorblue" @click="lookat(item.img,'img3')">【预览】</a></td>
+											<td><a class="colorblue" @click="lookat(item.img,'img3')">[预览]</a></td>
 											<td>{{item.isNew ? '是' : '否'}}</td>
 											<td>{{item.markePrice}}</td>
 											<td>{{item.memberPrice}}</td>
 											<td>{{item.name}}</td>
 											<td>{{item.onsale ? '下架' : '上架'}}</td>
 											<!-- <td>{{item.saleNum}}</td> -->
+											<!-- <td>{{item.sellerTime}}</td> -->
+											<!-- <td>{{item.storePrice}}</td> -->
 											<td>{{item.surplusNum}}</td>
 											<td>{{item.totalNum}}</td>
-                                            <td>{{item.typeId | ftype}}</td>
+											<!-- <td>{{item.typeId}}</td> -->
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
@@ -281,19 +283,21 @@
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<!-- <td>{{searchList.addtime}}</td> -->
-											<td>{{searchList.goodsWeight}}</td>
-											<td>{{searchList.homePage ? '是' : '否'}}</td>
-											<td><a class="colorblue" @click="lookat(searchList.img,'img3')">【预览】</a></td>
-											<td>{{searchList.isNew ? '是' : '否'}}</td>
-											<td>{{searchList.markePrice}}</td>
-											<td>{{searchList.memberPrice}}</td>
-											<td>{{searchList.name}}</td>
-											<td>{{searchList.onsale ? '下架' : '上架'}}</td>
-											<!-- <td>{{searchList.saleNum}}</td> -->
-											<td>{{searchList.surplusNum}}</td>
-											<td>{{searchList.totalNum}}</td>
-											<td>{{searchList.typeId | ftype}}</td>
+											<td>{{item.postage}}</td>
+											<td>{{item.homePage ? '是' : '否'}}</td>
+											<td><a class="colorblue" @click="lookat(item.img,'img3')">[预览]</a></td>
+											<td>{{item.isNew ? '是' : '否'}}</td>
+											<td>{{item.markePrice}}</td>
+											<td>{{item.memberPrice}}</td>
+											<td>{{item.name}}</td>
+											<td>{{item.onsale ? '下架' : '上架'}}</td>
+											<!-- <td>{{item.saleNum}}</td> -->
+											<!-- <td>{{item.sellerTime}}</td> -->
+											<!-- <td>{{item.storePrice}}</td> -->
+											<td>{{item.surplusNum}}</td>
+											<td>{{item.totalNum}}</td>
+											<!-- <td>{{item.typeId}}</td> -->
+											
 											<td>
 												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
@@ -312,7 +316,6 @@
 			<div class="popedit displaynone" id="popedit">
 				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-model="editTxt"></textarea>
 			</div>
-			
 			<div class="displaynone" style="max-width:500px;max-height:600px;overflow:auto;" id="popimg">
 				<img v-for="item in imgList" :src="item" style="max-width:200px;margin: 10px;"/>
 			</div>
@@ -348,7 +351,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url:  '/backstage/goods/1/10',
+				url:  '/backstage/giftPack/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -364,7 +367,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url:  '/backstage/goods/'+obj.curr+'/10',
+						    	url:  '/backstage/giftPack/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -387,49 +390,33 @@
 				}
 			})
 		},
-		filters:{
-			ftype(tys){
-				if(tys == 0) {
-					return '普通'
-				}else if(tys == 1){
-					return '平台自营'
-				}else if(tys == 2) {
-					return '家乡特产'
-				}else if(tys == 3){
-					return '礼包专区'
-				}else {
-					return '新人专区'
-				}
-			}
-		},
 		methods: {
 			mysearch() {
 				let _this = this;
 				if (!_this.searchid) {
 					_this.issearch = false
 				} else {
-					
+					_this.issearch = true;
 					$.ajax({
-						url:  '/backstage/goods/' + _this.searchid,
+						url:  '/backstage/giftPack/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
 						},
 						success: (res) => {
 							_this.searchList = res.data
-							_this.issearch = true;
 						}
 					})
 				}
 			},
 			edit(ids,storeids) {
-				window.location.href = "goods-edit.html?id=" + ids;
+				window.location.href = "gift-edit.html?id="+ids;
 			},
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/goods/' + ids,
-					type: 'DELETE',
+					url:  '/backstage/giftPack/' + ids,
+					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
 					},

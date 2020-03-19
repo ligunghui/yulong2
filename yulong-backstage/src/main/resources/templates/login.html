@@ -58,6 +58,16 @@
 			var form = layui.form;
 			
 			$('.loginbutton input').click(function(){
+				login();
+			})
+			
+			$(document).keyup(function(event){
+			  if(event.keyCode ==13){
+				login();
+			  }
+			});	
+			
+			function login() {
 				if($('input[name=name]').val() == '') {
 					layer.alert('请输入用户名');
 					return
@@ -91,8 +101,7 @@
 						}
 					}
 				})
-			})
-			
+			}
 		})
 	</script>
 </html>
