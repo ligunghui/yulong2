@@ -107,7 +107,7 @@
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="category.html"><em>分类管理</em></a>
+								<a href="category.html"><em>频道</em></a>
 							</li>
 							<li>
 								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="">
@@ -266,6 +266,17 @@
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">商品排列</span>
+									<div class="col-md-10_5 col-xs-12">
+										<label class="radios">
+											<input class="layui-form-danger" name="displayType" value="1" type="radio" ref="displayType" checked><em>横向</em>
+										</label>
+										<label class="radios">
+											<input name="displayType" value="2" type="radio" ref="displayType"><em>纵向</em> 
+										</label>
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">是否推荐到首页</span>
 									<div class="col-md-10_5 col-xs-12">
 										<strong class="buttons buttons-default homePageTop"><i class="buttons-point"></i></strong>
@@ -306,11 +317,10 @@
 										<input type="text" class="layui-input" id="startTime" placeholder="yyyy-MM-dd HH:mm:ss" ref='starttime'>
 									</div>
 								</label>
-								
 							</div>
 							<div class="block-con layui-form-item col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商品类型</span>
+									<span class="col-md-1_5 col-xs-12">频道</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
 										<select name="typeId" ref="typeId" lay-filter="typeId" id="typeId">
 											<!-- <option value="1">平台自营</option>
@@ -321,7 +331,7 @@
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12" v-show="changetype1s">
-									<span class="col-md-1_5 col-xs-12">通用的商品分类</span>
+									<span class="col-md-1_5 col-xs-12">分类</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
 										<select name="typeId2" ref="typeId2" lay-filter="typeId2" id="typeId2">
 										</select>
@@ -393,6 +403,7 @@
 					totalNum:'',
 					typeId:null,
 					details:'html',
+					displayType:0,
 					imgNum:0,
 					choosetype1:null,//一级分类
 					choosetype2:null,//二级分类
@@ -430,7 +441,7 @@
 						//多图片上传
 						  upload.render({
 						    elem: '#uploadlogo',
-						    url:  '/upload/upload',
+						    url: '/upload/upload',
 						    headers: {
 						    	'Authorization': sessionid
 						    }
@@ -460,7 +471,7 @@
 					    window.editor = K.create('#editor_id', {
 					        filePostName: "uploadFile",
 					        //这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-					        uploadJson:  '/Kindeditor/uploadFile',
+					        uploadJson: '/Kindeditor/uploadFile',
 					        resizeType: 1,
 					        allowPreviewEmoticons: true,
 					        allowImageUpload: true,
@@ -479,7 +490,7 @@
 						let _this = this;
 						// 查询所有分类
 						$.ajax({
-							url:  '/backstage/goodsType/1/1000',
+							url: '/backstage/goodsType/1/1000',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -501,7 +512,7 @@
 								}
 								// 查询第一个的二级分类
 								$.ajax({
-									url:  '/backstage/goodsType/findOneLevel/' + res.rows[0].id,
+									url: '/backstage/goodsType/findOneLevel/' + res.rows[0].id,
 									type: 'GET',
 									headers: {
 										'Authorization': sessionid,
@@ -536,7 +547,7 @@
 						let _this = this;
 						
 						$.ajax({
-							url:  '/backstage/goodsType/findOneLevel/' + ids,
+							url: '/backstage/goodsType/findOneLevel/' + ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -571,7 +582,7 @@
 					edit(ids) {
 						let _this = this;
 						$.ajax({
-							url:  '/backstage/goods/' + ids,
+							url: '/backstage/goods/' + ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -590,6 +601,7 @@
 									$('.homePage').val('off')
 									$('.homePageTop').addClass('buttons-dafault').removeClass('buttons-active')
 								}//homePage END
+								$('input[type=radio]').eq(res.data.displayType - 1)[0].checked = true;
 								_this.imgs = res.data.img;
 								if(res.data.img) {
 									res.data.img.split(' ').forEach(function(i) {
@@ -636,7 +648,7 @@
 						let _this = this;
 						// GET /backstage/goodsType/{id}查询商品类型
 						$.ajax({
-							url:  '/backstage/goodsType/' + tys,
+							url: '/backstage/goodsType/' + tys,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -652,7 +664,7 @@
 						let _this = this;
 						// 查询所有分类
 						$.ajax({
-							url:  '/backstage/goodsType/1/1000',
+							url: '/backstage/goodsType/1/1000',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -677,7 +689,7 @@
 								}
 								// 查询第一个的二级分类
 								$.ajax({
-									url:  '/backstage/goodsType/findOneLevel/' + Pids,
+									url: '/backstage/goodsType/findOneLevel/' + Pids,
 									type: 'GET',
 									headers: {
 										'Authorization': sessionid,
@@ -723,6 +735,7 @@
 						_this.homePage = _this.$refs.homePage.value == 'on' ? 1 : 0;
 						_this.isNew = _this.$refs.isNew.value == 'on' ? 1 : 0;
 						_this.onsale = _this.$refs.onsale.value == 'on' ? 0 : 1;
+						_this.displayType = $('input[type=radio]:checked').val();
 						
 						if(_this.choosetype2.length) {
 							_this.typeId = _this.$refs.typeId2.value;
@@ -747,7 +760,8 @@
 							"sellerTime": _this.starttime,
 							"storePrice": _this.storePrice,
 							"totalNum": _this.totalNum,
-							"typeId": _this.typeId
+							"typeId": _this.typeId,
+							"displayType": _this.displayType
 						}
 						var ajaxType = 'POST'
 						if(window.location.href.split('=')[1] != 'add') {
@@ -755,7 +769,7 @@
 							v.id = _this.ids;
 						}
 						$.ajax({
-							url:  '/backstage/goods',
+							url: '/backstage/goods',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {

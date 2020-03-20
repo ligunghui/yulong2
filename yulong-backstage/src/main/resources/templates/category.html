@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a class="active-menu" href="category.html"><em>分类管理</em></a>
+        						<a class="active-menu" href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -214,26 +214,26 @@
                     <div class="col-md-12 nav-topdown">
                       <!-- <h1 class="page-head-line">DASHBOARD</h1> -->
                        <!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="#">分类管理</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="#">频道</a></p>
                     </div>
                 </div>
                 <!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>分类管理</p>
+						<p>频道</p>
 					</div>
 					
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
-						<div class="panel panel-default">
+						<!-- <div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue btn-sm" href="category-add.html?id=add">新增</a>
-								<!-- <div class="btn-group pull-right">
+								<div class="btn-group pull-right">
 									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
 									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div> -->
+								</div>
 							</div>
 					
-						</div>
+						</div> -->
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-hover">
@@ -252,7 +252,7 @@
 											<td>{{item.name}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(item.id)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
+												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a> -->
 											</td>
 										</tr>
 										<tr v-if="issearch">
@@ -261,7 +261,7 @@
 											<td>{{searchList.name}}</td>
 											<td>
 												<a class="btn btn-blue btn-sm" href="javascript:;" @click="edit(searchList.id)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a> -->
 											</td>
 										</tr>
 									</tbody>
@@ -308,7 +308,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/goodsType/1/10',
+					url: '/backstage/goodsType/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -324,7 +324,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url:  '/backstage/goodsType/'+obj.curr+'/10',
+							    	url: '/backstage/goodsType/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -353,7 +353,7 @@
 					var upload = layui.upload;
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url:  '/upload/upload',
+						url: '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -382,7 +382,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url:  '/backstage/goodsType/' + _this.searchid,
+							url: '/backstage/goodsType/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -399,7 +399,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/goodsType/' + ids,
+						url: '/backstage/goodsType/' + ids,
 						type: 'delete',
 						headers: {
 							'Authorization': sessionid,

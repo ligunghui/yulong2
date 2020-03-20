@@ -115,7 +115,7 @@
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="category.html"><em>分类管理</em></a>
+								<a href="category.html"><em>频道</em></a>
 							</li>
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
@@ -157,9 +157,9 @@
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="">
@@ -364,7 +364,7 @@
 										//向服务端请求注册上传文件
 										$.ajax({
 											type: "POST",
-											url:  "/media/upload/register",
+											url: "/media/upload/register",
 											headers: {
 												'Authorization': sessionid,
 											},
@@ -396,7 +396,7 @@
 								// 每次上传分块前校验分块，如果已存在分块则不再上传，达到断点续传的目的
 								$.ajax({
 									type: "POST",
-									url:  "/media/upload/checkchunk",
+									url: "/media/upload/checkchunk",
 									headers: {
 										'Authorization': sessionid,
 									},
@@ -428,7 +428,7 @@
 								// 合并分块
 								$.ajax({
 									type: "POST",
-									url:  "/media/upload/mergechunks",
+									url: "/media/upload/mergechunks",
 									headers: {
 										'Authorization': sessionid,
 									},
@@ -454,7 +454,7 @@
 						// 创建uploader对象，配置参数
 						this.uploader = WebUploader.create({
 							swf: "assets/webuploader-0.1.5/Uploader.swf", //上传文件的flash文件，浏览器不支持h5时启动flash
-							server:  "/media/upload/uploadchunk", //上传分块的服务端地址，注意跨域问题
+							server: "/media/upload/uploadchunk", //上传分块的服务端地址，注意跨域问题
 							headers: {
 								'Authorization': sessionid,
 							},
@@ -518,7 +518,7 @@
 							//普通图片上传
 							var uploadInst = upload.render({
 								elem: '#uploadlogo',
-								url:  '/upload/upload',
+								url: '/upload/upload',
 								headers: {
 									'Authorization': sessionid
 								},
@@ -565,7 +565,7 @@
 							return
 						}
 						$.ajax({
-							url:  "/media/upload/" + _this.fileMd5 + '/' + _this.name + '?fileImg=' + _this.imgs,
+							url: "/media/upload/" + _this.fileMd5 + '/' + _this.name + '?fileImg=' + _this.imgs,
 							type: "POST",
 							headers: {
 								'Authorization': sessionid,

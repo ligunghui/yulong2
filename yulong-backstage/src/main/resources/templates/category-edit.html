@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a class="active-menu" href="category.html"><em>分类管理</em></a>
+        						<a class="active-menu" href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -143,9 +143,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -207,7 +207,7 @@
                     <div class="col-md-12 nav-topdown">
                       <!-- <h1 class="page-head-line">DASHBOARD</h1> -->
                        <!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="category.html">分类管理</a> > <a href="#">添加分类</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">平台商城管理</a> > <a href="category.html">频道</a> > <a href="#">添加分类</a></p>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -308,7 +308,7 @@
 				edit(ids) {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/goodsType/' + ids,
+						url: '/backstage/goodsType/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -317,7 +317,7 @@
 							_this.type1 = res.data.name
 							_this.storeid = res.data.storeId;
 							$.ajax({
-								url:  '/backstage/goodsType/findOneLevel/' + ids,
+								url: '/backstage/goodsType/findOneLevel/' + ids,
 								type: 'GET',
 								headers: {
 									'Authorization': sessionid,
@@ -352,7 +352,7 @@
 							yes:function(index) {
 								v.name = _this.addSecond
 								$.ajax({
-									url:  '/backstage/goodsType',
+									url: '/backstage/goodsType',
 									type: 'POST',
 									contentType: 'application/json',
 									headers: {
@@ -393,7 +393,7 @@
 						v.parentId = 1;
 						v.name = _this.type1
 						$.ajax({
-							url:  '/backstage/goodsType',
+							url: '/backstage/goodsType',
 							type: 'PUT',
 							contentType: 'application/json',
 							headers: {
@@ -414,7 +414,7 @@
 						v.parentId = _this.ids;
 						v.name = names;
 						$.ajax({
-							url:  '/backstage/goodsType',
+							url: '/backstage/goodsType',
 							type: 'PUT',
 							contentType: 'application/json',
 							headers: {
@@ -450,7 +450,7 @@
 	<script type="text/javascript">
 		function del(ids) {
 			$.ajax({
-				url: '/backstage/goodsType/' + ids,
+				url:'/backstage/goodsType/' + ids,
 				type: 'DELETE',
 				headers: {
 					'Authorization': sessionid,

@@ -24,7 +24,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/backstage/IntegralRule")
+@RequestMapping(value = "/backstage/integralRule")
 @Api(value = "积分规则", description = "积分规则")
 public class IntegralRuleController {
     @Autowired

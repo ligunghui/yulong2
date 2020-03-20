@@ -108,7 +108,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -150,9 +150,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -242,13 +242,13 @@
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr v-for="(item,index) in bannerList" :key="index">
+						                    <tr v-for="(item,index) in bannerList" :key="index" v-if="item.videoName">
 												<td><input type="checkbox" name="" id="" value="" /></td>
 						                        <td>{{item.videoName}}</td>
 						                        <td ><a class="colorblue" href="javascript:;" @click="lookat(item.fileImg,'img')">【预览】</a></td>
                                                 <td>{{item.uploadTime.slice(0,10)}}</td>
                                                 <td>
-													<a class="btn btn-blue btn-sm" href="javascript:;">编辑</a>
+													<!-- <a class="btn btn-blue btn-sm" :href="'addvideo.html?id='+item.id">编辑</a> -->
 													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.fileId)">删除</a>
 												</td>
 						                    </tr>
@@ -297,7 +297,7 @@
 				load() {
 					let _this = this;
 					$.ajax({
-						url:  '/media/upload/1/10',
+						url: '/media/upload/1/10',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -313,7 +313,7 @@
 							    ,count: res.total //数据总数，从服务端得到
 								,jump: function(obj, first){
 								    $.ajax({
-								    	url:  '/media/upload/'+obj.curr+'/10',
+								    	url: '/media/upload/'+obj.curr+'/10',
 								    	type: 'GET',
 								    	headers: {
 								    		'Authorization': sessionid,
@@ -354,7 +354,7 @@
 					let _this = this;
 					// DELETE /media/upload/{fileId}
 					$.ajax({
-						url:  '/media/upload/'+ids,
+						url: '/media/upload/'+ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,

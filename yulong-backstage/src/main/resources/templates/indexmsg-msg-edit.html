@@ -107,7 +107,7 @@
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="category.html"><em>分类管理</em></a>
+								<a href="category.html"><em>频道</em></a>
 							</li>
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="">
@@ -288,7 +288,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/aboutUs/1/10',
+						url: '/backstage/aboutUs/1/10',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -312,7 +312,7 @@
 						window.editor = K.create('#editor_id', {
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson:  '/Kindeditor/uploadFile',
+							uploadJson: '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -334,7 +334,7 @@
 						v.contents = window.editor.html();
 						
 						$.ajax({
-							url:  '/backstage/aboutUs',
+							url: '/backstage/aboutUs',
 							type: 'PUT',
 							contentType: 'application/json',
 							headers: {

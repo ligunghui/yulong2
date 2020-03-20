@@ -28,7 +28,6 @@ import java.util.List;
 public class PermissionController {
     @Autowired
     private PermissionService permissionService;
-
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ApiOperation(value = "查询")
     @ApiImplicitParams({

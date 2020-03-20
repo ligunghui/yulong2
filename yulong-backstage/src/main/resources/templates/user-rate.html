@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -329,7 +329,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/grade',
+					url: '/backstage/grade',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -350,7 +350,7 @@
 					//普通图片上传
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url:  '/upload/upload',
+						url: '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -394,7 +394,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url:  '/backstage/grade/' + _this.searchid,
+							url: '/backstage/grade/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -432,7 +432,7 @@
 							$('#popus').hide()
 							
 							$.ajax({
-								url:  '/backstage/grade',
+								url: '/backstage/grade',
 								type: 'POST',
 								contentType: 'application/json',
 								headers: {
@@ -461,7 +461,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/grade/' + ids,
+						url: '/backstage/grade/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -491,7 +491,7 @@
 									$('#popus').hide()
 									
 									$.ajax({
-										url:  '/backstage/grade',
+										url: '/backstage/grade',
 										type: 'PUT',
 										contentType: 'application/json',
 										headers: {
@@ -522,7 +522,7 @@
 					let _this = this;
 					layer.confirm('确定删除吗？',{icon:3,title:'提示'},function() {
 						$.ajax({
-							url:  '/backstage/grade/' + ids,
+							url: '/backstage/grade/' + ids,
 							type: 'delete',
 							headers: {
 								'Authorization': sessionid,

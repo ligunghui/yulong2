@@ -30,6 +30,12 @@ public class AppAdvertisementServiceImpl implements AppAdvertisementService {
 
     @Override
     public void add(AppAdvertisement appAdvertisement) {
+        String img = appAdvertisement.getImg();
+        appAdvertisement.setType(1);
+        if (img.endsWith(".avi")||img.endsWith(".mp4")||img.endsWith(".wmv")){
+            appAdvertisement.setType(2);
+        }
+
         appAdvertisementMapper.insert(appAdvertisement);
     }
 }

@@ -84,9 +84,9 @@ public class UserInfo {
     @ApiModelProperty(value = "身份证反面")
     private String reverseImg;
     @ApiModelProperty(value = "是否实名认证")
-    private int authentication;
+    private Integer authentication;
     @ApiModelProperty(value = "等级id")
-    private int gradeId;
+    private Integer gradeId;
     @ApiModelProperty(value = "玉龙卡开始时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -96,8 +96,8 @@ public class UserInfo {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date vipEnd;
     @ApiModelProperty(value = "是否购买玉龙卡(1是0否)")
-    private int vipIs;
+    private Integer vipIs;
     @ApiModelProperty(value = "积分")
-    private int integral;
+    private Integer integral;
 
 }

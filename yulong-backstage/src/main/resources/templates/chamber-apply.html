@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -336,7 +336,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/chamber/1/10/1',
+					url: '/backstage/chamber/1/10/1',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -352,7 +352,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url:  '/backstage/chamber/'+obj.curr+'/10/1',
+							    	url: '/backstage/chamber/'+obj.curr+'/10/1',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -404,7 +404,7 @@
 					let _this = this;
 					if(tys == 'all') {
 						$.ajax({
-							url:  '/backstage/chamber/' + _this.searchid,
+							url: '/backstage/chamber/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -430,7 +430,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/chamber/' + ids,
+						url: '/backstage/chamber/' + ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,
@@ -459,7 +459,7 @@
 						sts = 2;
 					}
 					$.ajax({
-						url:  '/backstage/chamber/' + ids + '/' + sts,
+						url: '/backstage/chamber/' + ids + '/' + sts,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,

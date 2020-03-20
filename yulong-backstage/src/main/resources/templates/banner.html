@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -317,7 +317,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/banner/findByStoreId',
+					url: '/backstage/banner/findByStoreId',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -336,7 +336,7 @@
 					var upload = layui.upload;
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url:  '/upload/upload',
+						url: '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -365,7 +365,7 @@
 					} else {
 						
 						$.ajax({
-							url:  '/backstage/banner/' + _this.searchid,
+							url: '/backstage/banner/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -380,7 +380,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/banner/' + ids,
+						url: '/backstage/banner/' + ids,
 						type: 'delete',
 						headers: {
 							'Authorization': sessionid,

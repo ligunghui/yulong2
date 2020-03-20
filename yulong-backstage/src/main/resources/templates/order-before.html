@@ -70,9 +70,6 @@
 									<a href="ads.html"><em>APP广告页管理</em></a>
 								</li>
 								<li>
-									<a href="card.html"><em>玉龙卡管理</em></a>
-								</li>
-								<li>
 									<a href="user-rate.html"><em>会员等级管理</em></a>
 								</li>
 								<li>
@@ -109,7 +106,7 @@
 							<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="category.html"><em>分类管理</em></a>
+									<a href="category.html"><em>频道</em></a>
 								</li>
 								<li>
 									<a href="goods.html"><em>商品列表管理</em></a>
@@ -151,9 +148,9 @@
 								<li>
 									<a href="chamber.html"><em>商会列表</em></a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-								</li>
+								</li> -->
 							</ul>
 						</li>
 						<li class="">
@@ -359,7 +356,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url:  '/backstage/order/findByStoreId/0/1/10',
+						url: '/backstage/order/findByStoreId/0/1/10',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -377,7 +374,7 @@
 										,
 									jump: function(obj, first) {
 										$.ajax({
-											url:  '/backstage/order/findByStoreId/0/' + obj.curr + '/10',
+											url: '/backstage/order/findByStoreId/0/' + obj.curr + '/10',
 											type: 'GET',
 											headers: {
 												'Authorization': sessionid,
@@ -423,7 +420,7 @@
 						} else {
 							_this.issearch = true;
 							$.ajax({
-								url:  '/backstage/order/' + _this.searchid,
+								url: '/backstage/order/' + _this.searchid,
 								type: 'GET',
 								headers: {
 									'Authorization': sessionid,
@@ -444,7 +441,7 @@
 						}, function(index, layero){
 						  //按钮【按钮一】的回调
 						  $.ajax({
-						  	url:  '/backstage/order/' + ids,
+						  	url: '/backstage/order/' + ids,
 						  	type: 'DELETE',
 						  	headers: {
 						  		'Authorization': sessionid,
@@ -526,7 +523,7 @@
 							})
 						}else {
 							$.ajax({
-								url:  '/backstage/order/findLogisticsByOrderId/' + ids,
+								url: '/backstage/order/findLogisticsByOrderId/' + ids,
 								type: 'GET',
 								headers: {
 									'Authorization': sessionid,

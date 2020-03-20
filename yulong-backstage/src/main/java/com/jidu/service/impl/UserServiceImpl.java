@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,9 +60,18 @@ public class UserServiceImpl implements UserService {
         int userInfoAuthentication = userInfo.getAuthentication();
         userInfo.setAuthentication(authentication);
         if (2 == authentication && 2 != userInfoAuthentication) {//第一次实名认证
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_YEAR,364);
+            Date time = calendar.getTime();
             userInfo.setVipIs(2);
+            userInfo.setVipStart(new Date());
+            userInfo.setVipEnd(time);
         }
         userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return new Result(ResultCode.SUCCESS);
     }
+
+
 }
+
+

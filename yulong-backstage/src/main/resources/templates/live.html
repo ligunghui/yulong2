@@ -107,7 +107,7 @@
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
-        						<a href="category.html"><em>分类管理</em></a>
+        						<a href="category.html"><em>频道</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
@@ -149,9 +149,9 @@
         					<li>
         						<a href="chamber.html"><em>商会列表</em></a>
         					</li>
-        					<li>
+        					<!-- <li>
         						<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-        					</li>
+        					</li> -->
         				</ul>
         			</li>
         			<li class="">
@@ -226,7 +226,7 @@
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 						    <div class="panel-heading textalign-left">
-						        <a class="btn btn-blue btn-sm" href="addlive.html">添加直播频道</a>
+						        <a class="btn btn-blue btn-sm" href="addlive.html?id=add">添加直播频道</a>
 						    </div>
 						    <div class="panel-body">
 						        <div class="table-responsive">
@@ -237,29 +237,32 @@
 												<th>ID</th>
 						                        <th>频道名称</th>
 						                        <th>直播封面</th>
-                                                <th>开播时间</th>
+						                        <th>状态</th>
 						                        <th>操作</th>
 						                    </tr>
 						                </thead>
 						                <tbody>
-						                    <tr>
+						                    <tr v-for="(item,index) in bannerList" :key="index">
 												<td><input type="checkbox" name="" id="" value="" /></td>
-						                        <td tableedit>110000</td>
-						                        <td tableedit>李嘉琪直播间</td>
-						                        <td ><a class="colorblue" href="javascript:;" popupimg="assets/img/logo.png">【预览】</a></td>
-                                                <td tableedit>每日10:00-12:00</td>
+						                        <td>{{item.id}}</td>
+						                        <td>{{item.title}}</td>
+						                        <td ><a class="colorblue" @click="lookat(item.cover,'img')">【预览】</a></td>
+												<td>{{item.status ? '开播' : '关播'}}</td>
 												<td>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a>
-													<a class="btn btn-blue btn-sm" href="javascript:;" rowdel>删除</a>
+													<a class="btn btn-blue btn-sm" @click="popMsg(item.id)">查看信息</a>
+													<a class="btn btn-blue btn-sm" @click="open(item.id,item.status)">{{item.status ? '关播' : '开播'}}</a>
+													<a class="btn btn-blue btn-sm" :href="'addlive.html?id='+item.id">编辑</a>
 												</td>
 						                    </tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
 					</div>
 				</div>
+			</div>
 				
             <!-- /. PAGE INNER  -->
         </div>
@@ -282,5 +285,168 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/common.js"></script>
+	<script src="assets/js/link.js"></script>
+	<script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#page-wrapper',
+			data:{
+				bannerList:null,
+				mypop:null
+			},
+			created() {
+				this.load()
+			},
+			methods:{
+				load() {
+					let _this = this;
+					$.ajax({
+						url: appurl + '/live/page?page=1',
+						type: 'POST',
+						contentType: 'application/json',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.bannerList = res.list
+							layui.use('laypage', function(){
+							  var laypage = layui.laypage;
+							  
+							  //执行一个laypage实例
+							  laypage.render({
+							    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+							    ,count: res.count //数据总数，从服务端得到
+								,jump: function(obj, first){
+								    $.ajax({
+										url: appurl + '/live/page?page='+obj.curr,
+								    	type: 'POST',
+										contentType: 'application/json',
+								    	headers: {
+								    		'Authorization': sessionid,
+								    	},
+								    	success: (res) => {
+								    		_this.bannerList = res.list
+								    	},
+								    	fail:(res) => {
+								    	}
+								    })
+								    //首次不执行
+								    // if(!first){
+								    //   //do something
+								    // }
+								  }
+							  });
+							});
+						},
+						fail:(res) => {
+						}
+					})
+				},
+				lookat(cons,types) {
+					if(types == 'img') {
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'封面图',
+								content:`<img src="${cons}" style="max-width:300px;"/>"`,
+								area:'auto'
+							})
+						})
+					}
+				},
+				popMsg(ids) {
+					var _this = this;
+					$.ajax({
+						url: appurl + '/live/selectById?id=' + ids,
+						type: 'POST',
+						contentType: 'application/json',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							_this.mypop = res;
+							var divs = `<div class=" page-block" id="pops" style="max-width:100%;box-sizing:border-box;padding:15px;">
+											<div class="block-con">
+												<p>id:${res.id}</p>
+											</div>
+											<div class="block-con">
+												<p>名称:${res.title}</p>
+											</div>
+											<div class="block-con">
+												<p>封面:</p>
+												<p><img src="${res.cover}" style="max-width:300px;"></p>
+											</div>
+											<div class="block-con">
+												<p>直播地址:</p>
+												<p>${res.liveAddress}</p>
+											</div>
+											<div class="block-con">
+												<p>推流地址:</p>
+												<p>${res.pushAddress}</p>
+											</div>
+										</div>`
+							layui.use('layer',function() {
+								var layer = layui.layer;
+								
+								layer.open({
+									type:1,
+									title:'信息',
+									content:divs,
+									area:'auto',
+								})
+							})
+						},
+						fail:(res) => {
+						}
+					})
+					
+				},
+				open(ids,sts) {
+					if(sts) {
+						$.ajax({
+							url: appurl + '/live/off?id='+ids,
+							type: 'POST',
+							contentType: 'application/json',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								layer.msg(res.message)
+								if(res.code == 200) {
+									setTimeout(function() {
+										_this.load()
+									},1000)
+									
+								}
+							},
+							fail:(res) => {
+							}
+						})
+					}else {
+						$.ajax({
+							url: appurl + '/live/on?id='+ids,
+							type: 'POST',
+							contentType: 'application/json',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								layer.msg(res.message)
+								if(res.code == 200) {
+									setTimeout(function() {
+										_this.load()
+									},1000)
+								}
+							},
+							fail:(res) => {
+							}
+						})
+					}
+				}
+			}
+		})
+	</script>
 </body>
 </html>

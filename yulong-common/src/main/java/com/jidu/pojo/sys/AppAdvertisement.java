@@ -22,7 +22,9 @@ public class AppAdvertisement {
     @ApiModelProperty(value = "图片")
     private String img;
     @ApiModelProperty(value = "1图片2视频")
-    private int type;
+    private Integer type;
     @ApiModelProperty(value = "1是2否")
-    private int isShow;
+    private Integer isShow;
+    @ApiModelProperty(value = "1广告页2引导页")
+    private Integer mold;
 }

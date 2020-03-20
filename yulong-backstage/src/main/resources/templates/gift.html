@@ -106,7 +106,7 @@
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="category.html"><em>分类管理</em></a>
+								<a href="category.html"><em>频道</em></a>
 							</li>
 							<li>
 								<a href="goods.html"><em>商品列表管理</em></a>
@@ -148,9 +148,9 @@
 							<li>
 								<a href="chamber.html"><em>商会列表</em></a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="chamber-apply.html"><em>商会入驻申请</em></a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="">
@@ -242,7 +242,6 @@
 											<th>ID</th>
 											<!-- <th>添加时间</th> -->
 											<th>运费</th>
-											<th>是否推荐到首页</th>
 											<th>商品图片</th>
 											<th>新人专区</th>
 											<th>市场价</th>
@@ -262,7 +261,6 @@
 											<td>{{item.id}}</td>
 											<!-- <td>{{item.addtime}}</td> -->
 											<td>{{item.postage}}</td>
-											<td>{{item.homePage ? '是' : '否'}}</td>
 											<td><a class="colorblue" @click="lookat(item.img,'img3')">[预览]</a></td>
 											<td>{{item.isNew ? '是' : '否'}}</td>
 											<td>{{item.markePrice}}</td>
@@ -284,7 +282,6 @@
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
 											<td>{{item.postage}}</td>
-											<td>{{item.homePage ? '是' : '否'}}</td>
 											<td><a class="colorblue" @click="lookat(item.img,'img3')">[预览]</a></td>
 											<td>{{item.isNew ? '是' : '否'}}</td>
 											<td>{{item.markePrice}}</td>
@@ -351,7 +348,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url:  '/backstage/giftPack/1/10',
+				url: '/backstage/giftPack/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -367,7 +364,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url:  '/backstage/giftPack/'+obj.curr+'/10',
+						    	url: '/backstage/giftPack/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -398,7 +395,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url:  '/backstage/giftPack/' + _this.searchid,
+						url: '/backstage/giftPack/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -415,7 +412,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url:  '/backstage/giftPack/' + ids,
+					url: '/backstage/giftPack/' + ids,
 					type: 'delete',
 					headers: {
 						'Authorization': sessionid,
