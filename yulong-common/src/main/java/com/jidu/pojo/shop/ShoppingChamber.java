@@ -8,6 +8,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -44,4 +45,6 @@ public class ShoppingChamber {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date validityTime;
+    @ApiModelProperty(value = "总钱数")
+    private BigDecimal totalMoney;
 }

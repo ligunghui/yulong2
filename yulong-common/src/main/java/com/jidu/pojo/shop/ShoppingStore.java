@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -63,4 +64,6 @@ public class ShoppingStore {
     private String storeKeywords;
     @ApiModelProperty(value = "拒绝原因")
     private String violationReseaon;
+    @ApiModelProperty(value = "总钱数")
+    private BigDecimal totalMoney;
 }

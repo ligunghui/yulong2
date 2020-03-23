@@ -7,7 +7,9 @@ import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.pojo.goods.ShoppingGoods;
 import com.jidu.pojo.shop.ShoppingBanner;
+import com.jidu.pojo.shop.ShoppingStore;
 import com.jidu.pojo.withdrawal.WithdrawalApplication;
+import com.jidu.service.StoreService;
 import com.jidu.service.WithdrawalService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,10 +34,20 @@ import java.util.Map;
 public class WithdrawalApplicationController extends BusinessBaseController {
     @Autowired
     private WithdrawalService withdrawalService;
+    @Autowired
+    private StoreService storeService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "申请提现")
     public Result save(@RequestBody WithdrawalApplication withdrawalApplication) {
+        ShoppingStore shoppingStore = storeService.findById(storeId);
+        if (shoppingStore.getTotalMoney()==null){
+            return new Result(201,"可用余额不足",false);
+        }
+        int a = shoppingStore.getTotalMoney().compareTo(withdrawalApplication.getMoney());
+        if (a==-1){
+            return new Result(201,"可用余额不足",false);
+        }
         withdrawalApplication.setUid(storeId);
         withdrawalApplication.setUserName(userName);
         withdrawalApplication.setUserType(2);

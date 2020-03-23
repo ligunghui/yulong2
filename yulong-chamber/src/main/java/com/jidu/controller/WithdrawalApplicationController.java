@@ -5,7 +5,10 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.pojo.shop.ShoppingChamber;
+import com.jidu.pojo.shop.ShoppingStore;
 import com.jidu.pojo.withdrawal.WithdrawalApplication;
+import com.jidu.service.ChamberService;
 import com.jidu.service.WithdrawalService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,10 +33,20 @@ import java.util.Map;
 public class WithdrawalApplicationController extends BusinessBaseController{
     @Autowired
     private WithdrawalService withdrawalService;
+    @Autowired
+    private ChamberService chamberService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "申请提现")
     public Result save(@RequestBody WithdrawalApplication withdrawalApplication) {
+        ShoppingChamber shoppingChamber = chamberService.findById(Integer.parseInt(storeId));
+        if (shoppingChamber.getTotalMoney()==null){
+            return new Result(201,"可用余额不足",false);
+        }
+        int a = shoppingChamber.getTotalMoney().compareTo(withdrawalApplication.getMoney());
+        if (a==-1){
+            return new Result(201,"可用余额不足",false);
+        }
         withdrawalApplication.setUid(storeId);
         withdrawalApplication.setUserName(userName);
         withdrawalApplication.setUserType(3);

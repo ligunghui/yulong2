@@ -8,6 +8,7 @@ import com.jidu.entity.ResultCode;
 
 import com.jidu.pojo.sys.AboutUs;
 import com.jidu.service.AboutUsService;
+import com.jidu.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -55,5 +56,8 @@ public class AboutUsController {
         Page<AboutUs> page = PageHelper.startPage(pageNum, pageSize);
         List<AboutUs> aboutUs = aboutUsService.search();
         return new PageResult(page.getTotal(), page.getResult());
+    }
+    public static void main(String[] args) {
+        System.out.println(MD5.encrypByMd5("jidu@123"));
     }
 }

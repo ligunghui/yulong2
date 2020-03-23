@@ -39,6 +39,8 @@ public class WithdrawalApplication {
     private  String account;
     @ApiModelProperty(value = "用户名")
     private  String userName;
+    @ApiModelProperty(value = "真实姓名")
+    private  String trueName;
     @ApiModelProperty(value = "用户类型(1用户2商户3商会)")
     private  Integer userType;
 }
