@@ -26,8 +26,8 @@ public class BusinessAdmin {
     @ApiModelProperty(value = "商户id")
     private String storeId;
     @ApiModelProperty(value = "(是否可用1是0否)")
-    private int useable;
+    private Integer useable;
     @ApiModelProperty(value = "0平台总管理员1平台管理2商会管理3商户管理")
-    private int type;
+    private Integer type;
 
 }

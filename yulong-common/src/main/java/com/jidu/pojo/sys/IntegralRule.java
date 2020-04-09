@@ -26,4 +26,6 @@ public class IntegralRule {
     private Integer register;
     @ApiModelProperty(value = "分享商品(个)")
     private Integer shareGoods;
+    @ApiModelProperty(value = "玉龙卡(个)")
+    private Integer vipCard;
 }

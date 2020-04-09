@@ -37,6 +37,7 @@ public class WithdrawalServiceImpl implements WithdrawalService {
         if (2==withdrawalApplication.getStatus()){
             return  new Result(201,"申请已通过,不能删除",false);
         }
+        withdrawalMapper.deleteByPrimaryKey(id);
         return  new Result(ResultCode.SUCCESS);
     }
 

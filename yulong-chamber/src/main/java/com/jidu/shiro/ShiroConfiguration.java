@@ -1,4 +1,4 @@
-package com.jidu;
+package com.jidu.shiro;
 
 import com.jidu.shiro.realm.MyRealm;
 import com.jidu.shiro.session.CustomSessionManager;
@@ -23,7 +23,7 @@ public class ShiroConfiguration {
     //1.创建realm
     @Bean
     public MyRealm getRealm() {
-        return new MyRealm();
+        return new ChamberRealm();
     }
 
     //2.创建安全管理器
@@ -68,6 +68,7 @@ public class ShiroConfiguration {
         RedisManager redisManager = new RedisManager();
 	    redisManager.setHost(host);
 	    redisManager.setPort(port);
+	    redisManager.setTimeout(7200000);
         return redisManager;
     }
 
@@ -86,6 +87,7 @@ public class ShiroConfiguration {
     public DefaultWebSessionManager sessionManager() {
         CustomSessionManager sessionManager = new CustomSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO());
+        sessionManager.setGlobalSessionTimeout(7200000);
         //禁用cookie
         //sessionManager.setSessionIdCookieEnabled(false);
         //禁用url重写   url;jsessionid=id
@@ -98,6 +100,7 @@ public class ShiroConfiguration {
      */
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
+
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }

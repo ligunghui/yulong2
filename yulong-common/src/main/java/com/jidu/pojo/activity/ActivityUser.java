@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class ActivityUser {
     @Id
     @KeySql(useGeneratedKeys = true)
-    private  int id;
-    private  int activityId;
+    private  Integer id;
+    private  Integer activityId;
     private  String userId;
 }

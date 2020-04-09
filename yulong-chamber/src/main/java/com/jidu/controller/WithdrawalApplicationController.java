@@ -30,7 +30,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/chamber/withdrawal")
 @Api(value = "提现", description = "提现")
-public class WithdrawalApplicationController extends BusinessBaseController{
+public class WithdrawalApplicationController extends BusinessBaseController {
     @Autowired
     private WithdrawalService withdrawalService;
     @Autowired
@@ -40,12 +40,15 @@ public class WithdrawalApplicationController extends BusinessBaseController{
     @ApiOperation(value = "申请提现")
     public Result save(@RequestBody WithdrawalApplication withdrawalApplication) {
         ShoppingChamber shoppingChamber = chamberService.findById(Integer.parseInt(storeId));
-        if (shoppingChamber.getTotalMoney()==null){
-            return new Result(201,"可用余额不足",false);
+        if (shoppingChamber == null) {
+            return new Result(201, "可用余额不足", false);
+        }
+        if (shoppingChamber.getTotalMoney() == null) {
+            return new Result(201, "可用余额不足", false);
         }
         int a = shoppingChamber.getTotalMoney().compareTo(withdrawalApplication.getMoney());
-        if (a==-1){
-            return new Result(201,"可用余额不足",false);
+        if (a == -1) {
+            return new Result(201, "可用余额不足", false);
         }
         withdrawalApplication.setUid(storeId);
         withdrawalApplication.setUserName(userName);

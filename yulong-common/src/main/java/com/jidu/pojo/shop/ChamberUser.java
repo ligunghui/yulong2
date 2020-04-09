@@ -27,7 +27,7 @@ public class ChamberUser {
     @ApiModelProperty(value = "商会id")
     private Integer chamberId;
     @ApiModelProperty(value = "商会标签")
-    private Integer chamberLabel;
+    private String chamberLabel;
     @ApiModelProperty(value = "真实姓名")
     private String trueName;
     @ApiModelProperty(value = "公司名称")

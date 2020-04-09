@@ -789,6 +789,9 @@ div>label:first-child .layui-form-radio {
 .textalign-left {
 	text-align: left;
 }
+.textalign-right {
+	text-align: right;
+}
 .colorblue {
 	color: #29A7E1;
 }
@@ -868,4 +871,22 @@ table .buttons {
 }
 .layui-laypage a:hover {
     color: #be0715;
+}
+/* 树形图 */
+.layui-form-checked[lay-skin=primary] i {
+    border-color: #29a7e1!important;
+    background-color: #29a7e1;
+    color: #fff;
+}
+.layui-icon-addition:before, .layui-icon-subtraction:before {
+    margin-left: -1px;
+}
+
+.pop .form-control {
+	width: 100%;
+}
+
+.layui-form-checkbox[lay-skin=primary]:hover i {
+    border-color: #29a7e1;
+    color: #fff;
 }

@@ -13,5 +13,5 @@ public class SevenOrder {
 
 
     private String name;
-    private int value;
+    private Integer value;
 }

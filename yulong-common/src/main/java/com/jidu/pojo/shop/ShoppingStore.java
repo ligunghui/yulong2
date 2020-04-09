@@ -66,4 +66,12 @@ public class ShoppingStore {
     private String violationReseaon;
     @ApiModelProperty(value = "总钱数")
     private BigDecimal totalMoney;
+    @ApiModelProperty(value = "纬度")
+    private String lat;
+    @ApiModelProperty(value = "经度")
+    private String lng;
+    @ApiModelProperty(value = "1=>普通商户 2=>本地服务商户")
+    private Integer storeType;
+    @ApiModelProperty(value = "商户资质图片")
+    private String certificates;
 }

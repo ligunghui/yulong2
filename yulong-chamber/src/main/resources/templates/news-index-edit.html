@@ -72,17 +72,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="">
-						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="platform-notice.html"><em>公告</em></a>
-							</li>
-							<li>
-								<a class="" href="platform-banner.html"><em>banner图</em></a>
-							</li>
-						</ul>
-					</li>
+					
 					<li>
 						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
 					</li>
@@ -94,6 +84,9 @@
 							</li>
 							<li>
 								<a class="" href="indexcontrol-store.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a class="" href="indexcontrol-member.html"><em>成员管理</em></a>
 							</li>
 						</ul>
 					</li>
@@ -158,8 +151,8 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">是否可见</span>
 									<div class="col-md-10_5 col-xs-12">
-										<strong class="buttons buttons-default"><i class="buttons-point"></i></strong>
-										<input class="displaynone switch" type="text" name="isopen" ref="display"/>
+										<strong class="buttons buttons-default displayTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch display" type="text" name="isopen" ref="display"/>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
@@ -178,8 +171,8 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">是否推到首页</span>
 									<div class="col-md-10_5 col-xs-12">
-										<strong class="buttons buttons-default"><i class="buttons-point"></i></strong>
-										<input class="displaynone switch" type="text" name="isopen" ref="homePage"/>
+										<strong class="buttons buttons-default homePageTop"><i class="buttons-point"></i></strong>
+										<input class="displaynone switch homePage" type="text" name="isopen" ref="homePage"/>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
@@ -255,8 +248,7 @@
 							success: (res) => {
 								_this.bannerList = res.data;
 								_this.$nextTick(() => {
-									// 设置HTML内容
-									window.editor.html(_this.bannerList.context);
+									
 									_this.headPic = _this.bannerList.headPic;
 									
 									$('.logopath').val(_this.bannerList.headPic)
@@ -264,6 +256,25 @@
 									_this.name = _this.bannerList.name;
 									_this.sordOrder = _this.bannerList.sordOrder;
 									_this.subheading = _this.bannerList.subheading;
+									_this.homePage = _this.bannerList.homePage;
+									_this.display = _this.bannerList.display;
+									
+									if(res.data.homePage) {
+										$('.homePage').val('on')
+											$('.homePageTop').addClass('buttons-active').removeClass('buttons-dafault')
+									}else {
+										$('.homePage').val('off')
+										$('.homePageTop').addClass('buttons-dafault').removeClass('buttons-active')
+									}
+									if(res.data.display) {
+										$('.display').val('on')
+											$('.displayTop').addClass('buttons-active').removeClass('buttons-dafault')
+									}else {
+										$('.display').val('off')
+										$('.displayTop').addClass('buttons-dafault').removeClass('buttons-active')
+									}
+									// 设置HTML内容
+									window.editor.html(_this.bannerList.context);
 								})
 							}
 						})
@@ -363,9 +374,19 @@
 					})
 		
 					// 关闭过滤模式，保留所有标签
-					KindEditor.options.filterMode = false;
+					// KindEditor.options.filterMode = false;
 					KindEditor.ready(function(K) {
 						window.editor = K.create('#editor_id', {
+							items:[
+							        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+							        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+							        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+							        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+							        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+							        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+							        'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+							        'anchor', 'link', 'unlink', '|', 'about'
+							],
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
 							uploadJson:  '/Kindeditor/uploadFile',
@@ -406,9 +427,9 @@
 						}
 						// 设置HTML内容
 						v.context = window.editor.html();
-						v.display = _this.$refs.display == 'on' ? 1 : 0;
+						v.display = _this.$refs.display.value == 'on' ? 1 : 0;
 						v.headPic = _this.headPic;
-						v.homePage = _this.$refs.homePage == 'on' ? 1 : 0;
+						v.homePage = _this.$refs.homePage.value == 'on' ? 1 : 0;
 						v.name = _this.name;
 						v.sordOrder = _this.sordOrder;
 						v.subheading = _this.subheading;

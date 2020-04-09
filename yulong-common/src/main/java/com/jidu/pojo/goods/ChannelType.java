@@ -22,5 +22,6 @@ public class ChannelType {
     private Integer channelId;
     private Integer typeId;
     private String typeName;
+    private String storeId;
 
 }

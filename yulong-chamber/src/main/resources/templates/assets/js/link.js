@@ -21,7 +21,16 @@ if(/login.html/.test(window.location.href)) {
 	}else {
 		$(function() {
 			var names = localStorage.getItem('userName');
-			$('nav .header-right .layui-btn-radius').text('账号：' + names)
+			let times = null;
+			times = setInterval(function() {
+				if(names == null) {
+					names = localStorage.getItem('userName');
+					$('nav .header-right .layui-btn-radius').text('账号：' + names)
+				}else {
+					clearInterval(times)
+					$('nav .header-right .layui-btn-radius').text('账号：' + names)
+				}
+			},200)
 			
 			$('.navbar .header-right').children().eq(1).click(function() {
 				window.location.href="index.html"

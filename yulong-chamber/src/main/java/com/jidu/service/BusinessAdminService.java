@@ -1,6 +1,7 @@
 package com.jidu.service;
 
 import com.jidu.pojo.shop.BusinessAdmin;
+import com.jidu.pojo.sys.Permission;
 
 import java.util.List;
 
@@ -22,4 +23,8 @@ public interface BusinessAdminService {
     void deleteBusinessAdminById(int id);
 
     List<BusinessAdmin> findBusinessAdminByUserName(String username);
+
+    BusinessAdmin findByUserName(String mobile);
+
+    List<Permission> findPermission(BusinessAdmin businessAdmin);
 }

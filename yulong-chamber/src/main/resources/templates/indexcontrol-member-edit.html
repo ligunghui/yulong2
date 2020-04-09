@@ -56,7 +56,7 @@
 						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
 					</li>
 					<li>
-						<a href="indexmsg-msg.html" class="active-menu"><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
+						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
 					</li>
 					<li class="">
 						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
@@ -76,7 +76,7 @@
 					<li>
 						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
 					</li>
-					<li class="">
+					<li class="active">
 						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
@@ -86,7 +86,7 @@
 								<a class="" href="indexcontrol-store.html"><em>商户管理</em></a>
 							</li>
 							<li>
-								<a class="" href="indexcontrol-member.html"><em>成员管理</em></a>
+								<a class="active-menu" href="indexcontrol-member.html"><em>成员管理</em></a>
 							</li>
 						</ul>
 					</li>
@@ -116,9 +116,7 @@
 
 				<div class="row">
 					<div class="col-md-12 nav-topdown">
-						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
-						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexmsg-msg.html">商会信息管理</a> > <a href="#">修改商会信息</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexcontrol-member.html">商会管理</a> > <a href="#">成员管理</a> > <a href="#">编辑成员</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -131,26 +129,7 @@
 						<form class="row layui-form" action="">
 							<div class="block-con col-xs-12">
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会名称</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="text" class="form-control col-md-5" v-model="name" />
-									</div>
-								</label>
-								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会地址</span>
-									<div class="col-md-10_5 col-xs-12">
-										<input type="text" class="form-control col-md-5" v-model="address" />
-									</div>
-								</label>
-								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">是否显示在首页</span>
-									<div class="col-md-10_5 col-xs-12">
-										<strong class="buttons buttons-default displayTop"><i class="buttons-point"></i></strong>
-										<input class="displaynone switch display" type="text" name="isopen" ref="display" value="off"/>
-									</div>
-								</label>
-								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会头像</span>
+									<span class="col-md-1_5 col-xs-12">成员头像</span>
 									<div class="col-md-10_5 col-xs-12">
 										<input class="form-control col-md-5 logopath" type="text" name="logopath" id="" value="" lay-verify="required" />
 										<div class="layui-upload col-md-8" id="layerDemo">
@@ -163,20 +142,50 @@
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会logo</span>
+									<span class="col-md-1_5 col-xs-12">商会职称</span>
 									<div class="col-md-10_5 col-xs-12">
-										<input class="form-control col-md-5 logopath2" type="text" name="logopath2" id="" value="" lay-verify="required" />
-										<div class="layui-upload col-md-8" id="layerDemo2">
-											<button type="button" class="layui-btn btn-bgfff" id="uploadlogo2"><img src="assets/img/upload.png">本地上传图片</button>
-										</div>
-										<div class="layui-upload-list col-md-12">
-											<img class="layui-upload-img" id="demo2">
-											<p id="demoText2"></p>
-										</div>
+										<input type="text" class="form-control col-md-5" v-model="chamberTitle" />
+										<b>如：会长、副会长之类</b>
 									</div>
 								</label>
 								<label class="col-md-12 col-xs-12">
-									<span class="col-md-1_5 col-xs-12">商会介绍</span>
+									<span class="col-md-1_5 col-xs-12">地址</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userAddress" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">公司名称</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userCompany" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">所在行业</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userIndustry" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">成员邮箱</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userMail" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">成员姓名</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userName" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">联系电话</span>
+									<div class="col-md-10_5 col-xs-12">
+										<input type="text" class="form-control col-md-5" v-model="userPhone" />
+									</div>
+								</label>
+								<label class="col-md-12 col-xs-12">
+									<span class="col-md-1_5 col-xs-12">介绍</span>
 									<div class="col-md-10_5 col-xs-12">
 										<textarea id="editor_id" name="content" style="width: 700px; height: 300px;">&lt;strong&gt;HTML内容&lt;/strong&gt; </textarea>
 									</div>
@@ -225,47 +234,23 @@
 			var app = new Vue({
 				el: '#page-wrapper',
 				data: {
-					bannerList: [],
-					address: '',
-					display: '',
-					imgs: '',
-					introduction: '',
-					log: '',
-					name: '',
+					userAvatar: '',//头像
+					chamberTitle:'',
+					userAddress:'',
+					userCompany:'',
+					userIndustry:'',
+					userMail:'',
+					userName:'',
+					userPhone:'',
+					userIntro:null,
+					ids:''
 				},
 				created() {
 					let _this = this;
-					$.ajax({
-						url:  '/chamber/index',
-						type: 'GET',
-						headers: {
-							'Authorization': sessionid,
-						},
-						success: (res) => {
-							_this.bannerList = res.data;
-							_this.$nextTick(() => {
-								_this.address = _this.bannerList.address;
-								_this.name = _this.bannerList.name;
-								
-								$('.logopath').val(_this.bannerList.img)
-								$('#demo1').attr('src', _this.bannerList.img);
-								$('.logopath2').val(_this.bannerList.log)
-								$('#demo2').attr('src', _this.bannerList.log);
-								_this.imgs = _this.bannerList.img;
-								_this.log = _this.bannerList.log;
-								_this.display = _this.bannerList.display;
-								if(_this.bannerList.display) {
-									$('.display').val('on');
-									$('.displayTop').addClass('buttons-active').removeClass('buttons-default');
-								}else {
-									$('.display').val('off');
-									$('.displayTop').removeClass('buttons-active').addClass('buttons-default');
-								}
-								// 设置HTML内容
-								window.editor.html(_this.bannerList.introduction);
-							})
-						}
-					})
+					_this.ids = window.location.href.split('=')[1];
+					if(_this.ids != 'add') {
+						_this.load()
+					}
 				},
 				mounted() {
 					let _this = this;
@@ -298,47 +283,11 @@
 								});
 							},
 							done: function(res) {
-								_this.imgs = res.data
+								_this.userAvatar = res.data
 							},
 							error: function() {
 								//演示失败状态，并实现重传
 								var demoText = $('#demoText');
-								demoText.html(
-									'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-								demoText.find('.demo-reload').on('click', function() {
-									uploadInst.upload();
-								});
-							}
-						});
-						var uploadInst2 = upload.render({
-							elem: '#uploadlogo2',
-							url:  '/upload/upload',
-							headers: {
-								'Authorization': sessionid
-							},
-							accept: 'images',
-							choose: function(obj) {
-								
-								//将每次选择的文件追加到文件队列
-								var files = obj.pushFile();
-								//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-								obj.preview(function(index, file, result) {
-									console.log(file.name); //得到文件对象
-									$('.logopath2').val(file.name)
-								});
-							},
-							before: function(obj) {
-								//预读本地文件示例，不支持ie8
-								obj.preview(function(index, file, result) {
-									$('#demo2').attr('src', result); //图片链接（base64）
-								});
-							},
-							done: function(res) {
-								_this.log = res.data
-							},
-							error: function() {
-								//演示失败状态，并实现重传
-								var demoText = $('#demoText2');
 								demoText.html(
 									'<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
 								demoText.find('.demo-reload').on('click', function() {
@@ -379,32 +328,64 @@
 					});
 				},
 				methods: {
-					subs() {
+					load() {
 						let _this = this;
-						let v;
-						if(_this.bannerList) {
-							v = _this.bannerList
-						}
-						if(!v) {
-							v = {
-								"name":'',
-								"log":'',
-								"img" : '',
-								"introduction" : '',
-								"display" : '',
-								"address" : ''
+						$.ajax({
+							url:  '/chamber/member/' + _this.ids,
+							type: 'GET',
+							headers: {
+								'Authorization': sessionid,
+							},
+							success: (res) => {
+								_this.bannerList = res.data;
+								_this.$nextTick(() => {
+									// 设置HTML内容
+									window.editor.html(_this.bannerList.userIntro);
+									$('.logopath').val(_this.bannerList.userAvatar)
+									$('#demo1').attr('src', _this.bannerList.userAvatar);
+									_this.userAvatar = _this.bannerList.userAvatar;
+									_this.chamberTitle = _this.bannerList.chamberTitle;
+									_this.userAddress = _this.bannerList.userAddress;
+									_this.userCompany = _this.bannerList.userCompany;
+									_this.userIndustry = _this.bannerList.userIndustry;
+									_this.userMail = _this.bannerList.userMail;
+									_this.userName = _this.bannerList.userName;
+									_this.userPhone = _this.bannerList.userPhone;
+								})
 							}
+						})
+					},
+					subs() {
+						let _this = this,
+							ajaxType = 'POST';
+						let v = {
+								"userAvatar":'',
+								"chamberTitle":'',
+								"userAddress" : '',
+								"userCompany" : '',
+								"userIndustry" : '',
+								"userMail" : '',
+								"userName" : '',
+								"userPhone" : '',
+								"userIntro" : ''
+							};
+						if(_this.ids != 'add') {
+							v = _this.bannerList
+							ajaxType = 'PUT'
 						}
-						v.name = _this.name;
-						v.log = _this.log;
-						v.img = _this.imgs;
-						v.introduction = window.editor.html();
-						v.display = _this.$refs.display.value == 'on' ? 1 : 0;
-						v.address = _this.address;
+						v.userAvatar = _this.userAvatar;
+						v.chamberTitle = _this.chamberTitle;
+						v.userAddress = _this.userAddress;
+						v.userCompany = _this.userCompany;
+						v.userIndustry = _this.userIndustry;
+						v.userMail = _this.userMail;
+						v.userName = _this.userName;
+						v.userPhone = _this.userPhone;
+						v.userIntro = window.editor.html();
 						
 						$.ajax({
-							url:  '/chamber/index',
-							type: 'PUT',
+							url:  '/chamber/member',
+							type: ajaxType,
 							contentType: 'application/json',
 							headers: {
 								'Authorization': sessionid,
@@ -415,7 +396,7 @@
 								layer.msg(res.message)
 								if (res.code == 10000) {
 									setTimeout(function() {
-										window.location.href = 'indexmsg-msg.html'	
+										// window.location.href = 'indexcontrol-member.html'
 									}, 1200)
 								}
 							}

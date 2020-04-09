@@ -6,6 +6,7 @@
 	<title>智汇玉龙-商会</title>
 	<meta name="Keywords" content="智汇玉龙,商会" />
 	<meta name="Description" content="智汇玉龙商会" />
+
 	<!-- BOOTSTRAP STYLES-->
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
 	<link href="assets/layui/css/layui.css" rel="stylesheet" />
@@ -70,35 +71,28 @@
 							</li>
 						</ul>
 					</li>
-					<li class="active">
-						<a href=""><i class="fa fa-th-large "></i><em>商会公告</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="platform-notice.html"><em>公告</em></a>
-							</li>
-							<li>
-								<a class="active-menu" href="platform-banner.html"><em>banner图</em></a>
-							</li>
-						</ul>
-					</li>
+					
 					<li>
 						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
 					</li>
-					<li class="">
+					<li class="active">
 						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
 							</li>
 							<li>
-								<a class="" href="indexcontrol-store.html"><em>商户管理</em></a>
+								<a href="indexcontrol-store.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a class="active-menu" href="indexcontrol-member.html"><em>成员管理</em></a>
 							</li>
 						</ul>
 					</li>
 					<li>
 						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
 					</li>
-					<li class="">
+					<li>
 						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
@@ -123,25 +117,25 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会公告</a> > <a href="#">banner图</a></a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会管理</a> > <a href="#">成员管理</a></a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>banner图</p>
+						<p>成员管理</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="platform-banner-edit.html?id=add">新增banner图</a>
-								<!-- <div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
-									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div> -->
+								<a class="btn btn-blue" v-show="types == 1" href="indexcontrol-member-edit.html?id=add">添加成员</a>
+								<select class="btn btn-blue btn-md" :class="types == 1 ? 'marginLeft20' : ''" v-model="types">
+									<option value ="0">会员管理</option>
+									<option value ="1">成员管理</option>
+								</select>
 							</div>
-
+					
 						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
@@ -150,44 +144,49 @@
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
 											<th>ID</th>
-											<!-- <th>添加时间</th> -->
-											<!-- <th>到期时间</th> -->
-											<th>内容</th>
-											<!-- <th>是否删除</th> -->
-											<th>发布者</th>
-											<th>发布位置</th>
-											<th>商户ID</th>
+											<th>用户头像</th>
+											<th>{{types == 1 ? '商会职称' : '真实姓名'}}</th>
+											<th v-if="types == 0">商户名称</th>
+											<th>联系电话</th>
+											<th>申请时间</th>
+											<th>商户地址</th>
+											<th>{{types == 1 ? '邮箱' : '处理状态'}}</th>
+											<th>{{types == 1 ? '个人介绍' : '处理人'}}</th>
+											<th v-if="types == 0">处理理由</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-if="!issearch" v-for="(item,index) in bannerList">
+										<tr v-if="types == 0" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<!-- <td>{{item.addtime}}</td> -->
-											<!-- <td>{{item.bannerdate}}</td> -->
-											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
-											<!-- <td>{{item.deletestatus ? '是' : '否'}}</td> -->
-											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
-											<td>{{item.location ? '首页' : '智汇购'}}</td>
-											<td>{{item.storeId}}</td>
+											<td><a class="btn btn-blue" @click="lookat(item.userImg,'img')">预览</a></td>
+											<td>{{item.trueName}}</td>
+											<td>{{item.companyName}}</td>
+											<td>{{item.mobile}}</td>
+											<td>{{item.applyTime}}</td>
+											<td><a class="btn btn-blue btn-sm" @click="lookat(item.address)">查看</a></td>
+											<td class="colorblue">{{item.status | fstatus}}</td>
+											<td>{{item.handlerPeople}}</td>
+											<td><a class="btn btn-blue btn-sm" @click="lookat(item.reason)">查看</a></td>
 											<td>
-												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
+												<a class="btn btn-sm" :class="item.status == 0 ? 'btn-blue' : 'btn-ccc'" @click="edit(item.id,'1',item.status)">通过</a>
+												<a class="btn btn-sm" :class="item.status == 0 ? 'btn-blue' : 'btn-ccc'" @click="edit(item.id,'2',item.status)">拒绝</a>
 											</td>
 										</tr>
-										<tr v-if="issearch">
+										<tr v-if="types == 1" v-for="(items,indexs) in searchList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{searchList.id}}</td>
-											<!-- <td>{{searchList.addtime}}</td> -->
-											<!-- <td>{{item.bannerdate}}</td> -->
-											<td><a class="btn btn-blue" @click="lookat(item.bannerimg)">预览</a></td>
-											<!-- <td>{{item.deletestatus ? '是' : '否'}}</td> -->
-											<td>{{item.isAdminer ? '管理发布' : '店铺发布'}}</td>
-											<td>{{item.location ? '首页' : '智汇购'}}</td>
-											<td>{{item.storeId}}</td>
+											<td>{{items.id}}</td>
+											<td><a class="btn btn-blue" @click="lookat(items.userAvatar,'img')">预览</a></td>
+											<td>{{items.chamberTitle}}</td>
+											<td>{{items.userPhone}}</td>
+											<td>{{items.addtime ? items.addtime.slice(0,10) : '暂无数据'}}</td>
+											<td><a class="btn btn-blue btn-sm" @click="lookat(items.userAddress)">查看</a></td>
+											<td>{{items.userMail}}</td>
+											<td><a class="btn btn-blue btn-sm" @click="lookat(items.userIntro)">查看</a></td>
 											<td>
-												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
+												<a class="btn btn-sm btn-blue" class="btn-blue" @click="edit(items.id,'编辑')">编辑</a>
+												<a class="btn btn-sm btn-blue" class="btn-blue" href="javascript:;" @click="del(items.id,'1')">删除</a>
 											</td>
 										</tr>
 									</tbody>
@@ -199,15 +198,6 @@
 			</div>
 
 			<!-- /. PAGE INNER  -->
-			<div class="popedit displaynone" id="popedit" style="width: 500px;height: 200px;max-width: 100%;">
-				<div class="layui-upload col-md-8" id="layerDemo">
-					<button type="button" class="layui-btn btn-bgfff" id="uploadlogo"><img src="assets/img/upload.png">重新上传图片</button>
-				</div>
-				<div class="layui-upload-list col-md-12">
-					<img class="layui-upload-img" id="demo1" :src="editTxt">
-					<p id="demoText"></p>
-				</div>
-			</div>
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
@@ -234,155 +224,150 @@
 			bannerList: [],
 			issearch: false,
 			searchList: null,
-			editTxt:''
+			types:0,
 		},
 		created() {
-			let _this = this;
-			$.ajax({
-				url:  '/chamber/banner/findByStoreId',
-				type: 'GET',
-				headers: {
-					'Authorization': sessionid,
-				},
-				success: (res) => {
-					_this.bannerList = res.data
-				},
-				fail:(res) => {
-				}
-			})
+			this.load()
 		},
-		mounted() {
-			let _this = this;
-			layui.use('upload',function() {
-				var upload = layui.upload;
-				var uploadInst = upload.render({
-					elem: '#uploadlogo',
-					url:  '/upload/upload',
-					headers: {
-						'Authorization': sessionid
-					},
-					accept: 'images',
-					choose: function(obj) {
-				
-						//将每次选择的文件追加到文件队列
-						var files = obj.pushFile();
-						//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
-						obj.preview(function(index, file, result) {
-							console.log(file.name); //得到文件对象
-							$('.logopath').val(file.name)
-						});
-					},
-					done: function(res) {
-						_this.editTxt =  res.data
-					}
-				});
-			})
+		filters:{
+			fstatus(tys) {
+				if(tys == 0) {
+					return '待审核'
+				}else if(tys == 1) {
+					return '审核通过'
+				}else {
+					return '审核未通过'
+				}
+			}
+		},
+		watch:{
+			types() {
+				let _this = this;
+				if(_this.types == 0) {
+					var underUrl = '/chamber/user/findChamberUserByChamberId'
+					_this.load(underUrl)
+				}else {
+					var underUrl = '/chamber/member'
+					_this.load(underUrl)
+				}
+			}
 		},
 		methods: {
+			load(urls) {
+				let _this = this;
+				var underUrl = urls ? urls : '/chamber/user/findChamberUserByChamberId';
+				$.ajax({
+					url:  underUrl,
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						if(_this.types == 0) {
+							_this.bannerList = res
+						}else {
+							_this.searchList = res.data
+						}
+						
+					},
+					fail:(res) => {
+						layer.msg('请求失败，请刷新页面')
+					}
+				})
+			},
 			mysearch() {
 				let _this = this;
 				if (!_this.searchid) {
 					_this.issearch = false
 				} else {
-					_this.issearch = true;
 					$.ajax({
-						url:  '/chamber/banner/' + _this.searchid,
+						url:  '/chamber/user/findChamberUserById/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
 						},
 						success: (res) => {
 							_this.searchList = res.data
+							_this.issearch = true;
 						}
 					})
 				}
 			},
-			edit(ids,storeids) {
-				let _this = this;
+			edit(ids,tys,sts) {
+				if(tys == '编辑') {
+					window.location.href = 'indexcontrol-member-edit.html?id=' + ids
+					return
+				}
+				if(sts != 0) {
+					layer.msg('此条已审核！')
+					return
+				}
 				$.ajax({
-					url:  '/chamber/banner/' + ids,
+					url:  '/chamber/user/delChamberUser/' + ids + '/' + tys,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
-						_this.editTxt = res.data.bannerimg;
-						let v = res.data;
-						layui.use(['layer','upload'], function(){
-						  var layer = layui.layer;
-						  
-						  layer.open({
-						    type: 1, 
-							title:'修改图片',
-						    content: $('#popedit') ,//这里content是一个普通的String
-							area: 'auto',
-							btn: ['确定', '取消'],
-							yes: function(index, layero){
-							    //按钮【按钮一】的回调
-								v.content = _this.editTxt;
-								layer.close(index)
-								$('#popedit').hide()
-								
-								$.ajax({
-									url:  '/chamber/banner',
-									type: 'PUT',
-									contentType: 'application/json',
-									headers: {
-										'Authorization': sessionid,
-									},
-									dataType: 'json',
-									data: JSON.stringify(v),
-									success: (res) => {
-										layer.msg(res.message)
-										if(res.code == 10000) {
-											setTimeout(function(){
-												window.location.reload()
-											},1200)
-										}
-									},
-									fail: (err) => {
-										layer.msg(err.message)
-									}
-								})
-							  }
-							  ,cancel: function(){ 
-							    //右上角关闭回调
-							    $('#popedit').hide()
-							    //return false 开启该代码可禁止点击该按钮关闭
-							  }
-						  });
-						}); 
-					}
-				})
-			},
-			del(ids) {
-				let _this = this;
-				$.ajax({
-					url:  '/chamber/banner/' + ids,
-					type: 'delete',
-					headers: {
-						'Authorization': sessionid,
-					},
-					success: (res) => {
 						layer.msg(res.message)
-						setTimeout(function(){
-							window.location.reload()
-						},1200)
-						
+						if(res.code == 10000) {
+							setTimeout(function() {
+								window.location.reload()
+							},1200)
+							
+						}
 					}
 				})
 			},
-			lookat(cons) {
-				layui.use('layer', function(){
-				  var layer = layui.layer;
-				  
-				  layer.open({
-				    type: 1, 
-					title:'内容',
-				    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
-					area: 'auto'
-				  });
-				}); 
+			del(ids,tys) {
+				let _this = this;
+				if(tys) {
+					$.ajax({
+						url:  '/chamber/member/' + ids,
+						type: 'DELETE',
+						headers: {
+							'Authorization': sessionid,
+						},
+						success: (res) => {
+							layer.msg(res.message)
+							if(res.code == 10000) {
+								setTimeout(function() {
+									_this.load()
+								},1200)
+							}
+						}
+					})
+				}
+			},
+			lookat(cons,tys) {
+				if(!cons) {
+					layer.msg('您查看的内容为空')
+					return
+				}
+				if(tys == 'img')  {
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+					    type: 1, 
+						title:'内容',
+					    content: '<img src="' + cons + '" style="max-width:300px;max-height:500px;"/>' ,//这里content是一个普通的String
+						area: 'auto'
+					  });
+					}); 
+				}else {
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+					    type: 1, 
+						title:'内容',
+					    content: cons ,//这里content是一个普通的String
+						area: 'auto'
+					  });
+					}); 
+				}
+				
 			}
 		}
 	})

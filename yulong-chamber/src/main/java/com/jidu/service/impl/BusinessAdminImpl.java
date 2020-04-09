@@ -1,7 +1,9 @@
 package com.jidu.service.impl;
 
 import com.jidu.mapper.BusinessAdminMapper;
+import com.jidu.mapper.PermissionMapper;
 import com.jidu.pojo.shop.BusinessAdmin;
+import com.jidu.pojo.sys.Permission;
 import com.jidu.service.BusinessAdminService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import java.util.List;
 public class BusinessAdminImpl implements BusinessAdminService {
     @Autowired
     private BusinessAdminMapper chamberAdminMapper;
+    @Autowired
+    private PermissionMapper permissionMapper;
 
     @Override
     public void updateBusinessAdmin(BusinessAdmin chamberAdmin) {
@@ -36,7 +40,7 @@ public class BusinessAdminImpl implements BusinessAdminService {
         String username = chamberAdmin.getUsername();
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         chamberAdmin.setPassword(password);
-        //chamberAdmin.setType(3);
+        chamberAdmin.setType(3);
         //chamberAdmin.setUseable(1);
         chamberAdminMapper.insert(chamberAdmin);
     }
@@ -65,5 +69,22 @@ public class BusinessAdminImpl implements BusinessAdminService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("username", username);
         return chamberAdminMapper.selectByExample(example);
+    }
+
+    @Override
+    public BusinessAdmin findByUserName(String mobile) {
+        BusinessAdmin businessAdmin = new BusinessAdmin();
+        businessAdmin.setUsername(mobile);
+        businessAdmin.setType(2);
+        businessAdmin.setUseable(1);
+        return chamberAdminMapper.selectOne(businessAdmin);
+    }
+
+    @Override
+    public List<Permission> findPermission(BusinessAdmin businessAdmin) {
+        Example example = new Example(Permission.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("adminId", businessAdmin.getId());
+        return permissionMapper.selectByExample(example);
     }
 }
