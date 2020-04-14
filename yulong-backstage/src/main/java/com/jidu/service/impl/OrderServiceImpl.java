@@ -1,6 +1,8 @@
 package com.jidu.service.impl;
 
+import com.jidu.mapper.OrderGoodsMapper;
 import com.jidu.mapper.OrderMapper;
+import com.jidu.pojo.order.OrderGoods;
 import com.jidu.pojo.order.ShoppingOrder;
 import com.jidu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private OrderGoodsMapper orderGoodsMapper;
+
     @Override
     public void update(ShoppingOrder shoppingOrder) {
         orderMapper.updateByPrimaryKeySelective(shoppingOrder);
@@ -36,10 +41,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<ShoppingOrder> search(String storeId) {
-        Example example=new Example(ShoppingOrder.class);
+        Example example = new Example(ShoppingOrder.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("storeId",storeId);
+        criteria.andEqualTo("storeId", storeId);
         return orderMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<OrderGoods> findOrderGoodsByOrderId(String orderId) {
+        Example example = new Example(OrderGoods.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("orderId", orderId);
+        return orderGoodsMapper.selectByExample(example);
     }
 
 }

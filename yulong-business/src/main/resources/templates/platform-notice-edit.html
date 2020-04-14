@@ -61,9 +61,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -87,7 +85,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -150,10 +157,7 @@
 								<label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">显示位置</span>
 									<div class="layui-input-block col-md-10_5 col-xs-12">
-										<select class="position" name="position" lay-filter="" lay-verify="" ref="position">
-											<option value="1" selected="" class="">首页</option>
-											<option value="2" class="">商户首页</option>
-										</select>
+										商户首页
 									</div>
 								</label>
 
@@ -220,8 +224,8 @@
 						}else {
 							_this.isshow = 0
 						}
-						_this.position = _this.$refs.position.value;
-						if (!_this.title || !_this.notices || !_this.position) {
+						_this.position = 1;
+						if (!_this.title || !_this.notices) {
 							layer.msg('请输入需要的信息')
 							return
 						}

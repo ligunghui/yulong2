@@ -63,6 +63,7 @@ public class ChannelServiceImpl implements ChannelService {
             ChannelType channelType = new ChannelType();
             channelType.setChannelId(channelId);
             channelType.setTypeId(typeId);
+            channelType.setStoreId("0");
             GoodsType goodsType = goodsTypeMapper.selectByPrimaryKey(typeId);
             if (goodsType != null) {
                 channelType.setTypeName(goodsType.getName());

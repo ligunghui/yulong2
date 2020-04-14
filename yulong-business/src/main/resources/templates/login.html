@@ -93,6 +93,7 @@
 						sessionid = res.data
 						localStorage.setItem("sessionid",sessionid);
 						localStorage.setItem("localTime",Date.parse(new Date()));
+						
 						layer.msg(res.message);
 						// return
 						if(res.code == 10000) {

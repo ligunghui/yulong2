@@ -21,7 +21,25 @@ if(/login.html/.test(window.location.href)) {
 	}else {
 		$(function() {
 			var names = localStorage.getItem('userName');
-			$('nav .header-right .layui-btn-radius').text('账号：' + names)
+			let times = null;
+			let types = localStorage.getItem('storeType');
+			if(/index.html/g.test(window.location.href)) {
+				times = setInterval(function() {
+					if(names == null) {
+						names = localStorage.getItem('userName');
+						$('nav .header-right .layui-btn-radius').text('账号：' + names);
+						types = localStorage.getItem('storeType');
+						isTypes(types);
+					}else {
+						clearInterval(times)
+						$('nav .header-right .layui-btn-radius').text('账号：' + names);
+						isTypes(types);
+					}
+				},200)
+			}else {
+				$('nav .header-right .layui-btn-radius').text('账号：' + names)
+				isTypes(types);
+			}
 			
 			$('.navbar .header-right').children().eq(1).click(function() {
 				window.location.href="index.html"
@@ -42,5 +60,34 @@ if(/login.html/.test(window.location.href)) {
 				})
 			})
 		})
+	}
+}
+
+function isTypes(types) {
+	if(localStorage.getItem('storeType')) {
+		// types = localStorage.getItem('storeType');
+		// 1=>普通商户 2=>本地服务商户
+		var str1_1 = 'store-goods.html',
+			str1_2 = 'store-kind.html',
+			str2_1 = 'store-service-goods.html',
+			str2_2 = 'store-service-kind.html',
+			str_normal = 'order-before.html',
+			str_service = 'order-service.html';
+		
+		$('nav a').each(function(i) {
+			if(types == 2) {
+				if($(this).attr('href') == str1_1 || $(this).attr('href') == str1_2) {
+					$(this).parent().remove()
+				}
+				if($(this).attr('href') == str_normal) {
+					$(this).attr('href',str_service)
+				}
+			}else {
+				if($(this).attr('href') == str2_1 || $(this).attr('href') == str2_2) {
+					$(this).parent().remove()
+				}
+			}
+		})
+		
 	}
 }

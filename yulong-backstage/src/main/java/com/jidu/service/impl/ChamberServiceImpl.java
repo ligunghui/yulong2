@@ -12,10 +12,14 @@ import com.jidu.service.ChamberService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,11 +37,16 @@ public class ChamberServiceImpl implements ChamberService {
     private BusinessAdminMapper businessAdminMapper;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     @Override
     public void save(ShoppingChamber shoppingChamber) {
+        shoppingChamber.setTotalMoney(new BigDecimal("0"));
+        shoppingChamber.setValidityTime(new Date());
         chamberMapper.insert(shoppingChamber);
+        verify(shoppingChamber, shoppingChamber.getId());
     }
 
     @Override
@@ -66,27 +75,18 @@ public class ChamberServiceImpl implements ChamberService {
         return chamberMapper.selectByExample(example);
     }
 
-    @Override
-    public Result verify(Integer id, String violationReseaon, Integer status) {
-        ShoppingChamber shoppingChamber = chamberMapper.selectByPrimaryKey(id);
+    public Result verify(ShoppingChamber shoppingChamber, Integer id) {
         String username = shoppingChamber.getTelephone();
-        if (username==null){
+        if (username == null) {
             return new Result(201, "没有填写手机号,审核失败", false);
         }
-        if (shoppingChamber.getStatus()!=null){
+        if (shoppingChamber.getStatus() != null) {
 
-            if (2 == status && 2 == shoppingChamber.getStatus()) {
+            if (2 == shoppingChamber.getStatus()) {
                 return new Result(201, "重复审核", false);
             }
         }
-        shoppingChamber.setStatus(status);
-        if (3 == status) {
-            if (StringUtils.isNotEmpty(violationReseaon)) {
-                shoppingChamber.setViolationReseaon(violationReseaon);
-            }
-            chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
-            return new Result(ResultCode.SUCCESS);
-        }
+        shoppingChamber.setStatus(2);
         //第一次审核通过初始化商会管理员
         //
 
@@ -106,14 +106,16 @@ public class ChamberServiceImpl implements ChamberService {
         businessAdminMapper.insert(businessAdmin);
         chamberMapper.updateByPrimaryKeySelective(shoppingChamber);
         //产生系统消息通知app端
-        ShoppingNotice notice=new ShoppingNotice();
+        ShoppingNotice notice = new ShoppingNotice();
         notice.setCreateName("平台管理员");
         notice.setCreateId("0");
         notice.setType(1);
         notice.setTitle("商会申请通过");
         notice.setAddtime(new Date());
-        notice.setContent("您申请的商会已经通过了,网址:http://zhyl.zh0476.com:9002,用户名是"+username+",初始密码是:"+"zhyl@123");
+        String content="您申请的智汇玉龙商会已经通过了,网址:http://zhyl.zh0476.com:9002,用户名是" + username + ",初始密码是:" + "zhyl@123";
+        notice.setContent(content);
         noticeMapper.insert(notice);
+        send(username,content);
         return new Result(ResultCode.SUCCESS);
     }
 
@@ -123,5 +125,21 @@ public class ChamberServiceImpl implements ChamberService {
         criteria.andEqualTo("username", username);
         return businessAdminMapper.selectByExample(example);
     }
+ public  void  send(String mobile,String content){
+     String url = "http://sms.linyu106.com/sms.aspx?action=send&userid=3156&account=15055153559&password=123456&mobile=" + mobile + "&content=【智汇玉龙】" + content + "&sendTime=&extno=";
+     Map map = new HashMap();
+     ResponseEntity<String> post = restTemplate.postForEntity(url, map, String.class);
+   //  System.out.println(post);
 
+ }
+
+    @Override
+    public boolean checkTelephone(String telephone) {
+        List<BusinessAdmin> list = findBusinessAdminByUserName(telephone);
+        if (list.isEmpty()){
+            return  true;
+
+        }
+        return false;
+    }
 }

@@ -32,6 +32,7 @@ public class AppAdvertisementServiceImpl implements AppAdvertisementService {
     public void add(AppAdvertisement appAdvertisement) {
         String img = appAdvertisement.getImg();
         appAdvertisement.setType(1);
+        appAdvertisement.setIsShow(1);
         if (img.endsWith(".avi")||img.endsWith(".mp4")||img.endsWith(".wmv")){
             appAdvertisement.setType(2);
         }

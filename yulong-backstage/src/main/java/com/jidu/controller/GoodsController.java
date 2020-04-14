@@ -2,6 +2,7 @@ package com.jidu.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jidu.aop.LogAnno;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
@@ -32,12 +33,14 @@ public class GoodsController {
     private GoodsService goodsService;
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品")
+    @LogAnno(operateType = "添加商品")
     public Result save(@RequestBody ShoppingGoods shoppingGoods) {
         goodsService.save(shoppingGoods);
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改商品")
+    @LogAnno(operateType = "修改商品")
     public Result update(@RequestBody ShoppingGoods shoppingGoods) {
         goodsService.update(shoppingGoods);
         return new Result(ResultCode.SUCCESS);
@@ -57,6 +60,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商品")
+    @LogAnno(operateType = "删除商品")
     public Result delete(@PathVariable long id) {
         goodsService.delete(id);
         return new Result(ResultCode.SUCCESS);

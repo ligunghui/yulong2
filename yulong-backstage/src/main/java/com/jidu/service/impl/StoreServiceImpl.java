@@ -36,13 +36,14 @@ public class StoreServiceImpl implements StoreService {
     private NoticeMapper noticeMapper;
 
     @Override
-    public List<ShoppingStore> search(Map param, int storeStatus) {
+    public List<ShoppingStore> search(Map param, int storeStatus, Integer storeType) {
         Example example = new Example(ShoppingStore.class);
         Example.Criteria criteria = example.createCriteria();
         if (0 != storeStatus) {
 
             criteria.andEqualTo("storeStatus", storeStatus);
         }
+        criteria.andEqualTo("storeType",storeType);
         return shoppingStoreMapper.selectByExample(example);
     }
 

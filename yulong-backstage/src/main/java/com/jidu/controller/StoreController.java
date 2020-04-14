@@ -32,16 +32,17 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
-    @RequestMapping(value = "/{pageNum}/{pageSize}/{storeStatus}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{pageNum}/{pageSize}/{storeStatus}/{storeType}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商户列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
             @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "storeStatus", value = "状态(0全部1申请中2申请通过3申请不通过4关闭)", required = true, paramType = "path")
+            @ApiImplicitParam(name = "storeStatus", value = "状态(0全部1申请中2申请通过3申请不通过4关闭)", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "storeType", value = "类型(1普通商户 2本地服务商户)", required = true, paramType = "path")
     })
-    public PageResult search(@PathVariable int pageNum, @PathVariable int pageSize, @RequestParam(required = false) Map param, @PathVariable int storeStatus) {
+    public PageResult search(@PathVariable int pageNum, @PathVariable int pageSize, @RequestParam(required = false) Map param, @PathVariable int storeStatus, @PathVariable Integer storeType) {
         Page<ShoppingStore> page = PageHelper.startPage(pageNum, pageSize);
-        List<ShoppingStore> shoppingStores = storeService.search(param, storeStatus);
+        List<ShoppingStore> shoppingStores = storeService.search(param, storeStatus,storeType);
         return new PageResult(page.getTotal(), page.getResult());
     }
 

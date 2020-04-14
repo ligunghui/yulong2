@@ -83,7 +83,7 @@
 				}
 				
 				$.ajax({
-					url:loginurl + '/business/login/login',
+					url: '/business/login/login',
 					type: 'POST',
 					contentType: 'application/json',
 					dataType: 'json',
@@ -99,6 +99,9 @@
 								window.location.href = 'index.html'
 							},1200)
 						}
+					},
+					fail: (err) => {
+						layer.msg('登录失败')
 					}
 				})
 			}

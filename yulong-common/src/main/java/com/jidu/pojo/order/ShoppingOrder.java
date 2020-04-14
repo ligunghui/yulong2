@@ -70,4 +70,10 @@ public class ShoppingOrder {
     private String goodsId;
     @ApiModelProperty(value = "数量")
     private Integer num;
+    @ApiModelProperty(value = "收货人姓名")
+    private String cName;
+    @ApiModelProperty(value = "收货人手机号")
+    private String cMobile;
+    @ApiModelProperty(value = "收货人地址")
+    private String cAddress;
 }

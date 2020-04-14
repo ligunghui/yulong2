@@ -61,6 +61,12 @@
 						<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
+								<a href="notice-screct.html"><em>隐私政策</em></a>
+							</li>
+							<li>
+								<a href="notice-user.html"><em>用户协议</em></a>
+							</li>
+							<li>
 								<a href="banner.html"><em>banner图管理</em></a>
 							</li>
 							<li>
@@ -69,8 +75,14 @@
 							<li>
 								<a href="ads.html"><em>APP广告页管理</em></a>
 							</li>
+							<!-- <li>
+								<a href="adload.html"><em>APP启动页管理</em></a>
+							</li> -->
 							<li>
 								<a href="user-rate.html"><em>会员等级管理</em></a>
+							</li>
+							<li>
+								<a href="integral.html"><em>积分规则</em></a>
 							</li>
 							<li>
 								<a href="chat.html"><em>聊天室管理</em></a>
@@ -78,18 +90,7 @@
 						</ul>
 					</li>
 					<li>
-						<a><i class="fa fa-outdent"></i><em>提现管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="chamberWithdraw.html"><em>商会提现</em></a>
-							</li>
-							<li>
-								<a href="shoper-withdraw.html"><em>商户提现</em></a>
-							</li>
-							<li>
-								<a href="user-withdraw.html"><em>用户提现</em></a>
-							</li>
-						</ul>
+						<a href="chamberWithdraw.html"><i class="fa fa-outdent"></i><em>提现管理</em></a>
 					</li>
 					<li>
 						<a><i class="fa fa-bank"></i><em>收益管理</em><span class="fa arrow"></span></a>
@@ -106,10 +107,16 @@
 						<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="category.html"><em>频道</em></a>
+								<a href="channel.html"><em>频道管理</em></a>
+							</li>
+							<li>
+								<a href="category.html"><em>分类管理</em></a>
 							</li>
 							<li>
 								<a class="active-menu" href="goods.html"><em>商品列表管理</em></a>
+							</li>
+							<li>
+								<a class="" href="commend-goods.html"><em>推荐商品管理</em></a>
 							</li>
 							<li>
 								<a href="gift.html"><em>礼包专区</em></a>
@@ -122,7 +129,7 @@
 					<li>
 						<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li>
@@ -141,7 +148,7 @@
 								<a href="goods-statistic.html"><em>产品统计</em></a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					<li>
 						<a href=""><i class="fa fa-users"></i><em>商会管理</em><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -185,7 +192,15 @@
 						</ul>
 					</li>
 					<li class="">
-						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+						<a href=""><i class="fa fa-user"></i><em>本地服务</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="local-service.html"><em>本地服务分类</em></a>
+							</li>
+							<li>
+								<a href="local-service-store.html"><em>本地服务商户</em></a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
@@ -199,6 +214,9 @@
 						</ul>
 					</li>
 					<li>
+						<a href="message.html" class=""><i class="fa fa-print"></i><em>意见建议</em></a>
+					</li>
+					<li>
 						<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
 					</li>
 				</ul>
@@ -206,7 +224,7 @@
 		</nav>
 
 		<!-- /. NAV SIDE  -->
-		<div id="page-wrapper">
+		<div id="page-wrapper" v-cloak>
 			<div id="page-inner">
 
 				<div class="row">
@@ -348,7 +366,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url: '/backstage/goods/1/10',
+				url:  '/backstage/goods/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -364,7 +382,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url: '/backstage/goods/'+obj.curr+'/10',
+						    	url:  '/backstage/goods/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -410,7 +428,7 @@
 				} else {
 					
 					$.ajax({
-						url: '/backstage/goods/' + _this.searchid,
+						url:  '/backstage/goods/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -428,7 +446,7 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url: '/backstage/goods/' + ids,
+					url:  '/backstage/goods/' + ids,
 					type: 'DELETE',
 					headers: {
 						'Authorization': sessionid,

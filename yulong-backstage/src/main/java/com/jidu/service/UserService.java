@@ -22,4 +22,6 @@ public interface UserService {
     List<UserInfo> searchAuthentication(Map param, Integer authentication);
 
     Result delAuthentication(String userId, Integer authentication);
+
+    Result open(String userId);
 }

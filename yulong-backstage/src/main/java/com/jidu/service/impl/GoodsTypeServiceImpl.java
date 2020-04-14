@@ -20,12 +20,16 @@ import java.util.Map;
 public class GoodsTypeServiceImpl implements GoodsTypeService {
     @Autowired
     private GoodsTypeMapper goodsTypeMapper;
+
     @Override
     public Integer save(String id, GoodsType goodsType) {
+        if (id == null) {
+            return -1;
+        }
         goodsType.setStoreId(id);
         goodsTypeMapper.insert(goodsType);
         Integer id1 = goodsType.getId();
-        return  id1;
+        return id1;
     }
 
     @Override
@@ -46,19 +50,19 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 
     @Override
     public List<GoodsType> search(Map param) {
-        Example example=new Example(GoodsType.class);
+        Example example = new Example(GoodsType.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("storeId",0);
-        criteria.andEqualTo("parentId",1);
+        criteria.andEqualTo("parentId", 1)
+                .andEqualTo("storeId", "0");
         return goodsTypeMapper.selectByExample(example);
     }
 
     @Override
-    public List<GoodsType> findOneLevel(String storeId,Integer parentId) {
-        Example example=new Example(GoodsType.class);
+    public List<GoodsType> findOneLevel(String storeId, Integer parentId) {
+        Example example = new Example(GoodsType.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("storeId",storeId);
-        criteria.andEqualTo("parentId",parentId);
+        criteria.andEqualTo("storeId", storeId);
+        criteria.andEqualTo("parentId", parentId);
         return goodsTypeMapper.selectByExample(example);
     }
 }

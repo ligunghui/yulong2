@@ -60,9 +60,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -86,7 +84,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a class="active-menu" href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -122,59 +129,9 @@
 						<p>商品分类管理</p>
 					</div>
 
-					<div class="col-md-12 page-block textalign-center th-textalign-center">
-						<div class="panel panel-default">
-							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="store-kind-add.html?id=add">新增</a>
-								<div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
-									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div>
-							</div>
-
-						</div>
-						<div class="panel-body">
-							<div class="table-responsive">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th><input type="checkbox" name="" id="" value="" /></th>
-											<th>ID</th>
-											<th>名称</th>
-											<!-- <th>一级分类</th> -->
-											<th>商铺ID</th>
-											<th>操作</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-if="!issearch" v-for="(item,index) in bannerList">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{item.id}}</td>
-											<td>{{item.name}}</td>
-											<!-- <td>{{item.type == 0 ? '普通' : item.type ? '平台自营' : item.type == 2 ? '家乡特产' : item.type == 3 ? '礼包专区' : '新人专区'}}</td> -->
-											<td>{{item.storeId}}</td>
-											<td>
-												<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
-											</td>
-										</tr>
-										<tr v-if="issearch">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{searchList.id}}</td>
-											<td>{{searchList.name}}</td>
-											<!-- <td>{{searchList.type == 0 ? '普通' : searchList.type ? '平台自营' : searchList.type == 2 ? '家乡特产' : searchList.type == 3 ? '礼包专区' : '新人专区'}}</td> -->
-											<td>{{searchList.storeId}}</td>
-											<td>
-												<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>内容</a> -->
-												<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div id="test1"></div>
-							</div>
-						</div>
+					<div class="col-md-12 page-block">
+						<div id="test12" class="demo-tree-more" style="padding:15px;"></div>
+						<a class="btn btn-blue" @click="edit">修改</a>
 					</div>
 				</div>
 			</div>
@@ -207,133 +164,98 @@
 		data: {
 			searchid: '',
 			bannerList: [],
-			issearch: false,
-			searchList: null,
-			editTxt:''
+			editTxt:'',
+			trees:null,
+			treeData:[]
 		},
 		created() {
-			let _this = this;
-			$.ajax({
-				url:  '/business/goodsType/1/10',
-				type: 'GET',
-				headers: {
-					'Authorization': sessionid,
-				},
-				success: (res) => {
-					_this.bannerList = res.rows
-					layui.use('laypage', function(){
-					  var laypage = layui.laypage;
-					  
-					  //执行一个laypage实例
-					  laypage.render({
-					    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-					    ,count: res.total //数据总数，从服务端得到
-						,jump: function(obj, first){
-						    $.ajax({
-						    	url:  '/business/goodsType/'+obj.curr+'/10',
-						    	type: 'GET',
-						    	headers: {
-						    		'Authorization': sessionid,
-						    	},
-						    	success: (res) => {
-						    		_this.bannerList = res.rows
-						    	},
-						    	fail:(res) => {
-						    	}
-						    })
-						    //首次不执行
-						    // if(!first){
-						    //   //do something
-						    // }
-						  }
-					  });
-					});
-				},
-				fail:(res) => {
-				}
-			})
+			this.loads()
 		},
 		methods: {
-			mysearch() {
+			loads() {
 				let _this = this;
-				if (!_this.searchid) {
-					_this.issearch = false
-				} else {
-					_this.issearch = true;
-					$.ajax({
-						url:  '/business/goodsType/' + _this.searchid,
-						type: 'GET',
-						headers: {
-							'Authorization': sessionid,
-						},
-						success: (res) => {
-							_this.searchList = res.data
-						}
-					})
-				}
-			},
-			edit(ids,storeids) {
-				window.location.href = "store-kind-edit.html?id="+ids;
-			},
-			del(ids) {
-				let _this = this;
+				// GET /business/channel
 				$.ajax({
-					url:  '/business/goodsType/' + ids,
-					type: 'delete',
-					headers: {
-						'Authorization': sessionid,
+					url:  '/business/channel',
+					type: 'GET',
+					headers:{
+						'Authorzation': sessionid
 					},
-					success: (res) => {
-						layer.msg(res.message)
-						setTimeout(function(){
-							window.location.reload()
-						},1200)
+					success:(res) => {
+						_this.treeData = res.data.data
+						_this.tree()
 					}
 				})
-			}
-		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
+			},
+			tree() {
+				let _this = this;
+				layui.use(['tree', 'util'], function(){
+				  _this.trees = layui.tree;
+				  var layer = layui.layer
+				  ,util = layui.util
+				  
+				  //模拟数据
+				  ,data = _this.treeData
+				  //基本演示
+				  _this.trees.render({
+				    elem: '#test12'
+				    ,data: data
+				    ,showCheckbox: true  //是否显示复选框
+				    ,id: 'demoId1'
+				    ,isJump: false //是否允许点击节点时弹出新窗口跳转
+				    ,click: function(obj){
+				      var data = obj.data;  //获取当前点击的节点数据
+				      // layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+				    }
+				  });
+				});
+			},
+			edit() {
+				let _this = this;
+				var checkedData = _this.trees.getChecked('demoId1'); //获取选中节点的数据
+				var arr = []
+				let mys
+				// console.log(checkedData);
+				checkedData.forEach(function(i,index) {
+					var arrs = {
+						id:i.id,
+						children:[]
+					}
+					i.children.forEach(function(j,jindex) {
+						arrs.children.push(j.id)
 					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
+					arr.push(arrs)
+					// arr.push(arrs)
+				})
+				console.log(JSON.stringify(arr))
+				// return
+				// let v = {
+				// 	"typeIds" : JSON.stringify(arr)
+				// }
+				$.ajax({
+					url:  '/business/channel',
+					type: 'POST',
+					contentType:'application/json',
+					headers:{
+						'Authorzation': sessionid
+					},
+					dataType:'json',
+					data:JSON.stringify(arr),
+					success:(res) => {
+						layer.msg(res.message)
+						if(res.code == 10000) {
+							setTimeout(function() {
+								_this.loads()
+							},1000)
+						}
+					},
+					fail:function() {
+						layer.msg('操作失败，请重新操作')
+					}
+				})
+				
+			},
+		}
 	})
 </script>
 </html>

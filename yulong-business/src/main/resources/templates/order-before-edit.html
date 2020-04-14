@@ -61,9 +61,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -87,7 +85,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -135,17 +142,17 @@
 											<option value="1" class="">待发货</option>
 											<option value="2" class="">待收货</option>
 											<option value="3" class="">待评价</option>
-											<option value="4" class="">申请退货</option>
-											<option value="4" class="">已退货</option>
+											<!-- <option value="4" class="">申请退货</option>
+											<option value="4" class="">已退货</option> -->
 										</select>
 									</div>
 								</label>
-								<label class="col-md-12 col-xs-12">
+								<!-- <label class="col-md-12 col-xs-12">
 									<span class="col-md-1_5 col-xs-12">退货单号</span>
 									<div class="col-md-10_5 col-xs-12">
 										<input type="text" class="form-control col-md-5" v-model="returnShipcode" />
 									</div>
-								</label>
+								</label> -->
 								
 							</div>
 							<div class="block-con layui-form-item col-xs-12">
@@ -235,6 +242,18 @@
 							_this.shipcode = res.data.shipcode;
 							_this.shiptime = res.data.shiptime;
 							_this.$refs.shiptime.value = res.data.shiptime;
+							_this.orderStatus = res.data.orderStatus;
+							var lengths = $('.orderStatus option').length;
+							for(let i=0;i<$('.orderStatus option').length;i++) {
+								if(_this.orderStatus == i) {
+									$('.orderStatus option').eq(i).attr('selected','selected').siblings().removeAttr('selected')
+								}
+							}
+							layui.use(['form'],function() {
+								var form = layui.form;
+								
+								form.render();
+							})
 						}
 					})
 				},

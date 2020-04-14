@@ -27,7 +27,9 @@ public class BusinessAdminServiceImpl implements BusinessAdminService {
     @Override
     public BusinessAdmin findByUserName(String mobile) {
         BusinessAdmin businessAdmin = new BusinessAdmin();
+        businessAdmin.setType(3);
         businessAdmin.setUsername(mobile);
+        businessAdmin.setUseable(1);
         return businessAdminMapper.selectOne(businessAdmin);
     }
 

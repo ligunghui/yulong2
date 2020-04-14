@@ -40,5 +40,9 @@ public class OrderGoods {
     private Integer isComment;
     @ApiModelProperty(value = "'1=> 普通商品 2=>礼包商品")
     private Integer type;
+    @ApiModelProperty(value = "规格名称")
+    private String specName;
+    @ApiModelProperty(value = "规格id")
+    private String specId;
 
 }

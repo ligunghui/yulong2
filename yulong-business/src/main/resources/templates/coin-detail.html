@@ -60,9 +60,7 @@
 							<li>
 								<a class="active-menu" href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -86,7 +84,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -122,19 +129,46 @@
 						<p>收益明细</p>
 					</div>
 
-					<div class="col-md-12 page-block textalign-center th-textalign-center">
-						<!-- <div class="panel panel-default">
-								<div class="panel-heading textalign-left">
-									<a class="btn btn-blue btn-sm" href="">新增栏目</a>
-										<div class="btn-group pull-right">
-											<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询"/>
-											<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-										</div>
-									</div>
-									
-								</div> -->
-						<div class="panel-body">
-							<h1>暂无数据</h1>
+					<div class="col-md-12 page-block">
+						<div class="panel panel-default">
+							
+							<div class="panel-heading textalign-left">
+								<select class="btn btn-blue btn-md" v-model="types">
+									<option value="1" selected >本月</option>
+									<option value="2" >历史</option>
+								</select>
+								<a class="btn btn-sm" href="">总收益：{{alltake ? alltake : '暂无数据'}}</a>
+							</div>
+						<div class="panel-body textalign-center th-textalign-center">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<th>花费钱数(元)</th>
+											<th>行为</th>
+											<th>分类</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-if="!issearch" v-for="(item,index) in bannerList">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{item.id}}</td>
+											<td>{{item.money}}</td>
+											<td>{{item.action}}</td>
+											<td>{{item.symbol == '+' ? '收入' : '花费'}}</td>
+										</tr>
+										<tr v-if="issearch">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{searchList.id}}</td>
+											<td>{{item.money}}</td>
+											<td>{{item.action}}</td>
+											<td>{{item.symbol == '+' ? '收入' : '花费'}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -166,22 +200,70 @@
 			searchid: '',
 			bannerList: [],
 			issearch: false,
-			searchList: null
+			searchList: null,
+			alltake:'',
+			types:1,
 		},
 		created() {
-			let _this = this;
-			$.ajax({
-				url:  '/business/banner/findByStoreId',
-				type: 'GET',
-				headers: {
-					'Authorization': sessionid,
-				},
-				success: (res) => {
-					_this.bannerList = res.data
-				}
-			})
+			this.load()
+		},
+		watch:{
+			types() {
+				this.load()
+			}
 		},
 		methods: {
+			load() {
+				let _this = this;
+				$.ajax({
+					url:  '/business/store',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						if(res.data) {
+							_this.alltake = res.data.totalMoney
+						}
+						
+					}
+				})
+				// GET /chamber/income/{type}/{pageNum}/{pageSize}
+				// 1本月2历史
+				$.ajax({
+					url:  '/chamber/income/' + _this.types + '/1/10',
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = res.rows
+						layui.use('laypage',function() {
+							var laypage = layui.laypage;
+							
+							laypage.render({
+								elem: 'test1',
+								count: res.total,
+								jump: function(obj,first) {
+									$.ajax({
+										url:  '/chamber/income/' + _this.types + '/'+ obj.curr +'/10',
+										type: 'GET',
+										headers: {
+											'Authorization': sessionid,
+										},
+										success: (res) => {
+											_this.bannerList = res.rows
+										},
+										fail:(re) => {
+											
+										}
+									})
+								}
+							})
+						})
+					}
+				})
+			},
 			mysearch() {
 				let _this = this;
 				if (!_this.searchid) {

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
@@ -19,5 +20,10 @@ public class BackstageApplication {
     public IdWorker idWorker() {
         return new IdWorker();
     }
+    @Bean
+    public RestTemplate restTemplate(){
 
+        RestTemplate restTemplate=new RestTemplate();
+        return  restTemplate;
+    }
 }

@@ -58,7 +58,7 @@ public class ShiroConfiguration {
         filterMap.put("/webjars/**", "anon");
         filterMap.put("/index.html", "anon");
         filterMap.put("/assets/**", "anon");
-       //filterMap.put("/**", "authc");
+        //filterMap.put("/**", "authc");
         filterFactory.setFilterChainDefinitionMap(filterMap);
 
         return filterFactory;

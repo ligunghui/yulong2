@@ -34,7 +34,6 @@ public class GoodsController extends BusinessBaseController {
     private GoodsService goodsService;
     @Autowired
     private StoreService storeService;
-
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品")
     public Result save(@RequestBody ShoppingGoods shoppingGoods) {

@@ -60,9 +60,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a class="active-menu" href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -86,7 +84,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -121,28 +128,89 @@
 					<div class="col-md-12 page-tit">
 						<p>提现情况</p>
 					</div>
-
-					<div class="col-md-12 page-block th-textalign-center marginBottom20">
-						<p>
-							<span class="">现有收益：￥0.00</span>
-							<a class="btn btn-blue btn-sm marginLeft20">提现</a>
-						</p>
-
-					</div>
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
-								<a class="btn btn-sm" href="">提现记录</a>
+								<a class="btn btn-sm btn-blue" @click="adds">申请提现</a>
 							</div>
 						</div>
 						<div class="panel-body">
-							<h1>暂无数据</h1>
+						    <div class="table-responsive">
+						        <table class="table table-hover" v-cloak>
+						            <thead>
+						                <tr>
+						                    <th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<th>提现账户</th>
+											<th>申请时间</th>
+											<th>处理时间</th>
+											<th>驳回理由</th>
+											<th>提现金额</th>
+											<th>提现状态</th>
+											<th>提现到</th>
+											<th>操作</th>
+						                </tr>
+						            </thead>
+						            <tbody>
+						                <tr v-if="!issearch" v-for="(item,index) in bannerList">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+						                    <td>{{item.id}}</td>
+						                    <td>{{item.account}}</td>
+						                    <td>{{item.appltTime ? item.appltTime.slice(0,10) : '暂无此信息'}}</td>
+						                    <td>{{item.handleTime ? item.handleTime.slice(0,10) : '暂无此信息'}}</td>
+						                    <td><a class="btn btn-blue" @click="lookat(item.reason)">预览</a></td>
+						                    <td>{{item.money}}</td>
+						                    <td>{{item.status | fstatus}}</td>
+						                    <td>{{item.type == 1 ? '微信' : '支付宝'}}</td>
+											<td>
+												<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
+											</td>
+						                </tr>
+										<tr v-if="issearch">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+										    <td>{{searchList.id}}</td>
+										    <td>{{searchList.account}}</td>
+										    <td>{{searchList.appltTime ? searchList.appltTime.slice(0,10) : '暂无此信息'}}</td>
+										    <td>{{searchList.handleTime ? searchList.handleTime.slice(0,10) : '暂无此信息'}}</td>
+										    <td><a class="btn btn-blue" @click="lookat(searchList.reason)">预览</a></td>
+										    <td>{{searchList.money}}</td>
+										    <td>{{searchList.status | fstatus}}</td>
+										    <td>{{searchList.type == 1 ? '微信' : '支付宝'}}</td>
+										    <td>
+										    	<a class="btn btn-blue btn-sm" @click="del(searchList.id)">删除</a>
+										    </td>
+										</tr>
+						            </tbody>
+						        </table>
+								<div id="test1"></div>
+						    </div>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- /. PAGE INNER  -->
+			<div class="pop displaynone" id="pops" style="max-width: 100%;">
+				<div class="col-md-12">
+					<p>真实姓名</p>
+					<input type="text" class="form-control col-md-12" v-model="trueName">
+				</div>
+				<div class="marginTop10 col-md-12">
+					<p>提现至</p>
+					<select v-model="type" class="form-control col-md-12">
+						<option value ="1" selected="">微信</option>
+						<option value ="2">支付宝</option>
+					</select>
+				</div>
+				<div class="marginTop10 col-md-12">
+					<p>提现账户</p>
+					<input type="text" class="form-control col-md-12" v-model="account">
+				</div>
+				<div class="marginTop10 marginBottom20 col-md-12">
+					<p>提现金额</p>
+					<input type="text" class="form-control col-md-12" v-model="money">
+				</div>
+			</div>
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
@@ -168,106 +236,158 @@
 			searchid: '',
 			bannerList: [],
 			issearch: false,
-			searchList: null
+			searchList: null,
+			trueName:'',
+			type:1,
+			account:'',
+			money:''
 		},
 		created() {
-			let _this = this;
-			$.ajax({
-				url:  '/business/banner/findByStoreId',
-				type: 'GET',
-				headers: {
-					'Authorization': sessionid,
-				},
-				success: (res) => {
-					_this.bannerList = res.data
+			this.load()
+		},
+		filters:{
+			fstatus(sts) {
+				if(sts == 1) {
+					return '待审核'
+				}else if(sts == 2) {
+					return '通过'
+				}else if(sts == 3) {
+					return '被驳回'
+				}else {
+					return '状态未知'
 				}
-			})
+			}
 		},
 		methods: {
-			mysearch() {
-				let _this = this;
-				if (!_this.searchid) {
-					_this.issearch = false
-				} else {
-					_this.issearch = true;
-					$.ajax({
-						url:  '/business/banner/' + _this.searchid,
-						type: 'GET',
-						headers: {
-							'Authorization': sessionid,
-						},
-						success: (res) => {
-							_this.searchList = res.data
-							console.log(_this.searchList)
-						}
-					})
-				}
-			},
-			del(ids) {
+			load() {
 				let _this = this;
 				$.ajax({
-					url:  '/business/banner/' + ids,
+					url:  '/business/withdrawal/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
+						_this.bannerList = res.rows
+						layui.use('laypage', function(){
+						  var laypage = layui.laypage;
+						  
+						  //执行一个laypage实例
+						  laypage.render({
+						    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						    ,count: res.total //数据总数，从服务端得到
+							,jump: function(obj, first){
+							    $.ajax({
+							    	url:  '/business/withdrawal/'+obj.curr+'/10',
+							    	type: 'GET',
+							    	headers: {
+							    		'Authorization': sessionid,
+							    	},
+							    	success: (res) => {
+							    		_this.bannerList = res.rows
+							    	},
+							    	fail:(res) => {
+							    	}
+							    })
+							    //首次不执行
+							    // if(!first){
+							    //   //do something
+							    // }
+							  }
+						  });
+						});
+					},
+					fail:(res) => {
+					}
+				})
+			},
+			del(ids) {
+				let _this = this;
+				$.ajax({
+					url:  '/business/withdrawal/' + ids,
+					type: 'DELETE',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						layer.msg(res.message)
+						if(res.code == 10000) {
+							setTimeout(function() {
+								_this.load()
+							},1000)
+						}
+					}
+				})
+			},
+			lookat(cons,tys) {
+				if(!cons) {
+					layer.msg('您查看的信息为空')
+					return
+				}
+				var divs;
+				if(tys == 'img') {
+					divs = `<img src="${cons}" style="max-width:300px;" />`
+				}else {
+					divs = cons
+				}
+				layui.use('layer',function() {
+					var layer = layui.layer;
+					
+					layer.open({
+						type:1,
+						title:'信息',
+						content:divs,
+						area:'device-width'
+					})
+				})
+			},
+			adds() {
+				let _this = this;
+				layer.open({
+					type:1,
+					title:'申请提现',
+					content:$('#pops')
+					,area:'auto',
+					btn:['确定','取消'],
+					yes:function(index) {
+						
+						if(!_this.trueName || !_this.account || !_this.money) {
+							layer.msg('请输入必填信息！')
+							return
+						}
+						let v = {
+						  "account": _this.account,
+						  "money": _this.money,
+						  "trueName": _this.trueName,
+						  "type": _this.type
+						}
 						$.ajax({
-							url:  '/business/banner/findByStoreId',
-							type: 'GET',
-							headers: {
+							url: '/business/withdrawal',
+							type:'POST',
+							contentType: 'application/json',
+							headers:{
 								'Authorization': sessionid,
 							},
-							success: (res) => {
-								_this.bannerList = res.data
+							dataType:'json',
+							data:JSON.stringify(v),
+							success:(res) => {
+								layer.msg(res.message)
+								if(res.code == 10000) {
+									setTimeout(function() {
+										_this.load()
+									},1000)
+								}
 							}
 						})
+						$('#pops').hide()
+						layer.close(index)
+					},
+					cancel:function() {
+						$('#pops').hide()
 					}
 				})
 			}
 		}
-	})
-</script>
-<script type="text/javascript">
-	layui.use('layer', function() {
-		var layer = layui.layer;
-
-		function getChecked() {
-			var eqs = '',
-				arr = [];
-			$('table th').each(function(i) {
-				if ($(this).text() == 'ID') {
-					eqs = i;
-				}
-			})
-			$('tr td:first-child input[type=checkbox]').each(function() {
-				var $this = $(this);
-				if ($(this)[0].checked) {
-					var check = $this.parent().parent().children().eq(eqs).text();
-					arr.push(check)
-				}
-			})
-
-			return arr
-		}
-
-		$('[data-event]').click(function() {
-			let dataEvent = $(this).attr('data-event');
-			let arr = getChecked();
-			if (arr.length) {
-				if (dataEvent == 'del') {
-					layer.confirm('确定删除吗？', function(index) {
-						console.log(arr)
-
-						layer.close(index);
-					})
-				}
-			} else {
-				layer.msg('您尚未选中任何选项！')
-			}
-
-		})
-		// $('[data-event]').click END
 	})
 </script>
 </html>

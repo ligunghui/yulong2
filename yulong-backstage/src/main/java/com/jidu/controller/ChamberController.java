@@ -49,6 +49,15 @@ public class ChamberController {
         ShoppingChamber shoppingChamber= chamberService.findById(id);
         return new Result(ResultCode.SUCCESS,shoppingChamber);
     }
+    @RequestMapping(value = "/checkTelephone{telephone}", method = RequestMethod.GET)
+    @ApiOperation(value = "检查是否注册")
+    public Result checkTelephone(@PathVariable String telephone) {
+        boolean b= chamberService.checkTelephone(telephone);
+        if (b){
+            return  new Result(200,"用户名可用",true);
+        }
+        return  new Result(201,"用户名重复",false);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商会")
@@ -69,15 +78,5 @@ public class ChamberController {
         List<ShoppingChamber> shoppingChamber= chamberService.search(param,status);
         return new PageResult(page.getTotal(),page.getResult());
     }
-    @RequestMapping(value = "/{id}/{status}", method = RequestMethod.GET)
-    @ApiOperation(value = "审核商会")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "status", value = "2通过3拒绝", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "violationReseaon", value = "拒绝理由", required = false, paramType = "query")
-    })
-    public Result verify(@PathVariable Integer id, @PathVariable Integer status, @RequestParam(required = false) String violationReseaon) {
-       return chamberService.verify(id, violationReseaon, status);
 
-    }
 }

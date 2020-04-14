@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.pojo.order.OrderGoods;
 import com.jidu.pojo.order.ShoppingOrder;
 import com.jidu.service.OrderService;
 import com.jidu.utils.KdApiOrderDistinguish;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value="/business/order")
+@RequestMapping(value = "/business/order")
 @Api(value = "订单", description = "订单")
 public class OrderController extends BusinessBaseController {
     // 电商ID
@@ -40,17 +41,19 @@ public class OrderController extends BusinessBaseController {
     private String ReqURL = "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx";
     @Autowired
     private OrderService orderService;
+
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改订单")
     public Result update(@RequestBody ShoppingOrder shoppingOrder) {
         orderService.update(shoppingOrder);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询订单")
     public Result<ShoppingOrder> findById(@PathVariable String id) {
-        ShoppingOrder shoppingOrder= orderService.findById(id);
-        return new Result(ResultCode.SUCCESS,shoppingOrder);
+        ShoppingOrder shoppingOrder = orderService.findById(id);
+        return new Result(ResultCode.SUCCESS, shoppingOrder);
     }
 
 
@@ -60,31 +63,45 @@ public class OrderController extends BusinessBaseController {
         orderService.delete(id);
         return new Result(ResultCode.SUCCESS);
     }
+
     @RequestMapping(value = "/findByStoreId/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ApiOperation(value = "查询订单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="pageNum",value="当前页码",required=true,paramType="path"),
-            @ApiImplicitParam(name="pageSize",value="每页条数",required=true,paramType="path")
+            @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path")
     })
-    public PageResult<ShoppingOrder> search (@PathVariable int pageNum, @PathVariable int pageSize) {
+    public PageResult<ShoppingOrder> search(@PathVariable int pageNum, @PathVariable int pageSize) {
         Page<ShoppingOrder> page = PageHelper.startPage(pageNum, pageSize);
-        List<ShoppingOrder> shoppingOrder= orderService.search(storeId);
-        return new PageResult(page.getTotal(),page.getResult());
+        List<ShoppingOrder> shoppingOrder = orderService.search(storeId);
+        return new PageResult(page.getTotal(), page.getResult());
     }
+
+    // 查询物流
+    @RequestMapping(value = "/findOrderGoodsByOrderId/{orderId}", method = RequestMethod.GET)
+    @ApiOperation(value = "通过订单查询商品")
+    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "订单id", required = true, paramType = "path")
+    })
+    public Result findOrderGoodsByOrderId(@PathVariable String orderId) throws Exception {
+        List<OrderGoods> orderGoods = orderService.findOrderGoodsByOrderId(orderId);
+        return new Result(ResultCode.SUCCESS, orderGoods);
+    }
+
     // 查询物流
     @RequestMapping(value = "/findLogisticsByOrderId/{orderId}", method = RequestMethod.GET)
     @ApiOperation(value = "查询物流")
     @ResponseBody
     @ApiImplicitParams({
-            @ApiImplicitParam(name="orderId",value="订单id",required=true,paramType="path")
+            @ApiImplicitParam(name = "orderId", value = "订单id", required = true, paramType = "path")
     })
     public Result logistics(@PathVariable String orderId) throws Exception {
         // 根据订单id查询单号
         Map<String, Object> map = new HashMap<String, Object>();
 
         ShoppingOrder shoppingOrder = orderService.findById(orderId);
-        if (shoppingOrder == null || shoppingOrder.getShipcode() == null || shoppingOrder.getOrderStatus()<2) {
-            return new Result(201,"未发货",false);
+        if (shoppingOrder == null || shoppingOrder.getShipcode() == null || shoppingOrder.getOrderStatus() < 2) {
+            return new Result(201, "未发货", false);
         }
 
         // 根据单号识别
@@ -116,7 +133,7 @@ public class OrderController extends BusinessBaseController {
         Object object1 = result.get("Traces");
         map.put("Traces", object1);
         System.out.print(object1);
-        return new Result(ResultCode.SUCCESS,map);
+        return new Result(ResultCode.SUCCESS, map);
 
     }
 

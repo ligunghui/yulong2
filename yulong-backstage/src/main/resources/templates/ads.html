@@ -61,6 +61,12 @@
         			<li class="active">
         				<a><i class="fa fa-stack-overflow"></i><em>平台基础设置</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
+							<li>
+								<a href="notice-screct.html"><em>隐私政策</em></a>
+							</li>
+							<li>
+								<a href="notice-user.html"><em>用户协议</em></a>
+							</li>
         					<li>
         						<a href="banner.html"><em>banner图管理</em></a>
         					</li>
@@ -70,27 +76,22 @@
         					<li>
         						<a class="active-menu" href="ads.html"><em>APP广告页管理</em></a>
         					</li>
+							<!-- <li>
+								<a href="adload.html"><em>APP启动页管理</em></a>
+							</li> -->
         					<li>
         						<a href="user-rate.html"><em>会员等级管理</em></a>
         					</li>
+							<li>
+								<a href="integral.html"><em>积分规则</em></a>
+							</li>
         					<li>
         						<a href="chat.html"><em>聊天室管理</em></a>
         					</li>
         				</ul>
         			</li>
         			<li>
-        				<a><i class="fa fa-outdent"></i><em>提现管理</em><span class="fa arrow"></span></a>
-        				<ul class="nav nav-second-level">
-        					<li>
-        						<a href="chamberWithdraw.html"><em>商会提现</em></a>
-        					</li>
-        					<li>
-        						<a href="shoper-withdraw.html"><em>商户提现</em></a>
-        					</li>
-        					<li>
-        						<a href="user-withdraw.html"><em>用户提现</em></a>
-        					</li>
-        				</ul>
+        				<a href="chamberWithdraw.html"><i class="fa fa-outdent"></i><em>提现管理</em></a>
         			</li>
         			<li>
         				<a><i class="fa fa-bank"></i><em>收益管理</em><span class="fa arrow"></span></a>
@@ -106,12 +107,18 @@
         			<li>
         				<a><i class="fa fa-cart-plus"></i><em>平台商城管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
+							<li>
+								<a href="channel.html"><em>频道管理</em></a>
+							</li>
         					<li>
-        						<a href="category.html"><em>频道</em></a>
+        						<a href="category.html"><em>分类管理</em></a>
         					</li>
         					<li>
         						<a href="goods.html"><em>商品列表管理</em></a>
         					</li>
+							<li>
+								<a class="" href="commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
         					<li>
         						<a href="gift.html"><em>礼包专区</em></a>
         					</li>
@@ -123,7 +130,7 @@
         			<li>
         				<a href="order-before.html"><i class="fa fa-print"></i><em>订单管理</em></a>
         			</li>
-        			<li>
+        			<!-- <li>
         				<a href=""><i class="fa fa-bar-chart"></i><em>财务统计</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
         					<li>
@@ -142,7 +149,7 @@
         						<a href="goods-statistic.html"><em>产品统计</em></a>
         					</li>
         				</ul>
-        			</li>
+        			</li> -->
         			<li>
         				<a href=""><i class="fa fa-users"></i><em>商会管理</em><span class="fa arrow"></span></a>
         				<ul class="nav nav-second-level">
@@ -186,7 +193,15 @@
         				</ul>
         			</li>
 					<li class="">
-						<a href="local-service.html"><i class="fa fa-user"></i><em>本地服务</em></a>
+						<a href=""><i class="fa fa-user"></i><em>本地服务</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="local-service.html"><em>本地服务分类</em></a>
+							</li>
+							<li>
+								<a href="local-service-store.html"><em>本地服务商户</em></a>
+							</li>
+						</ul>
 					</li>
         			<li>
         				<a href=""><i class="fa fa-play-circle"></i><em>视频管理</em><span class="fa arrow"></span></a>
@@ -199,6 +214,9 @@
         					</li>
         				</ul>
         			</li>
+					<li>
+						<a href="message.html" class=""><i class="fa fa-print"></i><em>意见建议</em></a>
+					</li>
         			<li>
         				<a href="log.html"><i class="fa fa-cubes"></i><em>系统日志</em></a>
         			</li>
@@ -207,7 +225,7 @@
         </nav>
         
 		<!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" v-cloak>
             <div id="page-inner">
 				
                 <div class="row">
@@ -237,6 +255,7 @@
 						                        <th><input type="checkbox" name="" id="" value="" /></th>
 												<th>ID</th>
 						                        <th>资源</th>
+						                        <th>类型</th>
 						                        <th>操作</th>
 						                    </tr>
 						                </thead>
@@ -245,6 +264,7 @@
 												<td><input type="checkbox" name="" id="" value="" /></td>
 						                        <td>{{item.id}}</td>
 						                        <td ><a class="colorblue" href="javascript:;" @click="lookat(item.img,'img')">【预览】</a></td>
+												<td>{{item.mold == 2 ? '引导页' : '广告页'}}</td>
 												<td>
 													<!-- <a class="btn btn-blue btn-sm" href="javascript:;" rowedit>编辑</a> -->
 													<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
@@ -252,6 +272,7 @@
 						                    </tr>
 						                </tbody>
 						            </table>
+									<div id="test1"></div>
 						        </div>
 						    </div>
 						</div>
@@ -259,7 +280,7 @@
 				</div>
 				
             <!-- /. PAGE INNER  -->
-			<div class="modules popups displaynone" id="popus" style="padding: 15px;">
+			<div class="modules popups displaynone layui-form" id="popus" style="padding: 15px;min-height: 400px;">
 				<div class="form-group">
 					<label class="col-md-4">资源</label>
 					<div class="layui-upload col-md-8" id="layerDemo">
@@ -269,7 +290,15 @@
 							<p id="demoText"></p>
 						</div>
 					</div>
-					
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">类型</label>
+					<div class="layui-input-block col-md-8">
+						<select class="col-md-12" name="mold" lay-filter="" lay-verify="" ref="mold">
+							<option value="1" selected="">广告页</option>
+							<option value="2">引导页</option>
+						</select>
+					</div>
 				</div>
 			</div>
         </div>
@@ -309,7 +338,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url: '/backstage/appAdvertisement/1/10',
+					url:  '/backstage/appAdvertisement/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -325,7 +354,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url: '/backstage/appAdvertisement/'+obj.curr+'/10',
+							    	url:  '/backstage/appAdvertisement/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -350,14 +379,17 @@
 			},
 			mounted() {
 				let _this = this;
-				layui.use('upload', function() {
+				layui.use(['upload','form'], function() {
 					var $ = layui.jquery,
-						upload = layui.upload;
+						upload = layui.upload,
+						form = layui.form;
+						
+					form.render()
 				
 					//普通图片上传
 					var uploadInst = upload.render({
 						elem: '#uploadlogo',
-						url: '/upload/upload',
+						url:  '/upload/upload',
 						headers: {
 							'Authorization': sessionid
 						},
@@ -408,13 +440,14 @@
 						yes: function(index, layero){
 						    //按钮【按钮一】的回调
 							let v = {
-							  "img":  _this.imgs
+							  "img":  _this.imgs,
+							  "mold": _this.$refs.mold.value
 							};
 							layer.close(index)
 							$('#popus').hide()
 							
 							$.ajax({
-								url: '/backstage/appAdvertisement',
+								url:  '/backstage/appAdvertisement',
 								type: 'POST',
 								contentType: 'application/json',
 								headers: {
@@ -443,7 +476,7 @@
 					let _this = this;
 					layer.confirm('确定删除吗？',{icon:3,title:'提示'},function() {
 						$.ajax({
-							url: '/backstage/appAdvertisement/' + ids,
+							url:  '/backstage/appAdvertisement/' + ids,
 							type: 'DELETE',
 							headers: {
 								'Authorization': sessionid,
@@ -459,6 +492,10 @@
 					
 				},
 				lookat(cons,tys) {
+					if(!cons) {
+						layer.msg('查看的内容为空')
+						return
+					}
 					let _this = this;
 					layui.use('layer',function() {
 						var layer = layui.layer;

@@ -41,7 +41,7 @@ public class WithdrawServiceImpl implements WithdrawService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("userType", userType);
         if (0 != status) {
-            criteria.andEqualTo("userType", userType);
+            criteria.andEqualTo("status", status);
         }
         return withdrawMapper.selectByExample(example);
     }

@@ -60,9 +60,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -86,7 +84,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a class="active-menu" href="store-index.html"><em>商户管理</em></a>
@@ -235,18 +242,21 @@
 					},
 					success: (res) => {
 						_this.bannerList = res.data;
-						_this.$nextTick(() => {
-							_this.storeName = _this.bannerList.storeName;
-							_this.storeAddress = _this.bannerList.storeAddress;
-							_this.storeInfo = _this.bannerList.storeInfo;
-							// 设置HTML内容
-							window.editor.html(_this.bannerList.storeDescription);
-							_this.storeKeywords = _this.bannerList.storeKeywords;
-							_this.storeTelephone = _this.bannerList.storeTelephone;
-							_this.imgs = _this.bannerList.logo;
-							$('.logopath').val(_this.bannerList.logo)
-							$('#demo1').attr('src', _this.bannerList.logo);
-						})
+						if(_this.bannerList) {
+							_this.$nextTick(() => {
+								_this.storeName = _this.bannerList.storeName;
+								_this.storeAddress = _this.bannerList.storeAddress;
+								_this.storeInfo = _this.bannerList.storeInfo;
+								// 设置HTML内容
+								window.editor.html(_this.bannerList.storeDescription);
+								_this.storeKeywords = _this.bannerList.storeKeywords;
+								_this.storeTelephone = _this.bannerList.storeTelephone;
+								_this.imgs = _this.bannerList.logo;
+								$('.logopath').val(_this.bannerList.logo)
+								$('#demo1').attr('src', _this.bannerList.logo);
+							})
+						}
+						
 					}
 				})
 			},
@@ -296,9 +306,19 @@
 				})
 
 				// 关闭过滤模式，保留所有标签
-				KindEditor.options.filterMode = false;
+				// KindEditor.options.filterMode = false;
 				KindEditor.ready(function(K) {
 					window.editor = K.create('#editor_id', {
+						items:[
+						        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+						        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+						        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+						        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+						        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+						        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+						        'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+						        'anchor', 'link', 'unlink', '|', 'about'
+						],
 						filePostName: "uploadFile",
 						//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
 						uploadJson:  '/Kindeditor/uploadFile',
@@ -332,6 +352,17 @@
 				subs() {
 					let _this = this;
 					let v = _this.bannerList;
+					if(!v) {
+						v = {
+							"logo":'',
+							"storeName" : '',
+							"storeAddress" : '',
+							"storeInfo" : '',
+							"storeDescription" : '',
+							"storeKeywords" : '',
+							"storeTelephone" : '',
+						}
+					}
 					v.logo = _this.imgs;
 					v.storeName = _this.storeName;
 					v.storeAddress = _this.storeAddress;

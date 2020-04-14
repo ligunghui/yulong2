@@ -31,7 +31,7 @@ public class GoodTypeController extends BusinessBaseController {
     @Autowired
     private GoodsTypeService goodsTypeService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+   @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品类型")
 
     public Result save(@RequestBody GoodsType goodsType) {
@@ -63,7 +63,7 @@ public class GoodTypeController extends BusinessBaseController {
         return new Result(ResultCode.SUCCESS, goodsType);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+   /* @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商品类型")
     public Result delete(@PathVariable int id) {
         //如果有下级id不能删除
@@ -74,7 +74,7 @@ public class GoodTypeController extends BusinessBaseController {
         }
         goodsTypeService.delete(id);
         return new Result(ResultCode.SUCCESS);
-    }
+    }*/
 
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商品类型")

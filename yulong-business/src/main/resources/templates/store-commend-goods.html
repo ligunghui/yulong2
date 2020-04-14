@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>智汇玉龙-商户</title>
+	<meta name="Keywords" content="智汇玉龙,商户" />
+	<meta name="Description" content="智汇玉龙商户" />
+
+	<!-- BOOTSTRAP STYLES-->
+	<link href="assets/css/bootstrap.css" rel="stylesheet" />
+	<link href="assets/layui/css/layui.css" rel="stylesheet" />
+	<!-- FONTAWESOME STYLES-->
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<!--CUSTOM BASIC STYLES-->
+	<link href="assets/css/basic.css" rel="stylesheet" />
+	<!--CUSTOM MAIN STYLES-->
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="assets/css/common.css" rel="stylesheet" />
+	<!-- GOOGLE FONTS-->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">
+					<img class="logoimg" src="assets/img/logo.png" alt="">
+					<img class="logotxt" src="assets/img/logo-text.png" alt="">
+				</a>
+			</div>
+			<div class="header-left">
+				<i class="fa fa-outdent"></i>
+			</div>
+			<div class="header-right">
+
+				<a class="btn btn-sm btn-blue layui-btn-radius" href="javascript:;">账号：jidu123</a>
+				<a href="javascript:;"><img src="assets/img/home.png"></a>
+				<a href="javascript:;"><img src="assets/img/home02.png"></a>
+				<a href="javascript:;"><img src="assets/img/home-return.png"></a>
+
+			</div>
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li>
+						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-object-group "></i><em>收益管理</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="coin-detail.html"><em>收益明细</em></a>
+							</li>
+							
+							<li>
+								<a href="coin-recharge.html"><em>提现</em></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="platform-notice.html"><em>公告展示</em></a>
+							</li>
+							<li>
+								<a href="platform-banner.html"><em>banner展示</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="active">
+						<a href=""><i class="fa fa-home"></i><em>商铺</em><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a class="" href="store-goods.html"><em>商品管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="active-menu" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
+								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
+							</li>
+							<li>
+								<a href="store-index.html"><em>商户管理</em></a>
+							</li>
+							<li>
+								<a href="store-control.html"><em>商户管理员</em></a>
+							</li>
+						</ul>
+					</li>
+					<li class="">
+					    <a href="order-before.html" class=""><i class="fa fa-tasks"></i><em>订单管理</em></a>
+					</li>
+				</ul>
+
+			</div>
+
+		</nav>
+
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<div class="row">
+					<div class="col-md-12 nav-topdown">
+						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
+						<!-- <h1 class="page-subhead-line"></h1> -->
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商铺</a> > <a href="#">推荐商品管理</a></a></p>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row page SEOpage">
+					<div class="col-md-12 page-tit">
+						<p>商品管理</p>
+					</div>
+
+					<div class="col-md-12 page-block textalign-center th-textalign-center">
+						<div class="panel panel-default">
+							<div class="panel-heading textalign-left">
+								<select class="btn btn-blue btn-sm" v-model="selected">
+									<!-- 1申请中2申请通过3驳回 -->
+									<option value ="0" selected="">全部</option>
+									<option value ="1">申请中</option>
+									<option value ="2">申请通过</option>
+									<option value ="3">驳回</option>
+								</select>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr v-if="types == 1">
+											<th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<th>运费</th>
+											<th>是否推荐到首页</th>
+											<th>商品图片</th>
+											<th>新人专区</th>
+											<th>市场价</th>
+											<th>会员价</th>
+											<th>商品名称</th>
+											<th>是否上架</th>
+											<th>剩余数量</th>
+											<th>总量</th>
+											<th>操作</th>
+										</tr>
+										<tr v-else>
+											<th><input type="checkbox" name="" id="" value="" /></th>
+											<th>ID</th>
+											<th>名称</th>
+											<th>价格</th>
+											<th>单位</th>
+											<th>图片</th>
+											<th>介绍</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-if="types == 1" v-for="(item,index) in bannerList">
+											<td><input type="checkbox" name="" id="" value="" /></td>
+											<td>{{item.id}}</td>
+											<!-- <td>{{item.addtime}}</td> -->
+											<td>{{item.shoppingGoods.goodsWeight}}</td>
+											<td>{{item.shoppingGoods.homePage ? '是' : '否'}}</td>
+											<td><a class="colorblue" @click="lookat(item.shoppingGoods.img,'img3')">【预览】</a></td>
+											<td>{{item.shoppingGoods.isNew ? '是' : '否'}}</td>
+											<td>{{item.shoppingGoods.markePrice}}</td>
+											<td>{{item.shoppingGoods.memberPrice}}</td>
+											<td>{{item.shoppingGoods.name}}</td>
+											<td>{{item.shoppingGoods.onsale ? '下架' : '上架'}}</td>
+											<!-- <td>{{item.saleNum}}</td> -->
+											<td>{{item.shoppingGoods.surplusNum}}</td>
+											<td>{{item.shoppingGoods.totalNum}}</td>
+											<td>
+												<a class="btn btn-blue btn-sm" @click="del(item.id)">取消推荐</a>
+											</td>
+										</tr>
+										<tr v-for="(item,index) in bannerList" v-if="types != 1">
+											<td v-if="item.localServiceGoods"><input type="checkbox" name="" id="" value="" /></td>
+											<td v-if="item.localServiceGoods">{{item.id}}</td>
+											<td v-if="item.localServiceGoods">{{item.localServiceGoods.title}}</td>
+											<td v-if="item.localServiceGoods">{{item.localServiceGoods.price}}</td>
+											<td v-if="item.localServiceGoods">{{item.localServiceGoods.unit}}</td>
+											<td v-if="item.localServiceGoods"><a class="colorblue" @click="lookat(item.localServiceGoods.img,'img3')">【预览】</a></td>
+											<td v-if="item.localServiceGoods"><a class="colorblue" @click="lookat(item.localServiceGoods.introduce,'HTML')">查看</a></td>
+											<td v-if="item.localServiceGoods">
+												<a class="btn btn-blue btn-sm" @click="del(item.id)">取消推荐</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="test1"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /. PAGE INNER  -->
+			<div class="popedit displaynone" id="popedit">
+				<textarea name="" id="" style="width: 500px;height: 200px;max-width: 100%;" v-html="editTxt"></textarea>
+			</div>
+			
+			<div class="displaynone" style="max-width:500px;max-height:600px;overflow:auto;" id="popimg">
+				<img v-for="item in imgList" :src="item" style="max-width:200px;margin: 10px;"/>
+			</div>
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<!-- /. WRAPPER  -->
+
+	<div id="footer-sec">
+		<p>Copyright © 2019 智汇玉龙版权所有</p>
+	</div>
+
+</body>
+<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/layui/layui.all.js"></script>
+<script src="assets/js/jquery.metisMenu.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/link.js"></script>
+<script src="assets/js/vue.js"></script>
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#page-wrapper',
+		data: {
+			searchid: '',
+			bannerList: [],
+			issearch: false,
+			searchList: null,
+			editTxt:'',
+			imgList:[],
+			types:1,
+			selected:0
+		},
+		created() {
+			this.types = localStorage.getItem('storeType');
+			this.load()
+		},
+		filters:{
+			ftype(tys){
+				if(tys == 0) {
+					return '普通'
+				}else if(tys == 1){
+					return '平台自营'
+				}else if(tys == 2) {
+					return '家乡特产'
+				}else if(tys == 3){
+					return '礼包专区'
+				}else {
+					return '新人专区'
+				}
+			}
+		},
+		watch: {
+			selected() {
+				let _this = this;
+				this.load(_this.selected)
+			}
+		},
+		methods: {
+			load(sts) {
+				if(!sts) {
+					sts = 0;
+				}
+				let _this = this;
+				
+				// GET /business/recommendGoods/{pageNum}/{pageSize}/{status}/{type}
+				// 1申请中2申请通过3驳回
+				$.ajax({
+					url:  '/business/recommendGoods/1/10/'+sts+'/' + _this.types,
+					type: 'GET',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						_this.bannerList = res.rows
+						layui.use('laypage', function(){
+						  var laypage = layui.laypage;
+						  
+						  //执行一个laypage实例
+						  laypage.render({
+						    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						    ,count: res.total //数据总数，从服务端得到
+							,jump: function(obj, first){
+							    $.ajax({
+							    	url:  '/business/recommendGoods/'+obj.curr+'/10/'+sts+'/' + _this.types,
+							    	type: 'GET',
+							    	headers: {
+							    		'Authorization': sessionid,
+							    	},
+							    	success: (res) => {
+							    		_this.bannerList = res.rows
+							    	},
+							    	fail:(res) => {
+							    	}
+							    })
+							    //首次不执行
+							    if(!first){
+							      //do something
+							    }
+							  }
+						  });
+						});
+					},
+					fail:(res) => {
+					}
+				})
+				if(localStorage.getItem('storeType') == 2) {
+					
+				}
+			},
+			del(ids) {
+				let _this = this;
+				// DELETE /business/recommendGoods/{id}
+				$.ajax({
+					url:  '/business/recommendGoods/' + ids,
+					type: 'delete',
+					headers: {
+						'Authorization': sessionid,
+					},
+					success: (res) => {
+						layer.msg(res.message)
+						setTimeout(function(){
+							_this.load()
+						},1200)
+					}
+				})
+			},
+			lookat(cons,tys) {
+				let _this = this;
+				if(!cons) {
+					layer.msg('查看的内容为空')
+					return
+				}
+				if(tys == 'img3') {
+					if(cons.split(' ').length) {
+						cons.split(' ').forEach(function(i){
+							if(i) {
+								_this.imgList.push(i)
+							}
+						})
+						
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'图片',
+								content:$('#popimg'),
+								area:'device-width',
+								cancel:function() {
+									$('#popimg').hide()
+									_this.imgList = []
+								}
+							})
+						})
+					}else {
+						layui.use('layer',function() {
+							var layer = layui.layer;
+							
+							layer.open({
+								type:1,
+								title:'图片',
+								content:$('#popedit'),
+								area:'device-width',
+								cancel:function() {
+									$('#popedit').hide()
+									
+								}
+							})
+						})
+					}
+				}else if(tys == 'HTML') {
+					_this.editTxt = cons;
+					layui.use('layer',function() {
+						var layer = layui.layer;
+						
+						layer.open({
+							type:1,
+							title:'介绍',
+							content:`<div style="max-width:100%;box-sizing:border-box;padding:15px;">${cons}</div>`,
+							area:'device-width',
+							cancel:function() {
+								$('#popimg').hide()
+								_this.imgList = []
+							}
+						})
+					})
+				}
+			}
+		}
+	})
+</script>
+</html>

@@ -58,7 +58,7 @@ public class StoreServiceImpl implements StoreService {
 
         password = new Md5Hash(password, username, 3).toString();  //1.密码，盐，加密次数
         businessAdmin.setPassword(password);
-        //businessAdmin.setType(3);
+        businessAdmin.setType(3);
         //businessAdmin.setUseable(1);
         businessAdminMapper.insert(businessAdmin);
     }

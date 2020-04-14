@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface StoreService {
-    List<ShoppingStore> search(Map param, int type);
+    List<ShoppingStore> search(Map param, int type, Integer storeType);
 
     ShoppingStore findShoppingStoreById(String id);
 

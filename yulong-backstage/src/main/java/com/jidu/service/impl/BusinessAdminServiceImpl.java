@@ -28,6 +28,8 @@ public class BusinessAdminServiceImpl implements BusinessAdminService {
     public BusinessAdmin findByUserName(String mobile) {
         BusinessAdmin businessAdmin = new BusinessAdmin();
         businessAdmin.setUsername(mobile);
+        businessAdmin.setType(0);
+        businessAdmin.setUseable(1);
         return businessAdminMapper.selectOne(businessAdmin);
     }
 

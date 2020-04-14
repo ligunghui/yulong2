@@ -1,20 +1,9 @@
 package com.jidu.controller;
 
-
-import com.alibaba.fastjson.JSON;
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.domain.AlipayTradeRefundModel;
-import com.alipay.api.request.AlipayFundTransToaccountTransferRequest;
-import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.jidu.config.AlipayConfig;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
-import com.jidu.pojo.AlipayVo;
-import com.jidu.pojo.PayeeInfo;
 import com.jidu.pojo.withdrawal.WithdrawalApplication;
 import com.jidu.service.WithdrawService;
 import io.swagger.annotations.Api;
@@ -23,8 +12,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @CrossOrigin

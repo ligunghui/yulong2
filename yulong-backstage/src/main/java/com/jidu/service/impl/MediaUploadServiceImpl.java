@@ -186,7 +186,7 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         //3.将map4 文件转成m3u8
         String mp4_video_path = getFilePath(fileMd5, fileExt);
         //map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);
-        saveFile(mp4_video_path, fileMd5, fileName, fileExt, mimetype, fileSize, null);
+        saveFile(mp4_video_path, fileMd5, fileName, fileExt, mimetype, fileSize, mp4_video_path);
 
         return new Result(ResultCode.SUCCESS);
     }
@@ -211,13 +211,13 @@ public class MediaUploadServiceImpl implements MediaUploadService {
     @Override
     public Result delete(String fileId) {
         MediaFile mediaFile = mediaFileMapper.selectByPrimaryKey(fileId);
-        if (mediaFile==null){
-            return new Result(201,"文件不存在",false);
+        if (mediaFile == null) {
+            return new Result(201, "文件不存在", false);
 
         }
         String fileUrl = mediaFile.getM3u8FileUrl();
         File file = new File(fileUrl);// 读取
-        if(file.isFile()){
+        if (file.isFile()) {
             file.delete();
         }
         mediaFileMapper.deleteByPrimaryKey(fileId);
@@ -323,14 +323,14 @@ public class MediaUploadServiceImpl implements MediaUploadService {
         mediaFile.setFileId(fileMd5);
         mediaFile.setFileOriginalName(fileName);
         mediaFile.setFileName(fileMd5 + "." + fileExt);
-        mp4_video_path=mp4_video_path.replaceAll("/yulong/","");
-        mp4_video_path="http://39.96.95.40:8080/"+mp4_video_path;
+        mp4_video_path = mp4_video_path.replaceAll("/yulong/", "");
+        mp4_video_path = "http://39.96.95.40:8080/" + mp4_video_path;
         mediaFile.setFilePath(mp4_video_path);
         mediaFile.setFileSize(fileSize);
         mediaFile.setUploadTime(new Date());
         mediaFile.setMimeType(mimetype);
         mediaFile.setFileType(fileExt);
-        mediaFile.setM3u8FileUrl("/yulong/"+mp4_video_path);
+        mediaFile.setM3u8FileUrl("/yulong/" + mp4_video_path);
         //状态为上传成功
         mediaFile.setFileStatus("上传成功");
         mediaFile.setM3u8FileUrl(m3u8FileUrl);

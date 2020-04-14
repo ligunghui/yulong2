@@ -2,6 +2,7 @@ package com.jidu.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jidu.aop.LogAnno;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;

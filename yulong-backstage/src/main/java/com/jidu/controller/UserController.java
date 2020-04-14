@@ -81,4 +81,12 @@ public class UserController {
     public Result delAuthentication(@PathVariable String userId, @PathVariable Integer authentication) {
         return   userService.delAuthentication(userId, authentication);
     }
+    @RequestMapping(value = "/open/{userId}", method = RequestMethod.POST)
+    @ApiOperation(value = "手动开通玉龙卡")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "userId", required = true, paramType = "path")
+    })
+    public Result open(@PathVariable String userId) {
+        return   userService.open(userId);
+    }
 }

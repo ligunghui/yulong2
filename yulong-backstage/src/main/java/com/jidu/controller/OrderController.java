@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.pojo.order.OrderGoods;
 import com.jidu.pojo.order.ShoppingOrder;
 import com.jidu.service.OrderService;
 import com.jidu.utils.KdApiOrderDistinguish;
@@ -120,5 +121,24 @@ public class OrderController {
         return new Result(ResultCode.SUCCESS,map);
 
     }
-
+    @RequestMapping(value = "/findOrderGoodsByOrderId/{orderId}", method = RequestMethod.GET)
+    @ApiOperation(value = "通过订单查询商品")
+    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "订单id", required = true, paramType = "path")
+    })
+    public Result findOrderGoodsByOrderId(@PathVariable String orderId) throws Exception {
+        List<OrderGoods> orderGoods = orderService.findOrderGoodsByOrderId(orderId);
+        return new Result(ResultCode.SUCCESS, orderGoods);
+    }
+    @RequestMapping(value = "/returnGoods/{orderId}/{type}", method = RequestMethod.GET)
+    @ApiOperation(value = "是否允许退货")
+    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "订单id", required = true, paramType = "path")
+    })
+    public Result returnGoods(@PathVariable String orderId, @PathVariable String type) throws Exception {
+        List<OrderGoods> orderGoods = orderService.findOrderGoodsByOrderId(orderId);
+        return new Result(ResultCode.SUCCESS, orderGoods);
+    }
 }

@@ -25,7 +25,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations(
                 "classpath:/META-INF/resources/webjars/");
         if(ConsUtils.IS_LINUX){
-            registry.addResourceHandler("/upload/**").addResourceLocations("file:/yulong/upload/");
+            registry.addResourceHandler("/ upload/**").addResourceLocations("file:/yulong/upload/");
         }else {
             registry.addResourceHandler("/upload/**").addResourceLocations("file:/C:/upload/");
         }

@@ -1,6 +1,7 @@
 package com.jidu.service;
 
 import com.jidu.entity.Result;
+import com.jidu.pojo.shop.BusinessAdmin;
 import com.jidu.pojo.shop.ShoppingChamber;
 
 import java.util.List;
@@ -17,5 +18,8 @@ public interface ChamberService {
 
     List<ShoppingChamber> search(Map param, Integer status);
 
-    Result verify(Integer id, String violationReseaon, Integer status);
+     List<BusinessAdmin> findBusinessAdminByUserName(String username);
+    void  send(String mobile,String content);
+
+    boolean checkTelephone(String telephone);
 }

@@ -60,9 +60,7 @@
 							<li>
 								<a href="coin-detail.html"><em>收益明细</em></a>
 							</li>
-							<li>
-								<a href="coin-show.html"><em>总收益展示</em></a>
-							</li>
+							
 							<li>
 								<a href="coin-recharge.html"><em>提现</em></a>
 							</li>
@@ -86,7 +84,16 @@
 								<a href="store-goods.html"><em>商品管理</em></a>
 							</li>
 							<li>
+								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-commend-goods.html"><em>推荐商品管理</em></a>
+							</li>
+							<li>
 								<a href="store-kind.html"><em>商品分类管理</em></a>
+							</li>
+							<li>
+								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
 							</li>
 							<li>
 								<a href="store-index.html"><em>商户管理</em></a>
@@ -167,7 +174,7 @@
 										<td>{{item.userId}}</td>
 										<td>
 											<a class="btn btn-blue btn-sm" @click="looks(item.orderId,item.orderStatus)">查看物流</a>
-											<a class="btn btn-blue btn-sm" @click="looklook(item.addrId,item.goodsId,item.finishtime,item.payMsg,item.paytime)">订单详情</a>
+											<a class="btn btn-blue btn-sm" :href="'order-detail.html?id=' + item.orderId">订单详情</a>
 											<a class="btn btn-blue btn-sm" @click="edit(item.id,item.storeId)">编辑</a>
 											<a class="btn btn-blue btn-sm" @click="del(item.id)">删除</a>
 										</td>
@@ -192,7 +199,7 @@
 										<td>{{searchList.userId}}</td>
 										<td>
 											<a class="btn btn-blue btn-sm" @click="looks(searchList.orderId,searchList.orderStatus)">查看物流</a>
-											<a class="btn btn-blue btn-sm" @click="looklook(searchList.addrId,searchList.goodsId,searchList.finishtime,searchList.payMsg,searchList.paytime)">订单详情</a>
+											<a class="btn btn-blue btn-sm" :href="'order-detail.html?id=' + item.orderId">订单详情</a>
 											<a class="btn btn-blue btn-sm" @click="edit(searchList.id,searchList.storeId)">编辑</a>
 											<a class="btn btn-blue btn-sm" @click="del(searchList.id)">删除</a>
 										</td>

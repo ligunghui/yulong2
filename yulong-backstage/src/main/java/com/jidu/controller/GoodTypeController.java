@@ -2,6 +2,7 @@ package com.jidu.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.jidu.aop.LogAnno;
 import com.jidu.entity.PageResult;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
@@ -33,8 +34,12 @@ public class GoodTypeController extends BusinessBaseController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商品类型")
+    @LogAnno(operateType = "添加商品类型")
     public Result save(@RequestBody GoodsType goodsType) {
         Integer integer = goodsTypeService.save("0", goodsType);
+        if (integer==-1){
+            return  new Result(201,"重复加入",false);
+        }
         return new Result(ResultCode.SUCCESS, integer);
     }
 

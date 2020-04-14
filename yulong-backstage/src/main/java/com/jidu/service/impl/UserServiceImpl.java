@@ -2,8 +2,12 @@ package com.jidu.service.impl;
 
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
+import com.jidu.mapper.IntegralRuleMapper;
 import com.jidu.mapper.UserInfoMapper;
+import com.jidu.mapper.UserPointsMapper;
+import com.jidu.pojo.sys.IntegralRule;
 import com.jidu.pojo.sys.UserInfo;
+import com.jidu.pojo.sys.UserPoints;
 import com.jidu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,10 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private IntegralRuleMapper integralRuleMapper;
+    @Autowired
+    private UserPointsMapper userPointsMapper;
 
     @Override
     public List<UserInfo> search(Map param) {
@@ -60,13 +68,38 @@ public class UserServiceImpl implements UserService {
         int userInfoAuthentication = userInfo.getAuthentication();
         userInfo.setAuthentication(authentication);
         if (2 == authentication && 2 != userInfoAuthentication) {//第一次实名认证
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_YEAR,364);
-            Date time = calendar.getTime();
-            userInfo.setVipIs(2);
-            userInfo.setVipStart(new Date());
-            userInfo.setVipEnd(time);
+            //判断是不是手动开通的玉龙卡
+            if (4 != userInfo.getGradeId()) {//不是
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, 364);
+                Date time = calendar.getTime();
+                userInfo.setVipStart(new Date());
+                userInfo.setVipEnd(time);
+                userInfo.setGradeId(4);
+                userInfo.setVipIs(2);
+
+            }
         }
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
+        return new Result(ResultCode.SUCCESS);
+    }
+
+    @Override
+    public Result open(String userId) {
+        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
+        if (userInfo == null) {
+            return new Result(201, "用户不存在", false);
+        }
+        if (userInfo.getAuthentication() != 2) {
+            return new Result(201, "该用户还未实名认证通过", false);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 364);
+        Date time = calendar.getTime();
+        userInfo.setVipStart(new Date());
+        userInfo.setVipEnd(time);
+        userInfo.setGradeId(4);
+        userInfo.setVipIs(2);
         userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return new Result(ResultCode.SUCCESS);
     }
