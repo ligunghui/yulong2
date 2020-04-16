@@ -1,8 +1,7 @@
 package com.jidu.service;
 
-import com.jidu.pojo.sys.Permission;
-
-import java.util.List;
+import com.jidu.entity.Result;
+import com.jidu.pojo.Tree;
 
 /**
  * @Author: liguanghui
@@ -11,5 +10,5 @@ import java.util.List;
  * @Description:
  */
 public interface PermissionService {
-    List<Permission> search();
+    Result<Tree> search(Integer roleId);
 }

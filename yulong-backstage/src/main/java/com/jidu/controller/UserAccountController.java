@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/backstage/incom")
 @Api(value = "平台收益明细", description = "平台收益明细 ")
+@RequiresPermissions("revenue_details")
 public class UserAccountController {
     @Autowired
     private UserAccountService userAccountService;

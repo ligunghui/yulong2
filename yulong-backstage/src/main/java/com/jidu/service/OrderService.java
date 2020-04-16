@@ -22,4 +22,6 @@ public interface OrderService {
     List<ShoppingOrder> search(String storeId);
 
     List<OrderGoods> findOrderGoodsByOrderId(String orderId);
+
+    void returnGoods(String orderId, Integer state);
 }

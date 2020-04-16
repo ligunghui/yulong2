@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/backstage/incomeSetting")
 @Api(value = "收益设置", description = "收益设置")
+@RequiresPermissions("distribution_settings")
 public class IncomeSettingController {
     @Autowired
     private IncomeSettingService incomeSettingService;

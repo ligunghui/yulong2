@@ -3,6 +3,9 @@ package com.jidu.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jidu.entity.PageResult;
+import com.jidu.entity.Result;
+import com.jidu.entity.ResultCode;
+import com.jidu.pojo.Tree;
 import com.jidu.pojo.sys.AboutUs;
 import com.jidu.pojo.sys.Permission;
 import com.jidu.service.PermissionService;
@@ -25,18 +28,20 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/backstage/permission")
 @Api(value = "权限", description = "权限")
-public class PermissionController {
+public class PermissionController extends BusinessBaseController{
     @Autowired
     private PermissionService permissionService;
-    @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)
-    @ApiOperation(value = "查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNum", value = "当前页码", required = true, paramType = "path"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, paramType = "path")
-    })
-    public PageResult<Permission> search(@PathVariable Integer pageNum, @PathVariable Integer pageSize) {
-        Page<Permission> page = PageHelper.startPage(pageNum, pageSize);
-        List<Permission> aboutUs = permissionService.search();
-        return new PageResult(page.getTotal(), page.getResult());
+    @RequestMapping(value = "/{roleId}", method = RequestMethod.GET)
+    @ApiOperation(value = "通过角色id查询所分配的权限")
+    public  Result<Tree>  search(@PathVariable Integer roleId) {
+        return new Result(ResultCode.SUCCESS,permissionService.search(roleId));
     }
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ApiOperation(value = "")
+    public  Result  findPermission() {
+
+        return new Result(ResultCode.SUCCESS,permsName);
+    }
+
+
 }

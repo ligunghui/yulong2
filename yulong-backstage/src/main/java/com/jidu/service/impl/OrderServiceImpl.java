@@ -55,4 +55,11 @@ public class OrderServiceImpl implements OrderService {
         return orderGoodsMapper.selectByExample(example);
     }
 
+    @Override
+    public void returnGoods(String orderId, Integer state) {
+          if (2==state){//允许退货,返回用户余额
+              orderMapper.selectByPrimaryKey(orderId);
+          }
+    }
+
 }

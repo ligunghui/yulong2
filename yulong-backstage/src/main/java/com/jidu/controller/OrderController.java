@@ -131,14 +131,15 @@ public class OrderController {
         List<OrderGoods> orderGoods = orderService.findOrderGoodsByOrderId(orderId);
         return new Result(ResultCode.SUCCESS, orderGoods);
     }
-    @RequestMapping(value = "/returnGoods/{orderId}/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/returnGoods/{orderId}/{state}", method = RequestMethod.GET)
     @ApiOperation(value = "是否允许退货")
     @ResponseBody
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderId", value = "订单id", required = true, paramType = "path")
+            @ApiImplicitParam(name = "orderId", value = " 订单id", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "state", value = "2申请通过3驳回", required = true, paramType = "path")
     })
-    public Result returnGoods(@PathVariable String orderId, @PathVariable String type) throws Exception {
-        List<OrderGoods> orderGoods = orderService.findOrderGoodsByOrderId(orderId);
-        return new Result(ResultCode.SUCCESS, orderGoods);
+    public Result returnGoods(@PathVariable String orderId, @PathVariable Integer state) throws Exception {
+        orderService.returnGoods(orderId,state);
+        return new Result(ResultCode.SUCCESS);
     }
 }

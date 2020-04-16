@@ -6,6 +6,7 @@ import com.jidu.pojo.grade.SysGrade;
 import com.jidu.service.GradeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/backstage/grade")
 @Api(value = "会员等级", description = "会员等级")
+@RequiresPermissions("grade_admin")
 public class GradeController {
     @Autowired
     private GradeService gradeService;

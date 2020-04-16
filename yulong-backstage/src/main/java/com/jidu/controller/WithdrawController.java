@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/backstage/withdraw")
 @Api(value = "提现", description = "提现")
+@RequiresPermissions("cash_management")
 public class WithdrawController {
     @Autowired
     private WithdrawService withdrawService;

@@ -6,6 +6,7 @@ import com.jidu.pojo.shop.ShoppingBanner;
 import com.jidu.service.BannerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/backstage/banner")
 @Api(value = "轮播图", description = "轮播图")
+@RequiresPermissions("banner_admin")
 public class BannerController {
     @Autowired
     private BannerService bannerService;

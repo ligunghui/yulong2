@@ -179,10 +179,10 @@ public class MediaUploadServiceImpl implements MediaUploadService {
 
         //2、校验文件的md5值是否和前端传入的md5一到
         boolean checkFileMd5 = this.checkFileMd5(mergeFile, fileMd5);
-        if (!checkFileMd5) {
+       /* if (!checkFileMd5) {
             //校验文件失败
             return new Result(100, "校验文件失败", false);
-        }
+        }*/
         //3.将map4 文件转成m3u8
         String mp4_video_path = getFilePath(fileMd5, fileExt);
         //map4ToM3u8(mp4_video_path,fileMd5,fileName,fileExt,mimetype,fileSize);
