@@ -1,6 +1,7 @@
 package com.jidu.controller;
 
 import com.jidu.shiro.result.ProfileResult;
+import net.bytebuddy.asm.Advice;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @program: yulong
@@ -21,6 +24,8 @@ public class BusinessBaseController {
 
     protected String storeId;
     protected String userName;
+    protected Set<String> perms = new HashSet<>();
+    protected Set<String> permsName = new HashSet<>();
 
 
     //使用shiro获取
@@ -38,6 +43,8 @@ public class BusinessBaseController {
             ProfileResult result = (ProfileResult) principals.getPrimaryPrincipal();
             this.storeId = result.getStoreId();
             this.userName = result.getUsername();
+            this.perms = result.getPerms();
+            this.permsName = result.getPermsName();
 
         }
     }

@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +33,14 @@ public class ChamberController {
     private ChamberService chamberService;
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ApiOperation(value = "添加商会")
+    @RequiresPermissions("chamber_add")
     public Result save(@RequestBody ShoppingChamber shoppingChamber) {
         chamberService.save(shoppingChamber);
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改商会")
+    @RequiresPermissions("chamber_edit")
     public Result update(@RequestBody ShoppingChamber shoppingChamber) {
         chamberService.update(shoppingChamber);
         return new Result(ResultCode.SUCCESS);
@@ -45,6 +48,7 @@ public class ChamberController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商会")
+    @RequiresPermissions("chamber_find")
     public Result<ShoppingChamber> findById(@PathVariable Integer id) {
         ShoppingChamber shoppingChamber= chamberService.findById(id);
         return new Result(ResultCode.SUCCESS,shoppingChamber);
@@ -61,6 +65,7 @@ public class ChamberController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商会")
+    @RequiresPermissions("chamber_delete")
     public Result delete(@PathVariable Integer id) {
         chamberService.delete(id);
         return new Result(ResultCode.SUCCESS);
@@ -73,6 +78,7 @@ public class ChamberController {
             @ApiImplicitParam(name = "status", value = "状态(0全部1申请中2申请通过3申请不通过4关闭)", required = true, paramType = "path")
 
     })
+    @RequiresPermissions("chamber_find")
     public PageResult<ShoppingChamber> search(@PathVariable int pageNum, @PathVariable int pageSize, @RequestParam(required = false) Map param, @PathVariable Integer status) {
         Page<ShoppingChamber> page = PageHelper.startPage(pageNum, pageSize);
         List<ShoppingChamber> shoppingChamber= chamberService.search(param,status);

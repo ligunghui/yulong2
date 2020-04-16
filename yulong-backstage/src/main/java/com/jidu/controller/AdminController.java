@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +32,14 @@ public class AdminController {
     private AdminService adminService;
     @RequestMapping(value = "/updateBusinessAdmin", method = RequestMethod.PUT)
     @ApiOperation(value = "修改商户管理员用户名 密码")
+    @RequiresPermissions("admin_edit")
     public Result updateBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
         adminService.updateBusinessAdmin(businessAdmin);
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "/addBusinessAdmin", method = RequestMethod.POST)
     @ApiOperation(value = "添加商户管理员")
+    @RequiresPermissions("admin_add")
     public Result addBusinessAdmin(@RequestBody BusinessAdmin businessAdmin) {
         businessAdmin.setStoreId("0");
         List<BusinessAdmin> list= adminService.findBusinessAdminByUserName(businessAdmin.getUsername());
@@ -66,6 +69,7 @@ public class AdminController {
     }
     @RequestMapping(value = "/deleteBusinessAdminById/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "删除单个商户管理员")
+    @RequiresPermissions("admin_delete")
     public Result deleteBusinessAdminById(@PathVariable int id) {
         adminService.deleteBusinessAdminById(id);
         return new Result(ResultCode.SUCCESS);

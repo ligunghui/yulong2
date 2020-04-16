@@ -1,29 +1,23 @@
 package com.jidu.pojo.sys;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
-
+/**
+ * @Author: liguanghui
+ * Date: 2020/4/15 0015 下午 2:00
+ * @Version:
+ * @Description:
+ */
 @Data
-@Table(name = "sys_role")
-public class Role  {
-
+@Table(name = "admin_role")
+public class AdminRole {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-
-    private String name;
-
-    private String description;
-
-
-
-
-
+    private Integer adminId;
+    private Integer roleId;
 }

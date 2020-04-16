@@ -21,6 +21,7 @@ public class ProfileResult implements Serializable, AuthCachePrincipal {
     private String username;
     private String storeId;
     private Set<String> perms = new HashSet<>();
+    private Set<String> permsName = new HashSet<>();
 
     /**
      * @param user
@@ -31,24 +32,27 @@ public class ProfileResult implements Serializable, AuthCachePrincipal {
         this.userId = user.getId();
         this.userPhoto = user.getUserphoto();
         Set<String> perms = new HashSet<>();
+        Set<String> permsName = new HashSet<>();
         for (Permission permission : list) {
             perms.add(permission.getDescription());
-
+            permsName.add(permission.getName());
         }
         this.perms = perms;
+        this.permsName = permsName;
 
     }
 
     public ProfileResult(BusinessAdmin businessAdmin, List<Permission> list) {
         this.username = businessAdmin.getUsername();
         this.storeId = businessAdmin.getStoreId();
+        Set<String> permsName = new HashSet<>();
         Set<String> perms = new HashSet<>();
         for (Permission permission : list) {
-            perms.add(permission.getName());
-
+            perms.add(permission.getDescription());
+            permsName.add(permission.getName());
         }
         this.perms = perms;
-
+        this.permsName = permsName;
     }
 
 
