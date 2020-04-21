@@ -84,7 +84,7 @@
 				}
 				
 				$.ajax({
-					url: '/business/login/login',
+					url:'/business/login/login',
 					type: 'POST',
 					contentType: 'application/json',
 					dataType: 'json',
@@ -97,7 +97,7 @@
 						// return
 						if(res.code == 10000) {
 							setTimeout(function(){
-								window.location.href = 'index.html'
+								window.location.href = 'index.html?data=' + new Date().getTime()
 							},1200)
 						}
 					}

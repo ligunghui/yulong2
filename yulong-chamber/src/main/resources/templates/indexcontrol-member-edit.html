@@ -52,59 +52,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
-					</li>
-					<li class="">
-						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="coin-month.html"><em>本月收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-history.html"><em>历史收益明细</em></a>
-							</li>
-							<li>
-								<a class="" href="coin-recharge.html"><em>收益提现</em></a>
-							</li>
-						</ul>
-					</li>
-					
-					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
-					</li>
-					<li class="active">
-						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
-							</li>
-							<li>
-								<a class="" href="indexcontrol-store.html"><em>商户管理</em></a>
-							</li>
-							<li>
-								<a class="active-menu" href="indexcontrol-member.html"><em>成员管理</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天群管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="news-index.html"><em>商会动态</em></a>
-							</li>
-							<li>
-								<a href="active-public.html"><em>活动信息发布</em></a>
-							</li>
-							
-						</ul>
-					</li>
 				</ul>
 			</div>
 		
@@ -116,7 +63,7 @@
 
 				<div class="row">
 					<div class="col-md-12 nav-topdown">
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="indexcontrol-member.html">商会管理</a> > <a href="#">成员管理</a> > <a href="#">编辑成员</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会管理</a> > <a href="indexcontrol-member.html">成员管理</a> > <a href="#">编辑成员</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -261,7 +208,7 @@
 		
 						var uploadInst = upload.render({
 							elem: '#uploadlogo',
-							url:  '/upload/upload',
+							url: '/upload/upload',
 							headers: {
 								'Authorization': sessionid
 							},
@@ -313,7 +260,7 @@
 							],
 							filePostName: "uploadFile",
 							//这里就是指定文件上传的请求地址，上面也已经说了，upload_json.jsp就相当去一个servlet去进行保存文件，这个地方很重要
-							uploadJson:  '/Kindeditor/uploadFile',
+							uploadJson: '/Kindeditor/uploadFile',
 							resizeType: 1,
 							allowPreviewEmoticons: true,
 							allowImageUpload: true,
@@ -331,7 +278,7 @@
 					load() {
 						let _this = this;
 						$.ajax({
-							url:  '/chamber/member/' + _this.ids,
+							url: '/chamber/member/' + _this.ids,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -384,7 +331,7 @@
 						v.userIntro = window.editor.html();
 						
 						$.ajax({
-							url:  '/chamber/member',
+							url: '/chamber/member',
 							type: ajaxType,
 							contentType: 'application/json',
 							headers: {
@@ -396,7 +343,7 @@
 								layer.msg(res.message)
 								if (res.code == 10000) {
 									setTimeout(function() {
-										// window.location.href = 'indexcontrol-member.html'
+										window.location.href = 'indexcontrol-member.html'
 									}, 1200)
 								}
 							}

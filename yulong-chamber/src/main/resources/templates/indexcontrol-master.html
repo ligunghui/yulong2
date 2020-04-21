@@ -51,61 +51,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
-					</li>
-					<li class="">
-						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="coin-month.html"><em>本月收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-history.html"><em>历史收益明细</em></a>
-							</li>
-							<li>
-								<a class="" href="coin-recharge.html"><em>收益提现</em></a>
-							</li>
-						</ul>
-					</li>
-					
-					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
-					</li>
-					<li class="active">
-						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a class="active-menu" href="indexcontrol-master.html"><em>管理员管理</em></a>
-							</li>
-							<li>
-								<a href="indexcontrol-store.html"><em>商户管理</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="news-index.html"><em>商会动态</em></a>
-							</li>
-							<li>
-								<a href="news-goverment.html"><em>政府资讯</em></a>
-							</li>
-							<li>
-								<a href="news-culture.html"><em>文化旅游</em></a>
-							</li>
-							<li>
-								<a href="news-local.html"><em>本地新闻</em></a>
-							</li>
-						</ul>
-					</li>
 				</ul>
 			</div>
 		
@@ -236,7 +181,7 @@
 			created() {
 				let _this = this;
 				$.ajax({
-					url:  '/chamber/admin/findBusinessAdmin/1/10',
+					url: '/chamber/admin/findBusinessAdmin/1/10',
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -252,7 +197,7 @@
 						    ,count: res.total //数据总数，从服务端得到
 							,jump: function(obj, first){
 							    $.ajax({
-							    	url:  '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
+							    	url: '/chamber/admin/findBusinessAdmin/'+obj.curr+'/10',
 							    	type: 'GET',
 							    	headers: {
 							    		'Authorization': sessionid,
@@ -292,7 +237,7 @@
 					} else {
 						_this.issearch = true;
 						$.ajax({
-							url:  '/chamber/admin/findBusinessAdminById/' + _this.searchid,
+							url: '/chamber/admin/findBusinessAdminById/' + _this.searchid,
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,
@@ -306,7 +251,7 @@
 				edit(ids,storeids) {
 					let _this = this;
 					$.ajax({
-						url:  '/chamber/admin/findBusinessAdminById/' + ids,
+						url: '/chamber/admin/findBusinessAdminById/' + ids,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -328,7 +273,7 @@
 										v.username = _this.username;
 										v.password = _this.password;
 										$.ajax({
-											url:  '/chamber/admin/updateBusinessAdmin',
+											url: '/chamber/admin/updateBusinessAdmin',
 											type: 'PUT',
 											contentType: 'application/json',
 											headers: {
@@ -363,7 +308,7 @@
 				del(ids) {
 					let _this = this;
 					$.ajax({
-						url:  '/chamber/admin/deleteBusinessAdminById/' + ids,
+						url: '/chamber/admin/deleteBusinessAdminById/' + ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,

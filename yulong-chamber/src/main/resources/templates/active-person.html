@@ -64,64 +64,48 @@
 					<div class="col-md-12 nav-topdown">
 						<!-- <h1 class="page-head-line">DASHBOARD</h1> -->
 						<!-- <h1 class="page-subhead-line"></h1> -->
-						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">商会聊天室管理</a></p>
+						<p class="nav-cls-topdown">您当前的位置：<a href="index.html">首页</a> > <a href="#">资讯管理</a> > <a href="active-public.html">活动信息发布</a> > <a href="">活动报名人员</a></p>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<div class="row page SEOpage">
 					<div class="col-md-12 page-tit">
-						<p>商会聊天室管理</p>
+						<p>活动报名人员</p>
 					</div>
 
 					<div class="col-md-12 page-block textalign-center th-textalign-center">
-						<div class="panel panel-default">
-							<div class="panel-heading textalign-left">
-								<a class="btn btn-blue btn-sm" href="chatteam-control-edit.html?id=add">新增聊天室</a>
-								<!-- <div class="btn-group pull-right">
-									<input type="number" class="searchid" id="" v-model="searchid" placeholder="按ID查询" />
-									<button class="btn btn-blue btn-sm pull-right" @click="mysearch">确定</button>
-								</div> -->
-							</div>
-
-						</div>
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-hover">
 									<thead>
 										<tr>
 											<th><input type="checkbox" name="" id="" value="" /></th>
-											<th>ID</th>
-											<th>名称</th>
-											<th>聊天室类型</th>
-											<th>申请情况</th>
-											<th>群主</th>
-											<th>操作</th>
+											<th>id</th>
+											<th>用户名</th>
+											<th>性别</th>
+											<th>积分</th>
+											<th>联系方式</th>
+											<th>钱数</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-if="!issearch" v-for="(item,index) in bannerList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{item.id}}</td>
-											<td>{{item.name}}</td>
-											<td>{{item.status | fstatus}}</td>
-											<td>{{item.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
-											<td>{{item.uid ? item.uid : '暂无群主'}}</td>
-											<td>
-												<!-- <a class="btn btn-blue btn-sm" :href="'chatteam-control-edit.html?id='+item.id">编辑</a> -->
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(item.id)">删除</a>
-											</td>
+											<td>{{item.username}}</td>
+											<td>{{item.sex ? '男' : '女'}}</td>
+											<td>{{item.integral}}</td>
+											<td>{{item.mobile}}</td>
+											<td>{{item.walletMoney}}</td>
 										</tr>
 										<tr v-if="issearch">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{searchList.id}}</td>
-											<td>{{searchList.name}}</td>
-											<td>{{searchList.status | fstatus}}</td>
-											<td>{{searchList.type == 1 ? '商务聊天室' : '休闲聊天室'}}</td>
-											<td>{{searchList.uid ? searchList.uid : '暂无群主'}}</td>
-											<td>
-												<!-- <a class="btn btn-blue btn-sm" :href="'chatteam-control-edit.html?id='+searchList.id">编辑</a> -->
-												<a class="btn btn-blue btn-sm" href="javascript:;" @click="del(searchList.id)">删除</a>
-											</td>
+											<td>{{searchList.username}}</td>
+											<td>{{searchList.sex ? '男' : '女'}}</td>
+											<td>{{searchList.integral}}</td>
+											<td>{{searchList.mobile}}</td>
+											<td>{{searchList.walletMoney}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -130,7 +114,9 @@
 					</div>
 				</div>
 			</div>
-
+			
+			<div class="pop displaynone" id="pop" v-html="editTxt" style="width: 500px;height: 200px;padding: 15px;max-width: 100%;max-width: 100%;">
+			</div>
 			<!-- /. PAGE INNER  -->
 		</div>
 		<!-- /. PAGE WRAPPER  -->
@@ -157,12 +143,15 @@
 			searchid: '',
 			bannerList: [],
 			issearch: false,
-			searchList: null
+			searchList: null,
+			editTxt:null,
+			ids:''
 		},
 		created() {
 			let _this = this;
+			_this.ids = window.location.href.split('=')[1]
 			$.ajax({
-				url: '/chamber/room',
+				url:  '/chamber/activity/findActivityUser/' + _this.ids,
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -172,60 +161,55 @@
 				}
 			})
 		},
-		filters:{
-			fstatus(sts) {
-				if(sts == 1) {
-					return '申请中'
-				}else if(sts == 2) {
-					return '申请通过'
-				}else if(sts == 3) {
-					return '申请不通过'
-				}else {
-					return '暂无此状态'
-				}
-			}
-		},
 		methods: {
-			mysearch() {
+			lookat(cons,tys) {
 				let _this = this;
-				if (!_this.searchid) {
-					_this.issearch = false
-				} else {
-					_this.issearch = true;
-					$.ajax({
-						url: '/chamber/notice/' + _this.searchid,
-						type: 'GET',
-						headers: {
-							'Authorization': sessionid,
-						},
-						success: (res) => {
-							_this.searchList = res.data
-							console.log(_this.searchList)
-						}
-					})
+				if(!cons) {
+					layer.msg('您查看的内容为空')
+					return
 				}
-			},
-			del(ids) {
-				let _this = this;
-				$.ajax({
-					url: '/chamber/room/' + ids,
-					type: 'DELETE',
-					headers: {
-						'Authorization': sessionid,
-					},
-					success: (res) => {
-						$.ajax({
-							url: '/chamber/room',
-							type: 'GET',
-							headers: {
-								'Authorization': sessionid,
-							},
-							success: (res) => {
-								_this.bannerList = res.data
-							}
-						})
-					}
-				})
+				if(tys == 'img')  {
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+					    type: 1, 
+						title:'内容',
+					    content: '<img src="' + cons + '" style="max-width:300px;"/>' ,//这里content是一个普通的String
+						area: 'auto'
+					  });
+					}); 
+				}else if(tys == 'HTML') {
+					_this.editTxt = cons;
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+					    type: 1, 
+						title:'内容',
+					    content: $('#pop') ,//这里content是一个普通的String
+						area: 'auto',
+						yes:function() {
+							$('#pop').hide()
+						},
+						cancel:function() {
+							$('#pop').hide()
+						}
+					  });
+					}); 
+				}else {
+					layui.use('layer', function(){
+					  var layer = layui.layer;
+					  
+					  layer.open({
+					    type: 1, 
+						title:'内容',
+					    content: cons ,//这里content是一个普通的String
+						area: 'auto'
+					  });
+					}); 
+				}
+				
 			}
 		}
 	})

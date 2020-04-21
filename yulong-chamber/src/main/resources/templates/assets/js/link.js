@@ -22,15 +22,19 @@ if(/login.html/.test(window.location.href)) {
 		$(function() {
 			var names = localStorage.getItem('userName');
 			let times = null;
-			times = setInterval(function() {
-				if(names == null) {
-					names = localStorage.getItem('userName');
-					$('nav .header-right .layui-btn-radius').text('账号：' + names)
-				}else {
-					clearInterval(times)
-					$('nav .header-right .layui-btn-radius').text('账号：' + names)
-				}
-			},200)
+			if(/index.html/g.test(window.location.href)) {
+				times = setInterval(function() {
+					if(names == null) {
+						names = localStorage.getItem('userName');
+						$('nav .header-right .layui-btn-radius').text('账号：' + names);
+					}else {
+						clearInterval(times)
+						$('nav .header-right .layui-btn-radius').text('账号：' + names);
+					}
+				},200)
+			}else {
+				$('nav .header-right .layui-btn-radius').text('账号：' + names)
+			}
 			
 			$('.navbar .header-right').children().eq(1).click(function() {
 				window.location.href="index.html"
@@ -46,6 +50,7 @@ if(/login.html/.test(window.location.href)) {
 					layer.confirm('确定退出登录吗?', {icon: 3, title:'提示'}, function(index){
 					  //do something
 					  window.location.href="login.html"
+					  localStorage.clear();
 					  layer.close(index);
 					});
 				})
@@ -53,3 +58,75 @@ if(/login.html/.test(window.location.href)) {
 		})
 	}
 }
+
+
+// 添加左侧栏
+var str0 = `<li>
+				<a class="" href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
+			</li>
+			<li>
+				<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li>
+						<a href="coin-month.html"><em>本月收益明细</em></a>
+					</li>
+					<li>
+						<a href="coin-history.html"><em>历史收益明细</em></a>
+					</li>
+					<li>
+						<a href="coin-recharge.html"><em>收益提现</em></a>
+					</li>
+				</ul>
+			</li>
+			
+			<li>
+				<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li>
+						<a href="indexcontrol-master.html"><em>管理员管理</em></a>
+					</li>
+					<li>
+						<a href="indexcontrol-vip.html"><em>会员管理</em></a>
+					</li>
+					<li>
+						<a class="" href="indexcontrol-member.html"><em>成员管理</em></a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
+			</li>
+			<li>
+				<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li>
+						<a href="news-index.html"><em>商会动态</em></a>
+					</li>
+					<li>
+						<a href="active-public.html"><em>活动信息发布</em></a>
+					</li>
+					
+				</ul>
+			</li>`;
+let str = str0;
+(function addMenu() {
+	$('#main-menu').append(str)
+	let locals = window.location.href.split('/').slice(-1);
+	$('#main-menu li a').each(function(i,item){
+		if($(item).attr('href')) {
+			let hrefs = new RegExp($(item).attr('href'))
+			if(hrefs.exec(locals)) {
+				if(hrefs.exec(locals).index == 0) {
+					$(item).addClass('active-menu').parents('li').addClass('active')
+				}
+			}
+		}
+		
+	})
+})()

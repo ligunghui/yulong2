@@ -51,59 +51,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
-					</li>
-					<li class="active">
-						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a class="active-menu" href="coin-month.html"><em>本月收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-history.html"><em>历史收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-recharge.html"><em>收益提现</em></a>
-							</li>
-						</ul>
-					</li>
-					
-					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
-							</li>
-							<li>
-								<a href="indexcontrol-store.html"><em>商户管理</em></a>
-							</li>
-							<li>
-								<a class="" href="indexcontrol-member.html"><em>成员管理</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a class="" href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="news-index.html"><em>商会动态</em></a>
-							</li>
-							<li>
-								<a href="active-public.html"><em>活动信息发布</em></a>
-							</li>
-							
-						</ul>
-					</li>
 				</ul>
 			</div>
 		
@@ -193,7 +140,7 @@
 		created() {
 			let _this = this;
 			$.ajax({
-				url:  '/chamber/income/1/1/10',
+				url: '/chamber/income/1/1/10',
 				type: 'GET',
 				headers: {
 					'Authorization': sessionid,
@@ -209,7 +156,7 @@
 					    ,count: res.total //数据总数，从服务端得到
 						,jump: function(obj, first){
 						    $.ajax({
-						    	url:  '/chamber/income/1/'+obj.curr+'/10',
+						    	url: '/chamber/income/1/'+obj.curr+'/10',
 						    	type: 'GET',
 						    	headers: {
 						    		'Authorization': sessionid,
@@ -238,7 +185,7 @@
 				} else {
 					_this.issearch = true;
 					$.ajax({
-						url:  '/chamber/income/' + _this.searchid,
+						url: '/chamber/income/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -253,14 +200,14 @@
 			del(ids) {
 				let _this = this;
 				$.ajax({
-					url:  '/chamber/income/' + ids,
+					url: '/chamber/income/' + ids,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
 					},
 					success: (res) => {
 						$.ajax({
-							url:  '/chamber/income/findByStoreId',
+							url: '/chamber/income/findByStoreId',
 							type: 'GET',
 							headers: {
 								'Authorization': sessionid,

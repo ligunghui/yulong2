@@ -124,7 +124,6 @@ public class ChamberServiceImpl implements ChamberService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("chamberId", chamberId);
         List<ChamberStore> chamberStores = chamberStoreMapper.selectByExample(example);
-
         return chamberStores;
     }
 

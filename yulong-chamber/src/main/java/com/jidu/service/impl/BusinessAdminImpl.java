@@ -73,11 +73,19 @@ public class BusinessAdminImpl implements BusinessAdminService {
 
     @Override
     public BusinessAdmin findByUserName(String mobile) {
-        BusinessAdmin businessAdmin = new BusinessAdmin();
-        businessAdmin.setUsername(mobile);
-        businessAdmin.setType(2);
-        businessAdmin.setUseable(1);
-        return chamberAdminMapper.selectOne(businessAdmin);
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", mobile);
+        criteria.andEqualTo("useable", 1);
+        criteria.andEqualTo("type", 2);
+        List<BusinessAdmin> businessAdmins = chamberAdminMapper.selectByExample(example);
+        if (businessAdmins.isEmpty()) {
+            return null;
+        }
+
+
+        return businessAdmins.get(0);
+
     }
 
     @Override

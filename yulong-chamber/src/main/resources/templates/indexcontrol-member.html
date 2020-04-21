@@ -51,59 +51,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
-					</li>
-					<li class="">
-						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="coin-month.html"><em>本月收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-history.html"><em>历史收益明细</em></a>
-							</li>
-							<li>
-								<a class="" href="coin-recharge.html"><em>收益提现</em></a>
-							</li>
-						</ul>
-					</li>
-					
-					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
-					</li>
-					<li class="active">
-						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
-							</li>
-							<li>
-								<a href="indexcontrol-store.html"><em>商户管理</em></a>
-							</li>
-							<li>
-								<a class="active-menu" href="indexcontrol-member.html"><em>成员管理</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="news-index.html"><em>商会动态</em></a>
-							</li>
-							<li>
-								<a href="active-public.html"><em>活动信息发布</em></a>
-							</li>
-							
-						</ul>
-					</li>
 				</ul>
 			</div>
 		
@@ -130,10 +77,6 @@
 						<div class="panel panel-default">
 							<div class="panel-heading textalign-left">
 								<a class="btn btn-blue" v-show="types == 1" href="indexcontrol-member-edit.html?id=add">添加成员</a>
-								<select class="btn btn-blue btn-md" :class="types == 1 ? 'marginLeft20' : ''" v-model="types">
-									<option value ="0">会员管理</option>
-									<option value ="1">成员管理</option>
-								</select>
 							</div>
 					
 						</div>
@@ -157,23 +100,6 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-if="types == 0" v-for="(item,index) in bannerList">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{item.id}}</td>
-											<td><a class="btn btn-blue" @click="lookat(item.userImg,'img')">预览</a></td>
-											<td>{{item.trueName}}</td>
-											<td>{{item.companyName}}</td>
-											<td>{{item.mobile}}</td>
-											<td>{{item.applyTime}}</td>
-											<td><a class="btn btn-blue btn-sm" @click="lookat(item.address)">查看</a></td>
-											<td class="colorblue">{{item.status | fstatus}}</td>
-											<td>{{item.handlerPeople}}</td>
-											<td><a class="btn btn-blue btn-sm" @click="lookat(item.reason)">查看</a></td>
-											<td>
-												<a class="btn btn-sm" :class="item.status == 0 ? 'btn-blue' : 'btn-ccc'" @click="edit(item.id,'1',item.status)">通过</a>
-												<a class="btn btn-sm" :class="item.status == 0 ? 'btn-blue' : 'btn-ccc'" @click="edit(item.id,'2',item.status)">拒绝</a>
-											</td>
-										</tr>
 										<tr v-if="types == 1" v-for="(items,indexs) in searchList">
 											<td><input type="checkbox" name="" id="" value="" /></td>
 											<td>{{items.id}}</td>
@@ -224,40 +150,18 @@
 			bannerList: [],
 			issearch: false,
 			searchList: null,
-			types:0,
+			types:1,
+			urls:'/chamber/member'
 		},
 		created() {
 			this.load()
 		},
-		filters:{
-			fstatus(tys) {
-				if(tys == 0) {
-					return '待审核'
-				}else if(tys == 1) {
-					return '审核通过'
-				}else {
-					return '审核未通过'
-				}
-			}
-		},
-		watch:{
-			types() {
-				let _this = this;
-				if(_this.types == 0) {
-					var underUrl = '/chamber/user/findChamberUserByChamberId'
-					_this.load(underUrl)
-				}else {
-					var underUrl = '/chamber/member'
-					_this.load(underUrl)
-				}
-			}
-		},
 		methods: {
 			load(urls) {
 				let _this = this;
-				var underUrl = urls ? urls : '/chamber/user/findChamberUserByChamberId';
+				var underUrl = _this.urls;
 				$.ajax({
-					url:  underUrl,
+					url: underUrl,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -281,7 +185,7 @@
 					_this.issearch = false
 				} else {
 					$.ajax({
-						url:  '/chamber/user/findChamberUserById/' + _this.searchid,
+						url: '/chamber/user/findChamberUserById/' + _this.searchid,
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
@@ -303,7 +207,7 @@
 					return
 				}
 				$.ajax({
-					url:  '/chamber/user/delChamberUser/' + ids + '/' + tys,
+					url: '/chamber/user/delChamberUser/' + ids + '/' + tys,
 					type: 'GET',
 					headers: {
 						'Authorization': sessionid,
@@ -323,7 +227,7 @@
 				let _this = this;
 				if(tys) {
 					$.ajax({
-						url:  '/chamber/member/' + ids,
+						url: '/chamber/member/' + ids,
 						type: 'DELETE',
 						headers: {
 							'Authorization': sessionid,

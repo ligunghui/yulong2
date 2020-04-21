@@ -52,59 +52,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a class="active-menu" href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="indexmsg-msg.html" class=""><i class="fa fa-object-group "></i><em>商会信息管理</em></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-gears "></i><em>商会收益</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="coin-month.html"><em>本月收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-history.html"><em>历史收益明细</em></a>
-							</li>
-							<li>
-								<a href="coin-recharge.html"><em>收益提现</em></a>
-							</li>
-						</ul>
-					</li>
-					
-					<li>
-						<a href="storecontrol.html"><i class="fa fa-user-circle-o "></i><em>推荐商户管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-flag "></i><em>商会管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="indexcontrol-master.html"><em>管理员管理</em></a>
-							</li>
-							<li>
-								<a href="indexcontrol-store.html"><em>商户管理</em></a>
-							</li>
-							<li>
-								<a class="" href="indexcontrol-member.html"><em>成员管理</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="chatteam-control.html"><i class="fa fa-comments "></i><em>商会聊天室管理</em></span></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-bullhorn "></i><em>资讯管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="news-index.html"><em>商会动态</em></a>
-							</li>
-							<li>
-								<a href="active-public.html"><em>活动信息发布</em></a>
-							</li>
-							
-						</ul>
-					</li>
 				</ul>
 			</div>
 
@@ -173,26 +120,10 @@
 				<!-- /. ROW  -->
 		
 				<div class="row index-tablemsg">
-					<!-- <div class="col-md-4 col-xs-12 tit-left">
-						<p class="col-xs-12">网站访问统计图</p>
-						<div class="col-xs-12 layui-inline">
-							<div class="layui-input-inline input-group">
-								<input type="text" class="layui-input form-control" id="choosedata" placeholder=" - ">
-								<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-							</div>
-						</div>
-					</div> -->
-					<!-- <div class="col-md-6 col-xs-12 pull-right tit-right">
-						<p class="col-xs-12"><img src="assets/img/images/index-05_03.png" alt="">订单数量（件）</p>
-						<p class="col-xs-12"><img src="assets/img/images/index-06_03.png">实时预测（人）</p>
-					</div> -->
+					
 				</div>
 				<!-- /. ROW  -->
-				<!-- <div class="row index-table">
-					<div id="zxBox" class="img-con" style="width: 100%;height: 500px;">
-					</div>
-		
-				</div> -->
+				
 				<!-- /. PAGE INNER  -->
 			</div>
 			<!-- /. PAGE WRAPPER  -->
@@ -243,7 +174,7 @@
 				created() {
 					let _this = this;
 					$.ajax({
-						url:  '/chamber/index/index',
+						url: '/chamber/index/index',
 						type: 'GET',
 						headers: {
 							'Authorization': sessionid,
