@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +35,7 @@ public class MediaUploadController {
 
     @ApiOperation("文件上传注册")
     @PostMapping("/register")
+    @RequiresPermissions("drop_add")
     public Result register(String fileMd5, String fileName, Long fileSize, String mimetype, String fileExt) {
         return mediaUploadService.register(fileMd5, fileName, fileSize, mimetype, fileExt);
     }
@@ -73,12 +75,14 @@ public class MediaUploadController {
             @ApiImplicitParam(name = "videoName", value = "视频名称", required = true, paramType = "path"),
             @ApiImplicitParam(name = "fileImg", value = "封面", required = true, paramType = "query")
     })
+    @RequiresPermissions("drop_add")
     public Result add(@PathVariable String fileMd5, @PathVariable String videoName, @RequestParam String fileImg) {
 
         return mediaUploadService.add(fileMd5,videoName,fileImg);
     }
     @RequestMapping(value = "/{fileId}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除")
+    @RequiresPermissions("drop_delete")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "fileId", value = "fileId", required = true, paramType = "path"),
     })
@@ -91,6 +95,7 @@ public class MediaUploadController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "fileId", value = "fileId", required = true, paramType = "path"),
     })
+    @RequiresPermissions("drop_find")
     public Result find(@PathVariable String fileId) {
         MediaFile mediaFile= mediaUploadService.find(fileId);
         return new Result(ResultCode.SUCCESS,mediaFile);

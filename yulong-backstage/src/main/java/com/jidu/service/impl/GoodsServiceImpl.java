@@ -60,4 +60,9 @@ public class GoodsServiceImpl implements GoodsService {
         criteria.andEqualTo("deletestatus", false);
         return goodsMapper.selectByExample(example);
     }
+
+    @Override
+    public List<ShoppingGoods> findAll() {
+        return goodsMapper.selectAll();
+    }
 }

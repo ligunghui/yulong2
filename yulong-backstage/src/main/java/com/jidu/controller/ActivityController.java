@@ -32,7 +32,7 @@ public class ActivityController {
     private ActivityService activityService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @RequiresPermissions(value = {"chamber_dynamics_add", "news_add", "", "tourism_add", "investment_add"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"chamber_dynamics_add", "news_add",  "tourism_add", "investment_add"}, logical = Logical.OR)
     @ApiOperation(value = "type 1商会动态2政府资讯3文化旅游4本地新闻")
     public Result save(@RequestBody ShoppingActivity shoppingActivity) {
         activityService.save(shoppingActivity);

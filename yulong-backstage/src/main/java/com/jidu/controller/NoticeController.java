@@ -55,7 +55,7 @@ public class NoticeController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除公告 系统消息")
-    @RequiresPermissions("notice_find")
+    @RequiresPermissions("notice_delete")
     public Result delete(@PathVariable Integer id) {
         noticeService.delete(id);
         return new Result(ResultCode.SUCCESS);

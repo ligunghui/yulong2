@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ import java.util.Map;
 public class StoreController {
     @Autowired
     private StoreService storeService;
-
+    @RequiresPermissions("business_find")
     @RequestMapping(value = "/{pageNum}/{pageSize}/{storeStatus}/{storeType}", method = RequestMethod.GET)
     @ApiOperation(value = "查询商户列表")
     @ApiImplicitParams({
@@ -51,6 +52,7 @@ public class StoreController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id", required = true, paramType = "path")
     })
+    @RequiresPermissions("business_find")
     public Result findShoppingStoreById(@PathVariable String id) {
         ShoppingStore shoppingStore = storeService.findShoppingStoreById(id);
         return new Result(ResultCode.SUCCESS, shoppingStore);

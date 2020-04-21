@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.bytebuddy.asm.Advice;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class LogController {
             @ApiImplicitParam(name="pageNum",value="当前页码",required=true,paramType="path"),
             @ApiImplicitParam(name="pageSize",value="每页条数",required=true,paramType="path")
     })
+    @RequiresPermissions("log")
     public PageResult search (@PathVariable int pageNum, @PathVariable int pageSize) {
         Page<Log> page = PageHelper.startPage(pageNum, pageSize);
         List<Log> shoppingGoods= logService.search();

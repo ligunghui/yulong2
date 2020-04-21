@@ -1,17 +1,12 @@
 package com.jidu.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.jidu.entity.PageResult;
+
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
 import com.jidu.pojo.Tree;
-import com.jidu.pojo.sys.AboutUs;
-import com.jidu.pojo.sys.Permission;
+
 import com.jidu.service.PermissionService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONArray;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value="/backstage/order")
 @Api(value = "订单", description = "订单")
-public class OrderController {
+public class OrderController extends  BusinessBaseController{
     // 电商ID
     private String EBusinessID = "1551827";
     // 电商加密私钥，快递鸟提供，注意保管，不要泄漏
@@ -43,12 +44,14 @@ public class OrderController {
     private OrderService orderService;
     @RequestMapping(value = "", method = RequestMethod.PUT)
     @ApiOperation(value = "修改订单")
+    @RequiresPermissions("order_edit")
     public Result update(@RequestBody ShoppingOrder shoppingOrder) {
         orderService.update(shoppingOrder);
         return new Result(ResultCode.SUCCESS);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(value = "查询订单")
+    @RequiresPermissions("order_details")
     public Result findById(@PathVariable String id) {
         ShoppingOrder shoppingOrder= orderService.findById(id);
         return new Result(ResultCode.SUCCESS,shoppingOrder);
@@ -57,6 +60,7 @@ public class OrderController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除订单")
+    @RequiresPermissions("order_delete")
     public Result delete(@PathVariable String id) {
         orderService.delete(id);
         return new Result(ResultCode.SUCCESS);
@@ -68,6 +72,7 @@ public class OrderController {
             @ApiImplicitParam(name="pageNum",value="当前页码",required=true,paramType="path"),
             @ApiImplicitParam(name="pageSize",value="每页条数",required=true,paramType="path")
     })
+    @RequiresPermissions("order_find")
     public PageResult search (@PathVariable String storeId, @PathVariable int pageNum, @PathVariable int pageSize) {
         Page<ShoppingOrder> page = PageHelper.startPage(pageNum, pageSize);
         List<ShoppingOrder> shoppingOrder= orderService.search(storeId);
@@ -139,7 +144,7 @@ public class OrderController {
             @ApiImplicitParam(name = "state", value = "2申请通过3驳回", required = true, paramType = "path")
     })
     public Result returnGoods(@PathVariable String orderId, @PathVariable Integer state) throws Exception {
-        orderService.returnGoods(orderId,state);
-        return new Result(ResultCode.SUCCESS);
+
+        return  orderService.returnGoods(orderId,state,storeId);
     }
 }

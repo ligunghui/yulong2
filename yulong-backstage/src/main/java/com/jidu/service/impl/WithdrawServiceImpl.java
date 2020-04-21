@@ -10,16 +10,22 @@ import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.jidu.config.AlipayConfig;
 import com.jidu.entity.Result;
 import com.jidu.entity.ResultCode;
-import com.jidu.mapper.WithdrawMapper;
+import com.jidu.mapper.*;
 import com.jidu.pojo.AlipayVo;
 import com.jidu.pojo.PayeeInfo;
 import com.jidu.pojo.activity.ShoppingActivity;
+import com.jidu.pojo.shop.ShoppingChamber;
+import com.jidu.pojo.shop.ShoppingStore;
+import com.jidu.pojo.sys.UserAccount;
+import com.jidu.pojo.sys.UserInfo;
 import com.jidu.pojo.withdrawal.WithdrawalApplication;
 import com.jidu.service.WithdrawService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +40,14 @@ import java.util.Map;
 public class WithdrawServiceImpl implements WithdrawService {
     @Autowired
     private WithdrawMapper withdrawMapper;
+    @Autowired
+    private UserAccountMapper userAccountMapper;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+    @Autowired
+    private ShoppingStoreMapper shoppingStoreMapper;
+    @Autowired
+    private ChamberMapper ShoppingChamberMapper;
 
     @Override
     public List<WithdrawalApplication> searchAuthentication(Map param, Integer status, Integer userType) {
@@ -49,8 +63,46 @@ public class WithdrawServiceImpl implements WithdrawService {
     @Override
     public Result delAuthentication(Integer id, Integer status) {
         WithdrawalApplication withdrawalApplication = withdrawMapper.selectByPrimaryKey(id);
-        if (withdrawalApplication.getStatus() == 2) {
+        String uid = withdrawalApplication.getUid();
+        Integer userType = withdrawalApplication.getUserType();
+        if (withdrawalApplication.getStatus() != 1) {
             return new Result(201, "重复审核", false);
+        }
+        if (status == 2) {
+            UserAccount userAccount = new UserAccount();
+            userAccount.setCreateTime(new Date());
+            userAccount.setAction("提现");
+            userAccount.setSymbol("-");
+            userAccount.setMoney(withdrawalApplication.getMoney());
+            userAccount.setItemId(uid);
+            userAccountMapper.insert(userAccount);
+            //商户提现
+            if (userType == 2) {
+                ShoppingStore shoppingStore = shoppingStoreMapper.selectByPrimaryKey(uid);
+                int a = shoppingStore.getTotalMoney().compareTo(withdrawalApplication.getMoney());
+                if (a == -1) {
+                    return new Result(201, "可用余额不足", false);
+                }
+                BigDecimal subtract = shoppingStore.getTotalMoney().subtract(withdrawalApplication.getMoney());
+                shoppingStore.setTotalMoney(subtract);
+                shoppingStoreMapper.updateByPrimaryKey(shoppingStore);
+            } else if (userType == 3) {
+                //商会提现
+                ShoppingChamber shoppingChamber = ShoppingChamberMapper.selectByPrimaryKey(uid);
+                int a = shoppingChamber.getTotalMoney().compareTo(withdrawalApplication.getMoney());
+                if (a == -1) {
+                    return new Result(201, "可用余额不足", false);
+                }
+                BigDecimal subtract = shoppingChamber.getTotalMoney().subtract(withdrawalApplication.getMoney());
+                shoppingChamber.setTotalMoney(subtract);
+                ShoppingChamberMapper.updateByPrimaryKeySelective(shoppingChamber);
+            }
+
+        }
+        if (status == 3 && userType == 1) {//用户
+            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(uid);
+            userInfo.setWalletMoney(userInfo.getWalletMoney().add(withdrawalApplication.getMoney()));
+            userInfoMapper.updateByPrimaryKey(userInfo);
         }
 
         withdrawalApplication.setStatus(status);

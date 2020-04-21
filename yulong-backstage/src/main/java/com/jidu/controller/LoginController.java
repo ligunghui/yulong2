@@ -37,7 +37,7 @@ public class LoginController {
             String sessionId = (String) subject.getSession().getId();
             return new Result(ResultCode.SUCCESS, sessionId);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return new Result(ResultCode.MOBILEORPASSWORDERROR);
         }
     }

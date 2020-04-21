@@ -15,4 +15,6 @@ public interface GoodsService {
     void delete(long id);
 
     List<ShoppingGoods> search(Map param);
+
+    List<ShoppingGoods> findAll();
 }
