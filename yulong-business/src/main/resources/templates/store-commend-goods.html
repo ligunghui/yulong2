@@ -51,61 +51,6 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-desktop "></i><em>管理控制台</em></a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-object-group "></i><em>收益管理</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="coin-detail.html"><em>收益明细</em></a>
-							</li>
-							
-							<li>
-								<a href="coin-recharge.html"><em>提现</em></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-th-large "></i><em>商户公告</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a href="platform-notice.html"><em>公告展示</em></a>
-							</li>
-							<li>
-								<a href="platform-banner.html"><em>banner展示</em></a>
-							</li>
-						</ul>
-					</li>
-					<li class="active">
-						<a href=""><i class="fa fa-home"></i><em>商铺</em><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a class="" href="store-goods.html"><em>商品管理</em></a>
-							</li>
-							<li>
-								<a class="" href="store-service-goods.html"><em>服务管理</em></a>
-							</li>
-							<li>
-								<a class="active-menu" href="store-commend-goods.html"><em>推荐商品管理</em></a>
-							</li>
-							<li>
-								<a href="store-kind.html"><em>商品分类管理</em></a>
-							</li>
-							<li>
-								<a class="" href="store-service-kind.html"><em>服务分类管理</em></a>
-							</li>
-							<li>
-								<a href="store-index.html"><em>商户管理</em></a>
-							</li>
-							<li>
-								<a href="store-control.html"><em>商户管理员</em></a>
-							</li>
-						</ul>
-					</li>
-					<li class="">
-					    <a href="order-before.html" class=""><i class="fa fa-tasks"></i><em>订单管理</em></a>
-					</li>
 				</ul>
 
 			</div>
@@ -173,21 +118,21 @@
 									</thead>
 									<tbody>
 										<tr v-if="types == 1" v-for="(item,index) in bannerList">
-											<td><input type="checkbox" name="" id="" value="" /></td>
-											<td>{{item.id}}</td>
+											<td v-if="item.shoppingGoods"><input type="checkbox" name="" id="" value="" /></td>
+											<td v-if="item.shoppingGoods">{{item.id}}</td>
 											<!-- <td>{{item.addtime}}</td> -->
-											<td>{{item.shoppingGoods.goodsWeight}}</td>
-											<td>{{item.shoppingGoods.homePage ? '是' : '否'}}</td>
-											<td><a class="colorblue" @click="lookat(item.shoppingGoods.img,'img3')">【预览】</a></td>
-											<td>{{item.shoppingGoods.isNew ? '是' : '否'}}</td>
-											<td>{{item.shoppingGoods.markePrice}}</td>
-											<td>{{item.shoppingGoods.memberPrice}}</td>
-											<td>{{item.shoppingGoods.name}}</td>
-											<td>{{item.shoppingGoods.onsale ? '下架' : '上架'}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.goodsWeight}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.homePage ? '是' : '否'}}</td>
+											<td v-if="item.shoppingGoods"><a class="colorblue" @click="lookat(item.shoppingGoods.img,'img3')">【预览】</a></td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.isNew ? '是' : '否'}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.markePrice}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.memberPrice}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.name}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.onsale ? '下架' : '上架'}}</td>
 											<!-- <td>{{item.saleNum}}</td> -->
-											<td>{{item.shoppingGoods.surplusNum}}</td>
-											<td>{{item.shoppingGoods.totalNum}}</td>
-											<td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.surplusNum}}</td>
+											<td v-if="item.shoppingGoods">{{item.shoppingGoods.totalNum}}</td>
+											<td v-if="item.shoppingGoods">
 												<a class="btn btn-blue btn-sm" @click="del(item.id)">取消推荐</a>
 											</td>
 										</tr>

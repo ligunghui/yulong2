@@ -1,7 +1,11 @@
 package com.jidu.service.impl;
 
+import com.jidu.entity.Result;
+import com.jidu.entity.ResultCode;
 import com.jidu.mapper.GoodsMapper;
+import com.jidu.mapper.StoreRecommendGoodsMapper;
 import com.jidu.pojo.goods.ShoppingGoods;
+import com.jidu.pojo.shop.StoreRecommendGoods;
 import com.jidu.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +25,13 @@ import java.util.Map;
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private StoreRecommendGoodsMapper storeRecommendGoodsMapper;
 
     @Override
     public void save(ShoppingGoods shoppingGoods) {
         shoppingGoods.setAddtime(new Date());
-       //System.out.println(shoppingGoods.getTotalNum());
+        //System.out.println(shoppingGoods.getTotalNum());
         shoppingGoods.setSurplusNum(shoppingGoods.getTotalNum());
         shoppingGoods.setSaleNum(0);
         shoppingGoods.setDeletestatus(false);
@@ -43,11 +49,21 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public void delete(long id) {
+    public Result delete(long id) {
+        Example example = new Example(StoreRecommendGoods.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("goodsId", id);
+        List<StoreRecommendGoods> storeRecommendGoods = storeRecommendGoodsMapper.selectByExample(example);
+        if (!storeRecommendGoods.isEmpty()) {
+
+            return new Result(201, "您已经推荐过该商品,请先撤回推荐!", false);
+        }
+
         ShoppingGoods shoppingGoods = new ShoppingGoods();
         shoppingGoods.setId(id);
         shoppingGoods.setDeletestatus(true);
         goodsMapper.updateByPrimaryKeySelective(shoppingGoods);
+        return new Result(ResultCode.SUCCESS);
     }
 
     @Override

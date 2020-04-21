@@ -136,5 +136,15 @@ public class OrderController extends BusinessBaseController {
         return new Result(ResultCode.SUCCESS, map);
 
     }
+    @RequestMapping(value = "/returnGoods/{orderId}/{state}", method = RequestMethod.GET)
+    @ApiOperation(value = "是否允许退货")
+    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = " 订单id", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "state", value = "2申请通过3驳回", required = true, paramType = "path")
+    })
+    public Result returnGoods(@PathVariable String orderId, @PathVariable Integer state) throws Exception {
 
+        return  orderService.returnGoods(orderId,state,storeId);
+    }
 }

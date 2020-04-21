@@ -71,8 +71,8 @@ public class GoodsController extends BusinessBaseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除商品")
     public Result delete(@PathVariable long id) {
-        goodsService.delete(id);
-        return new Result(ResultCode.SUCCESS);
+
+        return goodsService.delete(id);
     }
 
     @RequestMapping(value = "/{pageNum}/{pageSize}", method = RequestMethod.GET)

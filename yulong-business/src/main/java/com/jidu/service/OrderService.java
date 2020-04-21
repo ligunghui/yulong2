@@ -1,5 +1,6 @@
 package com.jidu.service;
 
+import com.jidu.entity.Result;
 import com.jidu.pojo.order.OrderGoods;
 import com.jidu.pojo.order.ShoppingOrder;
 
@@ -15,4 +16,6 @@ public interface OrderService {
     List<ShoppingOrder> search(String storeId);
 
     List<OrderGoods> findOrderGoodsByOrderId(String orderId);
+
+    Result returnGoods(String orderId, Integer state, String storeId);
 }

@@ -26,11 +26,18 @@ public class BusinessAdminServiceImpl implements BusinessAdminService {
 
     @Override
     public BusinessAdmin findByUserName(String mobile) {
-        BusinessAdmin businessAdmin = new BusinessAdmin();
-        businessAdmin.setType(3);
-        businessAdmin.setUsername(mobile);
-        businessAdmin.setUseable(1);
-        return businessAdminMapper.selectOne(businessAdmin);
+        Example example = new Example(BusinessAdmin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("username", mobile);
+        criteria.andEqualTo("useable", 1);
+        criteria.andEqualTo("type", 3);
+        List<BusinessAdmin> businessAdmins = businessAdminMapper.selectByExample(example);
+        if (businessAdmins.isEmpty()) {
+            return null;
+        }
+
+
+        return businessAdmins.get(0);
     }
 
     @Override

@@ -94,13 +94,37 @@
 						localStorage.setItem("sessionid",sessionid);
 						localStorage.setItem("localTime",Date.parse(new Date()));
 						
-						layer.msg(res.message);
 						// return
 						if(res.code == 10000) {
-							setTimeout(function(){
-								window.location.href = 'index.html'
-							},1200)
+							// 1=>普通商户 2=>本地服务商户
+							$.ajax({
+								url:  '/business/store',
+								type: 'GET',
+								headers: {
+									'Authorization': sessionid,
+								},
+								success: (res) => {
+									layer.msg(res.message);
+									if(res.data) {
+										if(res.data.storeType) {
+											localStorage.setItem('storeType',res.data.storeType)
+										}
+									}else {
+										localStorage.setItem('storeType',1)
+									}
+									
+									setTimeout(function(){
+										window.location.href = 'index.html?data=' + new Date().getTime()
+									},1200)
+								},
+								fail:() => {
+									layer.msg('请求失败，请重试')
+								}
+							})
 						}
+					},
+					fail:() => {
+						layer.msg('登录失败，请重试')
 					}
 				})
 			}
